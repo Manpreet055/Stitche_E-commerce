@@ -1,0 +1,65 @@
+@import "tailwindcss";
+@plugin "flowbite-react/plugin/tailwindcss";
+@source "../.flowbite-react/class-list.json";
+
+body {
+  background-color: #f8f8f8;
+  font-family: "Poppins", sans-serif;
+  overflow-x: hidden;
+  @apply  transition-all duration-300 ease-in-out
+}
+
+.dark{
+  @apply bg-gray-900 text-white transition-all duration-300 ease-in-out 
+}
+.dark .dark-text{
+  @apply text-white
+}
+.dark .navbar,.dark .card-img{
+  @apply bg-gray-900
+}
+.dark .filter-button-input-style {
+  @apply text-black
+}
+
+.mask-img {
+  mask-image: linear-gradient(to right, transparent 0%, black 20%);
+  -webkit-mask-image: linear-gradient(to right, transparent, black);
+}
+.hover-transition {
+  @apply hover:scale-[1.03] transition-all duration-300 ease-in-out will-change-transform;
+}
+
+.hide-scrollbar {
+  scrollbar-width: none;
+}
+
+.primary-bg {
+  @apply bg-rose-800 hover:bg-rose-700 focus:outline-none focus:ring-2 focus:ring-rose-500
+ shadow-xl;
+}
+
+.filter-button-input-style {
+  @apply border   border-gray-400 text-nowrap hover:bg-gray-200 px-4 py-3 rounded-xl bg-gray-100 max-w-[150px];
+}
+
+.primary-text {
+  @apply text-rose-800 hover:text-rose-700;
+}
+
+@keyframes infinite_scroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+@layer utilities {
+  .animate-infinite-scroll {
+    animation: infinite_scroll 25s linear infinite;
+  }
+  .animate-infinite-scroll:hover {
+    animation-play-state: paused;
+  }
+}
