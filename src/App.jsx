@@ -1,11 +1,11 @@
 import React from "react";
 
-import MainFooter from "./Pages/MainFooter";
-import MainNavbar from "./Pages/MainNavbar";
+import MainFooter from "./layout/footer/MainFooter";
+import MainNavbar from "./layout/header/MainNavbar";
 import { Outlet } from "react-router-dom";
-import ApiContextProvider from "./Context/ApiContextProvider";
-import SelectedProductContextProvider from "../src/Context/SelectedProductContextProvider";
-import DarkModeContextProvider from "./Context/DarkModeContextProvider";
+import ApiContextProvider from "./context/ApiContextProvider";
+import SelectedProductContextProvider from "./context/SelectedProductContextProvider";
+import DarkModeContextProvider from "./context/DarkModeContextProvider";
 const App = () => {
   
   return (

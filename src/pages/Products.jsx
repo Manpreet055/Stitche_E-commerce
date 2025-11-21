@@ -1,11 +1,8 @@
 import React from "react";
-import ShowProducts from "../Components/Products/ShowProducts";
-
-import Sidebar from "../Components/Products/Sidebar";
-const AllProductsPage = () => {
+import ShowProducts from "../layout/products/ShowProducts"
+const Products = () => {
   return (
     <div className="flex w-full h-full justify-center ">
-      <Sidebar></Sidebar>
       <div className=" max-h-screen max-w-7xl overflow-auto hide-scrollbar"> 
         <ShowProducts></ShowProducts>
       </div>
@@ -13,4 +10,4 @@ const AllProductsPage = () => {
   );
 };
 
-export default AllProductsPage;
+export default Products;

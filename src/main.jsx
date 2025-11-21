@@ -3,35 +3,35 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import ProductsPage from "./Pages/ProductsPage.jsx";
-import Homepage from "./Pages/Homepage.jsx";
-import About from "./Pages/About.jsx";
-import ContactPage from "./Pages/ContactPage.jsx";
-import ProductOverview from "./Components/Products/ProductOverview.jsx";
-import AllProductsPage from "./Pages/AllProductsPage.jsx";
-import ErrorPage from "./Pages/ErrorPage.jsx";
+import ProductsList from "./pages/ProductsList.jsx";
+import Homepage from "./pages/Homepage.jsx";
+import About from "./pages/About.jsx";
+import ContactPage from "./pages/ContactPage.jsx";
+import ProductOverview from "./layout/products/ProductOverview.jsx";
+import Products from "./pages/Products.jsx";
+import ErrorPage from "./pages/ErrorPage.jsx";
 const routes = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    errorElement:<ErrorPage></ErrorPage>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "",
         element: <Homepage />,
       },
-      { 
+      {
         path: "products",
-        element: <ProductsPage />,
+        element: <ProductsList />,
         children: [
           {
-            path:"",
-            element:<AllProductsPage />
+            path: "",
+            element: <Products />,
           },
           {
             path: "ProductOverview/:Id",
             element: <ProductOverview />,
-            errorElement:<ErrorPage />
+            errorElement: <ErrorPage />,
           },
         ],
       },

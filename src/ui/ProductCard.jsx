@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { motion } from "framer-motion";
-import ApiDataContext from "../../Context/ApiDataContext";
-import SelectedProductContext from "../../Context/SelectedProductContext";
+import ApiDataContext from "../context/ApiDataContext";
+import SelectedProductContext from "../context/SelectedProductContext";
 import { useNavigate } from "react-router-dom";
 
 const ProductCard = (props) => {

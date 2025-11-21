@@ -1,8 +1,8 @@
 import React from "react";
-import ContactForm from "../Components/Contact/ContactForm";
-import ContactPageContent from "./ContactPageContent";
-import Map from "../Components/Contact/Map";
-import FaqSection from "../Components/Contact/FaqSection";
+import ContactForm from "../layout/contact/ContactForm";
+import ContactPageContent from "../layout/contact/ContactPageContent"
+import Map from "../ui/Map";
+import FaqSection from "../layout/contact/FaqSection";
 import { motion } from "framer-motion";
 const ContactPage = () => {
   return (

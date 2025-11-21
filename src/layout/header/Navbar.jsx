@@ -3,9 +3,9 @@ import { Link, NavLink } from "react-router-dom";
 import { Droplet, Menu } from "lucide-react";
 import { motion } from "framer-motion";
 import MobileNav from "./MobileNav";
-import ShowMenuContext from "../../Context/ShowMenu";
+import ShowMenuContext from "../../context/ShowMenu";
 import SearchBar from "./SearchBar";
-import DarkModeContext from "../../Context/DarkModeContext";
+import DarkModeContext from "../../context/DarkModeContext";
 import { Sun, Moon } from "lucide-react";
 
 const Navbar = () => {

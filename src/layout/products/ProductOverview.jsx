@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Carousel } from "flowbite-react";
-import ApiDataContext from "../../Context/ApiDataContext";
+import ApiDataContext from "../../context/ApiDataContext";
 import { useNavigate, useParams } from "react-router-dom";
 
 const ProductOverview = () => {
@@ -14,7 +14,6 @@ const ProductOverview = () => {
     navigate(-1);
   };
 
-  // 🔒 Guard Clause - prevents crash on refresh
   if (!productDetails || !productDetails.images) {
     return (
       <div

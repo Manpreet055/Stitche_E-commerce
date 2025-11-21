@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
-import ApiDataContext from "../../Context/ApiDataContext";
-import ProductCard from "./ProductCard";
-import { useNavigate } from "react-router-dom";
+import ApiDataContext from "../../context/ApiDataContext";
+import ProductCard from "../../ui/ProductCard"
 
 const ShowProducts = () => {
   const { apiData, loadingState } = useContext(ApiDataContext);

@@ -1,7 +1,7 @@
 import React from "react";
-import Navbar from "../Components/Header/Navbar";
-import MobileNav from "../Components/Header/MobileNav";
-import ShowMenuContextProvider from "../Context/ShowMenuContextProvider";
+import Navbar from "./Navbar";
+import MobileNav from "./MobileNav";
+import ShowMenuContextProvider from "../../context/ShowMenuContextProvider";
 const MainNavbar = () => {
   return (
     <div className="fixed bg-white navbar w-full z-20  top-0">

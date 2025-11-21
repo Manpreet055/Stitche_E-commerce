@@ -1,7 +1,7 @@
 import React from "react";
 import { Copyright } from "lucide-react";
 
-import FooterLinks from "../Components/Footer/FooterLinks";
+import FooterLinks from "./FooterLinks";
 const MainFooter = () => {
   return (
     <footer>

@@ -1,19 +1,19 @@
 import React from "react";
 import { ArrowRightIcon } from "lucide-react";
-import ProductCard from "../Components/Products/ProductCard";
+import ProductCard from "../ui/ProductCard";
 import { motion } from "framer-motion";
-import HeroContent from "../Components/Home/HeroContent";
-import Banner from "../../src/Components/Home/Banner.jsx";
+import HeroContent from "../layout/home/HeroContent"
+import Banner from "../ui/Banner";
 
 const Homepage = () => {
   let logos = [
-    "/src/BannerImages/FastTrack.webp",
-    "/src/BannerImages/Fabman.webp",
-    "/src/BannerImages/SadafDesign.webp",
-    "/src/BannerImages/SanableDigi.webp",
-    "/src/BannerImages/SanableStudio.webp",
-    "/src/BannerImages/SMS.webp",
-    "/src/BannerImages/Wizcraft.webp",
+    "/src/assets/BannerImages/FastTrack.webp",
+    "/src/assets/BannerImages/Fabman.webp",
+    "/src/assets/BannerImages/SadafDesign.webp",
+    "/src/assets/BannerImages/SanableDigi.webp",
+    "/src/assets/BannerImages/SanableStudio.webp",
+    "/src/assets/BannerImages/SMS.webp",
+    "/src/assets/BannerImages/Wizcraft.webp",
   ];
 
   let allogos = [...logos, ...logos];
