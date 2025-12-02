@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ArrowRightIcon } from "lucide-react";
 import ProductCard from "../ui/ProductCard";
 import { motion } from "framer-motion";
-import HeroContent from "../layout/home/HeroContent"
+import HeroContent from "../layout/home/HeroContent";
 import Banner from "../ui/Banner";
+import useProducts from "../Hooks/useProducts";
 
 const Homepage = () => {
   let logos = [
@@ -15,7 +16,13 @@ const Homepage = () => {
     "/src/assets/BannerImages/SMS.webp",
     "/src/assets/BannerImages/Wizcraft.webp",
   ];
-
+  const { products, setQuery } = useProducts();
+  useEffect(() => {
+    setQuery((prev) => ({
+      ...prev,
+      limit: 4,
+    }));
+  }, []);
   let allogos = [...logos, ...logos];
   return (
     <div className="w-full">
@@ -28,26 +35,9 @@ const Homepage = () => {
         </div>
       </div>
       <div className="flex px-4 justify-evenly gap-4 overflow-x-scroll hide-scrollbar overflow-y-hidden">
-        <ProductCard
-          image="src/assets/Printer.png"
-          productname="Printers"
-          price="Starting from $129.99"
-        ></ProductCard>
-        <ProductCard
-          productname="Eco Solvent Inks"
-          price="Starting from $129.99"
-          image="src/assets/Ink_image.webp"
-        ></ProductCard>
-        <ProductCard
-          image="src/assets/acrylic.webp"
-          productname="Acrylic sheets"
-          price="Starting from $129.99"
-        ></ProductCard>
-        <ProductCard
-          image="src/assets/flex_rolls.webp"
-          productname="Flex Rolls"
-          price="Starting from $129.99"
-        ></ProductCard>
+        {products.map((product, index) => (
+          <ProductCard product={product} key={index} />
+        ))}
       </div>
       <div className="flex my-6 justify-between items-center md:justify-around p-4">
         <div className="flex flex-col gap-2">

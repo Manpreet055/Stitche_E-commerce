@@ -1,6 +1,6 @@
 import React from "react";
 import ContactForm from "../layout/contact/ContactForm";
-import ContactPageContent from "../layout/contact/ContactPageContent"
+import ContactPageContent from "../layout/contact/ContactPageContent";
 import Map from "../ui/Map";
 import FaqSection from "../layout/contact/FaqSection";
 import { motion } from "framer-motion";
@@ -20,7 +20,7 @@ const ContactPage = () => {
       </div>
       <div className="flex items-center flex-wrap justify-evenly w-full">
         <motion.img
-        initial={{ x: -100, opacity: 0 }}
+          initial={{ x: -100, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.5 }}
           className="h-96 justify-self-center"

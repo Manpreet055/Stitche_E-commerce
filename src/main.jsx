@@ -1,15 +1,16 @@
-import { StrictMode } from "react";
+import { StrictMode, lazy, Suspense } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import ProductsList from "./pages/ProductsList.jsx";
-import Homepage from "./pages/Homepage.jsx";
-import About from "./pages/About.jsx";
-import ContactPage from "./pages/ContactPage.jsx";
-import ProductOverview from "./layout/products/ProductOverview.jsx";
-import Products from "./pages/Products.jsx";
 import ErrorPage from "./pages/ErrorPage.jsx";
+import Homepage from "./pages/Homepage.jsx";
+
+const Products = lazy(() => import("./pages/Products.jsx"));
+const ContactPage = lazy(() => import("./pages/ContactPage.jsx"));
+const About = lazy(() => import("./pages/About.jsx"));
+const ProductOverview = lazy(() => import("./pages/ProductOverview.jsx"));
+
 const routes = createBrowserRouter([
   {
     path: "/",
@@ -22,18 +23,19 @@ const routes = createBrowserRouter([
       },
       {
         path: "products",
-        element: <ProductsList />,
-        children: [
-          {
-            path: "",
-            element: <Products />,
-          },
-          {
-            path: "ProductOverview/:Id",
-            element: <ProductOverview />,
-            errorElement: <ErrorPage />,
-          },
-        ],
+        element: (
+          <Suspense>
+            <Products />
+          </Suspense>
+        ),
+      },
+      {
+        path: "product/:id",
+        element: (
+          <Suspense>
+            <ProductOverview />
+          </Suspense>
+        ),
       },
       {
         path: "about",
@@ -50,5 +52,5 @@ const routes = createBrowserRouter([
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <RouterProvider router={routes} />
-  </StrictMode>
+  </StrictMode>,
 );

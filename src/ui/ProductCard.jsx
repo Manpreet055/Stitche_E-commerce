@@ -1,60 +1,40 @@
 import React, { useContext } from "react";
 import { motion } from "framer-motion";
-import ApiDataContext from "../context/ApiDataContext";
-import SelectedProductContext from "../context/SelectedProductContext";
 import { useNavigate } from "react-router-dom";
 
-const ProductCard = (props) => {
-  const { apiData } = useContext(ApiDataContext);
-  const { setSelectedProduct } = useContext(SelectedProductContext);
-  const navigateToPDP = useNavigate();
-  const handleCardClick = () => {
-    setSelectedProduct(apiData.find((item) => item.id === props.id));
-    navigateToPDP(`ProductOverview/${props.id}`);
-  };
-
+const ProductCard = ({ product }) => {
+  const { _id, price, title, media, description, discount } = product || {};
+  const navigate = useNavigate();
   return (
     <motion.div
-      onClick={handleCardClick}
+      onClick={() => navigate(`/product/${_id}`)}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
       exit={{ opacity: 0 }}
-      id={props.id}
       className="min-w-[250px]  mx-auto w-80 overflow-hidden rounded-lg  shadow-md duration-300  hover:shadow-lg"
     >
       <img
-        className={`${
-          props.height || "h-54"
-        } object-cover bg-white hover-transition card-img w-full min-h-54  object-center`}
-        src={props.image}
+        className={`h-54 object-cover bg-white hover-transition card-img w-full min-h-54  object-center`}
+        src={media.thumbnail}
         alt="Product Image"
       />
       <div className="p-4  primary-bg">
         <h2 className="mb-2 text-xl font-medium dark:text-white text-no text-gray-900">
-          {props.productname}
+          {title}
         </h2>
-        {props.description && (
-          <p className="mb-2 text-base dark:text-gray-300 text-gray-700">
-            {props.description}
-          </p>
-        )}
+        <p className="mb-2 text-base">{description}</p>
         <div className="flex items-center">
-          {props.price && (
-            <p className="mr-2 font-semibold text-gray-900 dark:text-white">
-              {props.price}
-            </p>
-          )}
-          {props.oldprice && (
-            <p className="text-base  font-medium text-gray-500 line-through dark:text-gray-300">
-              {props.oldprice}
-            </p>
-          )}
-          {props.discount && (
-            <p className="ml-auto text-base font-medium text-gray-300">
-              {props.discount}% off
-            </p>
-          )}
+          <p className="mr-2 font-semibold text-[#3d2b1f]">${price}</p>
+          <p className="ml-auto text-base font-medium  ">
+            {discount?.value ?? discount?.discount ?? 0}% off
+          </p>
+        </div>
+        <div className="flex flex-col z-99 mt-2 gap-3">
+          <button className="rounded-2xl p-3 theme border  text-white bg-[#3d2b1f] hover:scale-[1.02] ease-in-out transition-all">
+            Buy Now{" "}
+          </button>
+          <button className="rounded-2xl p-3 theme border">Add to Cart </button>
         </div>
       </div>
     </motion.div>

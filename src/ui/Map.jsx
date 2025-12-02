@@ -14,24 +14,10 @@ const Map = () => {
         ></iframe>
       </div>
       <div className="flex p-6 flex-col gap-2">
-        <div
-          className="text-xl font-medium"
-        >
-          Our Location{" "}
-        </div>
-        <h3
-          className="text-3xl font-semibold"
-        >
-          Connecting Near and Far
-        </h3>
-        <h1
-          className="text-3xl font-medium my-4"
-        >
-          Headquarters
-        </h1>
-        <div
-          className="flex flex-col"
-        >
+        <div className="text-xl font-medium">Our Location </div>
+        <h3 className="text-3xl font-semibold">Connecting Near and Far</h3>
+        <h1 className="text-3xl font-medium my-4">Headquarters</h1>
+        <div className="flex flex-col">
           <address className="text-lg leading-relaxed">
             SIMPLE MEDIA SOLUTIONS FZ LLC
             <br />

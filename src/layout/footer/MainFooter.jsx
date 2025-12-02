@@ -18,7 +18,6 @@ const MainFooter = () => {
             items.
           </h2>
         </div>{" "}
-        
         <FooterLinks
           heading="Shop"
           itemone="Printers"

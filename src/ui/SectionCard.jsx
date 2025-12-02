@@ -19,7 +19,9 @@ const SectionCard = (props) => {
         className="max-w-2xl text-xl flex flex-col gap-4"
       >
         {props.heading && (
-          <p className="primary-text  text-3xl font-semibold">{props.heading}</p>
+          <p className="primary-text  text-3xl font-semibold">
+            {props.heading}
+          </p>
         )}
         <p className="leading-8">{props.para}</p>
       </motion.div>
