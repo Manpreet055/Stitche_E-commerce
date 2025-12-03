@@ -5,6 +5,7 @@ import App from "./App.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ErrorPage from "./pages/ErrorPage.jsx";
 import Homepage from "./pages/Homepage.jsx";
+import SearchPage from "./pages/SearchPage.jsx";
 
 const Products = lazy(() => import("./pages/Products.jsx"));
 const ContactPage = lazy(() => import("./pages/ContactPage.jsx"));
@@ -44,6 +45,10 @@ const routes = createBrowserRouter([
       {
         path: "contact",
         element: <ContactPage />,
+      },
+      {
+        path: "search",
+        element: <SearchPage />,
       },
     ],
   },
