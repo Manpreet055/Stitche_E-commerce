@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { ChevronLeft } from "lucide-react";
 
-const BackButton = ({ text = "Back" }) => {
+const BackButton = ({ text = "" }) => {
   const navigate = useNavigate();
   return (
     <button

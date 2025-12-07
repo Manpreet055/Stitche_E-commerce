@@ -31,10 +31,10 @@ const ProductCard = ({ product }) => {
           </p>
         </div>
         <div className="flex flex-col z-99 mt-2 gap-3">
-          <button className="rounded-2xl p-3 theme border  text-white bg-[#3d2b1f] hover:scale-[1.02] ease-in-out transition-all">
+          <button className="rounded-2xl p-3 theme border  text-white bg-blue-600 hover:scale-[1.02] ease-in-out transition-all">
             Buy Now{" "}
           </button>
-          <button className="rounded-2xl p-3 theme border">Add to Cart </button>
+          <button className="rounded-2xl p-3 border">Add to Cart </button>
         </div>
       </div>
     </motion.div>

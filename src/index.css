@@ -10,7 +10,7 @@ body {
 }
 
 .dark {
-  @apply bg-gray-900 text-white transition-all duration-300 ease-in-out;
+  @apply bg-gray-800 text-white transition-all duration-300 ease-in-out;
 }
 .dark .dark-text {
   @apply text-white;
@@ -36,7 +36,7 @@ body {
 }
 
 .primary-bg {
-  @apply bg-[#edcfb1] text-[#554840] focus:outline-none focus:ring-2 focus:ring-rose-500
+  @apply bg-white text-gray-500 focus:outline-none focus:ring-2 focus:ring-rose-500
  shadow-xl;
 }
 
