@@ -6,7 +6,7 @@ import AsyncBoundary from "../ui/AsyncBoundary";
 import CarauselComp from "../layout/productDetails/CarauselComp";
 import ProductBasicDetails from "../layout/productDetails/ProductBasicDetails";
 import SimilarProducts from "../layout/productDetails/SimilarProducts";
-
+import CustomerReview from "../layout/productDetails/CustomerReview";
 const ProductOverview = () => {
   const [product, setProduct] = useState({});
   const [loadingState, setLoadingState] = useState(false);
@@ -53,13 +53,14 @@ const ProductOverview = () => {
     return <AsyncBoundary customMessage="No Product found." />;
   }
   return (
-    <div className="h-full w-full mt-20">
+    <div className="h-full w-full my-20">
       <BackButton text="Back" />
       <div className="w-full p-6 flex flex-col xl:flex-row  gap-7 justify-center">
         <CarauselComp loadingState={loadingState} images={images} />
         <ProductBasicDetails product={product} />
       </div>
       <SimilarProducts category={category} />
+      <CustomerReview />
     </div>
   );
 };

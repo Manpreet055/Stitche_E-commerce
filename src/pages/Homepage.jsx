@@ -16,13 +16,8 @@ const Homepage = () => {
     "/src/assets/BannerImages/SMS.webp",
     "/src/assets/BannerImages/Wizcraft.webp",
   ];
-  const { products, setQuery } = useProducts();
-  useEffect(() => {
-    setQuery((prev) => ({
-      ...prev,
-      limit: 4,
-    }));
-  }, []);
+  const { products } = useProducts(4);
+
   let allogos = [...logos, ...logos];
   return (
     <div className="w-full">
