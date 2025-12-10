@@ -8,11 +8,7 @@ const ProductCard = ({ product }) => {
   return (
     <motion.div
       onClick={() => navigate(`/product/${_id}`)}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
-      exit={{ opacity: 0 }}
-      className="min-w-[250px]  mx-auto w-80 overflow-hidden rounded-lg  shadow-md duration-300  hover:shadow-lg"
+      className="min-w-[250px] mx-auto w-80 overflow-hidden rounded-lg  shadow-md duration-300  hover:shadow-lg"
     >
       <img
         className={`h-54 object-cover bg-white hover-transition card-img w-full min-h-54  object-center`}
@@ -30,8 +26,8 @@ const ProductCard = ({ product }) => {
             {discount?.value ?? discount?.discount ?? 0}% off
           </p>
         </div>
-        <div className="flex flex-col z-99 mt-2 gap-3">
-          <button className="rounded-2xl p-3 theme border  text-white bg-blue-600 hover:scale-[1.02] ease-in-out transition-all">
+        <div className="flex h-full flex-col z-99 mt-2 gap-3">
+          <button className="rounded-2xl p-3 theme border  text-white bg-accent hover:scale-[1.02] ease-in-out transition-all">
             Buy Now{" "}
           </button>
           <button className="rounded-2xl p-3 border">Add to Cart </button>

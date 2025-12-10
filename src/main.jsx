@@ -6,12 +6,13 @@ import App from "./App.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ErrorPage from "./pages/ErrorPage.jsx";
 import Homepage from "./pages/Homepage.jsx";
-import SearchPage from "./pages/SearchPage.jsx";
 
 const Products = lazy(() => import("./pages/Products.jsx"));
+const SearchPage = lazy(() => import("./pages/SearchPage.jsx"));
 const ContactPage = lazy(() => import("./pages/ContactPage.jsx"));
 const About = lazy(() => import("./pages/About.jsx"));
 const ProductOverview = lazy(() => import("./pages/ProductOverview.jsx"));
+const Cart = lazy(() => import("./pages/Cart.jsx"));
 
 const routes = createBrowserRouter([
   {
@@ -41,15 +42,35 @@ const routes = createBrowserRouter([
       },
       {
         path: "about",
-        element: <About />,
+        element: (
+          <Suspense>
+            <About />
+          </Suspense>
+        ),
       },
       {
         path: "contact",
-        element: <ContactPage />,
+        element: (
+          <Suspense>
+            <ContactPage />
+          </Suspense>
+        ),
       },
       {
         path: "search",
-        element: <SearchPage />,
+        element: (
+          <Suspense>
+            <SearchPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "cart",
+        element: (
+          <Suspense>
+            <Cart />
+          </Suspense>
+        ),
       },
     ],
   },

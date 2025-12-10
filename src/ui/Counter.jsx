@@ -28,13 +28,13 @@ const Counter = () => {
     setValue(value - 1);
   };
   return (
-    <ButtonGroup>
+    <ButtonGroup className="h-fit ">
       <ThemeProvider theme={customTheme}>
-        <Button color="primary" onClick={decValue}>
+        <Button className="p-2" color="primary" onClick={decValue}>
           -
         </Button>
-        <p className="flex items-center px-6">{value}</p>
-        <Button color="primary" onClick={incValue}>
+        <p className="flex items-center px-2 md:px-6">{value}</p>
+        <Button className="p-2" color="primary" onClick={incValue}>
           +
         </Button>
       </ThemeProvider>

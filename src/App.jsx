@@ -8,7 +8,7 @@ const App = () => {
   return (
     <ContextProvider>
       <div>
-        <header className="mb-12">
+        <header className="">
           <MainNavbar></MainNavbar>
         </header>
         <main>

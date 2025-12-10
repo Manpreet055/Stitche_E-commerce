@@ -1,18 +1,6 @@
 import React from "react";
 import SectionCard from "../ui/SectionCard";
-import Banner from "../ui/Banner";
 const About = () => {
-  let logos = [
-    "/src/assets/BannerImages/FastTrack.webp",
-    "/src/assets/BannerImages/Fabman.webp",
-    "/src/assets/BannerImages/SadafDesign.webp",
-    "/src/assets/BannerImages/SanableDigi.webp",
-    "/src/assets/BannerImages/SanableStudio.webp",
-    "/src/assets/BannerImages/SMS.webp",
-    "/src/assets/BannerImages/Wizcraft.webp",
-  ];
-
-  let allogos = [...logos, ...logos];
   return (
     <div className="w-full flex flex-col ">
       <SectionCard
@@ -29,14 +17,7 @@ const About = () => {
         para="From our humble beginnings in Dubai, we've expanded our operations across India, Oman, KSA, Bangalore, and Mumbai. Over two decades of this journey, we've made mistakes, learned from them, and grown as a company. We extend our heartfelt gratitude to all our clients who have been instrumental in our growth. We are committed to continuously improving and delivering even better service in the future."
         image="/src/assets/AboutPageImages/growth.svg"
       ></SectionCard>
-      <div className="w-full text-5xl my-8 text-center font-semibold">
-        Our Companies
-      </div>
-      <Banner>
-        {allogos.map((src, i) => (
-          <img key={i} src={src} alt="brand" className="h-24 w-auto " />
-        ))}
-      </Banner>
+      <div className="w-full text-5xl my-8 text-center font-semibold"></div>
     </div>
   );
 };

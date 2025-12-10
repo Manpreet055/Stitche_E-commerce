@@ -1,13 +1,10 @@
 import React, { useContext } from "react";
-import { Link, NavLink } from "react-router-dom";
-import { Droplet, Menu } from "lucide-react";
+import { NavLink } from "react-router-dom";
+import { ShoppingBag, Menu } from "lucide-react";
 import { motion } from "framer-motion";
 import MobileNav from "./MobileNav";
 import ShowMenuContext from "../../context/ShowMenu";
-import SearchBar from "./SearchBar";
 import DarkModeContext from "../../context/DarkModeContext";
-import { Sun, Moon } from "lucide-react";
-
 const Navbar = () => {
   const { isMenuOpen, setIsMenuOpen } = useContext(ShowMenuContext);
   const { setDarkMode, darkMode } = useContext(DarkModeContext);
@@ -34,7 +31,6 @@ const Navbar = () => {
         className="h-11 w-fit"
         alt=""
       />
-      <SearchBar></SearchBar>
       <button
         onClick={() => setIsMenuOpen(true)}
         className="flex xl:hidden items-center justify-center font-semibold hover-transition"
@@ -47,7 +43,7 @@ const Navbar = () => {
           <NavLink
             to="/"
             className={({ isActive }) =>
-              `hover-transition ${isActive ? "text-red-700" : ""}`
+              `hover-transition ${isActive ? "text-white" : "text-gray-500"} `
             }
           >
             Home
@@ -57,7 +53,7 @@ const Navbar = () => {
           <NavLink
             to="/products"
             className={({ isActive }) =>
-              `hover-transition ${isActive ? "text-red-700" : ""}`
+              `hover-transition ${isActive ? "text-white" : "text-gray-500"}`
             }
           >
             Products
@@ -67,7 +63,7 @@ const Navbar = () => {
           <NavLink
             to="/about"
             className={({ isActive }) =>
-              `hover-transition ${isActive ? "text-red-700" : ""}`
+              `hover-transition ${isActive ? "text-white" : "text-gray-500"}`
             }
           >
             About Us
@@ -77,35 +73,25 @@ const Navbar = () => {
           <NavLink
             to="/contact"
             className={({ isActive }) =>
-              `hover-transition ${isActive ? "text-red-700" : ""}`
+              `hover-transition ${isActive ? "text-white" : "text-gray-500"}`
             }
           >
             Contact
           </NavLink>
         </li>
-        <li>
-          <button onClick={() => setDarkMode((prev) => !prev)}>
-            {darkMode ? (
-              <span className="flex gap-1">
-                <Sun /> Light
-              </span>
-            ) : (
-              <span className="flex gap-1">
-                <Moon /> Dark
-              </span>
-            )}
-          </button>
-        </li>
-        <li className="">
-          <NavLink
-            className={() =>
-              `hover-transition border border-gray-300 text-nowrap hover-transition py-2 px-4 rounded-xl`
-            }
-          >
-            Sign In
-          </NavLink>
-        </li>
       </ul>
+      <div className="flex items-center gap-4">
+        <NavLink to="cart">
+          <ShoppingBag />
+        </NavLink>
+        <NavLink
+          className={() =>
+            `hover-transition  border bg-primary border-gray-300 text-nowrap hover-transition py-2 px-4 rounded-xl`
+          }
+        >
+          Sign Up
+        </NavLink>
+      </div>
     </motion.nav>
   );
 };

@@ -1,7 +1,7 @@
 import React from "react";
 import { Spinner } from "flowbite-react";
 import ProductCard from "../ui/ProductCard";
-import useProducts from "../Hooks/useProducts";
+import useProducts from "../hooks/useProducts";
 import AsyncBoundary from "../ui/AsyncBoundary";
 import { container, item } from "../Animations/ListStagger";
 import { motion } from "framer-motion";
@@ -10,6 +10,7 @@ import FilterData from "../ui/FilterData";
 import SortData from "../ui/SortData";
 import { PRODUCTS_FILTER_OPTIONS } from "../utits/sort_filter_options";
 import { PRODUCTS_SORTING_OPTIONS } from "../utits/sort_filter_options";
+import SearchBar from "../layout/header/SearchBar";
 const Products = () => {
   const {
     products,
@@ -34,8 +35,9 @@ const Products = () => {
 
   return (
     <>
-      <div className="p-4">
+      <div className="mt-20">
         <div className="w-full flex justify-around items-center py-3">
+          <SearchBar />
           <SortData
             sortOptions={PRODUCTS_SORTING_OPTIONS}
             setQuery={setQuery}
