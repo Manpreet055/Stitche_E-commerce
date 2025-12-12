@@ -46,6 +46,11 @@ body {
   background-position: center;
   background-size: cover;
 }
+.login-img {
+  background: url("./assets/images/loginImage.svg");
+  background-position: center;
+  background-size: cover;
+}
 
 @keyframes infinite_scroll {
   0% {

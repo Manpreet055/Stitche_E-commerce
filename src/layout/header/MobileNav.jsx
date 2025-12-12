@@ -2,8 +2,8 @@ import { useContext } from "react";
 import { Droplet, Menu, X } from "lucide-react";
 import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import ShowMenuContext from "../../context/ShowMenu";
 import { NavLink } from "react-router-dom";
+import { useMenu } from "../../context/ShowMenuContextProvider";
 import {
   faYoutube,
   faInstagram,
@@ -12,7 +12,7 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 
 const MobileNav = () => {
-  const { isMenuOpen, setIsMenuOpen } = useContext(ShowMenuContext);
+  const { isMenuOpen, setIsMenuOpen } = useMenu();
 
   return (
     <div

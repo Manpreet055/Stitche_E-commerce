@@ -1,12 +1,11 @@
 import React from "react";
-import DarkModeContextProvider from "./DarkModeContextProvider";
-import ShowMenuContextProvider from "./ShowMenuContextProvider";
-
+import { ShowMenuContextProvider } from "./ShowMenuContextProvider";
+import { AuthProvider } from "./AuthProdvider";
 const ContextProvider = ({ children }) => {
   return (
-    <DarkModeContextProvider>
-      <ShowMenuContextProvider>{children}</ShowMenuContextProvider>
-    </DarkModeContextProvider>
+    <ShowMenuContextProvider>
+      <AuthProvider>{children}</AuthProvider>
+    </ShowMenuContextProvider>
   );
 };
 

@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import CartButton from "./CartButton";
 
 const ProductCard = ({ product }) => {
   const { _id, price, title, media, description, discount } = product || {};
@@ -30,7 +31,7 @@ const ProductCard = ({ product }) => {
           <button className="rounded-2xl p-3 theme border  text-white bg-accent hover:scale-[1.02] ease-in-out transition-all">
             Buy Now{" "}
           </button>
-          <button className="rounded-2xl p-3 border">Add to Cart </button>
+          <CartButton productId={_id} />{" "}
         </div>
       </div>
     </motion.div>

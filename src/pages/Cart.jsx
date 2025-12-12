@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import BackButton from "../ui/BackButton";
 import ProductRow from "../layout/cart/ProductRow";
 import OrderSummary from "../layout/cart/OrderSummary";
-import useProducts from "../hooks/useProducts";
+import { useAuth } from "../context/AuthProdvider";
 const Cart = () => {
-  const { products } = useProducts(4);
+  const { user } = useAuth();
+  const products = user?.cart || [];
   return (
     <div className="mt-20 p-4">
       <BackButton text="Back" />

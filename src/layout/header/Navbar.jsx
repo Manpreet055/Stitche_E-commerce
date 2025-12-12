@@ -1,18 +1,16 @@
 import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
-import { ShoppingBag, Menu } from "lucide-react";
+import { ShoppingCart, Menu } from "lucide-react";
 import { motion } from "framer-motion";
 import MobileNav from "./MobileNav";
-import ShowMenuContext from "../../context/ShowMenu";
-import DarkModeContext from "../../context/DarkModeContext";
+import { useMenu } from "../../context/ShowMenuContextProvider";
+import { useAuth } from "../../context/AuthProdvider";
+import AvatarDropDown from "../../ui/AvatarDropdown";
 const Navbar = () => {
-  const { isMenuOpen, setIsMenuOpen } = useContext(ShowMenuContext);
-  const { setDarkMode, darkMode } = useContext(DarkModeContext);
-  if (darkMode) {
-    document.body.classList.add("dark");
-  } else {
-    document.body.classList.remove("dark");
-  }
+  const { isMenuOpen, setIsMenuOpen } = useMenu();
+  const { user } = useAuth();
+  const cartItemsCount = user?.cart.length;
+  const userId = localStorage.getItem("userId");
   return (
     <motion.nav
       initial={{ y: -100 }}
@@ -81,16 +79,22 @@ const Navbar = () => {
         </li>
       </ul>
       <div className="flex items-center gap-4">
-        <NavLink to="cart">
-          <ShoppingBag />
+        <NavLink to="cart" className="flex flex-col items-end">
+          <span className="rounded-full px-1 text-xs"> {cartItemsCount}</span>
+          <ShoppingCart />
         </NavLink>
-        <NavLink
-          className={() =>
-            `hover-transition  border bg-primary border-gray-300 text-nowrap hover-transition py-2 px-4 rounded-xl`
-          }
-        >
-          Sign Up
-        </NavLink>
+        {userId ? (
+          <AvatarDropDown img={user?.profile?.avatar} />
+        ) : (
+          <NavLink
+            to="login"
+            className={() =>
+              `hover-transition  border bg-primary border-gray-300 text-nowrap hover-transition py-2 px-4 rounded-xl`
+            }
+          >
+            Sign Up
+          </NavLink>
+        )}
       </div>
     </motion.nav>
   );

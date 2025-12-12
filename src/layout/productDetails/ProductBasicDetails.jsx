@@ -3,10 +3,18 @@ import capitalizeFirstLetter from "../../utits/capitalizeLetter";
 import Counter from "../../ui/Counter";
 import { Button } from "flowbite-react";
 import RatingComp from "./RatingComp";
+import CartButton from "../../ui/CartButton";
 const ProductBasicDetails = ({ product }) => {
-  const { title, brand, description, price, category, subCategory, rating } =
-    product;
-  console.log(product);
+  const {
+    _id,
+    title,
+    brand,
+    description,
+    price,
+    category,
+    subCategory,
+    rating,
+  } = product;
 
   const stock = product?.stock ?? product?.quantity ?? 0;
 
@@ -30,10 +38,8 @@ const ProductBasicDetails = ({ product }) => {
             : `${stock} In Stock `}
       </p>
       <div className="flex  mt-6 px-6 gap-3">
-        <Counter />
-        <Button className="text-nowrap hover:scale-[1.01] ease-in-out transition-all">
-          Add to Cart
-        </Button>
+        <Counter productId={_id} />
+        <CartButton productId={_id} />
       </div>
       <div className="flex justify-start w-full">
         <Button className="w-full max-w-xs text-nowrap mt-6 hover:scale-[1.01] ease-in-out transition-all">

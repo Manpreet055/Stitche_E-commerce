@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import ShowMenuContext from "./ShowMenu";
+import React, { useContext, useState } from "react";
 
-const ShowMenuContextProvider = ({ children }) => {
+export const ShowMenuContext = React.createContext();
+export const ShowMenuContextProvider = ({ children }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   return (
     <ShowMenuContext.Provider value={{ isMenuOpen, setIsMenuOpen }}>
@@ -10,4 +10,4 @@ const ShowMenuContextProvider = ({ children }) => {
   );
 };
 
-export default ShowMenuContextProvider;
+export const useMenu = () => useContext(ShowMenuContext);

@@ -21,7 +21,6 @@ const SimilarProducts = ({ category }) => {
           setError,
         );
         setProducts(data);
-        console.log(data);
       } catch (err) {
         setError(err.message);
       }
