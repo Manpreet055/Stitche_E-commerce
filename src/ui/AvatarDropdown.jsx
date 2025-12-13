@@ -5,8 +5,16 @@ import {
   DropdownHeader,
   DropdownItem,
 } from "flowbite-react";
+import { useState } from "react";
 
 const AvatarDropDown = ({ img }) => {
+  const [isAuth, setAuth] = useState(Boolean(localStorage.getItem("userId")));
+
+  const handleLogOut = () => {
+    localStorage.removeItem("userId");
+    // setAuth(false);
+    window.location.reload();
+  };
   return (
     <Dropdown
       label={<Avatar alt="User settings" img={img} rounded />}
@@ -23,7 +31,7 @@ const AvatarDropDown = ({ img }) => {
       <DropdownItem>Settings</DropdownItem>
       <DropdownItem>Earnings</DropdownItem>
       <DropdownDivider />
-      <DropdownItem>Sign out</DropdownItem>
+      <DropdownItem onClick={handleLogOut}>Sign out</DropdownItem>
     </Dropdown>
   );
 };

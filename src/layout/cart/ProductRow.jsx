@@ -2,22 +2,10 @@ import React, { useEffect, useState } from "react";
 import Counter from "../../ui/Counter";
 import { Trash } from "lucide-react";
 import { Spinner } from "flowbite-react";
+import { removeProductFromCart } from "../../services/handleCart";
+import { useNavigate } from "react-router-dom";
 const ProductRow = ({ products }) => {
-  // const handleCart = (productsArray) => {
-  //   return productsArray.map((product) => ({
-  //     productId: product._id,
-  //   }));
-  // };
-
-  // // const [cart, setCart] = useState(() => handleCart(products));
-
-  // const removeProduct = (index) => {
-  //   const updatedCart = [...cart];
-  //   updatedCart.splice(index, 1);
-  //   setCart(() => handleCart(updatedCart));
-  //   console.log(updatedCart);
-  // };
-
+  const navigate = useNavigate();
   if (products.length === 0) {
     return (
       <div className="flex justify-center items-center">
@@ -30,6 +18,7 @@ const ProductRow = ({ products }) => {
     <ul className="flex flex-col gap-2 border border-gray-300 grow rounded-2xl p-4">
       {products.map((p, index) => (
         <li
+          onClick={() => navigate(`/product/${p.product._id}`)}
           key={index + 1}
           className="flex items-center border-t border-gray-300 justify-around py-4 w-full"
         >
@@ -52,7 +41,12 @@ const ProductRow = ({ products }) => {
           <span className=" ml-3 font-medium">
             ${(p.product?.price * p.qty).toFixed(2)}
           </span>
-          <button>
+          <button
+            onClick={(event) => {
+              event.stopPropagation();
+              removeProductFromCart(p?.product._id);
+            }}
+          >
             <Trash />
           </button>
         </li>
