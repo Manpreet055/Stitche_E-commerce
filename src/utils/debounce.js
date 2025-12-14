@@ -1,4 +1,4 @@
-const useDebounce = ({ callBack, delay }) => {
+const debounce = (callBack, delay) => {
   let timer;
   return function (...args) {
     if (timer) clearTimeout(timer);
@@ -8,4 +8,4 @@ const useDebounce = ({ callBack, delay }) => {
   };
 };
 
-export default useDebounce;
+export default debounce;

@@ -31,7 +31,7 @@ const ProductCard = ({ product }) => {
           <button className="rounded-2xl p-3 theme border  text-white bg-accent hover:scale-[1.02] ease-in-out transition-all">
             Buy Now{" "}
           </button>
-          <CartButton productId={_id} />{" "}
+          <CartButton product={_id} />{" "}
         </div>
       </div>
     </motion.div>

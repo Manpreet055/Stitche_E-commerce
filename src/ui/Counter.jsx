@@ -1,4 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { updateCartQty } from "../services/handleCart";
+
 import {
   ButtonGroup,
   Button,
@@ -6,8 +8,6 @@ import {
   ThemeProvider,
 } from "flowbite-react";
 const Counter = ({ productId = "", defaultqty = 1 }) => {
-  // const findProduct = cart.filter((p) => p.productId === productId);
-  // const unMatchedProducts = cart.filter((p) => p.productId !== productId);
   const customTheme = createTheme({
     button: {
       color: {
@@ -19,30 +19,20 @@ const Counter = ({ productId = "", defaultqty = 1 }) => {
       },
     },
   });
-  const [value, setValue] = useState(defaultqty);
+  const [quantity, setQuantity] = useState(defaultqty);
+
   const incValue = () => {
-    if (value === 10) return;
-    setValue(value + 1);
-    // setCart([
-    //   ...unMatchedProducts,
-    //   {
-    //     productId,
-    //     qty: value + 1,
-    //   },
-    // ]);
+    if (quantity === 10) return;
+    setQuantity(quantity + 1);
   };
   const decValue = () => {
-    if (value === 1) return;
-    setValue(value - 1);
-    // setCart([
-    //   ...unMatchedProducts,
-    //   {
-    //     productId,
-    //     qty: value - 1,
-    //   },
-    // ]);
+    if (quantity === 1) return;
+    setQuantity(quantity - 1);
   };
 
+  useEffect(() => {
+    updateCartQty(productId, quantity);
+  }, [quantity]);
   return (
     <ButtonGroup
       onClick={(event) => event.stopPropagation()}
@@ -52,7 +42,7 @@ const Counter = ({ productId = "", defaultqty = 1 }) => {
         <Button className="p-2" color="primary" onClick={decValue}>
           -
         </Button>
-        <p className="flex items-center px-2 md:px-6">{value}</p>
+        <p className="flex items-center px-2 md:px-6">{quantity}</p>
         <Button className="p-2" color="primary" onClick={incValue}>
           +
         </Button>

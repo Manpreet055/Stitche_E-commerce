@@ -1,5 +1,5 @@
 import { Pagination, createTheme } from "flowbite-react";
-import { customPaginationTheme } from "../utits/customFlowbiteTheme";
+import { customPaginationTheme } from "../utils/customFlowbiteTheme";
 
 export function PaginationComp({ currentPage, setCurrentPage, totalPages }) {
   const onPageChange = (page) => setCurrentPage(page);

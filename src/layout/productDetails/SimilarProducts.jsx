@@ -47,7 +47,7 @@ const SimilarProducts = ({ category }) => {
         initial="hidden"
         animate="show"
         variants={container}
-        className="flex w-full justify-evenly flex-wrap gap-y-8 gap-x-6"
+        className="flex w-full justify-evenly overflow-x-auto max-w-screen gap-y-8 gap-x-6"
       >
         {products.map((product, index) => (
           <motion.li variants={item} key={index}>

@@ -41,7 +41,7 @@ const Navbar = () => {
           <NavLink
             to="/"
             className={({ isActive }) =>
-              `hover-transition ${isActive ? "text-white" : "text-gray-500"} `
+              `hover-transition ${isActive ? "text-black" : "text-gray-500"} `
             }
           >
             Home
@@ -51,7 +51,7 @@ const Navbar = () => {
           <NavLink
             to="/products"
             className={({ isActive }) =>
-              `hover-transition ${isActive ? "text-white" : "text-gray-500"}`
+              `hover-transition ${isActive ? "text-black" : "text-gray-500"}`
             }
           >
             Products
@@ -61,7 +61,7 @@ const Navbar = () => {
           <NavLink
             to="/about"
             className={({ isActive }) =>
-              `hover-transition ${isActive ? "text-white" : "text-gray-500"}`
+              `hover-transition ${isActive ? "text-black" : "text-gray-500"}`
             }
           >
             About Us
@@ -71,7 +71,7 @@ const Navbar = () => {
           <NavLink
             to="/contact"
             className={({ isActive }) =>
-              `hover-transition ${isActive ? "text-white" : "text-gray-500"}`
+              `hover-transition ${isActive ? "text-black" : "text-gray-500"}`
             }
           >
             Contact
@@ -80,7 +80,10 @@ const Navbar = () => {
       </ul>
       <div className="flex items-center gap-4">
         <NavLink to="cart" className="flex flex-col items-end">
-          <span className="rounded-full px-1 text-xs"> {cartItemsCount}</span>
+          <span className="rounded-full px-1 text-xs">
+            {" "}
+            {cartItemsCount ?? 0}
+          </span>
           <ShoppingCart />
         </NavLink>
         {userId ? (

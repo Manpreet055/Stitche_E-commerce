@@ -63,7 +63,6 @@ export const toggleFeatured = async (
     const newValue = data?.isFeatured ?? isFeatured;
     setFeatured(newValue);
   } catch (error) {
-    console.log(error.message);
     setFeatured(!isFeatured);
     handleApiError(error);
     throw error;

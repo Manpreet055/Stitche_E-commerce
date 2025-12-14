@@ -1,5 +1,5 @@
 import React from "react";
-import capitalizeFirstLetter from "../../utits/capitalizeLetter";
+import capitalizeFirstLetter from "../../utils/capitalizeLetter";
 import Counter from "../../ui/Counter";
 import { Button } from "flowbite-react";
 import RatingComp from "./RatingComp";
@@ -39,7 +39,7 @@ const ProductBasicDetails = ({ product }) => {
       </p>
       <div className="flex  mt-6 px-6 gap-3">
         <Counter productId={_id} />
-        <CartButton productId={_id} />
+        <CartButton product={_id} />
       </div>
       <div className="flex justify-start w-full">
         <Button className="w-full max-w-xs text-nowrap mt-6 hover:scale-[1.01] ease-in-out transition-all">

@@ -17,29 +17,12 @@ const ContactForm = () => {
   };
   async function handleForm() {
     event.preventDefault();
-    console.log(formData);
     setFormData({
       fullname: "",
       email: "",
       phone: "",
       message: "",
     });
-    // try {
-    //   let response = await fetch(
-    //     "https://chromojet-1e5b1-default-rtdb.firebaseio.com",
-    //     {
-    //       method: "POST",
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //       },
-    //       body: JSON.stringify(formData),
-    //     }
-    //   );
-    //   let data = await response.json();
-    //   console.log(data);
-    // } catch (error) {
-    //   console.log(error.message);
-    // }
   }
   return (
     <motion.div

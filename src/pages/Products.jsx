@@ -8,8 +8,8 @@ import { motion } from "framer-motion";
 import PaginationComp from "../ui/PaginationComp";
 import FilterData from "../ui/FilterData";
 import SortData from "../ui/SortData";
-import { PRODUCTS_FILTER_OPTIONS } from "../utits/sort_filter_options";
-import { PRODUCTS_SORTING_OPTIONS } from "../utits/sort_filter_options";
+import { PRODUCTS_FILTER_OPTIONS } from "../utils/sort_filter_options";
+import { PRODUCTS_SORTING_OPTIONS } from "../utils/sort_filter_options";
 import SearchBar from "../layout/header/SearchBar";
 const Products = () => {
   const {

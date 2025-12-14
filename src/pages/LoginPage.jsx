@@ -1,11 +1,15 @@
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { loginUser } from "../services/loginRequest";
+import { loginUser } from "../services/handleUser";
 import AsyncBoundary from "../ui/AsyncBoundary";
 import { NavLink, useNavigate } from "react-router-dom";
 import BackButton from "../ui/BackButton";
+import ToastComp from "../ui/ToastComp";
+import { useAuth } from "../context/AuthProdvider";
 const LoginPage = () => {
   const navigate = useNavigate();
+  const { refetchUser } = useAuth();
+  const [toastText, setToastText] = useState();
   const { register, handleSubmit, reset } = useForm({
     defaultValues: {
       email: "",
@@ -17,12 +21,13 @@ const LoginPage = () => {
   const [error, setError] = useState("");
   const handleForm = async (data) => {
     try {
-      const user = await loginUser(data, setLoadingState, setError);
-      localStorage.setItem("userId", user._id);
-      reset();
-      navigate("/");
-    } catch (error) {
-      setError(error.message);
+      const result = await loginUser(data, setLoadingState, setError);
+      localStorage.setItem("userId", result?.user?._id);
+      setToastText(result.msg);
+      await refetchUser(); // Add this: Refetch user details immediately after login
+      navigate("/"); // Optionally navigate after refetch
+    } catch (err) {
+      setToastText(err.msg);
     }
   };
 
@@ -38,6 +43,7 @@ const LoginPage = () => {
       <div className="absolute top-10 left-10">
         <BackButton text="Go Back" navPath="/" />
       </div>
+      {toastText && <ToastComp text={toastText || error} position="top-10" />}
       <div className="w-full max-w-lg h-fit px-6 py-10 border border-gray-400 rounded-2xl">
         <h2 className="text-center text-3xl font-semibold">Login</h2>
         <h4 className="text-gray-500 text-center mt-4 mb-10">

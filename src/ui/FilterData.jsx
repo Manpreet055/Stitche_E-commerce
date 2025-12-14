@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { ChevronUp } from "lucide-react";
-import capitalizeFirstLetter from "../utits/capitalizeLetter";
+import capitalizeFirstLetter from "../utils/capitalizeLetter";
 
 const FilterData = ({ filterOptions, setQuery }) => {
   const { register, handleSubmit, getValues } = useForm({

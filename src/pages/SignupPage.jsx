@@ -1,12 +1,14 @@
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { loginUser } from "../services/loginRequest";
 import AsyncBoundary from "../ui/AsyncBoundary";
 import BackButton from "../ui/BackButton";
 import { useNavigate, NavLink } from "react-router-dom";
+import { signupUser } from "../services/handleUser";
+import { useAuth } from "../context/AuthProdvider";
 
 const SignupPage = () => {
   const navigate = useNavigate();
+  const { refetchUser } = useAuth();
   const {
     register,
     handleSubmit,
@@ -21,16 +23,19 @@ const SignupPage = () => {
 
   const [loadingState, setLoadingState] = useState(false);
   const [error, setError] = useState("");
+
   const handleForm = async (data) => {
     try {
-      // const user = await loginUser(data, setLoadingState, setError);
-      // localStorage.setItem("userId", user._id);
-      // reset();
-      // navigate(-1);
-
-      const comparePass = data.password === data.confirm;
+      const comparePassword = data.password === data.confirm;
+      if (!comparePassword) return setError("Both password should be equal");
       delete data.confirm;
-      console.log(data);
+      const user = await signupUser(data, setLoadingState, setError);
+      localStorage.setItem("userId", user?._id);
+      await refetchUser();
+      reset();
+      if (!loadingState) {
+        navigate("/");
+      }
     } catch (error) {
       setError(error.message);
     }
@@ -55,22 +60,23 @@ const SignupPage = () => {
           onSubmit={handleSubmit(handleForm)}
           className="p-4 flex flex-col h-full "
         >
-          <label htmlFor="username" className="font-medium px-2 my-2">
-            UserName
+          <label htmlFor="fullname" className="font-medium px-2 my-2">
+            Full Name
           </label>
           <input
-            {...register("username", {
+            {...register("fullname", {
               required: true,
               minLength: 6,
             })}
-            id="username"
+            id="fullname"
             type="text"
-            placeholder="Enter User name"
+            placeholder="Enter your name"
             className="border border-gray-400 p-2 rounded-xl shadow-md"
           />
           {errors?.username && (
             <p className="text-red-600">{errors.username?.message}</p>
           )}
+
           <label htmlFor="email" className="font-medium px-2 my-2">
             Email
           </label>
@@ -90,11 +96,11 @@ const SignupPage = () => {
           <input
             {...register("password", {
               required: true,
-              minLength: 10,
+              minLength: 8,
             })}
             id="password"
             type="password"
-            placeholder="Enter Your Email Address"
+            placeholder="Enter Password"
             className="border border-gray-400 p-2 rounded-xl shadow-md"
           />
           <label
@@ -107,10 +113,10 @@ const SignupPage = () => {
             id="confirm-password"
             {...register("confirm", {
               required: true,
-              minLength: 10,
+              minLength: 8,
             })}
             type="password"
-            placeholder="Enter Your Email Address"
+            placeholder="Confirm Password"
             className="border border-gray-400 p-2 rounded-xl shadow-md"
           />
           <button

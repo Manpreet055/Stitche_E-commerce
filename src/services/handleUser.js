@@ -2,18 +2,17 @@ import axios from "axios";
 import handleApiError from "./handleApiError";
 const uri = import.meta.env.VITE_BASE_URI;
 
-export const addProductToCart = async (
-  cartData,
+export const fetchUserData = async (
+  userId,
   setLoadingState = () => {},
   setError = () => {},
 ) => {
-  const userId = localStorage.getItem("userId") || "";
   try {
     setLoadingState(true);
-    await axios.patch(`${uri}/users/cart?userId=${userId}`, {
-      ...cartData,
-    });
+    const response = await axios.get(`${uri}/users/${userId}`);
+    const user = response.data.user;
     setLoadingState(false);
+    return user;
   } catch (error) {
     handleApiError(error, setError);
   } finally {
@@ -21,44 +20,41 @@ export const addProductToCart = async (
   }
 };
 
-export const removeProductFromCart = async (
-  productId,
+export const loginUser = async (
+  query,
   setLoadingState = () => {},
   setError = () => {},
 ) => {
-  const userId = localStorage.getItem("userId") || "";
   try {
     setLoadingState(true);
-    await axios.delete(`${uri}/users/cart`, {
+    const response = await axios.get(`${uri}/users/login`, {
       params: {
-        userId,
-        productId,
+        ...query,
       },
     });
+
+    const data = response.data;
+    setLoadingState(false);
+    return data;
   } catch (error) {
-    handleApiError(error, setError);
+    handleApiError(error);
+    setError(error.message);
   } finally {
     setLoadingState(false);
   }
 };
 
-export const updateCartQty = async (
-  product,
-  qty,
+export const signupUser = async (
+  formData,
   setLoadingState = () => {},
   setError = () => {},
 ) => {
-  const userId = localStorage.getItem("userId") || "";
   try {
     setLoadingState(true);
-    await axios.patch(`${uri}/users/cart/update`, null, {
-      params: {
-        userId,
-        product,
-        qty,
-      },
-    });
+    const response = await axios.post(`${uri}/users/signup`, formData);
+    const user = response.data.user;
     setLoadingState(false);
+    return user;
   } catch (error) {
     handleApiError(error, setError);
   } finally {

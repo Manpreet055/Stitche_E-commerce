@@ -17,15 +17,7 @@ const SearchPage = () => {
 
   //   fetching the products with based on query
   useEffect(() => {
-    const fetchResults = async () => {
-      try {
-        const data = await searchProducts(query, setLoadingState, setError);
-        setProducts(data);
-      } catch (err) {
-        setError(err.message);
-      }
-    };
-    fetchResults();
+    searchProducts(query, setLoadingState, setError).then(setProducts);
   }, [query]);
 
   //   handling errors and loading states

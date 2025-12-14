@@ -1,14 +1,23 @@
 import React, { useContext, useEffect } from "react";
 import { addProductToCart } from "../services/handleCart";
 import { useAuth } from "../context/AuthProdvider";
-const CartButton = ({ productId }) => {
-  const { user } = useAuth();
+const CartButton = ({ product }) => {
+  const { refetchUser } = useAuth();
+
+  const handleAddToCart = async () => {
+    try {
+      await addProductToCart({ product, qty: 1 });
+      await refetchUser(); // Refetch to update cart state immediately
+    } catch (error) {
+      console.error("Failed to add to cart:", error);
+      // Optionally show user feedback (e.g., toast)
+    }
+  };
   return (
     <button
       onClick={(event) => {
         event.stopPropagation();
-        addProductToCart({ productId, qty: 1 });
-        user.cart.push({ product: productId, qty: 1 });
+        handleAddToCart();
       }}
       className="rounded-2xl p-3 border"
     >

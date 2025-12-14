@@ -17,9 +17,7 @@ const ProductOverview = () => {
   useEffect(() => {
     if (!id) return;
 
-    fetchProductById(id, setLoadingState, setError).then((data) =>
-      setProduct(data),
-    );
+    fetchProductById(id, setLoadingState, setError).then(setProduct);
   }, [id]);
 
   const {

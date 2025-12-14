@@ -1,13 +1,13 @@
 import { Toast, ToastToggle } from "flowbite-react";
 import { motion } from "framer-motion";
 
-const ToastComp = ({ text = "", icon }) => {
+const ToastComp = ({ text = "", icon = "", position = "left-[50%]  " }) => {
   return (
     <motion.div
       initial={{ y: 30, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.3 }}
-      className="flex justify-center absolute left-[50%]"
+      className={`flex justify-center absolute ${position}`}
     >
       <Toast className="primary-bg items-center flex">
         {icon && (

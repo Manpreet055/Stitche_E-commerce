@@ -31,4 +31,3 @@ const AsyncBoundary = ({
 };
 
 export default AsyncBoundary;
-// ...existing code...

@@ -2,7 +2,7 @@ import React from "react";
 import { ShieldCheck } from "lucide-react";
 const OrderSummary = ({ products }) => {
   const sumofProductsPrice = products.reduce(
-    (acc, p) => acc + p.product.price * p.qty,
+    (acc, p) => acc + p?.product?.price * p.qty,
     0,
   );
   const priceAfterDiscount = sumofProductsPrice * 0.9;

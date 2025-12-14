@@ -6,10 +6,11 @@ import {
   DropdownItem,
 } from "flowbite-react";
 import { useState } from "react";
+import { useAuth } from "../context/AuthProdvider";
 
 const AvatarDropDown = ({ img }) => {
   const [isAuth, setAuth] = useState(Boolean(localStorage.getItem("userId")));
-
+  const { user } = useAuth();
   const handleLogOut = () => {
     localStorage.removeItem("userId");
     // setAuth(false);
@@ -22,9 +23,9 @@ const AvatarDropDown = ({ img }) => {
       inline
     >
       <DropdownHeader>
-        <span className="block text-sm">Bonnie Green</span>
+        <span className="block text-sm">{user?.username}</span>
         <span className="block truncate text-sm font-medium">
-          name@flowbite.com
+          {user?.email}
         </span>
       </DropdownHeader>
       <DropdownItem>Dashboard</DropdownItem>
