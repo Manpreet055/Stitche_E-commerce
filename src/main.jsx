@@ -26,10 +26,9 @@ const routes = createBrowserRouter([
       {
         path: "",
         element: (
-          <ProtectedRoute>
-            {" "}
-            <Homepage />
-          </ProtectedRoute>
+          // <ProtectedRoute>
+          <Homepage />
+          // </ProtectedRoute>
         ),
       },
       {

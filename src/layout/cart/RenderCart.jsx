@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthProdvider";
 const RenderCart = ({ products }) => {
   const navigate = useNavigate();
-  const { refetchUser } = useAuth();
+  const { refetchUser, accessToken } = useAuth();
 
   if (products.length === 0) {
     return (
@@ -19,7 +19,7 @@ const RenderCart = ({ products }) => {
 
   const handleRemove = async (productId) => {
     try {
-      await removeProductFromCart(productId);
+      await removeProductFromCart(accessToken, productId);
       await refetchUser(); // Refetch to update cart state immediately
     } catch (error) {
       console.error("Failed to remove from cart:", error);

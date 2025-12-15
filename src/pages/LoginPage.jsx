@@ -8,7 +8,7 @@ import ToastComp from "../ui/ToastComp";
 import { useAuth } from "../context/AuthProdvider";
 const LoginPage = () => {
   const navigate = useNavigate();
-  const { refetchUser } = useAuth();
+  const { refetchUser, setAccessToken } = useAuth();
   const [toastText, setToastText] = useState();
   const { register, handleSubmit, reset } = useForm({
     defaultValues: {
@@ -21,11 +21,10 @@ const LoginPage = () => {
   const [error, setError] = useState("");
   const handleForm = async (data) => {
     try {
-      const result = await loginUser(data, setLoadingState, setError);
-      localStorage.setItem("userId", result?.user?._id);
-      setToastText(result.msg);
-      await refetchUser(); // Add this: Refetch user details immediately after login
-      navigate("/"); // Optionally navigate after refetch
+      const token = await loginUser(data, setLoadingState, setError);
+      setAccessToken(token);
+      setToastText(login.msg);
+      navigate("/");
     } catch (err) {
       setToastText(err.msg);
     }

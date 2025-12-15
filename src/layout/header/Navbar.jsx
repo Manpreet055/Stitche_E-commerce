@@ -10,7 +10,7 @@ const Navbar = () => {
   const { isMenuOpen, setIsMenuOpen } = useMenu();
   const { user } = useAuth();
   const cartItemsCount = user?.cart.length;
-  const userId = localStorage.getItem("userId");
+
   return (
     <motion.nav
       initial={{ y: -100 }}
@@ -86,7 +86,7 @@ const Navbar = () => {
           </span>
           <ShoppingCart />
         </NavLink>
-        {userId ? (
+        {user ? (
           <AvatarDropDown img={user?.profile?.avatar} />
         ) : (
           <NavLink

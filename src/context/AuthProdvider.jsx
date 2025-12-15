@@ -1,18 +1,21 @@
 import React, { useContext, useCallback, useEffect, useState } from "react";
 import { fetchUserData } from "../services/handleUser";
+import { authStore } from "../utils/authStore";
+const uri = import.meta.env.VITE_BASE_URI;
+
 export const AuthContext = React.createContext();
 export const AuthProvider = ({ children }) => {
+  const [accessToken, setAccessToken] = useState("");
   const [user, setUser] = useState(null);
   const [cart, setCart] = useState([]);
   const [loadingState, setLoadingState] = useState({});
   const [error, setError] = useState({});
 
   const refetchUser = useCallback(async () => {
-    const userId = localStorage.getItem("userId");
-    if (userId && userId !== "undefined") {
+    if (accessToken && accessToken !== "") {
       try {
         const fetchedUser = await fetchUserData(
-          userId,
+          accessToken,
           setLoadingState,
           setError,
         );
@@ -22,7 +25,7 @@ export const AuthProvider = ({ children }) => {
         setError({ ...error, fetch: err.message });
       }
     }
-  }, [error]);
+  }, [accessToken]);
 
   useEffect(() => {
     refetchUser(); // Fetch on mount
@@ -39,6 +42,8 @@ export const AuthProvider = ({ children }) => {
         setError,
         refetchUser,
         loadingState,
+        setAccessToken,
+        accessToken,
       }}
     >
       {children}

@@ -3,13 +3,17 @@ import handleApiError from "./handleApiError";
 const uri = import.meta.env.VITE_BASE_URI;
 
 export const fetchUserData = async (
-  userId,
+  accessToken,
   setLoadingState = () => {},
   setError = () => {},
 ) => {
   try {
     setLoadingState(true);
-    const response = await axios.get(`${uri}/users/${userId}`);
+    const response = await axios.get(`${uri}/users`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
     const user = response.data.user;
     setLoadingState(false);
     return user;
@@ -21,24 +25,21 @@ export const fetchUserData = async (
 };
 
 export const loginUser = async (
-  query,
+  data,
   setLoadingState = () => {},
   setError = () => {},
 ) => {
   try {
     setLoadingState(true);
-    const response = await axios.get(`${uri}/users/login`, {
-      params: {
-        ...query,
-      },
-    });
 
-    const data = response.data;
-    setLoadingState(false);
-    return data;
+    const response = await axios.post(`${uri}/users/login`, data, {
+      withCredentials: true, // REQUIRED
+    });
+    console.log(response.data.token);
+    return response.data.token; // access token
   } catch (error) {
-    handleApiError(error);
-    setError(error.message);
+    setError(error.response?.data?.msg || error.message);
+    throw error;
   } finally {
     setLoadingState(false);
   }
@@ -52,9 +53,9 @@ export const signupUser = async (
   try {
     setLoadingState(true);
     const response = await axios.post(`${uri}/users/signup`, formData);
-    const user = response.data.user;
+    const token = response.data.token;
     setLoadingState(false);
-    return user;
+    return token;
   } catch (error) {
     handleApiError(error, setError);
   } finally {

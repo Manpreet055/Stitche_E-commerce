@@ -3,6 +3,7 @@ import BackButton from "../ui/BackButton";
 import RenderCart from "../layout/cart/RenderCart";
 import OrderSummary from "../layout/cart/OrderSummary";
 import { useAuth } from "../context/AuthProdvider";
+
 const Cart = () => {
   const { user } = useAuth();
   const products = user?.cart || [];

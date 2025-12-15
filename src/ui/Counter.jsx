@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { updateCartQty } from "../services/handleCart";
+import { useAuth } from "../context/AuthProdvider";
+import debounce from "../utils/debounce";
 
 import {
   ButtonGroup,
@@ -19,20 +21,33 @@ const Counter = ({ productId = "", defaultqty = 1 }) => {
       },
     },
   });
+  const { accessToken } = useAuth();
+  const hasInteracted = useRef(false);
   const [quantity, setQuantity] = useState(defaultqty);
 
   const incValue = () => {
+    hasInteracted.current = true;
     if (quantity === 10) return;
-    setQuantity(quantity + 1);
+    setQuantity((p) => p + 1);
   };
   const decValue = () => {
+    hasInteracted.current = true;
+
     if (quantity === 1) return;
-    setQuantity(quantity - 1);
+    setQuantity((p) => p - 1);
   };
 
+  // Debounce the quantity update
+  const debouncedUpdate = useMemo(
+    () => debounce(updateCartQty, 500),
+    [updateCartQty],
+  );
+
   useEffect(() => {
-    updateCartQty(productId, quantity);
+    if (!hasInteracted.current) return;
+    debouncedUpdate(accessToken, productId, quantity); // Only call on changes after mount
   }, [quantity]);
+
   return (
     <ButtonGroup
       onClick={(event) => event.stopPropagation()}

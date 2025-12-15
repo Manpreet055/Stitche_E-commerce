@@ -1,18 +1,22 @@
 import axios from "axios";
 import handleApiError from "./handleApiError";
 const uri = import.meta.env.VITE_BASE_URI;
+import api from "../utils/api";
 
 export const addProductToCart = async (
+  accessToken,
   cartData,
   setLoadingState = () => {},
   setError = () => {},
 ) => {
-  const userId = localStorage.getItem("userId") || "";
   try {
     setLoadingState(true);
-    await axios.patch(`${uri}/users/cart?userId=${userId}`, {
-      ...cartData,
+    const cart = await api.patch(`/users/cart`, cartData, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
     });
+    console.log(cart.data);
     setLoadingState(false);
   } catch (error) {
     handleApiError(error, setError);
@@ -22,17 +26,17 @@ export const addProductToCart = async (
 };
 
 export const removeProductFromCart = async (
+  accessToken,
   productId,
   setLoadingState = () => {},
   setError = () => {},
 ) => {
-  const userId = localStorage.getItem("userId") || "";
   try {
     setLoadingState(true);
     await axios.delete(`${uri}/users/cart`, {
-      params: {
-        userId,
-        productId,
+      params: { productId },
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
       },
     });
   } catch (error) {
@@ -43,21 +47,24 @@ export const removeProductFromCart = async (
 };
 
 export const updateCartQty = async (
+  accessToken,
   product,
   qty,
+
   setLoadingState = () => {},
   setError = () => {},
 ) => {
-  const userId = localStorage.getItem("userId") || "";
   try {
     setLoadingState(true);
-    await axios.patch(`${uri}/users/cart/update`, null, {
-      params: {
-        userId,
-        product,
-        qty,
+    await axios.patch(
+      `${uri}/users/cart/update`,
+      { product, qty },
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
       },
-    });
+    );
     setLoadingState(false);
   } catch (error) {
     handleApiError(error, setError);

@@ -2,11 +2,11 @@ import React, { useContext, useEffect } from "react";
 import { addProductToCart } from "../services/handleCart";
 import { useAuth } from "../context/AuthProdvider";
 const CartButton = ({ product }) => {
-  const { refetchUser } = useAuth();
+  const { refetchUser, accessToken } = useAuth();
 
   const handleAddToCart = async () => {
     try {
-      await addProductToCart({ product, qty: 1 });
+      await addProductToCart(accessToken, { product, qty: 1 });
       await refetchUser(); // Refetch to update cart state immediately
     } catch (error) {
       console.error("Failed to add to cart:", error);

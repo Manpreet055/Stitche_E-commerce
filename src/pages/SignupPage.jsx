@@ -8,7 +8,7 @@ import { useAuth } from "../context/AuthProdvider";
 
 const SignupPage = () => {
   const navigate = useNavigate();
-  const { refetchUser } = useAuth();
+  const { refetchUser, setAccessToken } = useAuth();
   const {
     register,
     handleSubmit,
@@ -29,9 +29,8 @@ const SignupPage = () => {
       const comparePassword = data.password === data.confirm;
       if (!comparePassword) return setError("Both password should be equal");
       delete data.confirm;
-      const user = await signupUser(data, setLoadingState, setError);
-      localStorage.setItem("userId", user?._id);
-      await refetchUser();
+      const accessToken = await signupUser(data, setLoadingState, setError);
+      setAccessToken(accessToken);
       reset();
       if (!loadingState) {
         navigate("/");
