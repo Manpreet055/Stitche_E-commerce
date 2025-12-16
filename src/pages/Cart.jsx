@@ -2,11 +2,8 @@ import React, { useState } from "react";
 import BackButton from "../ui/BackButton";
 import RenderCart from "../layout/cart/RenderCart";
 import OrderSummary from "../layout/cart/OrderSummary";
-import { useAuth } from "../context/AuthProdvider";
-
+import { useUser } from "../context/UserDataProvider";
 const Cart = () => {
-  const { user } = useAuth();
-  const products = user?.cart || [];
   return (
     <div className="my-20 p-4">
       <BackButton text="Back" />
@@ -14,8 +11,8 @@ const Cart = () => {
         Your Cart
       </h2>
       <div className="flex flex-wrap justify-evenly gap-4">
-        <RenderCart products={products} />
-        <OrderSummary products={products} />
+        <RenderCart />
+        <OrderSummary />
       </div>
     </div>
   );

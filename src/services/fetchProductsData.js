@@ -1,7 +1,5 @@
-import axios from "axios";
 import handleApiError from "./handleApiError";
-const uri = import.meta.env.VITE_BASE_URI;
-
+import api from "../utils/api";
 export const fetchProducts = async (
   query,
   setLoadingState,
@@ -13,7 +11,7 @@ export const fetchProducts = async (
   const { limit, sort, filters } = query;
   try {
     setLoadingState(true);
-    const response = await axios.get(`${uri}/products/`, {
+    const response = await api.get(`/products`, {
       params: {
         page: currentPage,
         limit,
@@ -37,7 +35,7 @@ export const fetchProducts = async (
 export const fetchProductById = async (id, setLoadingState, setError) => {
   try {
     setLoadingState(true);
-    const response = await axios.get(`${uri}/api/products/${id}`);
+    const response = await api.get(`/api/products/${id}`);
     let data = response.data.data;
     return data;
   } catch (error) {
@@ -57,7 +55,7 @@ export const toggleFeatured = async (
 ) => {
   try {
     loadingState(true);
-    const response = await axios.patch(`${uri}/products`, { _id, isFeatured });
+    const response = await api.patch(`/products`, { _id, isFeatured });
 
     const data = response.data;
     const newValue = data?.isFeatured ?? isFeatured;

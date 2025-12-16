@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
 import Counter from "../../ui/Counter";
+import { removeProductFromCart } from "../../services/handleCart";
 import { Trash } from "lucide-react";
 import { Spinner } from "flowbite-react";
-import { removeProductFromCart } from "../../services/handleCart";
+import { useUser } from "../../context/UserDataProvider";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/AuthProdvider";
-const RenderCart = ({ products }) => {
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+const RenderCart = () => {
+  const api = useAxiosPrivate();
+  const { cart, refetchUser } = useUser();
   const navigate = useNavigate();
-  const { refetchUser, accessToken } = useAuth();
 
-  if (products.length === 0) {
+  if (cart.length === 0) {
     return (
       <div className="flex justify-center items-center">
         No Products In the Cart
@@ -19,17 +21,16 @@ const RenderCart = ({ products }) => {
 
   const handleRemove = async (productId) => {
     try {
-      await removeProductFromCart(accessToken, productId);
-      await refetchUser(); // Refetch to update cart state immediately
+      await removeProductFromCart(api, productId);
+      await refetchUser();
     } catch (error) {
       console.error("Failed to remove from cart:", error);
-      // Optionally show user feedback
     }
   };
 
   return (
     <ul className="flex h-full lg:max-h-[500px] overflow-auto hide-scrollbar flex-col gap-2 border border-gray-300 grow rounded-2xl p-4">
-      {products.map((p, index) => (
+      {cart.map((p, index) => (
         <li
           onClick={() => navigate(`/product/${p.product._id}`)}
           key={index + 1}

@@ -6,15 +6,13 @@ import {
   DropdownItem,
 } from "flowbite-react";
 import { useState } from "react";
-import { useAuth } from "../context/AuthProdvider";
+import { LogOut } from "lucide-react";
+import { useUser } from "../context/UserDataProvider";
 
 const AvatarDropDown = ({ img }) => {
-  const [isAuth, setAuth] = useState(Boolean(localStorage.getItem("userId")));
-  const { user } = useAuth();
+  const { user } = useUser();
   const handleLogOut = () => {
-    localStorage.removeItem("userId");
-    // setAuth(false);
-    window.location.reload();
+    console.log("LogOut");
   };
   return (
     <Dropdown
@@ -32,7 +30,9 @@ const AvatarDropDown = ({ img }) => {
       <DropdownItem>Settings</DropdownItem>
       <DropdownItem>Earnings</DropdownItem>
       <DropdownDivider />
-      <DropdownItem onClick={handleLogOut}>Sign out</DropdownItem>
+      <DropdownItem className="flex gap-3" onClick={handleLogOut}>
+        <LogOut /> Log out
+      </DropdownItem>
     </Dropdown>
   );
 };

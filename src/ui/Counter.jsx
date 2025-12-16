@@ -1,27 +1,12 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { updateCartQty } from "../services/handleCart";
-import { useAuth } from "../context/AuthProdvider";
 import debounce from "../utils/debounce";
-
-import {
-  ButtonGroup,
-  Button,
-  createTheme,
-  ThemeProvider,
-} from "flowbite-react";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
+import { buttonGroupTheme } from "../utils/customFlowbiteTheme";
+import { ButtonGroup, Button, ThemeProvider } from "flowbite-react";
 const Counter = ({ productId = "", defaultqty = 1 }) => {
-  const customTheme = createTheme({
-    button: {
-      color: {
-        primary: "border-none",
-        secondary: "bg-blue-500 hover:bg-blue-600",
-      },
-      size: {
-        lg: "px-6 py-3 text-lg",
-      },
-    },
-  });
-  const { accessToken } = useAuth();
+  const api = useAxiosPrivate();
+
   const hasInteracted = useRef(false);
   const [quantity, setQuantity] = useState(defaultqty);
 
@@ -45,7 +30,7 @@ const Counter = ({ productId = "", defaultqty = 1 }) => {
 
   useEffect(() => {
     if (!hasInteracted.current) return;
-    debouncedUpdate(accessToken, productId, quantity); // Only call on changes after mount
+    debouncedUpdate(api, productId, quantity); // Only call on changes after mount
   }, [quantity]);
 
   return (
@@ -53,7 +38,7 @@ const Counter = ({ productId = "", defaultqty = 1 }) => {
       onClick={(event) => event.stopPropagation()}
       className="h-fit w-fit "
     >
-      <ThemeProvider theme={customTheme}>
+      <ThemeProvider theme={buttonGroupTheme}>
         <Button className="p-2" color="primary" onClick={decValue}>
           -
         </Button>

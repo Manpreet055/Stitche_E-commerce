@@ -75,3 +75,15 @@ export const customNavbarTheme = createTheme({
     title: "sr-only",
   },
 });
+
+export const buttonGroupTheme = createTheme({
+  button: {
+    color: {
+      primary: "border-none",
+      secondary: "bg-blue-500 hover:bg-blue-600",
+    },
+    size: {
+      lg: "px-6 py-3 text-lg",
+    },
+  },
+});

@@ -4,11 +4,11 @@ import { ShoppingCart, Menu } from "lucide-react";
 import { motion } from "framer-motion";
 import MobileNav from "./MobileNav";
 import { useMenu } from "../../context/ShowMenuContextProvider";
-import { useAuth } from "../../context/AuthProdvider";
+import { useUser } from "../../context/UserDataProvider";
 import AvatarDropDown from "../../ui/AvatarDropdown";
 const Navbar = () => {
   const { isMenuOpen, setIsMenuOpen } = useMenu();
-  const { user } = useAuth();
+  const { user } = useUser();
   const cartItemsCount = user?.cart.length;
 
   return (
@@ -29,14 +29,9 @@ const Navbar = () => {
         className="h-11 w-fit"
         alt=""
       />
-      <button
-        onClick={() => setIsMenuOpen(true)}
-        className="flex xl:hidden items-center justify-center font-semibold hover-transition"
-      >
-        <Menu className="" />
-      </button>
+
       {isMenuOpen && <MobileNav></MobileNav>}
-      <ul className=" hidden xl:flex justify-center items-center gap-4 lg:gap-10  font-semibold px-3">
+      <ul className=" w-full hidden md:flex md:justify-evenly lg:justify-center  items-center gap-4 lg:gap-10  font-semibold px-3">
         <li className="">
           <NavLink
             to="/"
@@ -98,6 +93,12 @@ const Navbar = () => {
             Sign Up
           </NavLink>
         )}
+        <button
+          onClick={() => setIsMenuOpen(true)}
+          className="flex md:hidden items-center justify-center font-semibold hover-transition"
+        >
+          <Menu className="" />
+        </button>
       </div>
     </motion.nav>
   );

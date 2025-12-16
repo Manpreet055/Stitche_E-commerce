@@ -1,74 +1,28 @@
-import axios from "axios";
 import handleApiError from "./handleApiError";
-const uri = import.meta.env.VITE_BASE_URI;
-import api from "../utils/api";
 
-export const addProductToCart = async (
-  accessToken,
-  cartData,
-  setLoadingState = () => {},
-  setError = () => {},
-) => {
+export const addProductToCart = async (api, cartData) => {
   try {
-    setLoadingState(true);
-    const cart = await api.patch(`/users/cart`, cartData, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
+    const cart = await api.patch(`/users/cart`, cartData);
     console.log(cart.data);
-    setLoadingState(false);
   } catch (error) {
-    handleApiError(error, setError);
-  } finally {
-    setLoadingState(false);
+    handleApiError(error);
   }
 };
 
-export const removeProductFromCart = async (
-  accessToken,
-  productId,
-  setLoadingState = () => {},
-  setError = () => {},
-) => {
+export const removeProductFromCart = async (api, productId) => {
   try {
-    setLoadingState(true);
-    await axios.delete(`${uri}/users/cart`, {
+    await api.delete(`/users/cart`, {
       params: { productId },
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
     });
   } catch (error) {
-    handleApiError(error, setError);
-  } finally {
-    setLoadingState(false);
+    handleApiError(error);
   }
 };
 
-export const updateCartQty = async (
-  accessToken,
-  product,
-  qty,
-
-  setLoadingState = () => {},
-  setError = () => {},
-) => {
+export const updateCartQty = async (api, product, qty) => {
   try {
-    setLoadingState(true);
-    await axios.patch(
-      `${uri}/users/cart/update`,
-      { product, qty },
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      },
-    );
-    setLoadingState(false);
+    await api.patch(`/users/cart/update`, { product, qty });
   } catch (error) {
-    handleApiError(error, setError);
-  } finally {
-    setLoadingState(false);
+    handleApiError(error);
   }
 };

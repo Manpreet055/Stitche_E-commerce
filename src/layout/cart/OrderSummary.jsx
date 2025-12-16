@@ -1,7 +1,9 @@
 import React from "react";
 import { ShieldCheck } from "lucide-react";
-const OrderSummary = ({ products }) => {
-  const sumofProductsPrice = products.reduce(
+import { useUser } from "../../context/UserDataProvider";
+const OrderSummary = () => {
+  const { cart } = useUser();
+  const sumofProductsPrice = cart.reduce(
     (acc, p) => acc + p?.product?.price * p.qty,
     0,
   );

@@ -1,14 +1,20 @@
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import AsyncBoundary from "../ui/AsyncBoundary";
 import BackButton from "../ui/BackButton";
-import { useNavigate, NavLink } from "react-router-dom";
-import { signupUser } from "../services/handleUser";
-import { useAuth } from "../context/AuthProdvider";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useAuthentication } from "../context/AuthProdvider";
+import { useUser } from "../context/UserDataProvider";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
 const SignupPage = () => {
   const navigate = useNavigate();
-  const { refetchUser, setAccessToken } = useAuth();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+
+  const api = useAxiosPrivate();
+  const { refetchUser, loadingState, error, setError } = useUser();
+  const { setAccessToken } = useAuthentication();
+
   const {
     register,
     handleSubmit,
@@ -21,31 +27,22 @@ const SignupPage = () => {
     },
   });
 
-  const [loadingState, setLoadingState] = useState(false);
-  const [error, setError] = useState("");
-
-  const handleForm = async (data) => {
+  const handleSignupForm = async (data) => {
     try {
       const comparePassword = data.password === data.confirm;
       if (!comparePassword) return setError("Both password should be equal");
       delete data.confirm;
-      const accessToken = await signupUser(data, setLoadingState, setError);
-      setAccessToken(accessToken);
+
+      const response = await api.post("/users/signup", data);
+      const token = response.data.token;
+      setAccessToken(token);
       reset();
-      if (!loadingState) {
-        navigate("/");
-      }
+      navigate(from, { replace: true });
+      await refetchUser();
     } catch (error) {
       setError(error.message);
     }
   };
-
-  if (loadingState) {
-    return <AsyncBoundary loadingState={true} errorState={null} />;
-  }
-  if (error) {
-    return <AsyncBoundary loadingState={false} errorState={error} />;
-  }
 
   return (
     <div className="w-full relative h-screen flex justify-center items-center">
@@ -56,7 +53,7 @@ const SignupPage = () => {
         <h2 className="text-center text-3xl font-semibold">Sign Up</h2>
 
         <form
-          onSubmit={handleSubmit(handleForm)}
+          onSubmit={handleSubmit(handleSignupForm)}
           className="p-4 flex flex-col h-full "
         >
           <label htmlFor="fullname" className="font-medium px-2 my-2">

@@ -1,16 +1,16 @@
 import React, { useContext, useEffect } from "react";
 import { addProductToCart } from "../services/handleCart";
-import { useAuth } from "../context/AuthProdvider";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
+import { useUser } from "../context/UserDataProvider";
 const CartButton = ({ product }) => {
-  const { refetchUser, accessToken } = useAuth();
-
+  const api = useAxiosPrivate();
+  const { refetchUser } = useUser();
   const handleAddToCart = async () => {
     try {
-      await addProductToCart(accessToken, { product, qty: 1 });
-      await refetchUser(); // Refetch to update cart state immediately
+      await addProductToCart(api, { product, qty: 1 });
+      await refetchUser();
     } catch (error) {
       console.error("Failed to add to cart:", error);
-      // Optionally show user feedback (e.g., toast)
     }
   };
   return (

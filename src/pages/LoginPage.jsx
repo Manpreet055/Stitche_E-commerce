@@ -1,14 +1,21 @@
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { loginUser } from "../services/handleUser";
 import AsyncBoundary from "../ui/AsyncBoundary";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import BackButton from "../ui/BackButton";
 import ToastComp from "../ui/ToastComp";
-import { useAuth } from "../context/AuthProdvider";
+
+import { useAuthentication } from "../context/AuthProdvider";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
+import { useUser } from "../context/UserDataProvider";
+
 const LoginPage = () => {
+  const api = useAxiosPrivate();
+  const { setAccessToken } = useAuthentication();
+
   const navigate = useNavigate();
-  const { refetchUser, setAccessToken } = useAuth();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
   const [toastText, setToastText] = useState();
   const { register, handleSubmit, reset } = useForm({
     defaultValues: {
@@ -21,12 +28,16 @@ const LoginPage = () => {
   const [error, setError] = useState("");
   const handleForm = async (data) => {
     try {
-      const token = await loginUser(data, setLoadingState, setError);
+      setLoadingState(true);
+
+      const token = await api.post(`/users/login`, data);
       setAccessToken(token);
-      setToastText(login.msg);
-      navigate("/");
+      setToastText(token.msg);
+      navigate(from, { replace: true });
     } catch (err) {
-      setToastText(err.msg);
+      setToastText(err.message);
+    } finally {
+      setLoadingState(false);
     }
   };
 
