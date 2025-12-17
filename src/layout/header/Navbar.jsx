@@ -8,8 +8,8 @@ import { useUser } from "../../context/UserDataProvider";
 import AvatarDropDown from "../../ui/AvatarDropdown";
 const Navbar = () => {
   const { isMenuOpen, setIsMenuOpen } = useMenu();
-  const { user } = useUser();
-  const cartItemsCount = user?.cart.length;
+  const { cart, user } = useUser();
+  const cartItemsCount = cart?.length || 0;
 
   return (
     <motion.nav
@@ -84,14 +84,22 @@ const Navbar = () => {
         {user ? (
           <AvatarDropDown img={user?.profile?.avatar} />
         ) : (
-          <NavLink
-            to="login"
-            className={() =>
-              `hover-transition  border bg-primary border-gray-300 text-nowrap hover-transition py-2 px-4 rounded-xl`
-            }
-          >
-            Sign Up
-          </NavLink>
+          <div className="flex ">
+            <NavLink
+              to="login"
+              className={() => `  text-nowrap  py-2 px-4 rounded-xl`}
+            >
+              Log in
+            </NavLink>
+            <NavLink
+              to="signup"
+              className={() =>
+                `  border bg-primary border-gray-300 text-nowrap transition-all ease-in-out  py-2 px-4 rounded-xl`
+              }
+            >
+              Sign Up
+            </NavLink>
+          </div>
         )}
         <button
           onClick={() => setIsMenuOpen(true)}

@@ -12,14 +12,14 @@ export const UserDataProvider = ({ children }) => {
   const [loadingState, setLoadingState] = useState(false);
   const [error, setError] = useState({});
 
+  // refetch user
   const refetchUser = useCallback(async () => {
     try {
       setLoadingState(true);
-
       const fetchUser = await api.get("/users");
       const user = fetchUser.data?.user;
       setUser(user);
-      setCart(user?.cart || []);
+      console.log(user);
     } catch (err) {
       setError((prev) => ({ ...prev, fetch: err.message }));
     } finally {
@@ -27,8 +27,29 @@ export const UserDataProvider = ({ children }) => {
     }
   }, [api, accessToken]);
 
+  // fetching cart
+  const refetchCart = async () => {
+    try {
+      const fetchCart = await api.get(`/cart`);
+      setCart(fetchCart.data.cart);
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
+  const logOutUser = async () => {
+    try {
+      await api.post(`/users/logout`);
+      window.location.reload();
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
   useEffect(() => {
     refetchUser();
+    refetchCart();
+    console.log(cart);
   }, [refetchUser]);
   return (
     <UserDataContext.Provider
@@ -38,6 +59,8 @@ export const UserDataProvider = ({ children }) => {
         loadingState,
         error,
         refetchUser,
+        refetchCart,
+        logOutUser,
       }}
     >
       {children}

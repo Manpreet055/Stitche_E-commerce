@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 const RenderCart = () => {
   const api = useAxiosPrivate();
-  const { cart, refetchUser } = useUser();
+  const { cart, refetchCart } = useUser();
   const navigate = useNavigate();
 
   if (cart.length === 0) {
@@ -22,7 +22,7 @@ const RenderCart = () => {
   const handleRemove = async (productId) => {
     try {
       await removeProductFromCart(api, productId);
-      await refetchUser();
+      await refetchCart();
     } catch (error) {
       console.error("Failed to remove from cart:", error);
     }

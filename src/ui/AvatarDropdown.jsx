@@ -8,12 +8,10 @@ import {
 import { useState } from "react";
 import { LogOut } from "lucide-react";
 import { useUser } from "../context/UserDataProvider";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
 const AvatarDropDown = ({ img }) => {
-  const { user } = useUser();
-  const handleLogOut = () => {
-    console.log("LogOut");
-  };
+  const { user, logOutUser } = useUser();
   return (
     <Dropdown
       label={<Avatar alt="User settings" img={img} rounded />}
@@ -30,7 +28,7 @@ const AvatarDropDown = ({ img }) => {
       <DropdownItem>Settings</DropdownItem>
       <DropdownItem>Earnings</DropdownItem>
       <DropdownDivider />
-      <DropdownItem className="flex gap-3" onClick={handleLogOut}>
+      <DropdownItem className="flex gap-3" onClick={logOutUser}>
         <LogOut /> Log out
       </DropdownItem>
     </Dropdown>

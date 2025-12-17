@@ -1,9 +1,10 @@
 import { useEffect, useCallback } from "react";
 import api from "../utils/api";
 import { useAuthentication } from "../context/AuthProdvider";
-
+import { useNavigate } from "react-router-dom";
 const useAxiosPrivate = () => {
   const { accessToken, setAccessToken } = useAuthentication();
+  const navigate = useNavigate();
 
   // 1️⃣ refresh function wrapped in useCallback
   const refresh = useCallback(async () => {
@@ -13,6 +14,7 @@ const useAxiosPrivate = () => {
       setAccessToken(token);
       return token;
     } catch (err) {
+      navigate("/login");
       // logout(); // if refresh fails, force logout
       throw err;
     }

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import BackButton from "../ui/BackButton";
 import RenderCart from "../layout/cart/RenderCart";
 import OrderSummary from "../layout/cart/OrderSummary";
-import { useUser } from "../context/UserDataProvider";
 const Cart = () => {
   return (
     <div className="my-20 p-4">

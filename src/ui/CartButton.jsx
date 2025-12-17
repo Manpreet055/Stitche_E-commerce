@@ -4,11 +4,11 @@ import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { useUser } from "../context/UserDataProvider";
 const CartButton = ({ product }) => {
   const api = useAxiosPrivate();
-  const { refetchUser } = useUser();
+  const { refetchCart } = useUser();
   const handleAddToCart = async () => {
     try {
       await addProductToCart(api, { product, qty: 1 });
-      await refetchUser();
+      await refetchCart();
     } catch (error) {
       console.error("Failed to add to cart:", error);
     }
