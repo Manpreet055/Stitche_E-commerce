@@ -1,10 +1,9 @@
 import { useEffect, useCallback } from "react";
 import api from "../utils/api";
 import { useAuthentication } from "../context/AuthProdvider";
-import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 const useAxiosPrivate = () => {
   const { accessToken, setAccessToken } = useAuthentication();
-  const navigate = useNavigate();
 
   // 1️⃣ refresh function wrapped in useCallback
   const refresh = useCallback(async () => {
@@ -12,18 +11,15 @@ const useAxiosPrivate = () => {
       const response = await api.post("/users/refresh-token");
       const token = response.data?.token;
       setAccessToken(token);
-      return token;
     } catch (err) {
-      navigate("/login");
-      // logout(); // if refresh fails, force logout
+      // logout(); // if refresh fails, force
       throw err;
     }
   }, [setAccessToken]);
 
+  let isRefreshing = false;
+  let failedQueue = [];
   useEffect(() => {
-    let isRefreshing = false;
-    let failedQueue = [];
-
     const processQueue = (error, token = null) => {
       failedQueue.forEach(({ resolve, reject }) => {
         if (error) reject(error);
@@ -50,6 +46,10 @@ const useAxiosPrivate = () => {
       async (error) => {
         const originalRequest = error.config;
 
+        if (originalRequest.url.includes("/refresh-token")) {
+          return Promise.reject(error);
+        }
+
         if (error.response?.status === 401 && !originalRequest._retry) {
           originalRequest._retry = true;
 
@@ -64,7 +64,6 @@ const useAxiosPrivate = () => {
           }
 
           isRefreshing = true;
-
           try {
             const newToken = await refresh();
             processQueue(null, newToken);
@@ -73,6 +72,8 @@ const useAxiosPrivate = () => {
             return api(originalRequest);
           } catch (err) {
             processQueue(err, null);
+            <Navigate to="/login" />;
+
             return Promise.reject(err);
           } finally {
             isRefreshing = false;

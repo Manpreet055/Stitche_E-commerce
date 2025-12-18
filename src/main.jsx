@@ -6,7 +6,7 @@ import App from "./App.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ErrorPage from "./pages/ErrorPage.jsx";
 import Homepage from "./pages/Homepage.jsx";
-import ProtectedRoute from "./utils/ProtectedRoute.jsx";
+// import ProtectedRoute from "./utils/ProtectedRoute.jsx";
 
 const Products = lazy(() => import("./pages/Products.jsx"));
 const SearchPage = lazy(() => import("./pages/SearchPage.jsx"));
@@ -25,11 +25,7 @@ const routes = createBrowserRouter([
     children: [
       {
         path: "",
-        element: (
-          // <ProtectedRoute>
-          <Homepage />
-          // </ProtectedRoute>
-        ),
+        element: <Homepage />,
       },
       {
         path: "products",

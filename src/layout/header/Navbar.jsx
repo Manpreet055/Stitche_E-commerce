@@ -84,22 +84,14 @@ const Navbar = () => {
         {user ? (
           <AvatarDropDown img={user?.profile?.avatar} />
         ) : (
-          <div className="flex ">
-            <NavLink
-              to="login"
-              className={() => `  text-nowrap  py-2 px-4 rounded-xl`}
-            >
-              Log in
-            </NavLink>
-            <NavLink
-              to="signup"
-              className={() =>
-                `  border bg-primary border-gray-300 text-nowrap transition-all ease-in-out  py-2 px-4 rounded-xl`
-              }
-            >
-              Sign Up
-            </NavLink>
-          </div>
+          <NavLink
+            to="login"
+            className={() =>
+              `  border  border-gray-300 text-nowrap transition-all ease-in-out  py-2 px-4 rounded-xl`
+            }
+          >
+            LogIn{" "}
+          </NavLink>
         )}
         <button
           onClick={() => setIsMenuOpen(true)}

@@ -2,7 +2,7 @@ import React, { useContext, useState, useCallback, useEffect } from "react";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { useAuthentication } from "./AuthProdvider";
 
-export const UserDataContext = React.createContext();
+const UserDataContext = React.createContext();
 
 export const UserDataProvider = ({ children }) => {
   const api = useAxiosPrivate();
@@ -19,7 +19,6 @@ export const UserDataProvider = ({ children }) => {
       const fetchUser = await api.get("/users");
       const user = fetchUser.data?.user;
       setUser(user);
-      console.log(user);
     } catch (err) {
       setError((prev) => ({ ...prev, fetch: err.message }));
     } finally {
@@ -49,7 +48,6 @@ export const UserDataProvider = ({ children }) => {
   useEffect(() => {
     refetchUser();
     refetchCart();
-    console.log(cart);
   }, [refetchUser]);
   return (
     <UserDataContext.Provider
