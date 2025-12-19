@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { addProductToCart } from "../services/handleCart";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { useUser } from "../context/UserDataProvider";
+import { ShoppingCart } from "lucide-react";
 const CartButton = ({ product }) => {
   const api = useAxiosPrivate();
   const { refetchCart } = useUser();
@@ -19,9 +20,9 @@ const CartButton = ({ product }) => {
         event.stopPropagation();
         handleAddToCart();
       }}
-      className="rounded-2xl p-3 border"
+      className="rounded-2xl w-fit p-3 border border-gray-3 00"
     >
-      Add to Cart{" "}
+      <ShoppingCart></ShoppingCart>
     </button>
   );
 };

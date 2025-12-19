@@ -24,11 +24,7 @@ const Navbar = () => {
       }}
       className="py-3 px-6 flex justify-between  z-20"
     >
-      <img
-        src="/src/assets/Chromojet_logo.webp"
-        className="h-11 w-fit"
-        alt=""
-      />
+      <h1 className="text-3xl text-nowrap font-bold">Stitche</h1>
 
       {isMenuOpen && <MobileNav></MobileNav>}
       <ul className=" w-full hidden md:flex md:justify-evenly lg:justify-center  items-center gap-4 lg:gap-10  font-semibold px-3">

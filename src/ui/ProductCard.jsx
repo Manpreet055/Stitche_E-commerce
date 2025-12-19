@@ -2,9 +2,11 @@ import React, { useContext } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import CartButton from "./CartButton";
+import RatingComp from "../layout/productDetails/RatingComp";
 
 const ProductCard = ({ product }) => {
-  const { _id, price, title, media, description, discount } = product || {};
+  const { _id, price, title, media, description, discount, rating } =
+    product || {};
   const navigate = useNavigate();
   return (
     <motion.div
@@ -27,8 +29,9 @@ const ProductCard = ({ product }) => {
             {discount?.value ?? discount?.discount ?? 0}% off
           </p>
         </div>
-        <div className="flex h-full flex-col z-99 mt-2 gap-3">
-          <button className="rounded-2xl p-3 theme border  text-white bg-accent hover:scale-[1.02] ease-in-out transition-all">
+        <RatingComp rating={rating} />
+        <div className="flex h-full w-full   z-99 mt-2 gap-3">
+          <button className="rounded-2xl p-3 theme border w-full  text-white bg-accent hover:scale-[1.02] ease-in-out transition-all">
             Buy Now{" "}
           </button>
           <CartButton product={_id} />{" "}

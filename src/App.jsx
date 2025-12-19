@@ -22,7 +22,7 @@ const App = () => {
         <main>
           <Outlet />
         </main>
-        <hr className="text-gray-300 shadow-2xl" />
+        <hr className="text-gray-300 my-10 mx-10 shadow-2xl" />
         <footer
           className={
             location.pathname.includes("login") ||

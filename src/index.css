@@ -28,7 +28,7 @@ body {
   -webkit-mask-image: linear-gradient(to right, transparent, black);
 }
 .hover-transition {
-  @apply hover:scale-[1.03] transition-all duration-300 ease-in-out will-change-transform;
+  @apply transition-all duration-300 ease-in-out;
 }
 
 .hide-scrollbar {
