@@ -31,7 +31,7 @@ const SearchPage = () => {
     return <AsyncBoundary customMessage="No Products found." />;
   }
   return (
-    <div className="w-full py-5 px-5 mt-10">
+    <div className="w-full py-5 theme text-theme px-5 mt-10">
       <div className="flex py-4">
         <BackButton />
         <h2 className="w-full text-2xl font-semibold mb-6 text-center">

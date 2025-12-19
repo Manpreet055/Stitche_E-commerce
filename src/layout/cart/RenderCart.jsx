@@ -29,43 +29,52 @@ const RenderCart = () => {
   };
 
   return (
-    <ul className="flex h-full lg:max-h-[500px] overflow-auto hide-scrollbar flex-col gap-2 border border-gray-300 grow rounded-2xl p-4">
-      {cart.map((p, index) => (
-        <li
-          onClick={() => navigate(`/product/${p.product._id}`)}
-          key={index + 1}
-          className="flex items-center border-t border-gray-300 justify-around py-4 w-full"
-        >
-          <img
-            src={
-              p.product?.media?.thumbnail ? (
-                p.product?.media?.thumbnail
-              ) : (
-                <Spinner />
-              )
-            }
-            alt="product"
-            className="h-20 "
-          />
-          <div className="flex flex-col justify-center gap-2 mx-4">
-            <h2 className="text-lg font-medium">{p.product?.brand}</h2>
-            <p className="">{p.product?.title}</p>
-          </div>
-          <Counter productId={p.product?._id} defaultqty={p?.qty} />
-          <span className=" ml-3 font-medium">
-            ${(p.product?.price * p.qty).toFixed(2)}
-          </span>
-          <button
-            onClick={(event) => {
-              event.stopPropagation();
-              handleRemove(p.product?._id);
-            }}
+    <div className="flex h-full relative   theme text-theme  flex-col gap-2 border border-gray-300 grow rounded-2xl p-4">
+      <div className="grid grid-cols-5 md:text-xl place-items-center py-4 w-full">
+        <span>Product</span>
+        <span>Brand</span>
+        <span>Quantity</span>
+        <span>Total</span>
+        <span></span>
+      </div>
+      <ul className="overflow-auto hide-scrollbar lg:min-h-125 lg:max-h-125">
+        {cart.map((p, index) => (
+          <li
+            onClick={() => navigate(`/product/${p.product._id}`)}
+            key={index + 1}
+            className="grid grid-cols-5 place-items-center border-t border-gray-300 py-4 w-full"
           >
-            <Trash />
-          </button>
-        </li>
-      ))}
-    </ul>
+            <img
+              src={
+                p.product?.media?.thumbnail ? (
+                  p.product?.media?.thumbnail
+                ) : (
+                  <Spinner />
+                )
+              }
+              alt="product"
+              className="h-20 "
+            />
+            <div className="flex place-self-start flex-col justify-center gap-2 mx-4">
+              <h2 className="text-lg font-medium">{p.product?.brand}</h2>
+              <p className="">{p.product?.title}</p>
+            </div>
+            <Counter productId={p.product?._id} defaultqty={p?.qty} />
+            <span className=" ml-3 font-medium">
+              ${(p.product?.price * p.qty).toFixed(2)}
+            </span>
+            <button
+              onClick={(event) => {
+                event.stopPropagation();
+                handleRemove(p.product?._id);
+              }}
+            >
+              <Trash />
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 };
 

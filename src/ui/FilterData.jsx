@@ -27,7 +27,7 @@ const FilterData = ({ filterOptions, setQuery }) => {
   };
 
   return (
-    <div>
+    <div className="theme text-theme">
       <button
         onClick={() => showFilters((prev) => !prev)}
         className=" flex items-center gap-3"
@@ -40,7 +40,7 @@ const FilterData = ({ filterOptions, setQuery }) => {
         </span>
       </button>
       {filters && (
-        <div className="bg-black text-white absolute z-90 flex flex-col blur-bg w-fit border  border-gray-400 rounded-xl">
+        <div className="theme text-theme absolute z-90 flex flex-col w-fit border  border-gray-400 lg:mt-5 rounded-md">
           <form
             onSubmit={handleSubmit(applyFilters)}
             className="overflow-auto w-fit p-4 flex flex-col gap-10"
@@ -66,7 +66,7 @@ const FilterData = ({ filterOptions, setQuery }) => {
             </ul>
             <button
               type="submit"
-              className="hover:bg-[#edcfb1] hover:text-[#554840] scale-transition will-change-transform p-4 rounded-2xl"
+              className=" scale-transition theme text-theme p-4 rounded-2xl"
             >
               Submit
             </button>

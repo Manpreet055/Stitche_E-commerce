@@ -3,11 +3,9 @@ import { NavLink } from "react-router-dom";
 import { ShoppingCart, Menu } from "lucide-react";
 import { motion } from "framer-motion";
 import MobileNav from "./MobileNav";
-import { useMenu } from "../../context/ShowMenuContextProvider";
 import { useUser } from "../../context/UserDataProvider";
 import AvatarDropDown from "../../ui/AvatarDropdown";
 const Navbar = () => {
-  const { isMenuOpen, setIsMenuOpen } = useMenu();
   const { cart, user } = useUser();
   const cartItemsCount = cart?.length || 0;
 
@@ -22,17 +20,16 @@ const Navbar = () => {
         damping: 15,
         mass: 1.5,
       }}
-      className="py-3 px-6 flex justify-between  z-20"
+      className="py-3 px-6 flex justify-between items-center  z-20"
     >
       <h1 className="text-3xl text-nowrap font-bold">Stitche</h1>
 
-      {isMenuOpen && <MobileNav></MobileNav>}
       <ul className=" w-full hidden md:flex md:justify-evenly lg:justify-center  items-center gap-4 lg:gap-10  font-semibold px-3">
         <li className="">
           <NavLink
             to="/"
             className={({ isActive }) =>
-              `hover-transition ${isActive ? "text-black" : "text-gray-500"} `
+              `hover-transition ${isActive ? "text-black dark:text-white" : "text-gray-500"} `
             }
           >
             Home
@@ -42,7 +39,7 @@ const Navbar = () => {
           <NavLink
             to="/products"
             className={({ isActive }) =>
-              `hover-transition ${isActive ? "text-black" : "text-gray-500"}`
+              `hover-transition ${isActive ? "text-black dark:text-white" : "text-gray-500"}`
             }
           >
             Products
@@ -52,7 +49,7 @@ const Navbar = () => {
           <NavLink
             to="/about"
             className={({ isActive }) =>
-              `hover-transition ${isActive ? "text-black" : "text-gray-500"}`
+              `hover-transition ${isActive ? "text-black dark:text-white" : "text-gray-500"}`
             }
           >
             About Us
@@ -62,7 +59,7 @@ const Navbar = () => {
           <NavLink
             to="/contact"
             className={({ isActive }) =>
-              `hover-transition ${isActive ? "text-black" : "text-gray-500"}`
+              `hover-transition ${isActive ? "text-black dark:text-white" : "text-gray-500"}`
             }
           >
             Contact
@@ -70,7 +67,12 @@ const Navbar = () => {
         </li>
       </ul>
       <div className="flex items-center gap-4">
-        <NavLink to="cart" className="flex flex-col items-end">
+        <NavLink
+          to="cart"
+          className={({ isActive }) =>
+            `hover-transition flex flex-col items-center ${isActive ? "text-black dark:text-white" : "text-gray-500"} `
+          }
+        >
           <span className="rounded-full px-1 text-xs">
             {" "}
             {cartItemsCount ?? 0}
@@ -83,18 +85,13 @@ const Navbar = () => {
           <NavLink
             to="login"
             className={() =>
-              `  border  border-gray-300 text-nowrap transition-all ease-in-out  py-2 px-4 rounded-xl`
+              `  border text-sm  border-gray-300 text-nowrap transition-all ease-in-out py-2 px-4 rounded`
             }
           >
             LogIn{" "}
           </NavLink>
         )}
-        <button
-          onClick={() => setIsMenuOpen(true)}
-          className="flex md:hidden items-center justify-center font-semibold hover-transition"
-        >
-          <Menu className="" />
-        </button>
+        <MobileNav />
       </div>
     </motion.nav>
   );

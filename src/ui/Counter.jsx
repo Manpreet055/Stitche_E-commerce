@@ -36,7 +36,7 @@ const Counter = ({ productId = "", defaultqty = 1 }) => {
   return (
     <ButtonGroup
       onClick={(event) => event.stopPropagation()}
-      className="h-fit w-fit "
+      className="h-fit w-fit theme text-theme border dark:border-gray-500 border-gray-300 "
     >
       <ThemeProvider theme={buttonGroupTheme}>
         <Button className="p-2" color="primary" onClick={decValue}>

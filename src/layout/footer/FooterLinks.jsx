@@ -4,14 +4,14 @@ import { Popover } from "flowbite-react";
 
 const FooterLinks = ({ heading = "", items = [], children }) => {
   return (
-    <div className="flex justify-evenly w-fit p-6">
+    <div className="flex text-theme justify-evenly w-fit p-4">
       <div className="flex flex-col gap-3">
-        <h2 className="text-xl font-medium mb-2 text-nowrap">{heading}</h2>
+        <h2 className=" sm:text-xl font-medium mb-2 text-nowrap">{heading}</h2>
         {items.map((i) =>
           !i.msg ? (
             <NavLink
               to={i?.link ?? "#"}
-              className="hover:underline text-nowrap w-fit hover-transition"
+              className="text-sm sm:text-lg  hover:underline text-nowrap w-fit hover-transition"
             >
               {i.name}
             </NavLink>
@@ -19,22 +19,14 @@ const FooterLinks = ({ heading = "", items = [], children }) => {
             <Popover
               aria-labelledby="default-popover"
               content={
-                <div className="w-64 text-sm text-gray-500 dark:text-gray-400">
-                  {/* <div className="border-b border-gray-200 bg-gray-100 px-3 py-2 dark:border-gray-600 dark:bg-gray-700">
-                    <h3
-                      id="default-popover"
-                      className="font-semibold text-gray-900 dark:text-white"
-                    >
-                      Popover title
-                    </h3>
-                  </div> */}
+                <div className="w-64 text-sm theme">
                   <div className="px-3 py-2">
                     <p>{i.msg}</p>
                   </div>
                 </div>
               }
             >
-              <button className="hover:underline text-nowrap w-fit hover-transition">
+              <button className="text-sm sm:text-lg  hover:underline text-nowrap w-fit hover-transition">
                 {i.name}
               </button>
             </Popover>

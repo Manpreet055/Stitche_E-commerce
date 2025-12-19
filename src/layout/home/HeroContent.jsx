@@ -6,13 +6,13 @@ import { ArrowRight } from "lucide-react";
 const HeroContent = () => {
   return (
     <div
-      className={`hero w-full py-15 md:min-h-[40vw] flex flex-col gap-3 justify-around md:px-10 p-6`}
+      className={`hero w-full mt-15 sm:mt-20 py-10 sm:py-15 md:min-h-[40vw] flex flex-col gap-3 justify-around md:px-10 p-3`}
     >
       <motion.p
         initial={{ translateX: -100, opacity: 0 }}
         animate={{ translateX: 0, opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="text-5xl lg:text-7xl max-w-sm lg:max-w-2xl tracking-wide leading-snug text-white font-bold "
+        className="text-4xl lg:text-7xl max-w-sm lg:max-w-2xl tracking-wide leading-snug text-white font-bold "
       >
         Beyond Trends. Pieces Built to Be Inherited.{" "}
       </motion.p>

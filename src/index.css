@@ -6,27 +6,26 @@ body {
   background-color: #f8f8f8;
   font-family: "Poppins", sans-serif;
   overflow-x: hidden;
-  @apply transition-all duration-300 ease-in-out;
+  @apply transition-all duration-300 ease-in-out dark:bg-[#101010];
 }
 
-.dark {
-  @apply bg-gray-800 text-white transition-all duration-300 ease-in-out;
-}
-.dark .dark-text {
-  @apply text-white;
-}
-.dark .navbar,
-.dark .card-img {
-  @apply bg-gray-900;
-}
-.dark .filter-button-input-style {
-  @apply text-black;
+/* Themes */
+.theme {
+  @apply bg-[#f8f8f8] dark:bg-[#121212];
 }
 
-.mask-img {
-  mask-image: linear-gradient(to right, transparent 0%, black 20%);
-  -webkit-mask-image: linear-gradient(to right, transparent, black);
+.text-theme {
+  @apply text-black dark:text-white;
 }
+
+.theme-alt {
+  @apply dark:bg-[#f8f8f8] bg-[#121212];
+}
+
+.text-theme-alt {
+  @apply dark:text-black text-white;
+}
+
 .hover-transition {
   @apply transition-all duration-300 ease-in-out;
 }
@@ -35,23 +34,18 @@ body {
   scrollbar-width: none;
 }
 
-.filter-button-input-style {
-  @apply border   border-gray-400 text-nowrap hover:bg-gray-200 px-4 py-3 rounded-xl bg-gray-100 max-w-[150px];
-}
-
 .hero {
   background:
-    linear-gradient(rgba(0, 0, 0, 0.6)),
-    url("./assets/bg-images/heroImage.webp");
-  background-position: center;
-  background-size: cover;
-}
-.login-img {
-  background: url("./assets/images/loginImage.svg");
+    linear-gradient(rgba(0, 0, 0, 0.6)), url("./assets/images/heroImage.webp");
   background-position: center;
   background-size: cover;
 }
 
+.btn-primary {
+  @apply rounded-md  py-2 px-4 ease-in-out transition-all duration-300;
+}
+
+/* Images Banner's Animations */
 @keyframes infinite_scroll {
   0% {
     transform: translateX(0%);
@@ -67,22 +61,4 @@ body {
   .animate-infinite-scroll:hover {
     animation-play-state: paused;
   }
-}
-
-/* Primary colors */
-.bg-primary {
-  @apply bg-[#fbe4d8] hover:bg-[#e3cfc4];
-}
-
-.btn-primary {
-  @apply rounded-md py-2 px-4 ease-in-out transition-all duration-300;
-}
-
-.text-primary {
-  @apply text-gray-400 hover:text-white;
-}
-
-/* Accent colors */
-.bg-accent {
-  @apply bg-[#522b5b] hover:bg-[#3b1e42];
 }

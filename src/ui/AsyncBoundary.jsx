@@ -13,11 +13,11 @@ const AsyncBoundary = ({
   if (!loadingState && !error && !customMessage) return null;
 
   return (
-    <div className="h-screen w-full flex justify-center items-center ">
+    <div className="h-screen text-theme w-full flex justify-center items-center ">
       <div className="text-xl">
         {loadingState ? (
           <div className="flex justify-center items-center text-xl blur-bg p-10 rounded flex-col w-full h-screen">
-            <Spinner size="xl" />
+            <Spinner size="xl" color="white" />
             Loading...
           </div>
         ) : error ? (

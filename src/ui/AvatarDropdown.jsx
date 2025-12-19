@@ -5,28 +5,38 @@ import {
   DropdownHeader,
   DropdownItem,
 } from "flowbite-react";
-import { useState } from "react";
-import { LogOut } from "lucide-react";
+import { LogOut, ShoppingCart, User2, Settings2, History } from "lucide-react";
 import { useUser } from "../context/UserDataProvider";
-import useAxiosPrivate from "../hooks/useAxiosPrivate";
+import { NavLink } from "react-router-dom";
 
 const AvatarDropDown = ({ img }) => {
   const { user, logOutUser } = useUser();
   return (
     <Dropdown
+      className="theme text-theme border border-gray-200 dark:border-gray-200"
       label={<Avatar alt="User settings" img={img} rounded />}
       arrowIcon={false}
       inline
     >
-      <DropdownHeader>
+      <DropdownHeader className="flex gap-3">
+        <User2 />
         <span className="block text-sm">{user?.username}</span>
-        <span className="block truncate text-sm font-medium">
-          {user?.email}
-        </span>
       </DropdownHeader>
-      <DropdownItem>Dashboard</DropdownItem>
-      <DropdownItem>Settings</DropdownItem>
-      <DropdownItem>Earnings</DropdownItem>
+
+      <DropdownItem className="flex gap-3">
+        <ShoppingCart />
+        <NavLink to="cart">Cart</NavLink>
+      </DropdownItem>
+
+      <DropdownItem className="flex gap-3">
+        <Settings2 />
+        Settings
+      </DropdownItem>
+      <DropdownItem className="flex gap-3">
+        <History />
+        Orders History
+      </DropdownItem>
+
       <DropdownDivider />
       <DropdownItem className="flex gap-3" onClick={logOutUser}>
         <LogOut /> Log out

@@ -39,7 +39,7 @@ const SimilarProducts = ({ category }) => {
     return <AsyncBoundary customMessage="No Products found." />;
   }
   return (
-    <div className="w-full ">
+    <div className="w-full theme text-theme ">
       <h1 className="md:text-xl font-semibold text-center mb-4">
         YOU MIGHT ALSO LIKE THIS
       </h1>

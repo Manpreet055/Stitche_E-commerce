@@ -4,25 +4,25 @@ export const customPaginationTheme = createTheme({
   base: "",
   layout: {
     table: {
-      base: "text-sm text-gray-700 dark:text-gray-400",
-      span: "font-semibold text-gray-900 dark:text-white",
+      base: "text-sm ",
+      span: "font-semibold",
     },
   },
   pages: {
     base: "xs:mt-0 mt-2 inline-flex items-center -space-x-px",
     showIcon: "inline-flex",
     previous: {
-      base: "ml-0 rounded-l-lg border border-gray-300 bg-white px-3 py-2 leading-tight text-gray-500 enabled:hover:bg-gray-100 enabled:hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 enabled:dark:hover:bg-gray-700 enabled:dark:hover:text-white",
+      base: "ml-0 rounded-l-lg border border-gray-300 px-3 py-2 leading-tight enabled:hover:bg-gray-100 enabled:hover:text-gray-700 dark:border-gray-700 theme text-theme  enabled:dark:hover:bg-gray-700 enabled:dark:hover:text-white",
       icon: "h-5 w-5",
     },
     next: {
-      base: "rounded-r-lg border border-gray-300 bg-red-900 px-3 py-2 leading-tight text-gray-500 enabled:hover:bg-gray-100 enabled:hover:text-gray-700 dark:border-gray-700 enabled:dark:hover:text-white",
+      base: "rounded-r-lg border border-gray-300 px-3 py-2 leading-tight text-gray-500 enabled:hover:bg-gray-100 enabled:hover:text-gray-700 dark:border-gray-700 theme text-theme enabled:dark:hover:text-white",
       icon: "h-5 w-5",
     },
     selector: {
-      base: "w-12 border border-gray-300 bg-white py-2 leading-tight text-gray-500 enabled:hover:bg-gray-100 enabled:hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 enabled:dark:hover:bg-gray-700 enabled:dark:hover:text-white",
+      base: "w-12 border border-gray-300 py-2 leading-tight enabled:hover:bg-gray-100 enabled:hover:text-gray-700 dark:border-gray-700 theme text-theme enabled:dark:hover:bg-gray-700 enabled:dark:hover:text-white",
       active:
-        "bg-cyan-50 text-cyan-600 hover:bg-cyan-100 hover:text-cyan-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white",
+        "bg-cyan-50 text-cyan-600 hover:bg-cyan-100 hover:text-cyan-700 dark:border-gray-700 theme text-theme",
       disabled: "cursor-not-allowed opacity-50",
     },
   },
@@ -86,4 +86,34 @@ export const buttonGroupTheme = createTheme({
       lg: "px-6 py-3 text-lg",
     },
   },
+});
+
+export const customDropdownTheme = createTheme({
+  arrowIcon: "ml-2 h-4 w-4",
+  content: "py-1 focus:outline-none",
+  primary: "bg-white",
+  floating: {
+    style: {
+      light: "bg-white text-black",
+      dark: "bg-[#121212] text-white",
+      auto: "bg-white text-black dark:bg-[#121212] dark:text-white",
+    },
+    base: "flex w-full cursor-pointer items-center justify-start px-4 py-2 text-sm text-black hover:bg-gray-100 focus:bg-gray-100 focus:outline-none dark:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700",
+    content: "py-1 text-sm text-gray-700 dark:text-gray-200",
+    divider: "my-1 h-px bg-gray-100 dark:bg-gray-600",
+    header: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-200",
+    hidden: "invisible opacity-0",
+    item: {
+      container: "",
+      base: "flex w-full cursor-pointer items-center justify-start px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:bg-gray-600 dark:focus:text-white",
+      icon: "mr-2 h-4 w-4",
+    },
+    style: {
+      dark: "bg-gray-900 text-white dark:bg-gray-700",
+      light: "border border-gray-200 bg-white text-gray-900",
+      auto: "border border-gray-200 bg-white text-gray-900 dark:border-none dark:bg-gray-700 dark:text-white",
+    },
+    target: "w-fit",
+  },
+  inlineWrapper: "flex items-center",
 });

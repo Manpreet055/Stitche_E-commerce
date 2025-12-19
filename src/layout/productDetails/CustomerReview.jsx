@@ -2,7 +2,7 @@ import React from "react";
 import { Button } from "flowbite-react";
 const CustomerReview = () => {
   return (
-    <div className="mt-10 flex-col flex">
+    <div className="mt-10 flex-col flex theme text-theme">
       <h1 className="md:text-xl font-semibold text-center mb-4">
         Customer Reviews{" "}
       </h1>

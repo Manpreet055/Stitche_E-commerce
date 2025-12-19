@@ -45,11 +45,11 @@ const SignupPage = () => {
   };
 
   return (
-    <div className="w-full relative h-screen flex justify-center items-center">
-      <div className="absolute top-10 left-10">
+    <div className="w-full theme text-theme relative h-screen flex justify-center items-center">
+      <div className="absolute top-10 left-2 sm:left-10">
         <BackButton text="Go Back" navPath="/" />
       </div>
-      <div className="w-full max-w-lg h-fit px-6 py-10 border border-gray-400 rounded-2xl">
+      <div className="w-full max-w-lg h-fit px-6 py-10 sm:border border-gray-400 rounded-2xl">
         <h2 className="text-center text-3xl font-semibold">Sign Up</h2>
 
         <form
@@ -67,7 +67,7 @@ const SignupPage = () => {
             id="fullname"
             type="text"
             placeholder="Enter your name"
-            className="border border-gray-400 p-2 rounded-xl shadow-md"
+            className="border border-gray-400 px-2  text-sm sm:text-md py-3 rounded-xl shadow-md"
           />
           {errors?.username && (
             <p className="text-red-600">{errors.username?.message}</p>
@@ -84,7 +84,7 @@ const SignupPage = () => {
             id="email"
             type="email"
             placeholder="Enter Your Email Address"
-            className="border border-gray-400 p-2 rounded-xl shadow-md"
+            className="border border-gray-400 px-2  text-sm sm:text-md py-3 rounded-xl shadow-md"
           />
           <label htmlFor="password" className=" font-medium px-2 mb-2 mt-6 ">
             Password
@@ -97,7 +97,7 @@ const SignupPage = () => {
             id="password"
             type="password"
             placeholder="Enter Password"
-            className="border border-gray-400 p-2 rounded-xl shadow-md"
+            className="border border-gray-400 px-2  text-sm sm:text-md py-3 rounded-xl shadow-md"
           />
           <label
             htmlFor="confirm-password"
@@ -113,10 +113,10 @@ const SignupPage = () => {
             })}
             type="password"
             placeholder="Confirm Password"
-            className="border border-gray-400 p-2 rounded-xl shadow-md"
+            className="border border-gray-400 px-2  text-sm sm:text-md py-3 rounded-xl shadow-md"
           />
           <button
-            className="btn-primary bg-accent mt-6 text-white"
+            className="btn-primary theme-alt text-theme-alt bg-accent mt-6 text-white"
             type="submit"
           >
             Create Account

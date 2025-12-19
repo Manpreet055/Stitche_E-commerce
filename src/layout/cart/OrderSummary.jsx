@@ -10,7 +10,7 @@ const OrderSummary = () => {
   const priceAfterDiscount = sumofProductsPrice * 0.9;
   const deliveryFee = sumofProductsPrice * 0.01;
   return (
-    <div className="flex flex-col border w-full min-w-sm lg:max-w-lg justify-around border-gray-300 rounded-2xl  p-4">
+    <div className="flex text-theme flex-col border w-full min-w-sm lg:max-w-lg justify-around border-gray-300 rounded-2xl  p-4">
       <div>
         <h2 className="text-xl font-medium">Order Summary</h2>{" "}
         <div className="flex justify-between items-center mt-4">
@@ -44,7 +44,7 @@ const OrderSummary = () => {
             </a>
           </p>
         </div>
-        <button className="bg-accent w-full text-white p-4 mt-3 rounded-4xl hover:scale-[1.02] ease-in-out duration-300 transition-all">
+        <button className=" w-full theme-alt text-theme-alt p-4 mt-3 rounded-2xl hover:scale-[1.02] ease-in-out duration-300 transition-all">
           Order Now
         </button>
       </div>

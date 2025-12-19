@@ -19,7 +19,7 @@ const ProductBasicDetails = ({ product }) => {
   const stock = product?.stock ?? product?.quantity ?? 0;
 
   return (
-    <div className="w-fit flex grow flex-col">
+    <div className="w-fit flex grow flex-col theme text-theme">
       <span className="font-semibold">{brand}</span>
       <span className="font-semibold md:text-2xl">{title}</span>
       <span className="font-medium mt-4 md:text-2xl">${price}</span>
@@ -39,7 +39,7 @@ const ProductBasicDetails = ({ product }) => {
       </p>
       <div className="flex  mt-6 px-6 gap-3">
         <Counter productId={_id} />
-        <CartButton product={_id} />
+        <CartButton product={_id} text="Add to Cart" />
       </div>
       <div className="flex justify-start w-full">
         <Button className="w-full max-w-xs text-nowrap mt-6 hover:scale-[1.01] ease-in-out transition-all">

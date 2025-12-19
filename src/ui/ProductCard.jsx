@@ -11,7 +11,7 @@ const ProductCard = ({ product }) => {
   return (
     <motion.div
       onClick={() => navigate(`/product/${_id}`)}
-      className="min-w-[250px] mx-auto w-80 overflow-hidden rounded-lg  shadow-md duration-300  hover:shadow-lg"
+      className="min-w-62.5 mx-auto w-80 overflow-hidden dark:bg-black dark:text-white rounded-lg  shadow-md duration-300  hover:shadow-lg"
     >
       <img
         className={`h-54 object-cover bg-white hover-transition card-img w-full min-h-54  object-center`}
@@ -19,19 +19,21 @@ const ProductCard = ({ product }) => {
         alt="Product Image"
       />
       <div className="p-4  primary-bg">
-        <h2 className="mb-2 text-xl font-medium dark:text-white text-no text-gray-900">
-          {title}
-        </h2>
-        <p className="mb-2 text-base">{description}</p>
+        <h2 className="mb-2 text-xl font-medium ">{title}</h2>
+        <p className="mb-2 text-base">
+          {description.length >= 50
+            ? description.slice(0, 50) + "..."
+            : description}{" "}
+        </p>
         <div className="flex items-center">
-          <p className="mr-2 font-semibold text-[#3d2b1f]">${price}</p>
+          <p className="mr-2 font-semibold ">${price}</p>
           <p className="ml-auto text-base font-medium  ">
             {discount?.value ?? discount?.discount ?? 0}% off
           </p>
         </div>
         <RatingComp rating={rating} />
         <div className="flex h-full w-full   z-99 mt-2 gap-3">
-          <button className="rounded-2xl p-3 theme border w-full  text-white bg-accent hover:scale-[1.02] ease-in-out transition-all">
+          <button className="rounded-xl p-3 bg-black text-white border border-gray-200 w-full hover:scale-[1.02] ease-in-out transition-all">
             Buy Now{" "}
           </button>
           <CartButton product={_id} />{" "}

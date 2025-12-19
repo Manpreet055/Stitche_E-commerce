@@ -1,9 +1,9 @@
 import React, { useContext, useEffect } from "react";
-import { addProductToCart } from "../services/handleCart";
-import useAxiosPrivate from "../hooks/useAxiosPrivate";
-import { useUser } from "../context/UserDataProvider";
+import { addProductToCart } from "../../services/handleCart";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import { useUser } from "../../context/UserDataProvider";
 import { ShoppingCart } from "lucide-react";
-const CartButton = ({ product }) => {
+const CartButton = ({ product, text = "" }) => {
   const api = useAxiosPrivate();
   const { refetchCart } = useUser();
   const handleAddToCart = async () => {
@@ -20,9 +20,10 @@ const CartButton = ({ product }) => {
         event.stopPropagation();
         handleAddToCart();
       }}
-      className="rounded-2xl w-fit p-3 border border-gray-3 00"
+      className="rounded-2xl w-fit flex gap-1 items-center p-3 border border-gray-300 dark:border-none"
     >
-      <ShoppingCart></ShoppingCart>
+      <ShoppingCart />
+      <span className="xl:text-lg">{text}</span>
     </button>
   );
 };
