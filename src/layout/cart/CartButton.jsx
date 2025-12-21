@@ -20,7 +20,7 @@ const CartButton = ({ product, text = "" }) => {
         event.stopPropagation();
         handleAddToCart();
       }}
-      className="rounded-2xl w-fit flex gap-1 items-center p-3 border border-gray-300 dark:border-none"
+      className="rounded  w-fit flex gap-2 items-center py-2 px-3  border-theme"
     >
       <ShoppingCart />
       <span className="xl:text-lg">{text}</span>

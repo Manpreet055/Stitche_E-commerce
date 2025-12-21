@@ -6,7 +6,7 @@ import { ArrowRight } from "lucide-react";
 const HeroContent = () => {
   return (
     <div
-      className={`hero w-full mt-15 sm:mt-20 py-10 sm:py-15 md:min-h-[40vw] flex flex-col gap-3 justify-around md:px-10 p-3`}
+      className={`hero w-full mt-15 sm:mt-20 sm:py-15 md:min-h-[40vw] flex flex-col gap-3 justify-around md:px-10 p-3`}
     >
       <motion.p
         initial={{ translateX: -100, opacity: 0 }}

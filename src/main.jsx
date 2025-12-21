@@ -16,6 +16,7 @@ const ProductOverview = lazy(() => import("./pages/ProductOverview.jsx"));
 const Cart = lazy(() => import("./pages/Cart.jsx"));
 const LoginPage = lazy(() => import("./pages/LoginPage.jsx"));
 const SignupPage = lazy(() => import("./pages/SignupPage.jsx"));
+const Orders = lazy(() => import("./layout/orders/Orders.jsx"));
 
 const routes = createBrowserRouter([
   {
@@ -88,6 +89,14 @@ const routes = createBrowserRouter([
         element: (
           <Suspense>
             <Cart />
+          </Suspense>
+        ),
+      },
+      {
+        path: "orders",
+        element: (
+          <Suspense>
+            <Orders />
           </Suspense>
         ),
       },

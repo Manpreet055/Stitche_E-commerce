@@ -1,4 +1,5 @@
 import handleApiError from "./handleApiError";
+import axios from "axios";
 import api from "../utils/api";
 export const fetchProducts = async (
   query,

@@ -55,7 +55,7 @@ const LoginPage = () => {
         <BackButton text="Go Back" navPath="/" />
       </div>
       {toastText && <ToastComp text={toastText || error} position="top-10" />}
-      <div className="w-full max-w-lg h-fit px-6 py-10 border border-gray-400 rounded-2xl">
+      <div className="w-full max-w-lg h-fit px-6 py-10 sm:border border-gray-400 rounded-2xl">
         <h2 className="text-center text-3xl font-semibold">Login</h2>
         <h4 className="text-gray-500 text-center mt-4 mb-2">
           Enter your email and password to login

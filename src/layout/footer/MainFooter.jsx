@@ -5,8 +5,8 @@ import Newsletter from "./Newsletter";
 const MainFooter = () => {
   return (
     <footer className="theme text-theme">
-      <div className="flex justify-evenly flex-wrap">
-        <div className="mt-8 flex flex-col gap-2 items-center">
+      <div className="flex  justify-evenly flex-wrap">
+        <div className="mt-3 sm:mt-6 flex flex-col gap-2 items-center">
           <h1 className="text-2xl sm:text-3xl  font-bold">
             Stitche <small>&nbsp;&#8482;</small>
           </h1>
@@ -14,7 +14,7 @@ const MainFooter = () => {
             Made By Hand. Designed to Tell Your Story.{" "}
           </h2>
         </div>{" "}
-        <div className="flex justify-evenly gap-10 w-fit flex-col lg:flex-row">
+        <div className="flex justify-evenly items-center gap-x-10 w-fit flex-col lg:flex-row">
           {" "}
           {/* All Footers links */}
           <div className="flex justify-evenly lg:gap-10 w-full lg:w-fit">

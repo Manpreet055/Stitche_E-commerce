@@ -6,9 +6,9 @@ import { Spinner } from "flowbite-react";
 import { useUser } from "../../context/UserDataProvider";
 import { useNavigate } from "react-router-dom";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-const RenderCart = () => {
+const RenderCart = ({ cart, fullheight = false }) => {
   const api = useAxiosPrivate();
-  const { cart, refetchCart } = useUser();
+  const { refetchCart } = useUser();
   const navigate = useNavigate();
 
   if (cart.length === 0) {
@@ -29,20 +29,22 @@ const RenderCart = () => {
   };
 
   return (
-    <div className="flex h-full relative   theme text-theme  flex-col gap-2 border border-gray-300 grow rounded-2xl p-4">
-      <div className="grid grid-cols-5 md:text-xl place-items-center py-4 w-full">
-        <span>Product</span>
+    <div className="flex h-full relative  theme text-theme  flex-col gap-2 border-theme grow rounded sm:p-4">
+      <div className="grid grid-cols-[60px_100px_1fr_60px_70px] sm:grid-cols-5 md:text-xl place-items-center py-4 w-full">
+        <span></span>
         <span>Brand</span>
         <span>Quantity</span>
         <span>Total</span>
         <span></span>
       </div>
-      <ul className="overflow-auto hide-scrollbar lg:min-h-125 lg:max-h-125">
+      <ul
+        className={`overflow-auto px-1 hide-scrollbar ${fullheight && "lg:min-h-125 lg:max-h-125"}`}
+      >
         {cart.map((p, index) => (
           <li
             onClick={() => navigate(`/product/${p.product._id}`)}
             key={index + 1}
-            className="grid grid-cols-5 place-items-center border-t border-gray-300 py-4 w-full"
+            className="grid grid-cols-[60px_100px_1fr_60px_70px] sm:grid-cols-5 place-items-center border-t border-gray-300 py-4 w-full"
           >
             <img
               src={
@@ -53,11 +55,13 @@ const RenderCart = () => {
                 )
               }
               alt="product"
-              className="h-20 "
+              className=" sm:w-] sm:grid-col20 h-full sm:h-20 "
             />
             <div className="flex place-self-start flex-col justify-center gap-2 mx-4">
-              <h2 className="text-lg font-medium">{p.product?.brand}</h2>
-              <p className="">{p.product?.title}</p>
+              <h2 className=" sm:text-xl font-medium">{p.product?.brand}</h2>
+              <p className="truncate text-sm sm:text-lg w-20 sm:w-full">
+                {p.product?.title}
+              </p>
             </div>
             <Counter productId={p.product?._id} defaultqty={p?.qty} />
             <span className=" ml-3 font-medium">

@@ -6,18 +6,21 @@ const RatingComp = ({ rating }) => {
   const ratings = [];
   for (let i = 1; i <= 5; i++) {
     if (i <= average) {
-      ratings.push(<RatingStar fill="orange" />);
+      ratings.push(<RatingStar className="" fill="orange" />);
     } else {
       ratings.push(<RatingStar fill="gray" />);
     }
   }
 
   return (
-    <Rating className="mt-4">
+    <Rating className="mt-2 sm:mt-4">
       {ratings}
       <p className="ml-2 text-sm font-semibold ">{average}</p>
       <span className="mx-1.5 h-1 w-1 rounded-full bg-gray-500 dark:bg-gray-400" />
-      <a href="#" className="text-sm font-medium underline hover:no-underline">
+      <a
+        href="#"
+        className="hidden sm:block text-sm font-medium underline hover:no-underline"
+      >
         {count} reviews
       </a>
     </Rating>

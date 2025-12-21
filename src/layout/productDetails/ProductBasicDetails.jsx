@@ -3,7 +3,7 @@ import capitalizeFirstLetter from "../../utils/capitalizeLetter";
 import Counter from "../../ui/Counter";
 import { Button } from "flowbite-react";
 import RatingComp from "./RatingComp";
-import CartButton from "../../ui/CartButton";
+import CartButton from "../cart/CartButton";
 const ProductBasicDetails = ({ product }) => {
   const {
     _id,
@@ -24,7 +24,7 @@ const ProductBasicDetails = ({ product }) => {
       <span className="font-semibold md:text-2xl">{title}</span>
       <span className="font-medium mt-4 md:text-2xl">${price}</span>
       <RatingComp rating={rating} />
-      <p className="mt-6 max-w-md">{description}</p>
+      <p className="mt-2 sm:mt-4 max-w-md">{description}</p>
       <p className=" mt-2">
         <span className="font-medium lg:text-lg">Category</span> :{" "}
         {capitalizeFirstLetter(category)}/{subCategory}
@@ -37,12 +37,12 @@ const ProductBasicDetails = ({ product }) => {
             ? `Only ${stock}  left`
             : `${stock} In Stock `}
       </p>
-      <div className="flex  mt-6 px-6 gap-3">
+      <div className="flex items-center  mt-3  sm:mt-6 gap-3">
         <Counter productId={_id} />
         <CartButton product={_id} text="Add to Cart" />
       </div>
       <div className="flex justify-start w-full">
-        <Button className="w-full max-w-xs text-nowrap mt-6 hover:scale-[1.01] ease-in-out transition-all">
+        <Button className="w-full sm:max-w-xs text-nowrap mt-3 sm:mt-6 hover:scale-[1.01] ease-in-out transition-all">
           Buy Now
         </Button>
       </div>

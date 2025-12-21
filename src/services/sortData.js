@@ -1,7 +1,6 @@
 import axios from "axios";
 import handleApiError from "./handleApiError";
-const uri = import.meta.env.VITE_BASE_URI;
-
+import api from "../utils/api";
 const sortData = async (
   schema,
   sortConfig,
@@ -13,7 +12,7 @@ const sortData = async (
 ) => {
   try {
     setLoadingState(true);
-    const response = await axios.get(`${uri}/api/sort/${schema}`, {
+    const response = await api.get(`/api/sort/${schema}`, {
       params: {
         sortingOrder: sortConfig.order,
         sortField: sortConfig.field,

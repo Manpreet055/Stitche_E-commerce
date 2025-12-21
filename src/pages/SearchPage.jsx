@@ -31,18 +31,20 @@ const SearchPage = () => {
     return <AsyncBoundary customMessage="No Products found." />;
   }
   return (
-    <div className="w-full py-5 theme text-theme px-5 mt-10">
-      <div className="flex py-4">
-        <BackButton />
-        <h2 className="w-full text-2xl font-semibold mb-6 text-center">
+    <div className="sm:p-5 relative theme text-theme my-12 sm:my-20 lg:flex">
+      <div className="flex items-center py-4">
+        <span className="w-fit ">
+          <BackButton />
+        </span>
+        <span className="w-full text-lg sm:text-2xl text-center">
           Found These Products
-        </h2>
+        </span>
       </div>
       <motion.ul
         initial="hidden"
         animate="show"
         variants={container}
-        className="flex w-full justify-evenly flex-wrap gap-y-8 gap-x-6"
+        className="flex w-full justify-around flex-wrap gap-y-4 sm:gap-8 "
       >
         {products.map((product, index) => (
           <motion.li variants={item} key={index}>

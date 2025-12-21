@@ -36,7 +36,7 @@ const Newsletter = () => {
           Subscribe
         </button>
       </form>
-      <ul className="flex justify-evenly mt-5 my-4">
+      <ul className="flex justify-evenly sm:mt-5 my-2">
         <h2 className="sm:text-xl font-medium">Join us on:</h2>
         <li>
           <a href="#">

@@ -1,10 +1,20 @@
-import { Button, Drawer, DrawerHeader, DrawerItems } from "flowbite-react";
+import {
+  Avatar,
+  Button,
+  Drawer,
+  DrawerHeader,
+  DrawerItems,
+} from "flowbite-react";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { Home, Menu } from "lucide-react";
+import { Home, Menu, Power } from "lucide-react";
 import SearchBar from "../header/SearchBar";
+import { useUser } from "../../context/UserDataProvider";
 const MobileNav = () => {
+  const { user, cart, logOutUser } = useUser();
+  console.log(user);
   const [isOpen, setIsOpen] = useState(false);
+  const cartItemsCount = cart?.length || 0;
 
   const handleClose = () => setIsOpen(false);
 
@@ -20,7 +30,23 @@ const MobileNav = () => {
         open={isOpen}
         onClose={handleClose}
       >
-        <DrawerHeader titleIcon={Home} title="Menu" />
+        <DrawerItems>
+          {user ? (
+            <div className="w-full flex items-center  gap-5">
+              <Avatar rounded img={user?.profile?.avatar} />{" "}
+              <span className="text-lg font-bold">{user?.username}</span>
+            </div>
+          ) : (
+            <NavLink
+              to="login"
+              className={() =>
+                `  border text-sm  border-gray-300 text-nowrap transition-all ease-in-out py-2 px-4 rounded`
+              }
+            >
+              LogIn{" "}
+            </NavLink>
+          )}
+        </DrawerItems>{" "}
         <DrawerItems>
           <SearchBar isDrawer />
         </DrawerItems>
@@ -68,12 +94,26 @@ const MobileNav = () => {
           <NavLink
             to="/cart"
             className={({ isActive }) =>
-              `hover-transition ${isActive ? "text-black dark:text-white" : "text-gray-500"}`
+              `hover-transition items-center flex w-full justify-between ${isActive ? "text-black dark:text-white" : "text-gray-500"}`
             }
           >
             Cart
+            <span className="theme-alt text-theme-alt h-6 text-center w-6 rounded-full mr-10">
+              {cartItemsCount}
+            </span>
           </NavLink>
         </DrawerItems>
+        {user && (
+          <DrawerItems>
+            <button
+              className="btn-primary flex gap-2 items-center border border-red-400"
+              onClick={logOutUser}
+            >
+              <Power size={16} />
+              Logout
+            </button>
+          </DrawerItems>
+        )}
       </Drawer>
     </>
   );

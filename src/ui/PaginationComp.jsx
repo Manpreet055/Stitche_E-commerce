@@ -5,7 +5,7 @@ export function PaginationComp({ currentPage, setCurrentPage, totalPages }) {
   const onPageChange = (page) => setCurrentPage(page);
 
   return (
-    <div className="flex overflow-x-auto py-6 sm:justify-center w-full">
+    <div className="flex py-6 justify-center">
       <Pagination
         theme={customPaginationTheme}
         currentPage={currentPage}

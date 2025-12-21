@@ -22,7 +22,7 @@ const Navbar = () => {
       }}
       className="py-3 px-6 flex justify-between items-center  z-20"
     >
-      <h1 className="text-3xl text-nowrap font-bold">Stitche</h1>
+      <h1 className="text-3xl sm:text-4xl text-nowrap font-bold">Stitche</h1>
 
       <ul className=" w-full hidden md:flex md:justify-evenly lg:justify-center  items-center gap-4 lg:gap-10  font-semibold px-3">
         <li className="">
@@ -73,24 +73,26 @@ const Navbar = () => {
             `hover-transition flex flex-col items-center ${isActive ? "text-black dark:text-white" : "text-gray-500"} `
           }
         >
-          <span className="rounded-full px-1 text-xs">
+          <span className="hidden md:block rounded-full px-1 text-xs">
             {" "}
             {cartItemsCount ?? 0}
           </span>
           <ShoppingCart />
         </NavLink>
-        {user ? (
-          <AvatarDropDown img={user?.profile?.avatar} />
-        ) : (
-          <NavLink
-            to="login"
-            className={() =>
-              `  border text-sm  border-gray-300 text-nowrap transition-all ease-in-out py-2 px-4 rounded`
-            }
-          >
-            LogIn{" "}
-          </NavLink>
-        )}
+        <div className="hidden md:block">
+          {user ? (
+            <AvatarDropDown img={user?.profile?.avatar} />
+          ) : (
+            <NavLink
+              to="login"
+              className={() =>
+                `  border text-sm  border-gray-300 text-nowrap transition-all ease-in-out py-2 px-4 rounded`
+              }
+            >
+              LogIn{" "}
+            </NavLink>
+          )}
+        </div>
         <MobileNav />
       </div>
     </motion.nav>

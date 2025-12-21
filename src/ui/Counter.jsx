@@ -36,14 +36,14 @@ const Counter = ({ productId = "", defaultqty = 1 }) => {
   return (
     <ButtonGroup
       onClick={(event) => event.stopPropagation()}
-      className="h-fit w-fit theme text-theme border dark:border-gray-500 border-gray-300 "
+      className="w-fit theme text-theme border-theme "
     >
       <ThemeProvider theme={buttonGroupTheme}>
-        <Button className="p-2" color="primary" onClick={decValue}>
+        <Button color="primary" className="p-2 sm:p-4" onClick={decValue}>
           -
         </Button>
-        <p className="flex items-center px-2 md:px-6">{quantity}</p>
-        <Button className="p-2" color="primary" onClick={incValue}>
+        <p className="flex  items-center px-4 md:px-6">{quantity}</p>
+        <Button color="primary" className="p-2 sm:p-4" onClick={incValue}>
           +
         </Button>
       </ThemeProvider>

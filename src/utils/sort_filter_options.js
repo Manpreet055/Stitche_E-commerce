@@ -67,32 +67,26 @@ export const PRODUCTS_FILTER_OPTIONS = [
 export const PRODUCTS_SORTING_OPTIONS = [
   {
     title: "Price High to Low",
-    field: "price",
-    order: "desc",
+    field: "price_desc",
   },
   {
     title: "Price Low to High",
-    field: "price",
-    order: "asc",
+    field: "price_asc",
   },
   {
     title: "Stock High to Low",
-    field: "stock",
-    order: "desc",
+    field: "stock_desc",
   },
   {
     title: "Stock Low to High",
-    field: "stock",
-    order: "asc",
+    field: "stock_asc",
   },
   {
     title: "Category",
-    field: "category",
-    order: "asc",
+    field: "category_asc",
   },
   {
     title: "Last Created",
-    field: "createdAt",
-    order: "asc",
+    field: "createdAt_asc",
   },
 ];

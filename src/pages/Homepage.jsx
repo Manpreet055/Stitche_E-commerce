@@ -5,15 +5,22 @@ import { motion } from "framer-motion";
 import HeroContent from "../layout/home/HeroContent";
 import useProducts from "../hooks/useProducts";
 import { NavLink } from "react-router-dom";
+import SalesCard from "../layout/home/SalesCard";
+import CategoryCards from "../layout/home/CategoryCards";
 
 const Homepage = () => {
-  const { products } = useProducts(4);
+  const { products } = useProducts(5);
+
+  console.log(import.meta.env.VITE_BASE_URI);
 
   return (
-    <div className="w-full">
+    <div className="w-full theme text-theme p-3 sm:p-10">
       <HeroContent />
-      <div className="w-full text-theme  flex justify-between my-4 mb-4  sm:text-2xl text-start mt-4 px-3 lg:px-12 py-2 font-semibold tracking-wide">
-        <div> POPULAR CATEGORIES</div>
+      <CategoryCards />
+      <SalesCard />
+
+      <div className="w-full text-theme flex justify-between my-4 mx-auto sm:text-2xl font-semibold">
+        <span>New Arrivals</span>
         <NavLink
           to="products"
           className="sm:text-lg font-medium hover-transition group flex items-center gap-2"
@@ -25,7 +32,7 @@ const Homepage = () => {
           />{" "}
         </NavLink>
       </div>
-      <div className="flex px-4 justify-evenly gap-4 overflow-x-scroll hide-scrollbar overflow-y-hidden">
+      <div className="flex  max-w-screen w-full gap-2 overflow-auto hide-scrollbar mb-5 justify-evenly">
         {products.map((product, index) => (
           <ProductCard product={product} key={index} />
         ))}

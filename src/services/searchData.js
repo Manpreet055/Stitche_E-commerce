@@ -1,11 +1,10 @@
 import axios from "axios";
 import handleApiError from "./handleApiError";
-const uri = import.meta.env.VITE_BASE_URI;
-
+import api from "../utils/api";
 const searchData = async (query, setLoadingState, setError) => {
   try {
     setLoadingState(true);
-    const response = await axios.get(`${uri}/api/search?query=${query}`);
+    const response = await api.get(`/api/search?query=${query}`);
     const data = response.data.results;
     return data;
   } catch (error) {

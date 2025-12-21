@@ -1,0 +1,137 @@
+import React, { useState } from "react";
+import SortData from "../../ui/SortData";
+import { PRODUCTS_SORTING_OPTIONS } from "../../utils/sort_filter_options";
+import { Checkbox, Label, RangeSlider, Tooltip } from "flowbite-react";
+import { useForm } from "react-hook-form";
+import { Filter, X } from "lucide-react";
+const FilterSortSidebar = ({ query }) => {
+  const { handleSubmit, register, reset, formState, watch } = useForm();
+  const price = watch("price");
+  const [show, setshow] = useState(false);
+  const handleForm = (data) => {
+    const [field, order] = data.sort.split("_");
+    data.sort = {
+      field,
+      order,
+    };
+    console.log(data);
+  };
+  return (
+    <>
+      <button
+        className="flex items-center gap-4 btn-primary my-6 lg:hidden w-fit border-theme"
+        onClick={() => setshow((prev) => !prev)}
+      >
+        Filter & Sort <Filter textRendering={true} />
+      </button>
+      <form
+        onSubmit={handleSubmit(handleForm)}
+        className={`fixed sm:z-0 z-20 lg:sticky ${!show ? "hidden lg:flex" : "flex"} theme h-screen lg:h-fit  p-4 flex-col top-15 lg:top-20 left-0 max-w-sm w-full`}
+      >
+        <button
+          className="my-2 lg:hidden w-fit"
+          onClick={() => setshow((prev) => !prev)}
+        >
+          <X />
+        </button>
+        <h2 className="font-bold sm:text-xl">Filter & Sort</h2>
+
+        {/* Category Filters */}
+        <hr className="my-4 text-gray-200 dark:text-gray-500" />
+        <h3 className="font-medium text-lg">Category</h3>
+        <ul className="flex flex-col my-5  gap-2">
+          <li className="flex gap-2 items-center">
+            <Checkbox id="all" {...register("category")} value="all" />
+            <Label id="all">All Categories</Label>
+          </li>
+          <li className="flex gap-2 items-center">
+            <Checkbox id="mens" {...register("category")} value="mens-wear" />
+            <Label id="mens">Men's wear</Label>
+          </li>
+          <li className="flex gap-2 items-center">
+            <Checkbox
+              id="womens"
+              {...register("category")}
+              value="womens-wear"
+            />
+            <Label id="womens">Women's wear</Label>
+          </li>
+          <li className="flex gap-2 items-center">
+            <Checkbox id="kids" {...register("category")} value="kids" />
+            <Label id="kids">Kid's wear</Label>
+          </li>
+        </ul>
+
+        {/* Brands */}
+        <hr className="my-4 text-gray-200 dark:text-gray-500" />
+        <h3 className="font-medium text-lg">Popular Brands</h3>
+        <ul className="flex flex-col my-5  gap-2">
+          <li className="flex gap-2 items-center">
+            <Checkbox id="nike" {...register("brand")} value="nike" />
+            <Label id="nike">Nike</Label>
+          </li>
+          <li className="flex gap-2 items-center">
+            <Checkbox id="addidas" {...register("brand")} value="addidas" />
+            <Label id="addidas">Addidas</Label>
+          </li>
+          <li className="flex gap-2 items-center">
+            <Checkbox
+              id="balenciaga"
+              {...register("brand")}
+              value="balenciaga"
+            />
+            <Label id="balenciaga">Balenciaga</Label>
+          </li>
+          <li className="flex gap-2 items-center">
+            <Checkbox id="louis" {...register("brand")} value="Louis Vuitton" />
+            <Label id="louis">Louis Vuitton</Label>
+          </li>
+        </ul>
+        {/* Price Range Slider */}
+        <hr className="relative mb-4 text-gray-200 dark:text-gray-500" />
+        <label htmlFor="price" className="font-medium text-lg">
+          Price Range
+        </label>
+        <input
+          type="range"
+          id="price"
+          {...register("price")}
+          min={500}
+          max={2000}
+          defaultValue={2000}
+        />
+        <span className="btn-primary border w-fit mb-5">
+          ${price}
+          {price >= 2000 && "+"}
+        </span>
+
+        <hr className="relative mb-4 text-gray-200 dark:text-gray-500" />
+        <label htmlFor="sort" className="font-medium text-lg">
+          Sort By
+        </label>
+        <select
+          className="btn-primary border border-gray-300 my-5"
+          {...register("sort")}
+          name="sort"
+          id="sort"
+        >
+          {PRODUCTS_SORTING_OPTIONS.map((option, index) => (
+            <option key={index} value={option.field}>
+              {option.title}
+            </option>
+          ))}
+        </select>
+
+        {/* Buttons */}
+        <div className="w-full flex justify-between  gap-4">
+          <button className="border w-full btn-primary">Clear all</button>
+          <button className="theme-alt w-full  text-theme-alt btn-primary">
+            Submit
+          </button>
+        </div>
+      </form>
+    </>
+  );
+};
+
+export default FilterSortSidebar;

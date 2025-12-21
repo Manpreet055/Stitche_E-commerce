@@ -14,7 +14,7 @@ const AvatarDropDown = ({ img }) => {
   return (
     <Dropdown
       className="theme text-theme border border-gray-200 dark:border-gray-200"
-      label={<Avatar alt="User settings" img={img} rounded />}
+      label={<Avatar className="w-10" alt="User settings" img={img} rounded />}
       arrowIcon={false}
       inline
     >

@@ -4,9 +4,11 @@ import { Popover } from "flowbite-react";
 
 const FooterLinks = ({ heading = "", items = [], children }) => {
   return (
-    <div className="flex text-theme justify-evenly w-fit p-4">
+    <div className="flex text-theme justify-evenly w-fit p-4  ">
       <div className="flex flex-col gap-3">
-        <h2 className=" sm:text-xl font-medium mb-2 text-nowrap">{heading}</h2>
+        <h2 className="text-lg sm:text-xl font-medium text-nowrap">
+          {heading}
+        </h2>
         {items.map((i) =>
           !i.msg ? (
             <NavLink

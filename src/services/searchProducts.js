@@ -1,6 +1,6 @@
 import axios from "axios";
 import handleApiError from "./handleApiError";
-const uri = import.meta.env.VITE_BASE_URI;
+import api from "../utils/api";
 
 const searchProducts = async (
   query,
@@ -10,8 +10,8 @@ const searchProducts = async (
 ) => {
   try {
     setLoadingState(true);
-    const response = await axios.get(
-      `${uri}/products/search?query=${query}&limit=${limit}`,
+    const response = await api.get(
+      `/products/search?query=${query}&limit=${limit}`,
     );
     const data = response.data.products;
     return data;

@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-const uri = import.meta.env.VITE_BASE_URI;
 import { fetchProducts } from "../services/fetchProductsData";
 
-const useProducts = (initialLimit = "") => {
+const useProducts = (initialLimit = 8) => {
   const [loadingState, setLoadingState] = useState(false);
   const [error, setError] = useState("");
   const [products, setProducts] = useState([]);
@@ -11,8 +10,8 @@ const useProducts = (initialLimit = "") => {
   const [query, setQuery] = useState({
     limit: initialLimit,
     sort: {
-      sortField: "name",
-      sortingOrder: "asc",
+      sortField: "",
+      sortingOrder: "",
     },
     filters: {},
   });
