@@ -12,7 +12,6 @@ import SearchBar from "../header/SearchBar";
 import { useUser } from "../../context/UserDataProvider";
 const MobileNav = () => {
   const { user, cart, logOutUser } = useUser();
-  console.log(user);
   const [isOpen, setIsOpen] = useState(false);
   const cartItemsCount = cart?.length || 0;
 
@@ -21,8 +20,8 @@ const MobileNav = () => {
   return (
     <>
       <div className="flex md:hidden   items-center justify-center">
-        <button onClick={() => setIsOpen(true)}>
-          <Menu />
+        <button className="mt-2" onClick={() => setIsOpen(true)}>
+          <Menu size={30} />
         </button>
       </div>
       <Drawer

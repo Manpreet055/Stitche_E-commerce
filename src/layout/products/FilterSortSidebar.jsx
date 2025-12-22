@@ -1,39 +1,62 @@
 import React, { useState } from "react";
-import SortData from "../../ui/SortData";
 import { PRODUCTS_SORTING_OPTIONS } from "../../utils/sort_filter_options";
-import { Checkbox, Label, RangeSlider, Tooltip } from "flowbite-react";
+import { Checkbox, Label } from "flowbite-react";
 import { useForm } from "react-hook-form";
 import { Filter, X } from "lucide-react";
-const FilterSortSidebar = ({ query }) => {
-  const { handleSubmit, register, reset, formState, watch } = useForm();
+
+const FilterSortSidebar = ({ setQuery }) => {
+  const {
+    handleSubmit,
+    register,
+    watch,
+    formState: { dirtyFields },
+    getValues,
+  } = useForm();
   const price = watch("price");
   const [show, setshow] = useState(false);
-  const handleForm = (data) => {
-    const [field, order] = data.sort.split("_");
-    data.sort = {
-      field,
-      order,
-    };
-    console.log(data);
+
+  const handleForm = () => {
+    const currentValues = getValues();
+    const changedData = Object.keys(dirtyFields).reduce((acc, key) => {
+      acc[key] = currentValues[key];
+      return acc;
+    }, {});
+
+    if (changedData?.category?.includes("all")) {
+      return setQuery((prev) => ({
+        ...prev,
+        sort: {
+          sortField: "",
+          sortingOrder: "",
+        },
+        filters: {},
+      }));
+    }
+
+    if (Object.keys(changedData).includes("sort")) {
+      const [sortField, sortingOrder] = changedData?.sort.split("_");
+      // setSort({ sortField, sortingOrder });
+      setQuery((prev) => ({
+        ...prev,
+        sort: {
+          sortField,
+          sortingOrder,
+        },
+      }));
+      delete changedData.sort;
+    }
+
+    setQuery((prev) => ({
+      ...prev,
+      filters: { ...changedData },
+    }));
   };
   return (
     <>
-      <button
-        className="flex items-center gap-4 btn-primary my-6 lg:hidden w-fit border-theme"
-        onClick={() => setshow((prev) => !prev)}
-      >
-        Filter & Sort <Filter textRendering={true} />
-      </button>
       <form
         onSubmit={handleSubmit(handleForm)}
-        className={`fixed sm:z-0 z-20 lg:sticky ${!show ? "hidden lg:flex" : "flex"} theme h-screen lg:h-fit  p-4 flex-col top-15 lg:top-20 left-0 max-w-sm w-full`}
+        className={`sm:sticky z-20  flex theme h-full lg:h-fit  p-4 flex-col sm:top-15 lg:top-20 left-0 sm:max-w-sm w-full`}
       >
-        <button
-          className="my-2 lg:hidden w-fit"
-          onClick={() => setshow((prev) => !prev)}
-        >
-          <X />
-        </button>
         <h2 className="font-bold sm:text-xl">Filter & Sort</h2>
 
         {/* Category Filters */}
@@ -67,18 +90,18 @@ const FilterSortSidebar = ({ query }) => {
         <h3 className="font-medium text-lg">Popular Brands</h3>
         <ul className="flex flex-col my-5  gap-2">
           <li className="flex gap-2 items-center">
-            <Checkbox id="nike" {...register("brand")} value="nike" />
-            <Label id="nike">Nike</Label>
+            <Checkbox id="puma" {...register("brand")} value="Puma" />
+            <Label id="puma">Puma</Label>
           </li>
           <li className="flex gap-2 items-center">
-            <Checkbox id="addidas" {...register("brand")} value="addidas" />
+            <Checkbox id="addidas" {...register("brand")} value="Adidas" />
             <Label id="addidas">Addidas</Label>
           </li>
           <li className="flex gap-2 items-center">
             <Checkbox
               id="balenciaga"
               {...register("brand")}
-              value="balenciaga"
+              value="Balenciaga"
             />
             <Label id="balenciaga">Balenciaga</Label>
           </li>
@@ -97,12 +120,12 @@ const FilterSortSidebar = ({ query }) => {
           id="price"
           {...register("price")}
           min={500}
-          max={2000}
-          defaultValue={2000}
+          max={1500}
+          defaultValue={1500}
         />
         <span className="btn-primary border w-fit mb-5">
           ${price}
-          {price >= 2000 && "+"}
+          {price >= 1500 && "+"}
         </span>
 
         <hr className="relative mb-4 text-gray-200 dark:text-gray-500" />

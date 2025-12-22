@@ -25,7 +25,7 @@ const SalesCard = () => {
             to="/products"
             className="btn-primary text-sm sm:text-lg items-center w-fit text-black bg-white flex mt-1 gap-2"
           >
-            Check out <ArrowRight className="hidden md:block" />
+            See Collections <ArrowRight className="hidden md:block" />
           </NavLink>
         </motion.div>
 

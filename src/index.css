@@ -54,7 +54,7 @@ body {
 
 .hero {
   background:
-    linear-gradient(rgba(0, 0, 0, 0.6)), url("./assets/images/heroImage.webp");
+    linear-gradient(rgba(0, 0, 0, 0.3)), url("./assets/images/heroImage.webp");
   background-position: center;
   background-size: cover;
   border-radius: 25px;

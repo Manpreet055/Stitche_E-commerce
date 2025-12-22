@@ -25,7 +25,7 @@ const Navbar = () => {
       <h1 className="text-3xl sm:text-4xl text-nowrap font-bold">Stitche</h1>
 
       <ul className=" w-full hidden md:flex md:justify-evenly lg:justify-center  items-center gap-4 lg:gap-10  font-semibold px-3">
-        <li className="">
+        <li classN ame="">
           <NavLink
             to="/"
             className={({ isActive }) =>
@@ -73,7 +73,7 @@ const Navbar = () => {
             `hover-transition flex flex-col items-center ${isActive ? "text-black dark:text-white" : "text-gray-500"} `
           }
         >
-          <span className="hidden md:block rounded-full px-1 text-xs">
+          <span className="px-1 text-[10px] sm:text-sm">
             {" "}
             {cartItemsCount ?? 0}
           </span>
