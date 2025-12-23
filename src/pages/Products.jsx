@@ -25,7 +25,7 @@ const Products = () => {
 
   return (
     <div className=" sm:p-5 relative theme text-theme mt-10 sm:mt-20 lg:flex">
-      <div className="hidden md:block max-w-sm w-full">
+      <div className="hidden lg:block max-w-sm w-full">
         {/* Sidebar for bigger screens */}
         <FilterSortSidebar setQuery={setQuery} />
       </div>

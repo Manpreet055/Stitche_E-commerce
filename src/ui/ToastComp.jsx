@@ -9,17 +9,18 @@ const ToastComp = ({ text = "", icon = "", position = "left-[50%]  " }) => {
       transition={{ duration: 0.3 }}
       className={`flex justify-center absolute ${position}`}
     >
-      <Toast className="primary-bg items-center flex">
+      <Toast className="theme text-theme border-theme items-center flex">
         {icon && (
           <div className=" p-1 ustify-center rounded-lg bg-amber-50 ">
             {icon}
           </div>
         )}
-        <div className="ml-3 font-normal mr-3">{text}</div>
-        <ToastToggle
-          className="text-lg rounded-xl hover:bg-white p-1 transition-all ease-in-out"
-          theme=""
-        />
+        <div className="ml-3 text-nowrap font-normal mr-3">{text}</div>
+        {/* <ToastToggle
+            onClick={(text = "")}
+            className="text-lg rounded-xl theme-alt text-theme-alt p-1 transition-all ease-in-out"
+            theme=""
+          /> */}
       </Toast>
     </motion.div>
   );

@@ -1,125 +1,162 @@
-import React, { useContext, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import BackButton from "../ui/BackButton";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAuthentication } from "../context/AuthProdvider";
 import { useUser } from "../context/UserDataProvider";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
+import BackButton from "../ui/BackButton";
+import ToastComp from "../ui/ToastComp";
 
 const SignupPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
+  const [toastText, setToastText] = useState("");
 
+  const from = location.state?.from?.pathname || "/";
   const api = useAxiosPrivate();
-  const { refetchUser, loadingState, error, setError } = useUser();
+  const { refetchUser } = useUser();
   const { setAccessToken } = useAuthentication();
 
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors },
+    watch,
+    formState: { errors, isSubmitting },
   } = useForm({
-    defaultValues: {
-      email: "",
-      password: "",
-    },
+    defaultValues: { fullname: "", email: "", password: "", confirm: "" },
   });
 
-  const handleSignupForm = async (data) => {
-    try {
-      const comparePassword = data.password === data.confirm;
-      if (!comparePassword) return setError("Both password should be equal");
-      delete data.confirm;
+  // Clear toast after 3 seconds automatically
+  useEffect(() => {
+    if (toastText) {
+      const timer = setTimeout(() => setToastText(""), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [toastText]);
 
-      const response = await api.post("/users/signup", data);
-      const token = response.data.token;
-      setAccessToken(token);
-      reset();
-      navigate(from, { replace: true });
-      await refetchUser();
+  const handleSignupForm = async (data) => {
+    if (data.password !== data.confirm) {
+      return setToastText("Passwords did not match");
+    }
+
+    try {
+      // Create a copy to avoid mutating the form state directly
+      const requestData = { ...data };
+      delete requestData.confirm;
+
+      const response = await api.post("/users/signup", requestData);
+
+      if (response?.status === 201) {
+        setToastText("Signup Successful!");
+        const token = response.data.token;
+        setAccessToken(token);
+
+        // Use a single timeout for UX
+        setTimeout(async () => {
+          reset();
+          await refetchUser();
+          navigate(from, { replace: true });
+        }, 1500);
+      }
     } catch (error) {
-      setError(error.message);
+      const serverMessage = error.response?.data?.message;
+      if (error.response?.status === 409) {
+        setToastText("Email or username already exists");
+      } else if (error.response?.status === 500) {
+        setToastText("Server error. Please try again later.");
+      } else {
+        setToastText(serverMessage || "An unexpected error occurred");
+      }
     }
   };
 
   return (
-    <div className="w-full theme text-theme relative h-screen flex justify-center items-center">
+    <div className="w-full theme text-theme relative min-h-screen flex justify-center items-center p-4">
       <div className="absolute top-10 left-2 sm:left-10">
         <BackButton text="Go Back" navPath="/" />
       </div>
-      <div className="w-full max-w-lg h-fit px-6 py-10 sm:border border-gray-400 rounded-2xl">
-        <h2 className="text-center text-3xl font-semibold">Sign Up</h2>
+
+      {toastText && <ToastComp text={toastText} position="top-10" />}
+
+      <div className="w-full max-w-lg h-fit px-6 py-10 sm:border border-gray-400 rounded-2xl bg-opacity-50">
+        <h2 className="text-center text-3xl font-semibold mb-6">Sign Up</h2>
 
         <form
           onSubmit={handleSubmit(handleSignupForm)}
-          className="p-4 flex flex-col h-full "
+          className="flex flex-col gap-4"
         >
-          <label htmlFor="fullname" className="font-medium px-2 my-2">
-            Full Name
-          </label>
-          <input
-            {...register("fullname", {
-              required: true,
-              minLength: 6,
-            })}
-            id="fullname"
-            type="text"
-            placeholder="Enter your name"
-            className="border border-gray-400 px-2  text-sm sm:text-md py-3 rounded-xl shadow-md"
-          />
-          {errors?.username && (
-            <p className="text-red-600">{errors.username?.message}</p>
-          )}
+          {/* Full Name */}
+          <div className="flex flex-col">
+            <label className="font-medium px-2 mb-1">Full Name</label>
+            <input
+              {...register("fullname", {
+                required: "Full name is required",
+                minLength: { value: 6, message: "Min 6 characters" },
+              })}
+              type="text"
+              placeholder="Enter your name"
+              className={`border px-3 py-3 rounded-xl shadow-sm ${errors.fullname ? "border-red-500" : "border-gray-400"}`}
+            />
+            {errors.fullname && (
+              <span className="text-red-500 text-xs mt-1 px-2">
+                {errors.fullname.message}
+              </span>
+            )}
+          </div>
 
-          <label htmlFor="email" className="font-medium px-2 my-2">
-            Email
-          </label>
-          <input
-            {...register("email", {
-              required: true,
-              minLength: 14,
-            })}
-            id="email"
-            type="email"
-            placeholder="Enter Your Email Address"
-            className="border border-gray-400 px-2  text-sm sm:text-md py-3 rounded-xl shadow-md"
-          />
-          <label htmlFor="password" className=" font-medium px-2 mb-2 mt-6 ">
-            Password
-          </label>
-          <input
-            {...register("password", {
-              required: true,
-              minLength: 8,
-            })}
-            id="password"
-            type="password"
-            placeholder="Enter Password"
-            className="border border-gray-400 px-2  text-sm sm:text-md py-3 rounded-xl shadow-md"
-          />
-          <label
-            htmlFor="confirm-password"
-            className=" font-medium px-2 mb-2 mt-6 "
-          >
-            Confirm Password
-          </label>
-          <input
-            id="confirm-password"
-            {...register("confirm", {
-              required: true,
-              minLength: 8,
-            })}
-            type="password"
-            placeholder="Confirm Password"
-            className="border border-gray-400 px-2  text-sm sm:text-md py-3 rounded-xl shadow-md"
-          />
+          {/* Email */}
+          <div className="flex flex-col">
+            <label className="font-medium px-2 mb-1">Email</label>
+            <input
+              {...register("email", {
+                required: "Email is required",
+                pattern: { value: /^\S+@\S+$/i, message: "Invalid email" },
+              })}
+              type="email"
+              placeholder="Enter your email"
+              className={`border px-3 py-3 rounded-xl shadow-sm ${errors.email ? "border-red-500" : "border-gray-400"}`}
+            />
+            {errors.email && (
+              <span className="text-red-500 text-xs mt-1 px-2">
+                {errors.email.message}
+              </span>
+            )}
+          </div>
+
+          {/* Password */}
+          <div className="flex flex-col">
+            <label className="font-medium px-2 mb-1">Password</label>
+            <input
+              {...register("password", {
+                required: "Password is required",
+                minLength: { value: 8, message: "Min 8 characters" },
+              })}
+              type="password"
+              placeholder="Enter Password"
+              className="border border-gray-400 px-3 py-3 rounded-xl shadow-sm"
+            />
+          </div>
+
+          {/* Confirm Password */}
+          <div className="flex flex-col">
+            <label className="font-medium px-2 mb-1">Confirm Password</label>
+            <input
+              {...register("confirm", {
+                required: "Please confirm your password",
+              })}
+              type="password"
+              placeholder="Confirm Password"
+              className="border border-gray-400 px-3 py-3 rounded-xl shadow-sm"
+            />
+          </div>
+
           <button
-            className="btn-primary theme-alt text-theme-alt bg-accent mt-6 text-white"
+            disabled={isSubmitting}
+            className={`mt-4 py-3 rounded-xl font-bold text-white transition-all ${isSubmitting ? "bg-gray-400" : "theme-alt text-theme-alt"}`}
             type="submit"
           >
-            Create Account
+            {isSubmitting ? "Creating Account..." : "Create Account"}
           </button>
         </form>
       </div>

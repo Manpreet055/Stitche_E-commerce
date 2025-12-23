@@ -10,7 +10,7 @@ const MobileSidebar = ({ setQuery }) => {
 
   return (
     <>
-      <div className="flex sm:hidden items-center theme justify-center">
+      <div className="flex lg:hidden items-center theme justify-center">
         <button
           className="btn-primary mt-1 border-theme flex items-center gap-3"
           onClick={() => setIsOpen(true)}

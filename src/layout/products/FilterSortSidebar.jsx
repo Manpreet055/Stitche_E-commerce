@@ -23,14 +23,8 @@ const FilterSortSidebar = ({ setQuery }) => {
     }, {});
 
     if (changedData?.category?.includes("all")) {
-      return setQuery((prev) => ({
-        ...prev,
-        sort: {
-          sortField: "",
-          sortingOrder: "",
-        },
-        filters: {},
-      }));
+      delete changedData?.category;
+      delete changedData?.brand;
     }
 
     if (Object.keys(changedData).includes("sort")) {

@@ -9,9 +9,10 @@ const FooterLinks = ({ heading = "", items = [], children }) => {
         <h2 className="text-lg sm:text-xl font-medium text-nowrap">
           {heading}
         </h2>
-        {items.map((i) =>
+        {items.map((i, idx) =>
           !i.msg ? (
             <NavLink
+              key={idx}
               to={i?.link ?? "#"}
               className="text-sm sm:text-lg  hover:underline text-nowrap w-fit hover-transition"
             >
@@ -19,6 +20,7 @@ const FooterLinks = ({ heading = "", items = [], children }) => {
             </NavLink>
           ) : (
             <Popover
+              key={idx}
               aria-labelledby="default-popover"
               content={
                 <div className="w-64 text-sm theme">

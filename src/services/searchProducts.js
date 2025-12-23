@@ -4,15 +4,12 @@ import api from "../utils/api";
 
 const searchProducts = async (
   query,
-  limit = 10,
   setLoadingState = () => {},
   setError = () => {},
 ) => {
   try {
     setLoadingState(true);
-    const response = await api.get(
-      `/products/search?query=${query}&limit=${limit}`,
-    );
+    const response = await api.get(`/products/search?query=${query}`);
     const data = response.data.products;
     return data;
   } catch (error) {

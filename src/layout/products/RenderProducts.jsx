@@ -31,8 +31,8 @@ const RenderProducts = ({ data }) => {
             variants={container}
             className="flex w-full justify-around flex-wrap gap-y-4 sm:gap-8 "
           >
-            {products.map((product, index) => (
-              <motion.li variants={item} key={index}>
+            {products.map((product) => (
+              <motion.li variants={item} key={product.title}>
                 <ProductCard product={product} />
               </motion.li>
             ))}

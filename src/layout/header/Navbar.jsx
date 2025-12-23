@@ -25,7 +25,7 @@ const Navbar = () => {
       <h1 className="text-3xl sm:text-4xl text-nowrap font-bold">Stitche</h1>
 
       <ul className=" w-full hidden md:flex md:justify-evenly lg:justify-center  items-center gap-4 lg:gap-10  font-semibold px-3">
-        <li classN ame="">
+        <li className="">
           <NavLink
             to="/"
             className={({ isActive }) =>

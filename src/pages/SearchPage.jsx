@@ -34,7 +34,7 @@ const SearchPage = () => {
     <div className="sm:p-5 relative flex-col theme text-theme my-12 sm:my-20 lg:flex">
       <div className="flex items-center py-4">
         <span className="w-fit ">
-          <BackButton />
+          <BackButton text="Back" />
         </span>
         <span className="w-full text-lg sm:text-2xl text-center">
           Found These Products
