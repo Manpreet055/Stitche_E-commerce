@@ -15,12 +15,7 @@ const ToastComp = ({ text = "", icon = "", position = "left-[50%]  " }) => {
             {icon}
           </div>
         )}
-        <div className="ml-3 text-nowrap font-normal mr-3">{text}</div>
-        {/* <ToastToggle
-            onClick={(text = "")}
-            className="text-lg rounded-xl theme-alt text-theme-alt p-1 transition-all ease-in-out"
-            theme=""
-          /> */}
+        <div className="ml-3 truncate font-normal  mr-3">{text}</div>
       </Toast>
     </motion.div>
   );
