@@ -31,10 +31,10 @@ const MobileNav = () => {
       >
         <DrawerItems>
           {user ? (
-            <div className="w-full flex items-center  gap-5">
+            <NavLink to="profile" className="w-full flex items-center  gap-5">
               <Avatar rounded img={user?.profile?.avatar} />{" "}
               <span className="text-lg font-bold">{user?.username}</span>
-            </div>
+            </NavLink>
           ) : (
             <NavLink
               to="login"

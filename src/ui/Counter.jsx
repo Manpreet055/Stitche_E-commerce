@@ -4,11 +4,19 @@ import debounce from "../utils/debounce";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { buttonGroupTheme } from "../utils/customFlowbiteTheme";
 import { ButtonGroup, Button, ThemeProvider } from "flowbite-react";
+import { useUser } from "../context/UserDataProvider";
 const Counter = ({ productId = "", defaultqty = 1 }) => {
   const api = useAxiosPrivate();
+  const { refetchCart, loadingState, cart } = useUser();
+
+  const findProductQtyInCart = cart.filter(
+    (p) => p?.product?._id === productId,
+  );
 
   const hasInteracted = useRef(false);
-  const [quantity, setQuantity] = useState(defaultqty);
+  const [quantity, setQuantity] = useState(
+    findProductQtyInCart[0]?.qty ?? defaultqty,
+  );
 
   const incValue = () => {
     hasInteracted.current = true;
@@ -31,12 +39,13 @@ const Counter = ({ productId = "", defaultqty = 1 }) => {
   useEffect(() => {
     if (!hasInteracted.current) return;
     debouncedUpdate(api, productId, quantity); // Only call on changes after mount
+    refetchCart();
   }, [quantity]);
 
   return (
     <ButtonGroup
       onClick={(event) => event.stopPropagation()}
-      className="w-fit theme text-theme border-theme "
+      className={`w-fit theme text-theme border-theme ${loadingState ? "cursor-progress" : "cursor-pointer"}`}
     >
       <ThemeProvider theme={buttonGroupTheme}>
         <Button color="primary" className="p-2 sm:p-4" onClick={decValue}>

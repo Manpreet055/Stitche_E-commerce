@@ -81,7 +81,10 @@ const Navbar = () => {
         </NavLink>
         <div className="hidden md:block">
           {user ? (
-            <AvatarDropDown img={user?.profile?.avatar} />
+            <AvatarDropDown
+              className="object-cover "
+              img={user?.profile?.avatar}
+            />
           ) : (
             <NavLink
               to="login"

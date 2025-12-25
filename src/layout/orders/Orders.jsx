@@ -14,7 +14,6 @@ const Orders = ({ order = null }) => {
     cart = [...cart, order];
   }
 
-  console.log(user);
   const sumofProductsPrice = cart.reduce(
     (acc, p) => acc + p?.product?.price * p.qty,
     0,

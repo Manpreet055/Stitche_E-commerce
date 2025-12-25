@@ -3,8 +3,8 @@ import axios from "axios";
 import api from "../utils/api";
 export const fetchProducts = async (
   query,
-  setLoadingState,
-  setError,
+  setLoadingState = () => {},
+  setError = () => {},
   setTotalPages,
   setProducts,
   currentPage,
@@ -33,7 +33,11 @@ export const fetchProducts = async (
   }
 };
 
-export const fetchProductById = async (id, setLoadingState, setError) => {
+export const fetchProductById = async (
+  id,
+  setLoadingState = () => {},
+  setError = () => {},
+) => {
   try {
     setLoadingState(true);
     const response = await api.get(`/api/products/${id}`);

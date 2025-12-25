@@ -6,13 +6,24 @@ import { useUser } from "../../context/UserDataProvider";
 import { useNavigate } from "react-router-dom";
 import BackButton from "../../ui/BackButton";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-
+import ToastComp from "../../ui/ToastComp";
 const UserProfileForm = () => {
   const api = useAxiosPrivate();
-  const { user } = useUser();
-  console.log(user);
+  const { user, setUser } = useUser();
   const navigate = useNavigate();
+  if (!user) {
+    return navigate("/login");
+  }
   const [preview, setPreview] = useState(null);
+  const [toastText, setToastText] = useState();
+
+  // Clear toast after 3 seconds automatically
+  useEffect(() => {
+    if (toastText) {
+      const timer = setTimeout(() => setToastText(""), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [toastText]);
 
   const {
     handleSubmit,
@@ -39,7 +50,7 @@ const UserProfileForm = () => {
         postalCode: user?.profile?.address?.postalCode || "",
       });
       // Set initial preview if user already has an avatar URL
-      if (user?.profile?.avatar) setPreview(user.avatar);
+      if (user?.profile?.avatar) setPreview(user?.profile?.avatar);
     }
   }, [user, reset]);
 
@@ -76,20 +87,34 @@ const UserProfileForm = () => {
       const updateProfile = await api.patch("/users/update-profile", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
-      console.log(updateProfile.data);
+      setToastText(updateProfile.data?.msg);
+      setUser(updateProfile.data?.user);
+      setTimeout(async () => {
+        navigate(-1);
+      }, 1500);
     } catch (error) {
-      console.log(error);
+      const serverMessage = error.response?.data?.message;
+      if (error.response?.status === 409) {
+        setToastText("Email or username already exists");
+      } else if (error.response?.status === 500) {
+        setToastText("Server error. Please try again later.");
+      } else {
+        setToastText(serverMessage || "An unexpected error occurred");
+      }
     }
   };
 
   return (
     <div className="w-full flex justify-center">
-      <div className="mt-20 w-full text-theme sm:p-4 max-w-5xl">
+      <div className=" mt-20 w-full text-theme sm:p-4 max-w-5xl">
         <BackButton text="Back" />
         <h2 className="poppins my-5 text-2xl font-semibold sm:text-3xl text-start">
           Edit Profile
         </h2>
 
+        <div className="w-full flex justify-center">
+          {toastText && <ToastComp text={toastText} position="top-15" />}
+        </div>
         <form onSubmit={handleSubmit(updateUserProfile)} className="w-full p-4">
           <div className="flex flex-col md:flex-row w-full gap-10 items-center">
             {/* Avatar Preview */}
@@ -147,7 +172,7 @@ const UserProfileForm = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <div className="mb-2 block">
-                <Label htmlFor="email">email</Label>
+                <Label htmlFor="email">Email</Label>
               </div>{" "}
               <TextInput
                 placeholder="Email"
@@ -210,14 +235,18 @@ const UserProfileForm = () => {
             </div>
           </div>
 
-          <div className="flex gap-4 mt-10">
-            <button className="w-full p-4 rounded" onClick={() => navigate(-1)}>
+          <div className="flex flex-wrap gap-4 mt-10">
+            <button
+              type="button"
+              className="w-full hover:bg-gray-500 dark:hover:bg-gray-300 dark:hover:text-black ease-in-out transition-colors  p-4 rounded"
+              onClick={() => navigate(-1)}
+            >
               Cancel
             </button>
             <button
               type="submit"
               isProcessing={isSubmitting}
-              className="w-full theme-alt text-theme-alt p-4 rounded"
+              className="w-full theme-alt   text-theme-alt p-4 rounded"
             >
               Save Changes
             </button>

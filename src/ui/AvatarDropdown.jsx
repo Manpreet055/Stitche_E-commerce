@@ -18,27 +18,29 @@ const AvatarDropDown = ({ img }) => {
       arrowIcon={false}
       inline
     >
-      <DropdownHeader className="flex gap-3">
-        <User2 />
-        <span className="block text-sm">{user?.username}</span>
+      <DropdownHeader>
+        <NavLink className="flex gap-3 items-center" to="profile">
+          <User2 />
+          <span className="block text-sm">{user?.username}</span>
+        </NavLink>
       </DropdownHeader>
 
-      <DropdownItem className="flex gap-3">
+      <DropdownItem className="flex gap-3 items-center">
         <ShoppingCart />
         <NavLink to="cart">Cart</NavLink>
       </DropdownItem>
 
-      <DropdownItem className="flex gap-3">
+      <DropdownItem className="flex gap-3 items-center">
         <Settings2 />
         Settings
       </DropdownItem>
-      <DropdownItem className="flex gap-3">
+      <DropdownItem className="flex gap-3 items-center">
         <History />
         Orders History
       </DropdownItem>
 
       <DropdownDivider />
-      <DropdownItem className="flex gap-3" onClick={logOutUser}>
+      <DropdownItem className="flex gap-3 items-center" onClick={logOutUser}>
         <LogOut /> Log out
       </DropdownItem>
     </Dropdown>

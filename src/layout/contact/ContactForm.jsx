@@ -15,14 +15,14 @@ const ContactForm = () => {
         <h2 className="font-bold w-full text-start text-4xl lg:text-6xl">
           Get in Touch
         </h2>
-        <div className="max-w-xs sm:max-w-full flex items-center justify-center flex-wrap gap-3 my-4">
+        <div className="w-full max-w-xs sm:max-w-full flex items-center flex-wrap gap-3 my-4">
           <input
             id="name"
             type="text"
             {...register("name", {
               required: true,
             })}
-            className="p-2 py-4  sm:p-4 rounded-md border sm:text-lg dark:border-gray-500 border-gray-200"
+            className="p-2 py-4 w-full  sm:p-4 rounded-md border sm:text-lg dark:border-gray-500 border-gray-200"
             placeholder="Name"
           />
           <input
@@ -30,7 +30,7 @@ const ContactForm = () => {
             {...register("email", {
               required: true,
             })}
-            className="p-2 py-4 sm:p-4 rounded-md border sm:text-lg dark:border-gray-500 border-gray-200"
+            className="p-2 py-4 w-full sm:p-4 rounded-md border sm:text-lg dark:border-gray-500 border-gray-200"
             placeholder="Email"
           />
         </div>

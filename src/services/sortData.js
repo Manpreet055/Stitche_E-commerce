@@ -4,8 +4,8 @@ import api from "../utils/api";
 const sortData = async (
   schema,
   sortConfig,
-  setLoadingState,
-  setError,
+  setLoadingState = () => {},
+  setError = () => {},
   setProducts,
   page,
   limit,

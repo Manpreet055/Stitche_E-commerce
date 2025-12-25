@@ -53,6 +53,7 @@ export const UserDataProvider = ({ children }) => {
     <UserDataContext.Provider
       value={{
         user,
+        setUser,
         cart,
         loadingState,
         error,
