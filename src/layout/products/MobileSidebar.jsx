@@ -34,15 +34,14 @@ const MobileSidebar = ({ setQuery, query }) => {
         </button>
 
         {/* Clear Filters Button */}
-        {isSorted ||
-          (Object.keys(query?.filters).length !== 0 && (
-            <button
-              className="btn-primary theme-alt text-theme-alt mt-1 text-xs flex items-center gap-1 border-theme"
-              onClick={clearFilters}
-            >
-              <X size={15} /> Clear Filters
-            </button>
-          ))}
+        {(isSorted || Object.keys(query?.filters).length !== 0) && (
+          <button
+            className="p-2 text-nowrap rounded-lg theme-alt text-theme-alt mt-1 text-xs flex items-center gap-1 border-theme"
+            onClick={clearFilters}
+          >
+            <X size={15} /> Clear Filters
+          </button>
+        )}
       </div>
 
       <Drawer className="p-0" open={isOpen} onClose={handleClose}>

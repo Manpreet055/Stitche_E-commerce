@@ -26,6 +26,7 @@ const UserProfilePreview = ({ preview }) => {
 
       <div className="flex flex-col gap-y-5 w-full">
         <div className="flex flex-col sm:flex-row gap-6 w-full">
+          {/* Username */}
           <div className="w-full">
             <div className="mb-2 block">
               <Label htmlFor="username">Username</Label>
@@ -33,12 +34,19 @@ const UserProfilePreview = ({ preview }) => {
             <TextInput
               placeholder="Username"
               {...register("username", {
-                required: "Username is required",
+                required: true,
               })}
               id="username"
               color={errors.username ? "failure" : "gray"}
             />
+            {errors.username && (
+              <span className="text-red-500 text-xs mt-1 px-2">
+                {errors.username?.message || "Username is required"}
+              </span>
+            )}
           </div>
+
+          {/* Full name */}
           <div className="w-full">
             <div className="mb-2 block">
               <Label htmlFor="fullname">Full Name</Label>
@@ -47,10 +55,17 @@ const UserProfilePreview = ({ preview }) => {
               placeholder="Full Name"
               id="fullname"
               {...register("fullName", { required: true })}
+              color={errors.fullName ? "failure" : "gray"}
             />
+            {errors.fullName && (
+              <span className="text-red-500 text-xs mt-1 px-2">
+                {errors.fullName?.message || "Fullname is required"}
+              </span>
+            )}
           </div>
         </div>
 
+        {/* Avatar input */}
         <div className="w-full">
           <div className="mb-2 block">
             <Label htmlFor="avatar">Upload Profile Pic </Label>

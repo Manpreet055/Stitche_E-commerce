@@ -76,24 +76,24 @@ const UserProfileForm = () => {
       formData.append("avatar", data?.avatar[0]);
     }
 
-    // API Call
-    try {
-      const updateProfile = await api.patch("/users/update-profile", formData);
-      setToastText(updateProfile.data?.msg);
-      setUser(updateProfile.data?.user);
-      setTimeout(async () => {
-        navigate(-1);
-      }, 1500);
-    } catch (error) {
-      const serverMessage = error.response?.data?.message;
-      if (error.response?.status === 409) {
-        setToastText("Email or username already exists");
-      } else if (error.response?.status === 500) {
-        setToastText("Server error. Please try again later.");
-      } else {
-        setToastText(serverMessage || "An unexpected error occurred");
-      }
-    }
+    // // API Call
+    // try {
+    //   const updateProfile = await api.patch("/users/update-profile", formData);
+    //   setToastText(updateProfile.data?.msg);
+    //   setUser(updateProfile.data?.user);
+    //   setTimeout(async () => {
+    //     navigate(-1);
+    //   }, 1500);
+    // } catch (error) {
+    //   const serverMessage = error.response?.data?.message;
+    //   if (error.response?.status === 409) {
+    //     setToastText("Email or username already exists");
+    //   } else if (error.response?.status === 500) {
+    //     setToastText("Server error. Please try again later.");
+    //   } else {
+    //     setToastText(serverMessage || "An unexpected error occurred");
+    //   }
+    // }
   };
 
   return (
@@ -113,9 +113,8 @@ const UserProfileForm = () => {
             onSubmit={methods.handleSubmit(updateUserProfile)}
             className="w-full p-4"
           >
-            <hr className="border-theme my-8 opacity-70" />
-
             <UserProfilePreview preview={preview} />
+            <hr className="border-theme my-8 opacity-70" />
             <UserContactDetails />
             <UserAddressDetails />
 
@@ -128,11 +127,13 @@ const UserProfileForm = () => {
                 Cancel
               </button>
               <button
+                disabled={methods.formState.isSubmitting}
                 type="submit"
-                isProcessing={methods.formState.isSubmitting}
-                className="w-full theme-alt   text-theme-alt p-4 rounded"
+                className={`w-full  ${methods.formState.isSubmitting ? "dark:bg-gray-400 bg-gray-200" : "theme-alt"}  text-theme-alt p-4 rounded`}
               >
-                Save Changes
+                {methods.formState.isSubmitting
+                  ? "Saving changes..."
+                  : "Save Changes"}
               </button>
             </div>
           </form>

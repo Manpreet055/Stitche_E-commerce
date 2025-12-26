@@ -5,12 +5,12 @@ import { Hand, Leaf, Scissors } from "lucide-react";
 import { Avatar, Blockquote } from "flowbite-react";
 const About = () => {
   return (
-    <div className="p-6 w-full   mt-20 text-theme flex flex-col  ">
+    <div className="p-6 w-full   mt-10 text-theme flex flex-col  ">
       {/* Image and story */}
       <div className="flex flex-wrap gap-x-20 justify-evenly mb-10 h-fit">
         <div className="flex flex-col w-fit">
-          <h2 className="text-2xl font-bold sm:text-5xl my-3 sm:my-5 text-start w-full">
-            Our Story & Misson
+          <h2 className="text-3xl font-bold sm:text-5xl my-3 sm:my-5 text-start w-full">
+            About Us
           </h2>
           <img
             className=" xl:max-w-4xl bg-center bg-cover rounded-xl my-5"

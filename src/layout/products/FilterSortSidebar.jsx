@@ -46,10 +46,6 @@ const FilterSortSidebar = ({ query, setQuery }) => {
       filters: { ...changedData },
     }));
   };
-
-  useEffect(() => {
-    console.log(query);
-  }, [query]);
   return (
     <>
       <form

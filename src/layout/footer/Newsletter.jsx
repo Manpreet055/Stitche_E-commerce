@@ -51,9 +51,9 @@ const Newsletter = () => {
             </form>
           </>
         ) : (
-          <div className="max-w-sm mx-auto mt-10 theme text-theme  overflow-hidden">
-            <div className="p-6 flex items-start gap-6 ">
-              <div className="flex items-center space-x-3 mb-4">
+          <div className="max-w-sm mx-auto sm:mt-10 theme text-theme  overflow-hidden">
+            <div className="p-2 flex items-start gap-6 ">
+              <div className="flex items-center space-x-3 ">
                 <div className="rounded-full theme-transparent p-2">
                   {" "}
                   <Mail />
