@@ -57,6 +57,7 @@ export const UserDataProvider = ({ children }) => {
         cart,
         loadingState,
         error,
+        setError,
         refetchUser,
         refetchCart,
         logOutUser,

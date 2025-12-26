@@ -4,15 +4,13 @@ import RenderCart from "../cart/RenderCart";
 import convertDate from "../../utils/convertDate";
 import { MapPin, IdCard, CreditCard, BadgeCheck } from "lucide-react";
 import capitalizeLetter from "../../utils/capitalizeLetter";
-import { NavLink } from "react-router-dom";
+import { Navigate, NavLink, useNavigate } from "react-router-dom";
 import BackButton from "../../ui/BackButton";
-const Orders = ({ order = null }) => {
+const Orders = () => {
+  const navigate = useNavigate();
   let { user, cart } = useUser();
-  const date = Date.now();
+  const date = Date.now(); //Current date for order details
   const randomOrderId = Math.floor(1000000 + Math.random() * 9000000);
-  if (order) {
-    cart = [...cart, order];
-  }
 
   const sumofProductsPrice = cart.reduce(
     (acc, p) => acc + p?.product?.price * p.qty,
@@ -20,6 +18,21 @@ const Orders = ({ order = null }) => {
   );
   const priceAfterDiscount = sumofProductsPrice * 0.9;
   const deliveryFee = sumofProductsPrice * 0.01;
+  if (!user) return <Navigate to="/login" replace />;
+  if (cart.length === 0) {
+    return (
+      <div className="flex flex-col mt-20 min-h-100 text-theme gap-y-6 justify-center items-center">
+        <span className="text-lg">Cart is empty</span>
+        <button
+          onClick={() => navigate("/products")}
+          className="btn-primary w-fit theme-alt text-theme-alt"
+        >
+          Shop now
+        </button>
+      </div>
+    );
+  }
+
   return (
     <div className=" flex mt-20 justify-center">
       <div className="max-w-300 flex theme items-center text-theme flex-col w-full">

@@ -4,6 +4,10 @@ import Counter from "../../ui/Counter";
 import { Button } from "flowbite-react";
 import RatingComp from "./RatingComp";
 import CartButton from "../cart/CartButton";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import { useUser } from "../../context/UserDataProvider";
+import { addProductToCart } from "../../services/handleCart";
+import { useNavigate } from "react-router-dom";
 const ProductBasicDetails = ({ product }) => {
   const {
     _id,
@@ -17,6 +21,18 @@ const ProductBasicDetails = ({ product }) => {
   } = product;
 
   const stock = product?.stock ?? product?.quantity ?? 0;
+
+  const naviagte = useNavigate();
+  const api = useAxiosPrivate();
+  const { refetchCart, setError } = useUser();
+  const handleAddToCart = async () => {
+    try {
+      await addProductToCart(api, { product, qty: 1 });
+      await refetchCart();
+    } catch (error) {
+      setError(error, message);
+    }
+  };
 
   return (
     <div className="w-fit flex grow flex-col theme text-theme">
@@ -42,7 +58,14 @@ const ProductBasicDetails = ({ product }) => {
         <CartButton product={_id} text="Add to Cart" />
       </div>
       <div className="flex justify-start w-full">
-        <Button className="w-full sm:max-w-xs text-nowrap mt-3 sm:mt-6 hover:scale-[1.01] ease-in-out transition-all">
+        <Button
+          onClick={async (event) => {
+            event.stopPropagation();
+            await handleAddToCart();
+            naviagte("/orders");
+          }}
+          className="w-full sm:max-w-xs text-nowrap mt-3 sm:mt-6 hover:scale-[1.01] ease-in-out transition-all"
+        >
           Buy Now
         </Button>
       </div>

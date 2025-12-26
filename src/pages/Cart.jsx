@@ -11,9 +11,9 @@ const Cart = () => {
         <BackButton text="Back" />
         <h2 className="text-2xl lg:text-3xl px-3 font-semibold">Your Cart</h2>
       </div>
-      <div className="flex flex-wrap lg:flex-nowrap justify-evenly gap-4">
+      <div className="flex flex-wrap lg:flex-nowrap min-h-100 justify-evenly gap-4">
         <RenderCart cart={cart} fullheight />
-        <OrderSummary />
+        {cart.length !== 0 && <OrderSummary />}
       </div>
     </div>
   );

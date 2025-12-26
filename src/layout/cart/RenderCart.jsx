@@ -13,8 +13,14 @@ const RenderCart = ({ cart, fullheight = false }) => {
 
   if (cart.length === 0) {
     return (
-      <div className="flex justify-center items-center">
-        No Products In the Cart
+      <div className="flex flex-col gap-y-6 justify-center items-center">
+        <span className="text-lg">Cart is empty</span>
+        <button
+          onClick={() => navigate("/products")}
+          className="btn-primary w-fit theme-alt text-theme-alt"
+        >
+          Shop now
+        </button>
       </div>
     );
   }
