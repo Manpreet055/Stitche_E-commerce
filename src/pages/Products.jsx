@@ -8,6 +8,7 @@ const Products = () => {
     products,
     loadingState,
     error,
+    query,
     setQuery,
     currentPage,
     setCurrentPage,
@@ -25,13 +26,13 @@ const Products = () => {
 
   return (
     <div className=" sm:p-5 relative theme text-theme mt-10 sm:mt-20 lg:flex">
-      <div className="hidden lg:block max-w-sm w-full">
+      <div className="hidden xl:block max-w-sm w-full">
         {/* Sidebar for bigger screens */}
         <FilterSortSidebar setQuery={setQuery} />
       </div>
       <div className="flex flex-col gap-3 w-full">
         {/* Sidebar for smaller screens */}
-        <ProductPageHeader setQuery={setQuery} />
+        <ProductPageHeader query={query} setQuery={setQuery} />
         <RenderProducts data={data} />
       </div>
     </div>

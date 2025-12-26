@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { PRODUCTS_SORTING_OPTIONS } from "../../utils/sort_filter_options";
 import { Checkbox, Label } from "flowbite-react";
 import { useForm } from "react-hook-form";
 import { Filter, X } from "lucide-react";
 
-const FilterSortSidebar = ({ setQuery }) => {
+const FilterSortSidebar = ({ query, setQuery }) => {
   const {
     handleSubmit,
     register,
@@ -13,7 +13,6 @@ const FilterSortSidebar = ({ setQuery }) => {
     getValues,
   } = useForm();
   const price = watch("price");
-  const [show, setshow] = useState(false);
 
   const handleForm = () => {
     const currentValues = getValues();
@@ -21,6 +20,8 @@ const FilterSortSidebar = ({ setQuery }) => {
       acc[key] = currentValues[key];
       return acc;
     }, {});
+
+    if (Object.keys(changedData).length === 0) return;
 
     if (changedData?.category?.includes("all")) {
       delete changedData?.category;
@@ -39,12 +40,16 @@ const FilterSortSidebar = ({ setQuery }) => {
       }));
       delete changedData.sort;
     }
-
+    console.log("data", changedData);
     setQuery((prev) => ({
       ...prev,
       filters: { ...changedData },
     }));
   };
+
+  useEffect(() => {
+    console.log(query);
+  }, [query]);
   return (
     <>
       <form
