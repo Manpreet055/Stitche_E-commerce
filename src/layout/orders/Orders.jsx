@@ -25,29 +25,17 @@ const Orders = () => {
   let { user, cart, refetchCart } = useUser();
 
   if (!user) return <Navigate to="/login" replace />;
-  if (cart.length === 0) {
-    return (
-      <div className="flex flex-col mt-20 min-h-100 text-theme gap-y-6 justify-center items-center">
-        <span className="text-lg">Cart is empty</span>
-        <button
-          onClick={() => navigate("/products")}
-          className="btn-primary w-fit theme-alt text-theme-alt"
-        >
-          Shop now
-        </button>
-      </div>
-    );
-  }
+  if (cart.length === 0) return navigate("/cart");
 
   if (isOrderPlaced) {
+    setTimeout(async () => {
+      await refetchCart();
+    }, 2000);
     return (
       <div className="grid place-items-center">
         <div className="w-full max-w-300 text-theme p-4 mt-5   min-h-150 grid place-items-center">
           <div
-            onClick={async () => {
-              setIsOrderPlaced(false);
-              await refetchCart();
-            }}
+            onClick={() => setIsOrderPlaced(false)}
             className="w-full mt-3 text-start"
           >
             <BackButton text="Go Back" navPath="/" />

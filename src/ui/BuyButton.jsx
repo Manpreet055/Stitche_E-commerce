@@ -7,7 +7,7 @@ import useAxiosPrivate from "../hooks/useAxiosPrivate";
 const BuyButton = ({ product, theme = "" }) => {
   const api = useAxiosPrivate();
   const navigate = useNavigate();
-  const { refetchCart, setError } = useUser();
+  const { refetchCart, setError, user } = useUser();
 
   // add product to cart and navigate to orders page
   const handleAddToCart = async () => {
@@ -22,6 +22,7 @@ const BuyButton = ({ product, theme = "" }) => {
   return (
     <Button
       onClick={async (event) => {
+        if (!user) return navigate("/login");
         event.stopPropagation();
         await handleAddToCart();
       }}

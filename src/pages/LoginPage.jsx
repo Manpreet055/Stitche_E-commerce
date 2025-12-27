@@ -52,7 +52,7 @@ const LoginPage = () => {
           reset();
           await refetchUser();
           navigate(from, { replace: true });
-        }, 1500);
+        }, 1000);
       }
     } catch (error) {
       const serverMessage = error.response?.data?.message;

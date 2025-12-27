@@ -41,7 +41,9 @@ const ProductBasicDetails = ({ product }) => {
         <Counter productId={_id} />
         <CartButton product={_id} text="Add to Cart" />
       </div>
-      <BuyButton product={_id} />
+      <div className="mt-5">
+        <BuyButton product={_id} />
+      </div>
     </div>
   );
 };

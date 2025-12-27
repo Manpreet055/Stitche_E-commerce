@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useUser } from "../context/UserDataProvider";
 import useAxiosPrivate from "./useAxiosPrivate";
 
 const useOrders = () => {
   const { cart, user } = useUser();
   const api = useAxiosPrivate();
+  const [allOrders, setAllOrders] = useState([]);
 
   // States and toast texts
   const [loadingState, setLoadingState] = useState(false);
@@ -75,7 +76,34 @@ const useOrders = () => {
     }
   };
 
+  // for Pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+
+  // fetch OrdersHistory
+  const getOrderHistory = async () => {
+    try {
+      setLoadingState(true);
+      const response = await api.get(`/orders?limit=${10}&page=${currentPage}`);
+      const data = response.data;
+      setAllOrders(data?.orders);
+      setTotalPages(data?.totalPages);
+      console.log(data?.orders);
+    } catch (error) {
+      console.log(error.messages);
+    } finally {
+      setLoadingState(false);
+    }
+  };
+
+  useEffect(() => {
+    getOrderHistory();
+  }, [currentPage]);
+
   return {
+    totalPages,
+    currentPage,
+    setCurrentPage,
     priceAfterDiscount,
     subTotal,
     placeOrder,
@@ -88,6 +116,8 @@ const useOrders = () => {
     setIsOrderPlaced,
     date,
     randomOrderId,
+    allOrders,
+    getOrderHistory,
   };
 };
 

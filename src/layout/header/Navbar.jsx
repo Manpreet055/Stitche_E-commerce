@@ -6,8 +6,9 @@ import MobileNav from "./MobileNav";
 import { useUser } from "../../context/UserDataProvider";
 import AvatarDropDown from "../../ui/AvatarDropdown";
 const Navbar = () => {
-  const { cart, user, refetchCart } = useUser();
+  const { cart, user } = useUser();
   const cartItemsCount = cart?.length || 0;
+
   return (
     <motion.nav
       initial={{ y: -100 }}
@@ -68,7 +69,6 @@ const Navbar = () => {
       <div className="flex items-center gap-4">
         <NavLink
           to="cart"
-          onClick={async () => await refetchCart()}
           className={({ isActive }) =>
             `hover-transition flex flex-col items-center ${isActive ? "text-black dark:text-white" : "text-gray-500"} `
           }

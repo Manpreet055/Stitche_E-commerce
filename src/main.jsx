@@ -6,7 +6,7 @@ import App from "./App.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ErrorPage from "./pages/ErrorPage.jsx";
 import Homepage from "./pages/Homepage.jsx";
-// import ProtectedRoute from "./utils/ProtectedRoute.jsx";
+import ProtectedRoute from "./utils/ProtectedRoute.jsx";
 
 const Products = lazy(() => import("./pages/Products.jsx"));
 const SearchPage = lazy(() => import("./pages/SearchPage.jsx"));
@@ -18,6 +18,7 @@ const LoginPage = lazy(() => import("./pages/LoginPage.jsx"));
 const SignupPage = lazy(() => import("./pages/SignupPage.jsx"));
 const Orders = lazy(() => import("./layout/orders/Orders.jsx"));
 const UserProfileForm = lazy(() => import("./pages/UserProfileForm.jsx"));
+const OrdersHistory = lazy(() => import("./pages/OrdersHistory.jsx"));
 
 const routes = createBrowserRouter([
   {
@@ -106,6 +107,14 @@ const routes = createBrowserRouter([
         element: (
           <Suspense>
             <Orders />
+          </Suspense>
+        ),
+      },
+      {
+        path: "orders/history",
+        element: (
+          <Suspense>
+            <OrdersHistory />
           </Suspense>
         ),
       },
