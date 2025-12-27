@@ -6,18 +6,24 @@ import { MapPin, IdCard, CreditCard, BadgeCheck } from "lucide-react";
 import capitalizeLetter from "../../utils/capitalizeLetter";
 import { Navigate, NavLink, useNavigate } from "react-router-dom";
 import BackButton from "../../ui/BackButton";
-const Orders = () => {
-  const navigate = useNavigate();
-  let { user, cart } = useUser();
-  const date = Date.now(); //Current date for order details
-  const randomOrderId = Math.floor(1000000 + Math.random() * 9000000);
+import useOrders from "../../hooks/useOrders";
 
-  const sumofProductsPrice = cart.reduce(
-    (acc, p) => acc + p?.product?.price * p.qty,
-    0,
-  );
-  const priceAfterDiscount = sumofProductsPrice * 0.9;
-  const deliveryFee = sumofProductsPrice * 0.01;
+const Orders = () => {
+  const {
+    placeOrder,
+    isOrderPlaced,
+    setIsOrderPlaced,
+    deliveryFee,
+    priceAfterDiscount,
+    sumofProductsPrice,
+    date,
+    subTotal,
+    randomOrderId,
+  } = useOrders();
+
+  const navigate = useNavigate();
+  let { user, cart, refetchCart } = useUser();
+
   if (!user) return <Navigate to="/login" replace />;
   if (cart.length === 0) {
     return (
@@ -33,20 +39,46 @@ const Orders = () => {
     );
   }
 
+  if (isOrderPlaced) {
+    return (
+      <div className="grid place-items-center">
+        <div className="w-full max-w-300 text-theme p-4 mt-5   min-h-150 grid place-items-center">
+          <div
+            onClick={async () => {
+              setIsOrderPlaced(false);
+              await refetchCart();
+            }}
+            className="w-full mt-3 text-start"
+          >
+            <BackButton text="Go Back" navPath="/" />
+          </div>
+          <div className="grid place-items-center gap-3">
+            {" "}
+            <BadgeCheck className="my-4" size={54} />
+            {/* Heading */}
+            <h2 className="headers poppins">Thank You for Your Purchase!</h2>
+            <p className="para my-2  max-w-xl text-center">
+              Your order has been successfully placed. A confirmation email has
+              been sent to{" "}
+              <span className="sm:text-xl font-bold">{user?.email}</span>
+            </p>
+          </div>
+          <NavLink
+            to="/products"
+            className="w-full dark:hover:bg-white dark:hover:text-black text-white bg-black btn-primary sm:text-lg poppins max-w-sm text-center  "
+          >
+            Continue Shopping
+          </NavLink>
+        </div>
+      </div>
+    );
+  }
   return (
     <div className=" flex mt-20 justify-center">
       <div className="max-w-300 flex theme items-center text-theme flex-col w-full">
-        <div className="w-full text-start">
-          <BackButton text="Go Back" />
+        <div className="w-full text-start mb-6">
+          <BackButton text="Back" />
         </div>
-        <BadgeCheck className="my-4" size={54} />
-        {/* Heading */}
-        <h2 className="headers poppins">Thank You for Your Purchase!</h2>
-        <p className="para my-4 max-w-xl text-center">
-          Your order has been successfully placed. A confirmation email has been
-          sent to <span className="sm:text-xl font-bold">{user?.email}</span>
-        </p>
-
         {/* Cart  */}
         <div className="w-full flex sm:text-xl p-6 theme-transparent rounded-t-xl border-theme justify-between">
           Order ID: #{randomOrderId}
@@ -61,28 +93,19 @@ const Orders = () => {
           <h2 className="text-xl font-medium">Order Summary</h2>{" "}
           <div className="flex sm:text-xl justify-between items-center mt-4">
             Sub Total :{" "}
-            <span className="font-bold sm:text-lg">
-              ${sumofProductsPrice.toFixed(2)}
-            </span>
+            <span className="font-bold sm:text-lg">${sumofProductsPrice}</span>
           </div>
           <div className="sm:text-xl flex justify-between items-center mt-4">
             Discount (10%) :{" "}
-            <span className="font-bold sm:text-lg">
-              ${priceAfterDiscount.toFixed(2)}
-            </span>
+            <span className="font-bold sm:text-lg">${priceAfterDiscount}</span>
           </div>
           <div className="sm:text-xl flex justify-between items-center mt-4">
             Delivery fee :{" "}
-            <span className="font-bold sm:text-lg">
-              ${deliveryFee.toFixed(2)}
-            </span>
+            <span className="font-bold sm:text-lg">${deliveryFee}</span>
           </div>
           <hr className="mt-6 text-gray-400" />
           <div className=" sm:text-xl flex justify-between items-center mt-4">
-            Total :{" "}
-            <span className="font-bold sm:text-lg">
-              ${(priceAfterDiscount + deliveryFee).toFixed(2)}
-            </span>
+            Total : <span className="font-bold sm:text-lg">${subTotal}</span>
           </div>
         </div>
 
@@ -117,12 +140,12 @@ const Orders = () => {
           </div>
         </div>
 
-        <NavLink
-          to="/products"
-          className="w-full btn-primary sm:text-lg poppins max-w-sm text-center my-6 text-theme-alt theme-alt"
+        <button
+          onClick={placeOrder}
+          className="w-full btn-primary my-4  sm:text-lg poppins  text-center text-theme-alt theme-alt"
         >
-          Continue Shopping
-        </NavLink>
+          Place Order
+        </button>
       </div>
     </div>
   );

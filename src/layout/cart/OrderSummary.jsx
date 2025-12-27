@@ -1,37 +1,28 @@
 import React from "react";
 import { ShieldCheck } from "lucide-react";
-import { useUser } from "../../context/UserDataProvider";
 import { NavLink } from "react-router-dom";
+import useOrders from "../../hooks/useOrders";
 const OrderSummary = () => {
-  const { cart } = useUser();
-  const sumofProductsPrice = cart.reduce(
-    (acc, p) => acc + p?.product?.price * p.qty,
-    0,
-  );
-  const priceAfterDiscount = sumofProductsPrice * 0.9;
-  const deliveryFee = sumofProductsPrice * 0.01;
+  const { priceAfterDiscount, deliveryFee, sumofProductsPrice, subTotal } =
+    useOrders();
+
   return (
     <div className="flex text-theme flex-col border w-full min-w-sm lg:max-w-lg justify-around border-gray-300 rounded  p-4">
       <div>
         <h2 className="text-xl font-medium">Order Summary</h2>{" "}
         <div className="flex justify-between items-center mt-4">
-          Sub Total :{" "}
-          <span className="font-bold">${sumofProductsPrice.toFixed(2)}</span>
+          Sub Total : <span className="font-bold">${sumofProductsPrice}</span>
         </div>
         <div className="flex justify-between items-center mt-4">
           Discount (10%) :{" "}
-          <span className="font-bold">${priceAfterDiscount.toFixed(2)}</span>
+          <span className="font-bold">${priceAfterDiscount}</span>
         </div>
         <div className="flex justify-between items-center mt-4">
-          Delivery fee :{" "}
-          <span className="font-bold">${deliveryFee.toFixed(2)}</span>
+          Delivery fee : <span className="font-bold">${deliveryFee}</span>
         </div>
         <hr className="my-6 text-gray-400" />
         <div className="flex justify-between items-center mt-4">
-          Total :{" "}
-          <span className="font-bold">
-            ${(priceAfterDiscount + deliveryFee).toFixed(2)}
-          </span>
+          Total : <span className="font-bold">${subTotal}</span>
         </div>
       </div>
 

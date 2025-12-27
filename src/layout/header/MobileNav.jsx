@@ -7,11 +7,11 @@ import {
 } from "flowbite-react";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { Home, Menu, Power } from "lucide-react";
+import { Menu, Power } from "lucide-react";
 import SearchBar from "../header/SearchBar";
 import { useUser } from "../../context/UserDataProvider";
 const MobileNav = () => {
-  const { user, cart, logOutUser } = useUser();
+  const { user, cart, logOutUser, refetchCart } = useUser();
   const [isOpen, setIsOpen] = useState(false);
   const cartItemsCount = cart?.length || 0;
 
@@ -92,6 +92,7 @@ const MobileNav = () => {
         <DrawerItems>
           <NavLink
             to="/cart"
+            onClick={async () => await refetchCart()}
             className={({ isActive }) =>
               `hover-transition items-center flex w-full justify-between ${isActive ? "text-black dark:text-white" : "text-gray-500"}`
             }

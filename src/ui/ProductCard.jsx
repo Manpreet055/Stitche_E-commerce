@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import CartButton from "../layout/cart/CartButton";
 import RatingComp from "../layout/productDetails/RatingComp";
+import BuyButton from "./BuyButton";
 
 const ProductCard = ({ product }) => {
   const { _id, price, title, media, description, discount, rating } =
@@ -28,10 +29,8 @@ const ProductCard = ({ product }) => {
           </p>
         </div>
         <RatingComp rating={rating} />
-        <div className="md:flex hidden  h-fit w-full mt-2 justify-between md:gap-3">
-          <button className="rounded-xl p-3 bg-black text-white border border-gray-200 w-full hover:scale-[1.02] ease-in-out transition-all">
-            Buy Now{" "}
-          </button>
+        <div className="md:flex hidden  h-fit w-full mt-2 items-center justify-between md:gap-3">
+          <BuyButton product={_id} theme="theme-alt text-theme-alt" />
           <CartButton product={_id} />{" "}
         </div>
       </div>

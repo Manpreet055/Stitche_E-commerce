@@ -8,7 +8,7 @@ const CartButton = ({ product, text = "" }) => {
   const { refetchCart } = useUser();
   const handleAddToCart = async () => {
     try {
-      await addProductToCart(api, { product, qty: 1 });
+      await api.patch("/cart", { product, qty: 1 });
       await refetchCart();
     } catch (error) {
       console.error("Failed to add to cart:", error);
@@ -20,7 +20,7 @@ const CartButton = ({ product, text = "" }) => {
         event.stopPropagation();
         handleAddToCart();
       }}
-      className="rounded  w-fit flex gap-2 items-center py-2 px-3  border-theme"
+      className="rounded h-fit w-fit flex gap-2 items-center p-2  border-theme"
     >
       <ShoppingCart />
       <span className="xl:text-lg">{text}</span>
