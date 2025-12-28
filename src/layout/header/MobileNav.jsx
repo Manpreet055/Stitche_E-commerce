@@ -102,6 +102,12 @@ const MobileNav = () => {
             </span>
           </NavLink>
         </DrawerItems>
+        <DrawerItems>
+          <NavLink to="orders/history" className="flex gap-3 items-center">
+            {" "}
+            Orders History
+          </NavLink>
+        </DrawerItems>
         {user && (
           <DrawerItems>
             <button

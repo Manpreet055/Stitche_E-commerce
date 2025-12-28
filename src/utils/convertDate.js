@@ -1,7 +1,7 @@
-const convertDate = (isoDate) => {
+const convertDate = (isoDate, monthtype = "short") => {
   return new Date(isoDate).toLocaleDateString("en-US", {
     year: "numeric",
-    month: "short",
+    month: monthtype,
     day: "2-digit",
   });
 };

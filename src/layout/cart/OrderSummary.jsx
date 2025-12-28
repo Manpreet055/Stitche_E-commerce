@@ -1,10 +1,9 @@
 import React from "react";
 import { ShieldCheck } from "lucide-react";
 import { NavLink } from "react-router-dom";
-import useOrders from "../../hooks/useOrders";
-const OrderSummary = () => {
+const OrderSummary = ({ priceDetails }) => {
   const { priceAfterDiscount, deliveryFee, sumofProductsPrice, subTotal } =
-    useOrders();
+    priceDetails;
 
   return (
     <div className="flex text-theme flex-col border w-full min-w-sm lg:max-w-lg justify-around border-gray-300 rounded  p-4">

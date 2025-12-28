@@ -7,22 +7,17 @@ import capitalizeLetter from "../../utils/capitalizeLetter";
 import { Navigate, NavLink, useNavigate } from "react-router-dom";
 import BackButton from "../../ui/BackButton";
 import useOrders from "../../hooks/useOrders";
-
+import generatePriceDetails from "../../utils/generatePriceDetails";
+import orderDataGenerator from "../../utils/orderDataGenerator";
 const Orders = () => {
-  const {
-    placeOrder,
-    isOrderPlaced,
-    setIsOrderPlaced,
-    deliveryFee,
-    priceAfterDiscount,
-    sumofProductsPrice,
-    date,
-    subTotal,
-    randomOrderId,
-  } = useOrders();
+  const { placeOrder, isOrderPlaced, setIsOrderPlaced } = useOrders();
 
+  const { date, randomOrderId } = orderDataGenerator();
   const navigate = useNavigate();
   let { user, cart, refetchCart } = useUser();
+
+  const { priceAfterDiscount, deliveryFee, sumofProductsPrice, subTotal } =
+    generatePriceDetails(cart);
 
   if (!user) return <Navigate to="/login" replace />;
   if (cart.length === 0) return navigate("/cart");

@@ -2,9 +2,11 @@ import React, { useEffect } from "react";
 import convertDate from "../../utils/convertDate";
 import capitalizeFirstLetter from "../../utils/capitalizeLetter";
 import { ArrowRight } from "lucide-react";
+import { NavLink } from "react-router-dom";
 
 const RenderOrders = ({ allOrders }) => {
   const orders = allOrders?.orders;
+
   return (
     <ul className="w-full grid gap-y-4 pb-3 mt-5">
       {/* Header */}
@@ -17,7 +19,11 @@ const RenderOrders = ({ allOrders }) => {
       </li>
 
       {/* All orders */}
-      {orders &&
+      {!orders || orders.length === 0 ? (
+        <div className="flex text-lg sm:text-xl justify-center items-center text-theme min-h-100">
+          No order history
+        </div>
+      ) : (
         orders.map((order) => (
           <li
             key={order?.shipping?.trackingId}
@@ -33,14 +39,18 @@ const RenderOrders = ({ allOrders }) => {
               {capitalizeFirstLetter(order?.orderStatus)}
             </span>
             <span className="text-sm sm:text-base">${order?.totalAmount}</span>
-            <button className="border-theme btn-primary flex items-center gap-3 group">
+            <NavLink
+              to={`/orders/${order._id}`}
+              className="border-theme btn-primary flex items-center gap-3 group"
+            >
               View Details{" "}
               <span className="group-hover:translate-x-1 ease-in-out transition-all">
                 <ArrowRight size={20} />
               </span>
-            </button>
+            </NavLink>
           </li>
-        ))}
+        ))
+      )}
     </ul>
   );
 };
