@@ -8,7 +8,7 @@ const OrdersHistory = () => {
   const { currentPage, totalPages, setCurrentPage, loadingState, allOrders } =
     useOrders();
   return (
-    <div className="flex mt-23 items-center w-full h-screen text-theme flex-col">
+    <div className="flex mt-18 sm:mt-23 items-center w-full h-screen text-theme flex-col">
       <div className="flex h-full flex-col w-full max-w-6xl ">
         <BackButton text="Back" />
         <h2 className="text-4xl font-bold my-3">Order History</h2>

@@ -50,63 +50,83 @@ const MobileNav = () => {
           <SearchBar isDrawer />
         </DrawerItems>
         <DrawerItems>
-          <NavLink
-            to="/"
-            className={({ isActive }) =>
-              `hover-transition ${isActive ? "text-black dark:text-white" : "text-gray-500"} `
-            }
-          >
-            Home
-          </NavLink>
+          <button>
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                `hover-transition ${isActive ? "text-black dark:text-white" : "text-gray-500"} `
+              }
+            >
+              Home
+            </NavLink>
+          </button>
         </DrawerItems>
         <DrawerItems>
-          <NavLink
-            to="/products"
-            className={({ isActive }) =>
-              `hover-transition ${isActive ? "text-black dark:text-white" : "text-gray-500"}`
-            }
-          >
-            Products
-          </NavLink>
-        </DrawerItems>
-        <DrawerItems>
-          <NavLink
-            to="/about"
-            className={({ isActive }) =>
-              `hover-transition ${isActive ? "text-black dark:text-white" : "text-gray-500"}`
-            }
-          >
-            About Us
-          </NavLink>
-        </DrawerItems>
-        <DrawerItems>
-          <NavLink
-            to="/contact"
-            className={({ isActive }) =>
-              `hover-transition ${isActive ? "text-black dark:text-white" : "text-gray-500"}`
-            }
-          >
-            Contact
-          </NavLink>
-        </DrawerItems>
-        <DrawerItems>
-          <NavLink
-            to="/cart"
-            className={({ isActive }) =>
-              `hover-transition items-center flex w-full justify-between ${isActive ? "text-black dark:text-white" : "text-gray-500"}`
-            }
-          >
-            Cart
-            <span className="theme-alt text-theme-alt h-6 text-center w-6 rounded-full mr-10">
-              {cartItemsCount}
-            </span>
-          </NavLink>
-        </DrawerItems>
-        <DrawerItems>
-          <NavLink to="orders/history" className="flex gap-3 items-center">
+          <button>
             {" "}
-            Orders History
-          </NavLink>
+            <NavLink
+              to="/products"
+              className={({ isActive }) =>
+                `hover-transition ${isActive ? "text-black dark:text-white" : "text-gray-500"}`
+              }
+            >
+              Products
+            </NavLink>
+          </button>
+        </DrawerItems>
+        <DrawerItems>
+          <button>
+            <NavLink
+              to="/about"
+              className={({ isActive }) =>
+                `hover-transition ${isActive ? "text-black dark:text-white" : "text-gray-500"}`
+              }
+            >
+              About Us
+            </NavLink>
+          </button>
+        </DrawerItems>
+        <DrawerItems>
+          <button>
+            {" "}
+            <NavLink
+              to="/contact"
+              className={({ isActive }) =>
+                `hover-transition ${isActive ? "text-black dark:text-white" : "text-gray-500"}`
+              }
+            >
+              Contact
+            </NavLink>
+          </button>
+        </DrawerItems>
+        <DrawerItems>
+          <button className="w-full">
+            {" "}
+            <NavLink
+              to="/cart"
+              className={({ isActive }) =>
+                `hover-transition items-center flex w-full justify-between ${isActive ? "text-black dark:text-white" : "text-gray-500"}`
+              }
+            >
+              Cart
+              <span className="theme-alt text-theme-alt h-6 text-center w-6 rounded-full mr-10">
+                {cartItemsCount}
+              </span>
+            </NavLink>
+          </button>
+        </DrawerItems>
+        <DrawerItems>
+          <button>
+            <NavLink
+              to="orders/history"
+              className={({ isActive }) =>
+                `hover-transition items-center flex w-full justify-between ${isActive ? "text-black dark:text-white" : "text-gray-500"}`
+              }
+            >
+              {" "}
+              Orders History
+            </NavLink>
+          </button>
         </DrawerItems>
         {user && (
           <DrawerItems>

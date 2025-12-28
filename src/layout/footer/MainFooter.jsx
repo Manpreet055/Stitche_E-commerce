@@ -21,9 +21,9 @@ const MainFooter = () => {
             <FooterLinks
               heading="Categories"
               items={[
-                { name: "Men's-wear", msg: "This feature is comming soon" },
-                { name: "Women's wear", msg: "This feature is comming soon" },
-                { name: "Kid's wear", msg: "This feature is comming soon" },
+                { name: "Men's-wear", link: "/search?q=mens-wear" },
+                { name: "Women's wear", link: "/search?q=womens-wear" },
+                { name: "Kid's wear", link: "/search?q=kids-wear" },
               ]}
             />
             <FooterLinks

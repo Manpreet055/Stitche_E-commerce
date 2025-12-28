@@ -35,7 +35,7 @@ const ContactDetails = () => {
             className="md:max-w-max max-w-20 truncate"
             href="mailto:manpreetuae4@gmail.com"
           >
-            manpreetuae4@gmail.com
+            support.stitch@gmail.com
           </a>
         </div>
       </div>

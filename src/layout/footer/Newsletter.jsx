@@ -90,7 +90,9 @@ const Newsletter = () => {
           </a>
         </li>
         <li>
-          <Github />
+          <a href="https://github.com/Manpreet055">
+            <Github />
+          </a>
         </li>
         <li>
           <Twitter />

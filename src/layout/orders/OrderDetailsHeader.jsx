@@ -76,7 +76,7 @@ const OrderDetailsHeader = ({ order }) => {
           <div className="grid grid-cols-2 py-1 font-medium  text-xl">
             Order Status:{" "}
             <span
-              className={`text-lg w-fit p-1 rounded-lg ${statusColor[orderStatus]}`}
+              className={`text-lg w-fit px-2 p-1 rounded-lg ${statusColor[orderStatus]}`}
             >
               {" "}
               {capitalizeFirstLetter(orderStatus)}

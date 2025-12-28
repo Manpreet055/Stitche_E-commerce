@@ -56,16 +56,9 @@ const ContactForm = () => {
             placeholder="Email"
           />
         </div>
-
-        {/* "General Inquiry",
-          "Order Issue",
-          "Technical Support",
-          "Feedback",
-          "Other", */}
-        {/* Subject */}
         <select
           {...register("subject")}
-          className=" border-theme my-4 p-2 py-4 rounded-md w-full sm:p-4"
+          className=" border-theme mb-3 p-2 py-4 rounded-md w-full sm:p-4"
           name="subject"
           id="subject"
         >
