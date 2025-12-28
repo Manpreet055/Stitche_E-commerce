@@ -10,7 +10,7 @@ const Cart = () => {
   return (
     <div className="my-15 sm:p-4 w-full theme text-theme">
       <div className="flex flex-col my-6 gap-y-3 items-start">
-        <BackButton text="Back" />
+        <BackButton navPath="/" text="Back" />
         <h2 className="text-2xl lg:text-3xl px-3 font-semibold">Your Cart</h2>
       </div>
       <div className="flex flex-wrap lg:flex-nowrap min-h-100 justify-evenly gap-4">

@@ -10,18 +10,7 @@ const Navbar = () => {
   const cartItemsCount = cart?.length || 0;
 
   return (
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{
-        duration: 0.3,
-        type: "spring",
-        stiffness: 100,
-        damping: 15,
-        mass: 1.5,
-      }}
-      className="py-3 px-6 flex justify-between items-center  z-20"
-    >
+    <nav className="py-3 px-6 flex justify-between items-center  z-20">
       <h1 className="text-3xl sm:text-4xl text-nowrap font-bold">Stitche</h1>
 
       <ul className=" w-full hidden md:flex md:justify-evenly lg:justify-center  items-center gap-4 lg:gap-10  font-semibold px-3">
@@ -98,7 +87,7 @@ const Navbar = () => {
         </div>
         <MobileNav />
       </div>
-    </motion.nav>
+    </nav>
   );
 };
 

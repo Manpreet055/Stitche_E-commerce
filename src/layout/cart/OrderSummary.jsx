@@ -28,7 +28,7 @@ const OrderSummary = ({ priceDetails }) => {
       <div>
         <div className="flex mt-10 justify-self-end justify-center w-full">
           <ShieldCheck />
-          <p className="max-w-2xs">
+          <p className="max-w-3xs">
             90 Days limited warranty against manufacturer's defects.{" "}
             <a href="#" className="font-semibold underline">
               Details
@@ -37,7 +37,7 @@ const OrderSummary = ({ priceDetails }) => {
         </div>
         <NavLink to="/orders" className="flex justify-center">
           {" "}
-          <button className=" w-40 sm:w-full  theme-alt text-theme-alt p-4 mt-3 rounded-2xl hover:scale-[1.02] ease-in-out duration-300 transition-all">
+          <button className=" w-full  theme-alt text-theme-alt p-4 mt-3 rounded-2xl hover:scale-[1.02] ease-in-out duration-300 transition-all">
             Order Now
           </button>
         </NavLink>

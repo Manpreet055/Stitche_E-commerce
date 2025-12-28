@@ -3,7 +3,8 @@ import convertDate from "../../utils/convertDate";
 import capitalizeFirstLetter from "../../utils/capitalizeLetter";
 import { ArrowRight } from "lucide-react";
 import { NavLink } from "react-router-dom";
-
+import { container, item } from "../../Animations/ListStagger";
+import { motion } from "framer-motion";
 const RenderOrders = ({ allOrders }) => {
   const orders = allOrders?.orders;
   const statusColor = {
@@ -15,14 +16,18 @@ const RenderOrders = ({ allOrders }) => {
   };
 
   return (
-    <ul className="w-full grid gap-y-4 pb-3 mt-5">
+    <motion.ul
+      initial="hidden"
+      animate="show"
+      variants={container}
+      className="w-full grid gap-y-6   sm:gap-y-8 pb-3 mt-5"
+    >
       {/* Header */}
-      <li className="w-full py-4 theme-transparent grid grid-cols-5 place-items-center">
+      <li className="w-full py-4 theme-transparent grid grid-cols-4 place-items-center">
         <span className=" ">OrdersId</span>
         <span className=" ">Date</span>
         <span className=" ">Status</span>
         <span className="">Total</span>
-        <span className="">Action </span>
       </li>
 
       {/* All orders */}
@@ -32,35 +37,30 @@ const RenderOrders = ({ allOrders }) => {
         </div>
       ) : (
         orders.map((order) => (
-          <li
-            key={order?.shipping?.trackingId}
-            className="w-full grid grid-cols-5 place-items-center"
-          >
-            <span className="font-semibold text-lg">
-              #{order?.shipping?.trackingId}
-            </span>
-            <span className="text-sm sm:text-base">
-              {convertDate(order?.createdAt)}
-            </span>
-            <span
-              className={` w-fit p-1 px-2 rounded-lg ${statusColor[order?.orderStatus]}`}
-            >
-              {capitalizeFirstLetter(order?.orderStatus)}
-            </span>
-            <span className="text-sm sm:text-base">${order?.totalAmount}</span>
+          <motion.li variants={item} key={order?.shipping?.trackingId}>
             <NavLink
               to={`/orders/${order._id}`}
-              className="border-theme btn-primary flex items-center gap-3 group"
+              className="w-full grid grid-cols-4 place-items-center"
             >
-              View Details{" "}
-              <span className="group-hover:translate-x-1 ease-in-out transition-all">
-                <ArrowRight size={20} />
+              <span className="font-semibold sm:text-lg">
+                #{order?.shipping?.trackingId}
+              </span>
+              <span className="text-sm sm:text-base">
+                {convertDate(order?.createdAt)}
+              </span>
+              <span
+                className={`text-sm w-fit p-1 px-2 rounded-lg ${statusColor[order?.orderStatus]}`}
+              >
+                {capitalizeFirstLetter(order?.orderStatus)}
+              </span>
+              <span className="text-sm sm:text-base">
+                ${order?.totalAmount}
               </span>
             </NavLink>
-          </li>
+          </motion.li>
         ))
       )}
-    </ul>
+    </motion.ul>
   );
 };
 

@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import ContactDetails from "./ContactDetails";
 import { useUser } from "../../context/UserDataProvider";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import { motion } from "framer-motion";
 const ContactForm = () => {
   const api = useAxiosPrivate();
   const { user } = useUser();
@@ -28,7 +29,12 @@ const ContactForm = () => {
     }
   };
   return (
-    <div className="flex md:grow justify-center  items-center flex-col">
+    <motion.div
+      initial={{ translateX: -100, opacity: 0 }}
+      animate={{ translateX: 0, opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className="flex md:grow justify-center  items-center flex-col"
+    >
       <form
         onSubmit={handleSubmit(handleForm)}
         className="flex h-fit p-6 flex-col w-fit justify-center items-center  rounded theme text-theme"
@@ -86,7 +92,7 @@ const ContactForm = () => {
         </button>
       </form>
       <ContactDetails />
-    </div>
+    </motion.div>
   );
 };
 

@@ -10,7 +10,7 @@ const BackButton = ({ text = "", theme, navPath = -1 }) => {
       className={`text-theme w-fit flex items-center gap-2 sm:btn-primary  group scale-transition ${theme}`}
     >
       <span className="duration-200 ease-in-out">
-        <ArrowLeft />
+        <ArrowLeft size={20} />
       </span>
       {text}
     </button>

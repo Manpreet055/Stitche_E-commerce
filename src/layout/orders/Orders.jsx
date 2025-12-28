@@ -68,7 +68,7 @@ const Orders = () => {
           <span>Order Date: {convertDate(date)}</span>
         </div>
         <div className="w-full ">
-          <RenderCart cart={cart} />
+          <RenderCart fullheight cart={cart} />
         </div>
 
         {/* Order Summary   */}

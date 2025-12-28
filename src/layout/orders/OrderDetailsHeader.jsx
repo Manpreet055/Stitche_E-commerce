@@ -45,18 +45,20 @@ const OrderDetailsHeader = ({ order }) => {
   };
 
   return (
-    <div className="w-full flex flex-col p-3">
-      <h2 className="w-full  text-start text-4xl font-semibold">
+    <div className="w-full flex flex-col sm:p-3">
+      <h2 className="w-full my-2 sm:my-3 text-start text-2xl sm:text-4xl font-semibold">
         Order #{trackingId}
       </h2>
       <div className="w-full flex justify-between ">
-        <div className="text-xl flex items-center gap-3 font-semibold">
+        <div className="sm:text-xl  flex items-center gap-3 font-semibold">
           Order date:{" "}
-          <span className="text-base">{convertDate(createdAt, "long")}</span>
+          <span className="text-sm sm:text-base">
+            {convertDate(createdAt, "long")}
+          </span>
         </div>
         <button
           onClick={cancelOrder}
-          className={`btn-primary border-theme text-red-500 ${orderStatus === "cancelled" && "hidden"}`}
+          className={`btn-primary text-sm sm:text-base border-theme text-red-500 ${orderStatus === "cancelled" && "hidden"}`}
         >
           Cancel Order
         </button>
@@ -64,49 +66,59 @@ const OrderDetailsHeader = ({ order }) => {
 
       {/* Cards */}
       <div className="flex border-theme flex-wrap my-5 rounded-lg">
-        <div className=" border-r border-gray-300 dark:border-gray-400  grow flex flex-col gap-4 px-5 py-6">
-          <h2 className="text-2xl font-semibold mb-2">Order information</h2>
-          <div className="grid grid-cols-2 font-medium  text-xl">
-            Order Id: <span className="text-lg"> #{trackingId}</span>
+        <div className="border-b  md:border-r border-gray-300 dark:border-gray-400  grow flex flex-col gap-4 px-5 py-6">
+          <h2 className="text-xl sm:text-2xl font-semibold mb-2">
+            Order information
+          </h2>
+          <div className="grid grid-cols-2 font-medium  sm:text-xl">
+            Order Id: <span className="text-sm sm:text-lg"> #{trackingId}</span>
           </div>
-          <div className="grid grid-cols-2 font-medium  text-xl">
+          <div className="grid grid-cols-2 font-medium  sm:text-xl">
             Order Date:{" "}
-            <span className="text-lg"> {convertDate(createdAt, "long")}</span>
+            <span className="text-sm sm:text-lg">
+              {" "}
+              {convertDate(createdAt, "long")}
+            </span>
           </div>
-          <div className="grid grid-cols-2 py-1 font-medium  text-xl">
+          <div className="grid grid-cols-2 py-1 font-medium  sm:text-xl">
             Order Status:{" "}
             <span
-              className={`text-lg w-fit px-2 p-1 rounded-lg ${statusColor[orderStatus]}`}
+              className={`text-sm sm:text-lg w-fit px-2 p-1 rounded-lg ${statusColor[orderStatus]}`}
             >
               {" "}
               {capitalizeFirstLetter(orderStatus)}
             </span>
           </div>
-          <div className="grid grid-cols-2 font-medium  text-xl">
-            Payment method: <span className="text-lg"> {method}</span>
+          <div className="grid grid-cols-2 font-medium  sm:text-xl">
+            Payment method:{" "}
+            <span className="text-sm sm:text-lg"> {method}</span>
           </div>
-          <div className="grid grid-cols-2 font-medium  text-xl">
-            Transaction ID : <span className="text-lg"> {transactionId}</span>
+          <div className="grid grid-cols-2 font-medium  sm:text-xl">
+            Transaction ID :{" "}
+            <span className="text-sm sm:text-lg"> {transactionId}</span>
           </div>
         </div>
 
         {/* Shipping Adress */}
         <div className="grow flex flex-col gap-4 p-6">
-          <h2 className="text-2xl font-semibold mb-2">Shipping Address</h2>
-          <div className="grid grid-cols-2 font-medium  text-xl">
-            Ordered By: <span className="text-lg"> {fullName}</span>
+          <h2 className="text-xl sm:text-2xl font-semibold mb-2">
+            Shipping Address
+          </h2>
+          <div className="grid grid-cols-2 font-medium  sm:text-xl">
+            Ordered By: <span className="text-sm sm:text-lg"> {fullName}</span>
           </div>
-          <div className="grid grid-cols-2 font-medium  text-xl">
-            Street: <span className="text-lg"> {street}</span>
+          <div className="grid grid-cols-2 font-medium  sm:text-xl">
+            Street: <span className="text-sm sm:text-lg"> {street}</span>
           </div>
-          <div className="grid grid-cols-2 font-medium  text-xl">
-            City: <span className="text-lg"> {city}</span>
+          <div className="grid grid-cols-2 font-medium  sm:text-xl">
+            City: <span className="text-sm sm:text-lg"> {city}</span>
           </div>
-          <div className="grid grid-cols-2 font-medium  text-xl">
-            Postal Code: <span className="text-lg"> {postalCode}</span>
+          <div className="grid grid-cols-2 font-medium  sm:text-xl">
+            Postal Code:{" "}
+            <span className="text-sm sm:text-lg"> {postalCode}</span>
           </div>
-          <div className="grid grid-cols-2 font-medium  text-xl">
-            Country: <span className="text-lg"> {country}</span>
+          <div className="grid grid-cols-2 font-medium  sm:text-xl">
+            Country: <span className="text-sm sm:text-lg"> {country}</span>
           </div>
         </div>
       </div>

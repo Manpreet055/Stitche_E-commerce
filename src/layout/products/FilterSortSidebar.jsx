@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { PRODUCTS_SORTING_OPTIONS } from "../../utils/sort_filter_options";
 import { Checkbox, Label } from "flowbite-react";
 import { useForm } from "react-hook-form";
-import { Filter, X } from "lucide-react";
 
 const FilterSortSidebar = ({ query, setQuery }) => {
   const {
@@ -50,7 +49,7 @@ const FilterSortSidebar = ({ query, setQuery }) => {
     <>
       <form
         onSubmit={handleSubmit(handleForm)}
-        className={`sm:sticky z-20  flex theme h-full lg:h-fit  p-4 flex-col sm:top-15 lg:top-20 left-0 sm:max-w-sm w-full`}
+        className={`sm:sticky  flex theme h-full lg:h-fit  p-4 flex-col sm:top-15 lg:top-20 left-0 sm:max-w-sm w-full`}
       >
         <h2 className="font-bold sm:text-xl">Filter & Sort</h2>
 

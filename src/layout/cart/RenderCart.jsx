@@ -6,6 +6,9 @@ import { Spinner } from "flowbite-react";
 import { useUser } from "../../context/UserDataProvider";
 import { useNavigate } from "react-router-dom";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import { container, item } from "../../Animations/ListStagger";
+import { motion } from "framer-motion";
+
 const RenderCart = ({ cart, fullheight = false }) => {
   const api = useAxiosPrivate();
   const { refetchCart } = useUser();
@@ -43,11 +46,15 @@ const RenderCart = ({ cart, fullheight = false }) => {
         <span>Total</span>
         <span></span>
       </div>
-      <ul
+      <motion.ul
+        initial="hidden"
+        animate="show"
+        variants={container}
         className={`overflow-auto px-1 hide-scrollbar ${fullheight && "lg:min-h-125 lg:max-h-125"}`}
       >
         {cart.map((p, index) => (
-          <li
+          <motion.li
+            variants={item}
             onClick={() => navigate(`/product/${p.product._id}`)}
             key={index + 1}
             className="grid grid-cols-[60px_100px_1fr_60px_70px] sm:grid-cols-5 place-items-center border-t border-gray-300 py-4 w-full"
@@ -81,9 +88,9 @@ const RenderCart = ({ cart, fullheight = false }) => {
             >
               <Trash />
             </button>
-          </li>
+          </motion.li>
         ))}
-      </ul>
+      </motion.ul>
     </div>
   );
 };

@@ -35,8 +35,8 @@ const OrderDetails = () => {
   }
 
   return (
-    <div className="mt-20 flex justify-center theme text-theme ">
-      <div className="w-full max-w-7xl p-4">
+    <div className="my-15 sm:my-20 flex justify-center theme text-theme ">
+      <div className="w-full max-w-7xl p-1 sm:p-4">
         <BackButton text="Back" />
         <OrderDetailsHeader order={order} />
         <RenderOrderedProducts products={order.products} />

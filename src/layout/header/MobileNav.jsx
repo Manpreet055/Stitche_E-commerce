@@ -100,6 +100,19 @@ const MobileNav = () => {
           </button>
         </DrawerItems>
         <DrawerItems>
+          <button>
+            <NavLink
+              to="orders/history"
+              className={({ isActive }) =>
+                `hover-transition items-center flex w-full justify-between ${isActive ? "text-black dark:text-white" : "text-gray-500"}`
+              }
+            >
+              {" "}
+              Orders History
+            </NavLink>
+          </button>
+        </DrawerItems>
+        <DrawerItems>
           <button className="w-full">
             {" "}
             <NavLink
@@ -115,23 +128,10 @@ const MobileNav = () => {
             </NavLink>
           </button>
         </DrawerItems>
-        <DrawerItems>
-          <button>
-            <NavLink
-              to="orders/history"
-              className={({ isActive }) =>
-                `hover-transition items-center flex w-full justify-between ${isActive ? "text-black dark:text-white" : "text-gray-500"}`
-              }
-            >
-              {" "}
-              Orders History
-            </NavLink>
-          </button>
-        </DrawerItems>
         {user && (
           <DrawerItems>
             <button
-              className="btn-primary flex gap-2 items-center border border-red-400"
+              className="btn-primary flex gap-2 items-center border border-red-500"
               onClick={logOutUser}
             >
               <Power size={16} />

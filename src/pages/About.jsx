@@ -3,6 +3,7 @@ import aboutImg from "../assets/images/aboutImage.webp";
 import ceoImage from "../assets/images/ceo.avif";
 import { Hand, Leaf, Scissors } from "lucide-react";
 import { Avatar, Blockquote } from "flowbite-react";
+import { motion } from "framer-motion";
 const About = () => {
   return (
     <div className="p-6 w-full   mt-10 text-theme flex flex-col  ">
@@ -12,7 +13,10 @@ const About = () => {
           <h2 className="text-3xl font-bold sm:text-5xl my-3 sm:my-5 text-start w-full">
             About Us
           </h2>
-          <img
+          <motion.img
+            initial={{ translateX: -100, opacity: 0 }}
+            animate={{ translateX: 0, opacity: 1 }}
+            transition={{ duration: 0.5 }}
             className=" xl:max-w-4xl bg-center bg-cover rounded-xl my-5"
             src={aboutImg}
             alt="meeting pic"
@@ -23,7 +27,12 @@ const About = () => {
           <h1 className="text-2xl font-bold my-3 sm:my-5 text-start w-full">
             Who We Are
           </h1>
-          <p className="max-w-2xl sm:text-lg dark:text-gray-200 text-gray-500">
+          <motion.p
+            initial={{ translateX: 100, opacity: 0 }}
+            animate={{ translateX: 0, opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            className="max-w-2xl sm:text-lg dark:text-gray-200 text-gray-500"
+          >
             Stitche was founded on the art of slow fashion and refined
             craftsmanship. Rooted in handmade excellence, we create thoughtfully
             designed garments— from hand-knitted sweaters to meticulously
@@ -37,12 +46,17 @@ const About = () => {
             fabric, the precision of every stitch, and the way a garment lives
             with you over time. Our commitment is simple: create enduring
             clothing that honors craftsmanship and elevates everyday wear.
-          </p>
+          </motion.p>
         </div>
       </div>
 
       {/* Core Values */}
-      <div className="flex flex-col">
+      <motion.div
+        initial={{ translateX: -100, opacity: 0 }}
+        animate={{ translateX: 0, opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className="flex flex-col"
+      >
         <div className="flex flex-wrap justify-around items-center ">
           <div className="flex flex-col items-center justify-center">
             <h1 className="text-2xl font-bold my-5 text-center w-full">
@@ -77,7 +91,12 @@ const About = () => {
           </div>
 
           {/* CEO Profile */}
-          <div className="flex border border-gray-200 dark:border-gray-500 flex-wrap grow text-sm sm:max-w-2xl gap-4  items-center justify-center p-4 mt-6 sm:mt-0 rounded-xl">
+          <motion.div
+            initial={{ translateX: 100, opacity: 0 }}
+            animate={{ translateX: 0, opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            className="flex border border-gray-200 dark:border-gray-500 flex-wrap grow text-sm sm:max-w-2xl gap-4  items-center justify-center p-4 mt-6 sm:mt-0 rounded-xl"
+          >
             <div className="flex flex-col justify-center items-center gap-2">
               <Avatar
                 img={ceoImage}
@@ -97,9 +116,9 @@ const About = () => {
               Thank you for being part of a brand that values how things are
               made as much as how they are worn.”
             </Blockquote>
-          </div>
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };
