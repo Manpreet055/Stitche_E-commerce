@@ -6,6 +6,13 @@ import { NavLink } from "react-router-dom";
 
 const RenderOrders = ({ allOrders }) => {
   const orders = allOrders?.orders;
+  const statusColor = {
+    cancelled: "bg-red-100 text-red-800",
+    pending: "bg-yellow-100 text-yellow-800",
+    delivered: "bg-green-100 text-green-800",
+    confirmed: "bg-indigo-100 text-indigo-800",
+    shipped: "bg-purple-100 text-purple-800",
+  };
 
   return (
     <ul className="w-full grid gap-y-4 pb-3 mt-5">
@@ -35,7 +42,9 @@ const RenderOrders = ({ allOrders }) => {
             <span className="text-sm sm:text-base">
               {convertDate(order?.createdAt)}
             </span>
-            <span className=" text-sm sm:text-base">
+            <span
+              className={` w-fit p-1 px-2 rounded-lg ${statusColor[order?.orderStatus]}`}
+            >
               {capitalizeFirstLetter(order?.orderStatus)}
             </span>
             <span className="text-sm sm:text-base">${order?.totalAmount}</span>

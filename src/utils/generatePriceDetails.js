@@ -8,7 +8,7 @@ const generatePriceDetails = (cart) => {
   //perform all math using  numbers
   const PriceAfterDiscount = Sum * 0.9;
   const Discount = Sum - PriceAfterDiscount;
-  const DeliveryFee = Sum * 0.01;
+  const DeliveryFee = Sum * 0.01 <= 10 ? 0 : Sum * 0.01;
   const Total = PriceAfterDiscount + DeliveryFee;
 
   // convert to fixed strings only at the end for the UI

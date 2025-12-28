@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { List, ListItem } from "flowbite-react";
 import convertDate from "../../utils/convertDate";
 import capitalizeFirstLetter from "../../utils/capitalizeLetter";
-
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import { useNavigate } from "react-router-dom";
 const OrderDetailsHeader = ({ order }) => {
+  const [loadingState, setLoadingState] = useState(false);
+  const [error, setError] = useState({});
+  const navigate = useNavigate();
+  const api = useAxiosPrivate();
+
   const {
     _id,
     shipping: { trackingId, street, city, postalCode, country },
@@ -23,6 +29,21 @@ const OrderDetailsHeader = ({ order }) => {
     shipped: "bg-purple-100 text-purple-800",
   };
 
+  const cancelOrder = async () => {
+    if (!confirm("Do you really want to cancel the order")) return;
+    try {
+      setLoadingState(true);
+      const response = await api.patch(`/orders/${_id}`);
+      if (response.status === 200) {
+        navigate(-1);
+      }
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setLoadingState(false);
+    }
+  };
+
   return (
     <div className="w-full flex flex-col p-3">
       <h2 className="w-full  text-start text-4xl font-semibold">
@@ -33,7 +54,10 @@ const OrderDetailsHeader = ({ order }) => {
           Order date:{" "}
           <span className="text-base">{convertDate(createdAt, "long")}</span>
         </div>
-        <button className="btn-primary border-theme text-red-500">
+        <button
+          onClick={cancelOrder}
+          className={`btn-primary border-theme text-red-500 ${orderStatus === "cancelled" && "hidden"}`}
+        >
           Cancel Order
         </button>
       </div>

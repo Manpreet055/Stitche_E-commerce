@@ -20,7 +20,6 @@ const OrderDetails = () => {
       setLoadingState(true);
       const response = await api.get(`/orders/${id}`);
       setOrder(response.data?.orders);
-      console.log(response.data.orders);
     } catch (error) {
       console.error("Fetch error:", error);
     } finally {

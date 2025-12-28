@@ -12,6 +12,7 @@ const useOrders = () => {
   const [loadingState, setLoadingState] = useState(false);
   const [isOrderPlaced, setIsOrderPlaced] = useState(false);
   const [toast, setToast] = useState("");
+  const [error, setError] = useState("");
 
   // API call in this function
   const placeOrder = async () => {
@@ -44,7 +45,7 @@ const useOrders = () => {
       setAllOrders(data?.orders);
       setTotalPages(data?.totalPages);
     } catch (error) {
-      console.log(error.messages);
+      setError(error.messages);
     } finally {
       setLoadingState(false);
     }
@@ -65,6 +66,7 @@ const useOrders = () => {
     setIsOrderPlaced,
     allOrders,
     getOrderHistory,
+    error,
   };
 };
 
