@@ -4,7 +4,7 @@ import api from "../utils/api";
 
 const searchProducts = async (
   query,
-  limit = 4,
+  limit = 6,
   setLoadingState = () => {},
   setError = () => {},
 ) => {
@@ -14,6 +14,7 @@ const searchProducts = async (
       `/products/search?query=${query}&limit=${limit}`,
     );
     const data = response.data.products;
+    console.log(data);
     return data;
   } catch (error) {
     setError(error);

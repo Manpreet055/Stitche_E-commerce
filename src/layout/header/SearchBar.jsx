@@ -2,22 +2,46 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Search } from "lucide-react";
 import searchProducts from "../../services/searchProducts";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 import debounce from "../../utils/debounce";
+import { Spinner } from "flowbite-react";
+import DebounceSuggestions from "../../ui/DebounceSuggestions";
+
 const SearchBar = ({ isDrawer = false }) => {
   const navigate = useNavigate();
+  const [searches, setSearches] = useState([]);
+  const [loadingState, setLoadingState] = useState(false);
+  const [error, setError] = useState("");
   const { register, handleSubmit, watch } = useForm();
-
-  // Creating Debounce Variable function
-  const debounceSearch = debounce(searchProducts, 500);
 
   let watchSearchBar = watch("search");
 
+  // Creating Debounce Variable function
+  const debounceFn = React.useMemo(
+    () =>
+      debounce(async (query) => {
+        try {
+          setLoadingState(true);
+          if (query?.length > 2) {
+            const results = await searchProducts(query);
+            console.log(results);
+            setSearches(results);
+          }
+        } catch (error) {
+          setError(error.message);
+        } finally {
+          setLoadingState(false);
+        }
+      }, 500),
+    [],
+  );
+
   useEffect(() => {
-    if (watchSearchBar?.length > 2) {
-      debounceSearch(watchSearchBar);
+    debounceFn(watchSearchBar);
+    if (watchSearchBar === "") {
+      setSearches([]);
     }
-  }, [watchSearchBar]);
+  }, [watchSearchBar, debounceFn]);
 
   const handleFormSubmit = (data) => {
     const query = data.search?.trim();
@@ -29,7 +53,7 @@ const SearchBar = ({ isDrawer = false }) => {
   return (
     <form
       onSubmit={handleSubmit(handleFormSubmit)}
-      className={`h-full w-full max-w-xl theme text-theme  grow ${!isDrawer ? "hidden md:flex" : "flex "} items-center gap-2`}
+      className={` relative h-full w-full max-w-xl theme text-theme  grow ${!isDrawer ? "hidden md:flex" : "flex "} items-center gap-2`}
     >
       <input
         autoComplete="off"
@@ -46,6 +70,11 @@ const SearchBar = ({ isDrawer = false }) => {
       >
         <Search size={20} /> {!isDrawer && "Search"}
       </button>
+      <DebounceSuggestions
+        loadingState={loadingState}
+        error={error}
+        searches={searches}
+      />
     </form>
   );
 };
