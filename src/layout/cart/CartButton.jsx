@@ -20,10 +20,10 @@ const CartButton = ({ product, text = "" }) => {
         event.stopPropagation();
         handleAddToCart();
       }}
-      className="rounded h-fit w-fit flex gap-2 items-center p-2  border-theme"
+      className="rounded h-fit w-fit flex gap-2 items-center p-2.5  border-theme"
     >
-      <ShoppingCart />
-      <span className="xl:text-lg">{text}</span>
+      <ShoppingCart size={20} />
+      <span className="text-sm xl:text-base">{text}</span>
     </button>
   );
 };

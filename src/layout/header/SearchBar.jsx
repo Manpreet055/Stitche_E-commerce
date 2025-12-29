@@ -37,11 +37,11 @@ const SearchBar = ({ isDrawer = false }) => {
           required: true,
         })}
         type="text"
-        className={`w-full h-12 bg-transparent placeholder:text-gray-700 dark:placeholder:text-gray-400 text-sm sm:text-base border border-slate-200 rounded-md ${!isDrawer ? "pl-10" : "pl-2"} pr-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow`}
+        className={`w-full h-10 sm:h-12 bg-transparent placeholder:text-gray-700 dark:placeholder:text-gray-400 text-sm sm:text-base border border-slate-200 rounded-md ${!isDrawer ? "pl-10" : "pl-2"} pr-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow`}
         placeholder="Search Products .."
       />
       <button
-        className="theme-alt text-theme-alt  flex items-center gap-1 rounded-md p-2 ease-in-out transition-all duration-300"
+        className="theme-alt text-theme-alt  flex items-center gap-1 rounded-md p-2.5 ease-in-out transition-all duration-300"
         type="submit"
       >
         <Search size={20} /> {!isDrawer && "Search"}

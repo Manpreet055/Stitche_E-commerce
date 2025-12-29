@@ -6,7 +6,7 @@ const RatingComp = ({ rating }) => {
   const ratings = [];
   for (let i = 1; i <= 5; i++) {
     if (i <= average) {
-      ratings.push(<RatingStar className="" fill="orange" />);
+      ratings.push(<RatingStar className="text-sm" fill="orange" />);
     } else {
       ratings.push(<RatingStar fill="gray" />);
     }

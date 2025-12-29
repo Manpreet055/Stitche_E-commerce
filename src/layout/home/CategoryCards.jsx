@@ -32,7 +32,7 @@ const CategoryCards = () => {
             className="w-40 max-h-33 h-33  lg:w-50 lg:max-h-45 lg:h-45  xl:w-60 xl:max-h-55 xl:h-55  object-cover object-center rounded-t-2xl"
             alt="mens-wear"
           />
-          <span>Men's Wear</span>
+          <span className="text-sm sm:text-base">Men's Wear</span>
         </motion.div>
         <motion.div
           variants={item}
@@ -44,7 +44,7 @@ const CategoryCards = () => {
             className="w-40 max-h-33 h-33  lg:w-50 lg:max-h-45 lg:h-45  xl:w-60 xl:max-h-55 xl:h-55 object-cover object-center rounded-t-2xl"
             alt="mens-wear"
           />
-          <span>Women's Wear</span>
+          <span className="text-sm sm:text-base">Women's Wear</span>
         </motion.div>
         <motion.div
           variants={item}
@@ -56,7 +56,7 @@ const CategoryCards = () => {
             className="w-40 max-h-33 h-33  lg:w-50 lg:max-h-45 lg:h-45  xl:w-60 xl:max-h-55 xl:h-55 object-cover object-center rounded-t-2xl"
             alt="mens-wear"
           />
-          <span>Kid's Wear</span>
+          <span className="text-sm sm:text-base">Kid's Wear</span>
         </motion.div>
         <motion.div
           variants={item}
@@ -68,7 +68,7 @@ const CategoryCards = () => {
             className="w-40 max-h-33 h-33  lg:w-50 lg:max-h-45 lg:h-45  xl:w-60 xl:max-h-55 xl:h-55 object-cover object-center rounded-t-2xl"
             alt="mens-wear"
           />
-          <span>Footwear</span>
+          <span className="text-sm sm:text-base">Footwear</span>
         </motion.div>
         <motion.div
           variants={item}
@@ -80,7 +80,7 @@ const CategoryCards = () => {
             className="w-40 max-h-33 h-33  lg:w-50 lg:max-h-45 lg:h-45  xl:w-60 xl:max-h-55 xl:h-55 object-cover object-center rounded-t-2xl"
             alt="mens-wear"
           />
-          <span>Accessories</span>
+          <span className="text-sm sm:text-base">Accessories</span>
         </motion.div>
       </motion.div>
     </div>

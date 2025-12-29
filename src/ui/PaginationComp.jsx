@@ -12,6 +12,7 @@ export function PaginationComp({ currentPage, setCurrentPage, totalPages }) {
         totalPages={totalPages}
         onPageChange={onPageChange}
         showIcons
+        previousLabel="Prev"
       />
     </div>
   );

@@ -29,7 +29,7 @@ const RenderProducts = ({ data }) => {
             initial="hidden"
             animate="show"
             variants={container}
-            className="flex w-full justify-around flex-wrap gap-y-4 sm:gap-8 "
+            className="flex w-full justify-around flex-wrap gap-y-4 gap-2 sm:gap-8 "
           >
             {products.map((product) => (
               <motion.li variants={item} key={product.title}>

@@ -131,7 +131,7 @@ const MobileNav = () => {
         {user && (
           <DrawerItems>
             <button
-              className="btn-primary flex gap-2 items-center border border-red-500"
+              className="btn-primary text-xs flex gap-2 items-center border border-red-500"
               onClick={logOutUser}
             >
               <Power size={16} />

@@ -16,11 +16,11 @@ export const customPaginationTheme = createTheme({
       icon: "h-5 w-5",
     },
     next: {
-      base: "rounded-r-lg border border-gray-300 px-3 py-2 leading-tight text-gray-500 enabled:hover:bg-gray-100 enabled:hover:text-gray-700 dark:border-gray-700 theme text-theme enabled:dark:hover:text-white",
+      base: "rounded-r-lg border border-gray-300 px-3 py-2 ml-2 sm:ml-0  leading-tight text-gray-500 enabled:hover:bg-gray-100 enabled:hover:text-gray-700 dark:border-gray-700 theme text-theme enabled:dark:hover:text-white",
       icon: "h-5 w-5",
     },
     selector: {
-      base: "w-12 hidden sm:block border border-gray-300 py-2 leading-tight enabled:hover:bg-gray-100 enabled:hover:text-gray-700 dark:border-gray-700 theme text-theme enabled:dark:hover:bg-gray-700 enabled:dark:hover:text-white",
+      base: "w-12 hidden sm:block border border-gray-300  py-2 leading-tight enabled:hover:bg-gray-100 enabled:hover:text-gray-700 dark:border-gray-700 theme text-theme enabled:dark:hover:bg-gray-700 enabled:dark:hover:text-white",
       active:
         "bg-cyan-50 text-cyan-600 hover:bg-cyan-100 hover:text-cyan-700 dark:border-gray-700 theme text-theme",
       disabled: "cursor-not-allowed opacity-50",

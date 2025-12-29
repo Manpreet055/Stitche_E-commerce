@@ -8,20 +8,20 @@ const OrderSummary = ({ priceDetails }) => {
   return (
     <div className="flex text-theme flex-col border w-full min-w-sm lg:max-w-lg justify-around border-gray-300 rounded  p-4">
       <div>
-        <h2 className="text-xl font-medium">Order Summary</h2>{" "}
+        <h2 className="text-lg sm:text-xl font-medium">Order Summary</h2>{" "}
         <div className="flex justify-between items-center mt-4">
-          Sub Total : <span className="font-bold">${sumofProductsPrice}</span>
+          Sub Total <span className="font-bold">${sumofProductsPrice}</span>
         </div>
         <div className="flex justify-between items-center mt-4">
-          Discount (10%) :{" "}
+          Discount (10%){" "}
           <span className="font-bold">${priceAfterDiscount}</span>
         </div>
         <div className="flex justify-between items-center mt-4">
-          Delivery fee : <span className="font-bold">${deliveryFee}</span>
+          Delivery fee <span className="font-bold">${deliveryFee}</span>
         </div>
         <hr className="my-6 text-gray-400" />
         <div className="flex justify-between items-center mt-4">
-          Total : <span className="font-bold">${subTotal}</span>
+          Total <span className="font-bold">${subTotal}</span>
         </div>
       </div>
 
@@ -37,7 +37,7 @@ const OrderSummary = ({ priceDetails }) => {
         </div>
         <NavLink to="/orders" className="flex justify-center">
           {" "}
-          <button className=" w-full  theme-alt text-theme-alt p-4 mt-3 rounded-2xl hover:scale-[1.02] ease-in-out duration-300 transition-all">
+          <button className=" w-full max-w-xs sm:max-w-full theme-alt text-theme-alt p-3  sm:p-4 mt-3 rounded-2xl hover:scale-[1.02] ease-in-out duration-300 transition-all">
             Order Now
           </button>
         </NavLink>
