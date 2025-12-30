@@ -8,9 +8,9 @@ import {
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Home, Menu, Power } from "lucide-react";
-import SearchBar from "../header/SearchBar";
+import SearchBar from "./SearchBar";
 import { useUser } from "../../context/UserDataProvider";
-const MobileNav = () => {
+const Sidebar = () => {
   const { user, cart, logOutUser } = useUser();
   const [isOpen, setIsOpen] = useState(false);
   const cartItemsCount = cart?.length || 0;
@@ -144,4 +144,4 @@ const MobileNav = () => {
   );
 };
 
-export default MobileNav;
+export default Sidebar;

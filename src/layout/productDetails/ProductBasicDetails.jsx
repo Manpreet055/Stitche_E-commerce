@@ -1,8 +1,8 @@
 import React from "react";
 import capitalizeFirstLetter from "../../utils/capitalizeLetter";
 import Counter from "../../ui/Counter";
-import RatingComp from "./RatingComp";
-import CartButton from "../cart/CartButton";
+import ProductRating from "./ProductRating";
+import AddToCartButton from "../cart/AddToCartButton";
 import BuyButton from "../../ui/BuyButton";
 
 const ProductBasicDetails = ({ product }) => {
@@ -23,7 +23,7 @@ const ProductBasicDetails = ({ product }) => {
       <span className="font-semibold">{brand}</span>
       <span className="font-semibold md:text-2xl">{title}</span>
       <span className="font-medium mt-4 md:text-2xl">${price}</span>
-      <RatingComp rating={rating} />
+      <ProductRating rating={rating} />
       <p className="mt-2 sm:mt-4 max-w-md">{description}</p>
       <p className=" mt-2">
         <span className="font-medium lg:text-lg">Category</span> :{" "}
@@ -39,7 +39,7 @@ const ProductBasicDetails = ({ product }) => {
       </p>
       <div className="flex items-center  mt-3  sm:mt-6 gap-3">
         <Counter productId={_id} />
-        <CartButton product={_id} text="Add to Cart" />
+        <AddToCartButton product={_id} text="Add to Cart" />
       </div>
       <div className="mt-5">
         <BuyButton product={_id} />

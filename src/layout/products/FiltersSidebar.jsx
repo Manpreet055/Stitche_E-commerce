@@ -1,9 +1,9 @@
-import { Button, Drawer, DrawerHeader, DrawerItems } from "flowbite-react";
+import { Drawer } from "flowbite-react";
 import { useState } from "react";
 import FilterSortSidebar from "./FilterSortSidebar";
 import { Filter, X } from "lucide-react";
 
-const MobileSidebar = ({ setQuery, query }) => {
+const FiltersSidebar = ({ setQuery, query }) => {
   const [isOpen, setIsOpen] = useState(false);
   const handleClose = () => setIsOpen(false);
 
@@ -51,4 +51,4 @@ const MobileSidebar = ({ setQuery, query }) => {
   );
 };
 
-export default MobileSidebar;
+export default FiltersSidebar;

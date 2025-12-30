@@ -2,17 +2,21 @@ import { useEffect, useCallback } from "react";
 import api from "../utils/api";
 import { useAuthentication } from "../context/AuthProdvider";
 import { Navigate } from "react-router-dom";
+
+// This custom hook handles the token exchange silently
+// using axios interceptors
 const useAxiosPrivate = () => {
   const { accessToken, setAccessToken } = useAuthentication();
 
-  // 1️⃣ refresh function wrapped in useCallback
+  //refresh function wrapped in useCallback
   const refresh = useCallback(async () => {
     try {
       const response = await api.post("/users/refresh-token");
       const token = response.data?.token;
       setAccessToken(token);
     } catch (err) {
-      // logout(); // if refresh fails, force
+      await api.post(`/users/logout`);
+      window.location.reload();
       throw err;
     }
   }, [setAccessToken]);
@@ -28,7 +32,7 @@ const useAxiosPrivate = () => {
       failedQueue = [];
     };
 
-    // 2️⃣ request interceptor
+    // request interceptor
     const requestIntercept = api.interceptors.request.use(
       (config) => {
         // always attach latest token

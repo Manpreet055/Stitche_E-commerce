@@ -22,8 +22,9 @@ const BuyButton = ({ product, theme = "" }) => {
   return (
     <Button
       onClick={async (event) => {
-        if (!user) return navigate("/login");
+        event.preventDefault();
         event.stopPropagation();
+        if (!user) return navigate("/login");
         await handleAddToCart();
       }}
       className={`w-full sm:max-w-xs btn-primary text-nowrap hover:scale-[1.01] ease-in-out transition-all ${theme}`}

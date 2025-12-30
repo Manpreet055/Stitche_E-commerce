@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { motion } from "framer-motion";
 import { NavLink } from "react-router-dom";
-import CartButton from "../layout/cart/CartButton";
-import RatingComp from "../layout/productDetails/RatingComp";
+import AddToCartButton from "../layout/cart/AddToCartButton";
+import ProductRating from "../layout/productDetails/ProductRating";
 import BuyButton from "./BuyButton";
 
 const ProductCard = ({ product }) => {
@@ -33,10 +33,10 @@ const ProductCard = ({ product }) => {
                   : ""}
             </p>
           </div>
-          <RatingComp rating={rating} />
+          <ProductRating rating={rating} />
           <div className="md:flex hidden  h-fit w-full mt-2 items-center justify-between md:gap-3">
             <BuyButton product={_id} theme="theme-alt text-theme-alt" />
-            <CartButton product={_id} />{" "}
+            <AddToCartButton product={_id} />{" "}
           </div>
         </div>
       </motion.div>

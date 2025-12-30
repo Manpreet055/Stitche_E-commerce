@@ -3,7 +3,7 @@ import { PRODUCTS_SORTING_OPTIONS } from "../../utils/sort_filter_options";
 import { Checkbox, Label } from "flowbite-react";
 import { useForm } from "react-hook-form";
 
-const FilterSortSidebar = ({ query, setQuery }) => {
+const FilterSortSidebar = ({ setQuery }) => {
   const {
     handleSubmit,
     register,
@@ -11,22 +11,26 @@ const FilterSortSidebar = ({ query, setQuery }) => {
     formState: { dirtyFields },
     getValues,
   } = useForm();
+
   const price = watch("price");
 
   const handleForm = () => {
+    // Filters only chnaged values
     const currentValues = getValues();
     const changedData = Object.keys(dirtyFields).reduce((acc, key) => {
       acc[key] = currentValues[key];
       return acc;
     }, {});
 
-    if (Object.keys(changedData).length === 0) return;
+    if (Object.keys(changedData).length === 0) return; //if nothing changes return
 
+    // if all category option selected then apply remove other category and send null to the backend
     if (changedData?.category?.includes("all")) {
       delete changedData?.category;
       delete changedData?.brand;
     }
 
+    // Parsing the sorting fields
     if (Object.keys(changedData).includes("sort")) {
       const [sortField, sortingOrder] = changedData?.sort.split("_");
       // setSort({ sortField, sortingOrder });
@@ -37,9 +41,8 @@ const FilterSortSidebar = ({ query, setQuery }) => {
           sortingOrder,
         },
       }));
-      delete changedData.sort;
+      delete changedData.sort; //after parsing delete the form field
     }
-    console.log("data", changedData);
     setQuery((prev) => ({
       ...prev,
       filters: { ...changedData },

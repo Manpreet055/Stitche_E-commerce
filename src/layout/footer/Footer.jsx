@@ -1,10 +1,21 @@
 import React, { useEffect } from "react";
 import FooterLinks from "./FooterLinks";
 import Newsletter from "./Newsletter";
+import { useLocation } from "react-router-dom";
 
-const MainFooter = () => {
+const Footer = () => {
+  const { pathname } = useLocation();
   return (
-    <footer className="theme text-theme">
+    <footer
+      className={`theme text-theme ${
+        (pathname === "/login" || pathname === "/signup") && "hidden"
+      }`}
+    >
+      <hr
+        className={`text-gray-400 sm:my-10 mx-2 sm:mx-10 ${
+          (pathname === "/login" || pathname === "/signup") && "hidden"
+        }`}
+      />
       <div className="flex  justify-evenly w-full flex-wrap   ">
         <div className="mt-3 sm:mt-6 flex flex-col gap-2 items-center">
           <h1 className="text-xl sm:text-3xl  font-bold">
@@ -57,4 +68,4 @@ const MainFooter = () => {
   );
 };
 
-export default MainFooter;
+export default Footer;

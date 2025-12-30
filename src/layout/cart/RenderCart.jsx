@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Counter from "../../ui/Counter";
-import { removeProductFromCart } from "../../services/handleCart";
 import { Trash } from "lucide-react";
 import { Spinner } from "flowbite-react";
 import { useUser } from "../../context/UserDataProvider";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { container, item } from "../../Animations/ListStagger";
 import { motion } from "framer-motion";
@@ -12,25 +11,27 @@ import { motion } from "framer-motion";
 const RenderCart = ({ cart, fullheight = false }) => {
   const api = useAxiosPrivate();
   const { refetchCart } = useUser();
-  const navigate = useNavigate();
 
+  // Empty cart states handles
   if (cart.length === 0) {
     return (
       <div className="flex flex-col gap-y-6 justify-center items-center">
         <span className="text-lg">Cart is empty</span>
-        <button
-          onClick={() => navigate("/products")}
+        <NavLink
+          to="/products"
           className="btn-primary w-fit theme-alt text-theme-alt"
         >
           Shop now
-        </button>
+        </NavLink>
       </div>
     );
   }
 
   const handleRemove = async (productId) => {
     try {
-      await removeProductFromCart(api, productId);
+      await api.delete(`/cart`, {
+        params: { productId },
+      });
       await refetchCart();
     } catch (error) {
       console.error("Failed to remove from cart:", error);
@@ -39,6 +40,7 @@ const RenderCart = ({ cart, fullheight = false }) => {
 
   return (
     <div className="flex h-full relative  theme text-theme  flex-col gap-2 border-theme grow rounded sm:p-4">
+      {/* Header */}
       <div className="grid grid-cols-[60px_100px_1fr_60px_70px] sm:grid-cols-5 md:text-xl place-items-center py-4 w-full">
         <span></span>
         <span>Brand</span>
@@ -46,6 +48,8 @@ const RenderCart = ({ cart, fullheight = false }) => {
         <span>Total</span>
         <span></span>
       </div>
+
+      {/* List Rendering */}
       <motion.ul
         initial="hidden"
         animate="show"
@@ -53,41 +57,41 @@ const RenderCart = ({ cart, fullheight = false }) => {
         className={`overflow-auto px-1 hide-scrollbar ${fullheight && "lg:min-h-125 lg:max-h-125"}`}
       >
         {cart.map((p, index) => (
-          <motion.li
-            variants={item}
-            onClick={() => navigate(`/product/${p.product._id}`)}
-            key={index + 1}
-            className="grid grid-cols-[60px_100px_1fr_60px_70px] sm:grid-cols-5 place-items-center border-t border-gray-300 py-4 w-full"
-          >
-            <img
-              src={
-                p.product?.media?.thumbnail ? (
-                  p.product?.media?.thumbnail
-                ) : (
-                  <Spinner />
-                )
-              }
-              alt="product"
-              className=" sm:w-] sm:grid-col20 h-full sm:h-20 "
-            />
-            <div className="flex place-self-start flex-col justify-center gap-2 mx-4">
-              <h2 className=" sm:text-xl font-medium">{p.product?.brand}</h2>
-              <p className="truncate text-sm sm:text-lg w-20 sm:w-full">
-                {p.product?.title}
-              </p>
-            </div>
-            <Counter productId={p.product?._id} defaultqty={p?.qty} />
-            <span className=" ml-3 font-medium">
-              ${(p.product?.price * p.qty).toFixed(2)}
-            </span>
-            <button
-              onClick={(event) => {
-                event.stopPropagation();
-                handleRemove(p.product?._id);
-              }}
+          <motion.li variants={item} key={index + 1}>
+            <NavLink
+              to={`/product/${p.product._id}`}
+              className="grid grid-cols-[60px_100px_1fr_60px_70px] sm:grid-cols-5 place-items-center border-t border-gray-300 py-4 w-full"
             >
-              <Trash />
-            </button>
+              <img
+                src={
+                  p.product?.media?.thumbnail ? (
+                    p.product?.media?.thumbnail
+                  ) : (
+                    <Spinner />
+                  )
+                }
+                alt="product"
+                className=" sm:w-] sm:grid-col20 h-full sm:h-20 "
+              />
+              <div className="flex place-self-start flex-col justify-center gap-2 mx-4">
+                <h2 className=" sm:text-xl font-medium">{p.product?.brand}</h2>
+                <p className="truncate text-sm sm:text-lg w-20 sm:w-full">
+                  {p.product?.title}
+                </p>
+              </div>
+              <Counter productId={p.product?._id} defaultqty={p?.qty} />
+              <span className=" ml-3 font-medium">
+                ${(p.product?.price * p.qty).toFixed(2)}
+              </span>
+              <button
+                onClick={(event) => {
+                  event.stopPropagation();
+                  handleRemove(p.product?._id);
+                }}
+              >
+                <Trash />
+              </button>
+            </NavLink>
           </motion.li>
         ))}
       </motion.ul>

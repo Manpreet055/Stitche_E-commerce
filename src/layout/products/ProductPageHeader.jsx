@@ -2,7 +2,7 @@ import React from "react";
 import SearchBar from "../header/SearchBar";
 import { ArrowLeft, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import MobileSidebar from "./MobileSidebar";
+import FiltersSidebar from "./FiltersSidebar";
 
 const ProductPageHeader = ({ setQuery, query }) => {
   const navigate = useNavigate();
@@ -33,7 +33,7 @@ const ProductPageHeader = ({ setQuery, query }) => {
           </span>
           Back
         </button>
-        <MobileSidebar query={query} setQuery={setQuery} />
+        <FiltersSidebar query={query} setQuery={setQuery} />
         {/* Clear Filters Button */}
         {(isSorted || Object.keys(query?.filters).length !== 0) && (
           <button

@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import BackButton from "../ui/BackButton";
 import RenderCart from "../layout/cart/RenderCart";
-import OrderSummary from "../layout/cart/OrderSummary";
+import CartPriceSummary from "../layout/cart/CartPriceSummary";
 import { useUser } from "../context/UserDataProvider";
 import generatePriceDetails from "../utils/generatePriceDetails";
+import AsyncBoundary from "../ui/AsyncBoundary";
+import { Spinner } from "flowbite-react";
+
 const Cart = () => {
-  const { cart } = useUser();
+  const { cart, loadingState } = useUser();
   const priceDetails = generatePriceDetails(cart);
   return (
     <div className="my-15 sm:p-4 w-full theme text-theme">
@@ -13,9 +16,17 @@ const Cart = () => {
         <BackButton navPath="/" text="Back" />
         <h2 className="text-2xl lg:text-3xl px-3 font-semibold">Your Cart</h2>
       </div>
-      <div className="flex flex-wrap lg:flex-nowrap min-h-100 justify-evenly gap-4">
-        <RenderCart cart={cart} fullheight />
-        {cart.length !== 0 && <OrderSummary priceDetails={priceDetails} />}
+      <div className="flex flex-wrap xl:flex-nowrap min-h-100 justify-evenly gap-4">
+        {loadingState ? (
+          <AsyncBoundary
+            loader={<Spinner color="gray" />}
+            loadingState={true}
+            errorState={null}
+          />
+        ) : (
+          <RenderCart cart={cart} fullheight />
+        )}
+        {cart.length !== 0 && <CartPriceSummary priceDetails={priceDetails} />}
       </div>
     </div>
   );

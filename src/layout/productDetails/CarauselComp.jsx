@@ -11,7 +11,7 @@ const CarauselComp = ({ images = [], loadingState = () => {} }) => {
           <Spinner />
         </div>
       ) : (
-        <div className="lg:max-w-6xl w-full relative overflow-hidden h-56 sm:h-64 xl:h-80 2xl:h-96">
+        <div className="lg:max-w-3xl w-full relative overflow-hidden h-56 sm:h-100 2xl:h-96">
           {" "}
           <Carousel
             leftControl={

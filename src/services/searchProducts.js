@@ -1,5 +1,4 @@
 import axios from "axios";
-import handleApiError from "./handleApiError";
 import api from "../utils/api";
 
 const searchProducts = async (
@@ -18,7 +17,6 @@ const searchProducts = async (
     return data;
   } catch (error) {
     setError(error);
-    handleApiError(error);
     throw error;
   } finally {
     setLoadingState(false);

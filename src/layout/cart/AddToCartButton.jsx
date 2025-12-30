@@ -1,11 +1,13 @@
 import React, { useContext, useEffect } from "react";
-import { addProductToCart } from "../../services/handleCart";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { useUser } from "../../context/UserDataProvider";
 import { ShoppingCart } from "lucide-react";
-const CartButton = ({ product, text = "" }) => {
+import { useNavigate } from "react-router-dom";
+const AddToCartButton = ({ product, text = "" }) => {
+  const navigate = useNavigate();
   const api = useAxiosPrivate();
-  const { refetchCart } = useUser();
+  const { refetchCart, user } = useUser();
+
   const handleAddToCart = async () => {
     try {
       await api.patch("/cart", { product, qty: 1 });
@@ -17,7 +19,9 @@ const CartButton = ({ product, text = "" }) => {
   return (
     <button
       onClick={(event) => {
+        event.preventDefault();
         event.stopPropagation();
+        if (!user) return navigate("/login");
         handleAddToCart();
       }}
       className="rounded h-fit w-fit flex gap-2 items-center p-2.5  border-theme"
@@ -28,4 +32,4 @@ const CartButton = ({ product, text = "" }) => {
   );
 };
 
-export default CartButton;
+export default AddToCartButton;

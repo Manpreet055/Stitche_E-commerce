@@ -28,8 +28,6 @@ const SalesCard = () => {
             See Collections <ArrowRight className="hidden md:block" />
           </NavLink>
         </motion.div>
-
-        <div></div>
       </div>
     </div>
   );

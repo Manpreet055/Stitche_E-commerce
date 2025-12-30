@@ -1,46 +1,18 @@
 import React from "react";
-import MainFooter from "./layout/footer/MainFooter";
-import MainNavbar from "./layout/header/MainNavbar";
+import Footer from "./layout/footer/Footer";
+import Navbar from "./layout/header/Navbar";
 import { Outlet } from "react-router-dom";
-import { useLocation } from "react-router-dom";
 import ContextProvider from "./context/ContextProvider";
 const App = () => {
-  const location = useLocation();
   return (
     <ContextProvider>
-      <div>
-        <header
-          className={
-            location.pathname.includes("login") ||
-            location.pathname.includes("signup")
-              ? "hidden"
-              : ""
-          }
-        >
-          <MainNavbar></MainNavbar>
-        </header>
+      <>
+        <Navbar />
         <main>
           <Outlet />
         </main>
-        <hr
-          className={`text-gray-400 sm:my-10 mx-2 sm:mx-10 ${
-            location.pathname.includes("login") ||
-            location.pathname.includes("signup")
-              ? "hidden"
-              : ""
-          }`}
-        />
-        <footer
-          className={
-            location.pathname.includes("login") ||
-            location.pathname.includes("signup")
-              ? "hidden"
-              : ""
-          }
-        >
-          <MainFooter></MainFooter>
-        </footer>
-      </div>
+        <Footer />
+      </>
     </ContextProvider>
   );
 };

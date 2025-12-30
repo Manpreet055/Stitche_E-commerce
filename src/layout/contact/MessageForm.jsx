@@ -4,10 +4,17 @@ import ContactDetails from "./ContactDetails";
 import { useUser } from "../../context/UserDataProvider";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { motion } from "framer-motion";
-const ContactForm = () => {
+import { Check, SendHorizonal } from "lucide-react";
+
+const MessageForm = () => {
   const api = useAxiosPrivate();
   const { user } = useUser();
-  const { handleSubmit, reset, register } = useForm({
+  const {
+    handleSubmit,
+    reset,
+    register,
+    formState: { isSubmitSuccessful },
+  } = useForm({
     defaultValues: {
       name: "",
       email: "",
@@ -18,12 +25,8 @@ const ContactForm = () => {
   const handleForm = async (data) => {
     data.user = user._id;
     try {
-      const response = await api.post("/inbox", data);
-      const responseData = response.data?.newMessage;
-      if (response.status === 200) {
-        reset();
-      }
-      console.log(responseData);
+      await api.post("/inbox", data);
+      reset();
     } catch (error) {
       console.log(error.message);
     }
@@ -87,8 +90,21 @@ const ContactForm = () => {
           placeholder="Message"
           id="msg"
         />
-        <button className="rounded-md w-full py-3 hover:opacity-90 px-4 ease-in-out transition-all duration-300 theme-alt text-theme-alt">
-          Send Message
+        <button
+          disabled={isSubmitSuccessful}
+          className="rounded-md w-full disabled:bg-gray-400 py-3 flex justify-center hover:opacity-90 px-4 ease-in-out transition-all duration-300 theme-alt text-theme-alt"
+        >
+          {isSubmitSuccessful ? (
+            <span className="flex place-items-center gap-2 text-center">
+              Message sent
+              <Check size={18} />
+            </span>
+          ) : (
+            <span className="flex place-items-center gap-2 text-center">
+              Send Message
+              <SendHorizonal size={18} />
+            </span>
+          )}
         </button>
       </form>
       <ContactDetails />
@@ -96,4 +112,4 @@ const ContactForm = () => {
   );
 };
 
-export default ContactForm;
+export default MessageForm;

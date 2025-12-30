@@ -14,7 +14,7 @@ const SearchBar = ({ isDrawer = false }) => {
   const [error, setError] = useState("");
   const { register, handleSubmit, watch } = useForm();
 
-  let watchSearchBar = watch("search");
+  const watchSearchBar = watch("search");
 
   // Creating Debounce Variable function
   const debounceFn = React.useMemo(

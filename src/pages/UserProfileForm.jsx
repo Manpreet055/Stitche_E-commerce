@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
-import { TextInput, Label } from "flowbite-react";
 import { useUser } from "../context/UserDataProvider";
 import { useNavigate } from "react-router-dom";
 import BackButton from "../ui/BackButton";

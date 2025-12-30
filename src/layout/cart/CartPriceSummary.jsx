@@ -1,12 +1,12 @@
 import React from "react";
 import { ShieldCheck } from "lucide-react";
 import { NavLink } from "react-router-dom";
-const OrderSummary = ({ priceDetails }) => {
+const CartPriceSummary = ({ priceDetails }) => {
   const { priceAfterDiscount, deliveryFee, sumofProductsPrice, subTotal } =
     priceDetails;
 
   return (
-    <div className="flex text-theme flex-col border w-full min-w-sm lg:max-w-lg justify-around border-gray-300 rounded  p-4">
+    <div className="flex grow text-theme flex-col border w-full min-w-sm xl:max-w-lg justify-around border-gray-300 rounded  p-4">
       <div>
         <h2 className="text-lg sm:text-xl font-medium">Order Summary</h2>{" "}
         <div className="flex justify-between items-center mt-4">
@@ -46,4 +46,4 @@ const OrderSummary = ({ priceDetails }) => {
   );
 };
 
-export default OrderSummary;
+export default CartPriceSummary;

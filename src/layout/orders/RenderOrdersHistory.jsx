@@ -5,7 +5,7 @@ import { ArrowRight } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { container, item } from "../../Animations/ListStagger";
 import { motion } from "framer-motion";
-const RenderOrders = ({ allOrders }) => {
+const RenderOrdersHistory = ({ allOrders }) => {
   const orders = allOrders?.orders;
   const statusColor = {
     cancelled: "bg-red-100 text-red-800",
@@ -64,4 +64,4 @@ const RenderOrders = ({ allOrders }) => {
   );
 };
 
-export default RenderOrders;
+export default RenderOrdersHistory;

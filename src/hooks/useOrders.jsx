@@ -3,7 +3,7 @@ import { useUser } from "../context/UserDataProvider";
 import useAxiosPrivate from "./useAxiosPrivate";
 import orderDataGenerator from "../utils/orderDataGenerator";
 const useOrders = () => {
-  const { cart, user } = useUser();
+  const { cart, user, setCart } = useUser();
   const api = useAxiosPrivate();
   const [allOrders, setAllOrders] = useState([]);
   const { orderData } = orderDataGenerator(cart, user); //random order data
@@ -14,13 +14,13 @@ const useOrders = () => {
   const [toast, setToast] = useState("");
   const [error, setError] = useState("");
 
-  // API call in this function
   const placeOrder = async () => {
     try {
       setLoadingState(true);
       const response = await api.post("/orders", orderData);
       if (response.status === 200) {
         setToast("Order Placed !!");
+        setCart([]);
         setTimeout(() => {
           setIsOrderPlaced(true);
         }, 500);
@@ -32,7 +32,7 @@ const useOrders = () => {
     }
   };
 
-  //Pagination stuff
+  //Pagination states
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
 

@@ -1,5 +1,3 @@
-import handleApiError from "./handleApiError";
-import axios from "axios";
 import api from "../utils/api";
 export const fetchProducts = async (
   query,
@@ -25,7 +23,6 @@ export const fetchProducts = async (
     setProducts(data.products);
     setTotalPages(data.totalPages);
   } catch (error) {
-    handleApiError(error);
     setError(error.message);
     throw error;
   } finally {
@@ -44,32 +41,9 @@ export const fetchProductById = async (
     let data = response.data.data;
     return data;
   } catch (error) {
-    handleApiError(error);
     setError(error.message);
     throw error;
   } finally {
     setLoadingState(false);
-  }
-};
-
-export const toggleFeatured = async (
-  _id,
-  isFeatured,
-  loadingState,
-  setFeatured,
-) => {
-  try {
-    loadingState(true);
-    const response = await api.patch(`/products`, { _id, isFeatured });
-
-    const data = response.data;
-    const newValue = data?.isFeatured ?? isFeatured;
-    setFeatured(newValue);
-  } catch (error) {
-    setFeatured(!isFeatured);
-    handleApiError(error);
-    throw error;
-  } finally {
-    loadingState(false);
   }
 };

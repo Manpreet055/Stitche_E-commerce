@@ -14,7 +14,7 @@ const Orders = () => {
 
   const { date, randomOrderId } = orderDataGenerator();
   const navigate = useNavigate();
-  let { user, cart, refetchCart } = useUser();
+  let { user, cart } = useUser();
 
   const { priceAfterDiscount, deliveryFee, sumofProductsPrice, subTotal } =
     generatePriceDetails(cart);
@@ -23,9 +23,6 @@ const Orders = () => {
   if (cart.length === 0) return navigate("/cart");
 
   if (isOrderPlaced) {
-    setTimeout(async () => {
-      await refetchCart();
-    }, 2000);
     return (
       <div className="grid place-items-center">
         <div className="w-full max-w-300 text-theme p-4 mt-5   min-h-150 grid place-items-center">
@@ -39,8 +36,10 @@ const Orders = () => {
             {" "}
             <BadgeCheck className="my-4" size={54} />
             {/* Heading */}
-            <h2 className="headers poppins">Thank You for Your Purchase!</h2>
-            <p className="para my-2  max-w-xl text-center">
+            <h2 className="font-medium w-full text-center text-2xl sm:text-4xl poppins">
+              Thank You for Your Purchase!
+            </h2>
+            <p className="text-gray-200 dark:text-gray-400 sm:text-lg my-2  max-w-xl text-center">
               Your order has been successfully placed. A confirmation email has
               been sent to{" "}
               <span className="sm:text-xl font-bold">{user?.email}</span>

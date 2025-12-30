@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import StitcheLoader from "../ui/StithceLoader";
 
 const AsyncBoundary = ({
+  loader = <StitcheLoader />,
   loadingState = false,
   errorMessage,
   errorState,
@@ -17,13 +18,11 @@ const AsyncBoundary = ({
   return (
     <div className="h-screen text-theme w-full flex justify-center items-center ">
       <div className="text-xl">
-        {loadingState ? (
-          <StitcheLoader />
-        ) : error ? (
-          error
-        ) : (
-          (customMessage ?? "Something Went Wrong")
-        )}
+        {loadingState
+          ? loader
+          : error
+            ? error
+            : (customMessage ?? "Something Went Wrong")}
       </div>
     </div>
   );

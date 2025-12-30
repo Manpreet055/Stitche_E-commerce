@@ -29,10 +29,13 @@ export const UserDataProvider = ({ children }) => {
   // fetching cart
   const refetchCart = async () => {
     try {
+      setLoadingState(true);
       const fetchCart = await api.get(`/cart`);
       setCart(fetchCart.data.cart);
     } catch (error) {
       setError(error.message);
+    } finally {
+      setLoadingState(false);
     }
   };
 

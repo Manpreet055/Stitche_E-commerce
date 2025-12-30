@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { updateCartQty } from "../services/handleCart";
 import debounce from "../utils/debounce";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { buttonGroupTheme } from "../utils/customFlowbiteTheme";
@@ -7,7 +6,7 @@ import { ButtonGroup, Button, ThemeProvider } from "flowbite-react";
 import { useUser } from "../context/UserDataProvider";
 const Counter = ({ productId = "", defaultqty = 1 }) => {
   const api = useAxiosPrivate();
-  const { refetchCart, loadingState, cart } = useUser();
+  const { loadingState, cart } = useUser();
 
   const findProductQtyInCart = cart.filter(
     (p) => p?.product?._id === productId,
@@ -30,6 +29,12 @@ const Counter = ({ productId = "", defaultqty = 1 }) => {
     setQuantity((p) => p - 1);
   };
 
+  const updateCartQty = (product, qty) => {
+    api
+      .patch(`/cart/update`, { product, qty })
+      .catch((error) => console.log(error.message));
+  };
+
   // Debounce the quantity update
   const debouncedUpdate = useMemo(
     () => debounce(updateCartQty, 500),
@@ -38,13 +43,15 @@ const Counter = ({ productId = "", defaultqty = 1 }) => {
 
   useEffect(() => {
     if (!hasInteracted.current) return;
-    debouncedUpdate(api, productId, quantity); // Only call on changes after mount
-    refetchCart();
+    debouncedUpdate(productId, quantity); // Only call on changes after mount
   }, [quantity]);
 
   return (
     <ButtonGroup
-      onClick={(event) => event.stopPropagation()}
+      onClick={(event) => {
+        event.preventDefault();
+        event.stopPropagation();
+      }}
       className={`w-fit theme text-theme border-theme ${loadingState ? "cursor-progress" : "cursor-pointer"}`}
     >
       <ThemeProvider theme={buttonGroupTheme}>

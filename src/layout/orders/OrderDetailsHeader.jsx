@@ -5,11 +5,10 @@ import capitalizeFirstLetter from "../../utils/capitalizeLetter";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { useNavigate } from "react-router-dom";
 const OrderDetailsHeader = ({ order }) => {
-  const [loadingState, setLoadingState] = useState(false);
-  const [error, setError] = useState({});
   const navigate = useNavigate();
   const api = useAxiosPrivate();
 
+  // destructuring order data
   const {
     _id,
     shipping: { trackingId, street, city, postalCode, country },
@@ -32,15 +31,12 @@ const OrderDetailsHeader = ({ order }) => {
   const cancelOrder = async () => {
     if (!confirm("Do you really want to cancel the order")) return;
     try {
-      setLoadingState(true);
       const response = await api.patch(`/orders/${_id}`);
       if (response.status === 200) {
         navigate(-1);
       }
     } catch (error) {
       setError(error.message);
-    } finally {
-      setLoadingState(false);
     }
   };
 

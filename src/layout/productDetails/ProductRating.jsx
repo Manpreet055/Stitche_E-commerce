@@ -1,7 +1,7 @@
 import React from "react";
 import { Rating, RatingStar } from "flowbite-react";
 
-const RatingComp = ({ rating }) => {
+const ProductRating = ({ rating }) => {
   let { average, count } = rating;
   const ratings = [];
   for (let i = 1; i <= 5; i++) {
@@ -17,14 +17,11 @@ const RatingComp = ({ rating }) => {
       {...ratings}
       <p className="ml-2 text-sm font-semibold ">{average}</p>
       <span className="mx-1.5 h-1 w-1 rounded-full bg-gray-500 dark:bg-gray-400" />
-      <a
-        href="#"
-        className="hidden sm:block text-sm font-medium underline hover:no-underline"
-      >
+      <span className="hidden sm:block text-sm font-medium underline hover:no-underline">
         {count} reviews
-      </a>
+      </span>
     </Rating>
   );
 };
 
-export default RatingComp;
+export default ProductRating;

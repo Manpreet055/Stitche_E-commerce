@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import RenderOrders from "../layout/orders/RenderOrders";
+import RenderOrdersHistory from "../layout/orders/RenderOrdersHistory";
 import BackButton from "../ui/BackButton";
 import PaginationComp from "../ui/PaginationComp";
 import useOrders from "../hooks/useOrders";
@@ -16,7 +16,7 @@ const OrdersHistory = () => {
           <AsyncBoundary loadingState={loadingState} errorState={null} />
         ) : (
           <>
-            <RenderOrders allOrders={allOrders} />
+            <RenderOrdersHistory allOrders={allOrders} />
             <div className="w-full flex justify-center">
               {totalPages > 0 && (
                 <PaginationComp
