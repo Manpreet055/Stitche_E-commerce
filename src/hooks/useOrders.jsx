@@ -5,7 +5,6 @@ import orderDataGenerator from "../utils/orderDataGenerator";
 const useOrders = () => {
   const { cart, user, setCart } = useUser();
   const api = useAxiosPrivate();
-  const [allOrders, setAllOrders] = useState([]);
   const { orderData } = orderDataGenerator(cart, user); //random order data
 
   // States and toast texts
@@ -27,45 +26,18 @@ const useOrders = () => {
       }
     } catch (error) {
       setToast(error.message);
+      setError(error.message);
     } finally {
       setLoadingState(false);
     }
   };
-
-  //Pagination states
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(0);
-
-  // fetch OrdersHistory
-  const getOrderHistory = async () => {
-    try {
-      setLoadingState(true);
-      const response = await api.get(`/orders?limit=${7}&page=${currentPage}`);
-      const data = response.data;
-      setAllOrders(data?.orders);
-      setTotalPages(data?.totalPages);
-    } catch (error) {
-      setError(error.messages);
-    } finally {
-      setLoadingState(false);
-    }
-  };
-
-  useEffect(() => {
-    getOrderHistory();
-  }, [currentPage]);
 
   return {
-    totalPages,
-    currentPage,
-    setCurrentPage,
     placeOrder,
     loadingState,
     toast,
     isOrderPlaced,
     setIsOrderPlaced,
-    allOrders,
-    getOrderHistory,
     error,
   };
 };

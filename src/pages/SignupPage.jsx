@@ -14,14 +14,13 @@ const SignupPage = () => {
 
   const from = location.state?.from?.pathname || "/";
   const api = useAxiosPrivate();
-  const { refetchUser } = useUser();
+  const { setUser } = useUser();
   const { setAccessToken } = useAuthentication();
 
   const {
     register,
     handleSubmit,
     reset,
-    watch,
     formState: { errors, isSubmitting },
   } = useForm({
     defaultValues: { fullname: "", email: "", password: "", confirm: "" },
@@ -50,12 +49,13 @@ const SignupPage = () => {
       if (response?.status === 201) {
         setToastText("Signup Successful!");
         const token = response.data.token;
+        const user = response.data?.user;
         setAccessToken(token);
+        setUser(user);
 
         // Use a single timeout for UX
         setTimeout(async () => {
           reset();
-          await refetchUser();
           navigate(from, { replace: true });
         }, 1500);
       }

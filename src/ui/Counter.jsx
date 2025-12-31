@@ -6,7 +6,7 @@ import { ButtonGroup, Button, ThemeProvider } from "flowbite-react";
 import { useUser } from "../context/UserDataProvider";
 const Counter = ({ productId = "", defaultqty = 1 }) => {
   const api = useAxiosPrivate();
-  const { loadingState, cart } = useUser();
+  const { loadingState, cart, setCart } = useUser();
 
   const findProductQtyInCart = cart.filter(
     (p) => p?.product?._id === productId,
@@ -32,6 +32,7 @@ const Counter = ({ productId = "", defaultqty = 1 }) => {
   const updateCartQty = (product, qty) => {
     api
       .patch(`/cart/update`, { product, qty })
+      .then((res) => setCart(res.data?.cart))
       .catch((error) => console.log(error.message));
   };
 

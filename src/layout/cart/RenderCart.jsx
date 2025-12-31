@@ -10,7 +10,7 @@ import { motion } from "framer-motion";
 
 const RenderCart = ({ cart, fullheight = false }) => {
   const api = useAxiosPrivate();
-  const { refetchCart } = useUser();
+  const { setCart, setError } = useUser();
 
   // Empty cart states handles
   if (cart.length === 0) {
@@ -27,15 +27,13 @@ const RenderCart = ({ cart, fullheight = false }) => {
     );
   }
 
-  const handleRemove = async (productId) => {
-    try {
-      await api.delete(`/cart`, {
+  const handleRemove = (productId) => {
+    api
+      .delete(`/cart`, {
         params: { productId },
-      });
-      await refetchCart();
-    } catch (error) {
-      console.error("Failed to remove from cart:", error);
-    }
+      })
+      .then((res) => setCart(res.data?.cart))
+      .catch((error) => setError(error.message));
   };
 
   return (
@@ -85,6 +83,7 @@ const RenderCart = ({ cart, fullheight = false }) => {
               </span>
               <button
                 onClick={(event) => {
+                  event.preventDefault();
                   event.stopPropagation();
                   handleRemove(p.product?._id);
                 }}

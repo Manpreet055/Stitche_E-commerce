@@ -2,11 +2,11 @@ import React, { useEffect } from "react";
 import RenderOrdersHistory from "../layout/orders/RenderOrdersHistory";
 import BackButton from "../ui/BackButton";
 import PaginationComp from "../ui/PaginationComp";
-import useOrders from "../hooks/useOrders";
+import useOrderHistory from "../hooks/useOrderHistory";
 import AsyncBoundary from "../ui/AsyncBoundary";
 const OrdersHistory = () => {
   const { currentPage, totalPages, setCurrentPage, loadingState, allOrders } =
-    useOrders();
+    useOrderHistory();
   return (
     <div className="flex my-15 sm:my-23 items-center w-full h-screen text-theme flex-col">
       <div className="flex h-full flex-col w-full p-2 max-w-6xl ">

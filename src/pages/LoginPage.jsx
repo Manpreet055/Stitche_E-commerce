@@ -9,7 +9,7 @@ import { useUser } from "../context/UserDataProvider";
 import { Popover } from "flowbite-react";
 
 const LoginPage = () => {
-  const { refetchUser } = useUser();
+  const { setUser, setCart } = useUser();
   const api = useAxiosPrivate();
   const { setAccessToken } = useAuthentication();
 
@@ -44,13 +44,17 @@ const LoginPage = () => {
 
       if (response?.status === 200) {
         setToastText("Login Successful!");
-        const token = response.data.token;
+        const token = response.data?.token;
+        const user = response.data?.user;
+        const cart = response.data?.user?.cart;
+
         setAccessToken(token);
+        setUser(user); //setting user after login
+        setCart(cart); //setting cart after login
 
         // Use a single timeout for UX
         setTimeout(async () => {
           reset();
-          await refetchUser();
           navigate(from, { replace: true });
         }, 1000);
       }

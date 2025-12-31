@@ -19,45 +19,35 @@ const AvatarDropDown = ({ img }) => {
       inline
     >
       <DropdownHeader>
-        <button>
-          <NavLink className="flex gap-3 items-center" to="profile">
-            <User2 />
-            <span className="block text-sm">{user?.username}</span>
-          </NavLink>
-        </button>
+        <NavLink className="flex gap-3 items-center" to="profile">
+          <User2 />
+          <span className="block text-sm">{user?.username}</span>
+        </NavLink>
       </DropdownHeader>
 
       <DropdownItem>
-        <button>
-          <NavLink to="cart" className="flex gap-3 items-center">
-            <ShoppingCart />
-            Cart
-          </NavLink>
-        </button>
+        <NavLink to="cart" className="flex gap-3 items-center">
+          <ShoppingCart />
+          Cart
+        </NavLink>
       </DropdownItem>
 
-      <DropdownItem>
-        <button className="flex gap-3 items-center">
-          <Settings2 />
-          Settings
-        </button>
+      <DropdownItem className="flex gap-3 items-center">
+        <Settings2 />
+        Settings
       </DropdownItem>
       <DropdownItem>
-        <button>
-          <NavLink to="orders/history" className="flex gap-3 items-center">
-            {" "}
-            <History />
-            Orders History
-          </NavLink>
-        </button>
+        <NavLink to="orders/history" className="flex gap-3 items-center">
+          {" "}
+          <History />
+          Orders History
+        </NavLink>
       </DropdownItem>
 
       <DropdownDivider />
-      <DropdownItem>
-        <button className="flex gap-3 items-center" onClick={logOutUser}>
-          {" "}
-          <LogOut /> Log out
-        </button>
+      <DropdownItem className="flex gap-3 items-center" onClick={logOutUser}>
+        {" "}
+        <LogOut /> Log out
       </DropdownItem>
     </Dropdown>
   );

@@ -57,6 +57,7 @@ export const UserDataProvider = ({ children }) => {
       value={{
         user,
         setUser,
+        setCart,
         cart,
         loadingState,
         error,

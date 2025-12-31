@@ -6,15 +6,13 @@ import { useNavigate } from "react-router-dom";
 const AddToCartButton = ({ product, text = "" }) => {
   const navigate = useNavigate();
   const api = useAxiosPrivate();
-  const { refetchCart, user } = useUser();
+  const { setCart, setError, user } = useUser();
 
-  const handleAddToCart = async () => {
-    try {
-      await api.patch("/cart", { product, qty: 1 });
-      await refetchCart();
-    } catch (error) {
-      console.error("Failed to add to cart:", error);
-    }
+  const handleAddToCart = () => {
+    api
+      .patch("/cart", { product, qty: 1 })
+      .then((res) => setCart(res.data?.cart))
+      .catch((error) => setError(error.message));
   };
   return (
     <button

@@ -75,24 +75,24 @@ const UserProfileForm = () => {
       formData.append("avatar", data?.avatar[0]);
     }
 
-    // // API Call
-    // try {
-    //   const updateProfile = await api.patch("/users/update-profile", formData);
-    //   setToastText(updateProfile.data?.msg);
-    //   setUser(updateProfile.data?.user);
-    //   setTimeout(async () => {
-    //     navigate(-1);
-    //   }, 1500);
-    // } catch (error) {
-    //   const serverMessage = error.response?.data?.message;
-    //   if (error.response?.status === 409) {
-    //     setToastText("Email or username already exists");
-    //   } else if (error.response?.status === 500) {
-    //     setToastText("Server error. Please try again later.");
-    //   } else {
-    //     setToastText(serverMessage || "An unexpected error occurred");
-    //   }
-    // }
+    // API Call
+    try {
+      const updateProfile = await api.patch("/users/update-profile", formData);
+      setToastText(updateProfile.data?.msg);
+      setUser(updateProfile.data?.user);
+      setTimeout(() => {
+        navigate(-1);
+      }, 1500);
+    } catch (error) {
+      const serverMessage = error.response?.data?.message;
+      if (error.response?.status === 409) {
+        setToastText("Email or username already exists");
+      } else if (error.response?.status === 500) {
+        setToastText("Server error. Please try again later.");
+      } else {
+        setToastText(serverMessage || "An unexpected error occurred");
+      }
+    }
   };
 
   return (

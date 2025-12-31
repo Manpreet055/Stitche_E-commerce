@@ -7,17 +7,17 @@ import useAxiosPrivate from "../hooks/useAxiosPrivate";
 const BuyButton = ({ product, theme = "" }) => {
   const api = useAxiosPrivate();
   const navigate = useNavigate();
-  const { refetchCart, setError, user } = useUser();
+  const { setCart, setError, user } = useUser();
 
   // add product to cart and navigate to orders page
   const handleAddToCart = async () => {
-    try {
-      await api.patch("/cart", { product, qty: 1 });
-      await refetchCart();
-      navigate("/orders");
-    } catch (error) {
-      setError(error.message);
-    }
+    api
+      .patch("/cart", { product, qty: 1 })
+      .then((res) => {
+        setCart(res.data?.cart); // setCart
+        navigate("/orders"); // after that navigate to orders page
+      })
+      .catch((error) => setError(error.message));
   };
   return (
     <Button

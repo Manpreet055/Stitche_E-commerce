@@ -3,8 +3,9 @@ import { Instagram, Twitter, Github, Mail } from "lucide-react";
 import api from "../../utils/api";
 import { useUser } from "../../context/UserDataProvider";
 const Newsletter = () => {
-  const { user, refetchUser } = useUser();
+  const { user, setUser } = useUser();
   const [email, setEmail] = useState("");
+
   const subscribe = async () => {
     try {
       const response = await api.patch(
@@ -32,7 +33,10 @@ const Newsletter = () => {
                 if (!email && !email.includes("@")) return;
 
                 subscribe();
-                refetchUser();
+                setUser((prev) => ({
+                  ...prev,
+                  isSubscribed: !prev.isSubscribed,
+                }));
               }}
               className="flex mt-1 sm:h-15 sm:py-2 w-fit  "
             >
@@ -72,7 +76,10 @@ const Newsletter = () => {
                 className="text-xs  sm:text-sm h-fit p-2 rounded-lg font-semibold  text-red-500"
                 onClick={() => {
                   subscribe();
-                  refetchUser();
+                  setUser((prev) => ({
+                    ...prev,
+                    isSubscribed: !prev.isSubscribed,
+                  }));
                 }}
               >
                 Unsubscribe
