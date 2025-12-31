@@ -24,7 +24,6 @@ const SearchBar = ({ isDrawer = false }) => {
           setLoadingState(true);
           if (query?.length > 2) {
             const results = await searchProducts(query);
-            console.log(results);
             setSearches(results);
           }
         } catch (error) {

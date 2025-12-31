@@ -28,6 +28,7 @@ const CategoryCards = () => {
           className="grid h-full min-w-40 gap-3  pb-2 text-black bg-white rounded-2xl place-items-center"
         >
           <img
+            loading="lazy"
             src={mensWear}
             className="w-40 max-h-33 h-33  lg:w-50 lg:max-h-45 lg:h-45  xl:w-60 xl:max-h-55 xl:h-55  object-cover object-center rounded-t-2xl"
             alt="mens-wear"
@@ -40,6 +41,7 @@ const CategoryCards = () => {
           className="grid h-full min-w-40 gap-3  pb-2 text-black bg-white rounded-2xl place-items-center"
         >
           <img
+            loading="lazy"
             src={womensWear}
             className="w-40 max-h-33 h-33  lg:w-50 lg:max-h-45 lg:h-45  xl:w-60 xl:max-h-55 xl:h-55 object-cover object-center rounded-t-2xl"
             alt="mens-wear"
@@ -51,6 +53,7 @@ const CategoryCards = () => {
           className="grid h-full min-w-40 gap-3  pb-2 text-black bg-white rounded-2xl place-items-center"
         >
           <img
+            loading="lazy"
             src={kidsWear}
             onClick={() => navigate(`/search?q=kids-wear`)}
             className="w-40 max-h-33 h-33  lg:w-50 lg:max-h-45 lg:h-45  xl:w-60 xl:max-h-55 xl:h-55 object-cover object-center rounded-t-2xl"
@@ -64,6 +67,7 @@ const CategoryCards = () => {
           className="grid h-full min-w-40 gap-3  pb-2 text-black bg-white rounded-2xl place-items-center"
         >
           <img
+            loading="lazy"
             src={footWear}
             className="w-40 max-h-33 h-33  lg:w-50 lg:max-h-45 lg:h-45  xl:w-60 xl:max-h-55 xl:h-55 object-cover object-center rounded-t-2xl"
             alt="mens-wear"
@@ -76,6 +80,7 @@ const CategoryCards = () => {
           className="grid h-full min-w-40 gap-3  pb-2 text-black bg-white rounded-2xl place-items-center"
         >
           <img
+            loading="lazy"
             src={accessories}
             className="w-40 max-h-33 h-33  lg:w-50 lg:max-h-45 lg:h-45  xl:w-60 xl:max-h-55 xl:h-55 object-cover object-center rounded-t-2xl"
             alt="mens-wear"

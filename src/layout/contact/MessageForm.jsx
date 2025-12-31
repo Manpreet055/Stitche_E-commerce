@@ -8,7 +8,7 @@ import { Check, SendHorizonal } from "lucide-react";
 
 const MessageForm = () => {
   const api = useAxiosPrivate();
-  const { user } = useUser();
+  const { user, setError } = useUser();
   const {
     handleSubmit,
     reset,
@@ -28,7 +28,7 @@ const MessageForm = () => {
       await api.post("/inbox", data);
       reset();
     } catch (error) {
-      console.log(error.message);
+      setError(error.message);
     }
   };
   return (

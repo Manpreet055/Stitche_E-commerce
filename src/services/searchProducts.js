@@ -13,7 +13,6 @@ const searchProducts = async (
       `/products/search?query=${query}&limit=${limit}`,
     );
     const data = response.data.products;
-    console.log(data);
     return data;
   } catch (error) {
     setError(error);

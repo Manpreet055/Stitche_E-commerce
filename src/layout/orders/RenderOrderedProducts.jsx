@@ -29,6 +29,7 @@ const RenderOrderedProducts = ({ products }) => {
                 className="grid grid-cols-[70px_1fr_70px_60px_70px] sm:grid-cols-5 place-items-center"
               >
                 <img
+                  loading="lazy"
                   src={p?.product?.media?.thumbnail}
                   className="h-15 sm:h-20"
                   alt=""

@@ -61,6 +61,7 @@ const RenderCart = ({ cart, fullheight = false }) => {
               className="grid grid-cols-[60px_100px_1fr_60px_70px] sm:grid-cols-5 place-items-center border-t border-gray-300 py-4 w-full"
             >
               <img
+                loading="lazy"
                 src={
                   p.product?.media?.thumbnail ? (
                     p.product?.media?.thumbnail

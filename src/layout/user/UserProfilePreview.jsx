@@ -16,6 +16,7 @@ const UserProfilePreview = ({ preview }) => {
         {preview ? (
           <img
             src={preview}
+            loading="lazy"
             alt="Avatar"
             className="w-full h-full object-cover"
           />

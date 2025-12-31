@@ -29,7 +29,11 @@ const CarauselComp = ({ images = [], loadingState = () => {} }) => {
           >
             {images.map((img, index) => (
               <div key={index} className="relative flex justify-center h-full ">
-                <img src={img} className=" h-full w-full object-cover" />
+                <img
+                  src={img}
+                  loading="lazy"
+                  className=" h-full w-full object-cover"
+                />
               </div>
             ))}
           </Carousel>

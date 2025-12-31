@@ -3,7 +3,7 @@ import { Instagram, Twitter, Github, Mail } from "lucide-react";
 import api from "../../utils/api";
 import { useUser } from "../../context/UserDataProvider";
 const Newsletter = () => {
-  const { user, setUser } = useUser();
+  const { user, setUser, setError } = useUser();
   const [email, setEmail] = useState("");
 
   const subscribe = async () => {
@@ -13,7 +13,7 @@ const Newsletter = () => {
       );
       setEmail("");
     } catch (error) {
-      console.log(error.message);
+      setError(error.message);
     }
   };
 
