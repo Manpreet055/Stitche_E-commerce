@@ -3,17 +3,28 @@ import { Instagram, Twitter, Github, Mail } from "lucide-react";
 import api from "../../utils/api";
 import { useUser } from "../../context/UserDataProvider";
 const Newsletter = () => {
-  const { user, setUser, setError } = useUser();
+  const { user, setUser } = useUser();
   const [email, setEmail] = useState("");
-
+  const [loadingState, setLoadingState] = useState(false);
+  const [error, setError] = useState("");
   const subscribe = async () => {
     try {
+      setLoadingState(true);
       const response = await api.patch(
         `/users/subscirbe?email=${email || user?.email}`,
       );
       setEmail("");
+      if (error) {
+        setError("");
+      }
+      setUser((prev) => ({ ...prev, isSubscribed: response?.data?.state }));
     } catch (error) {
       setError(error.message);
+    } finally {
+      setTimeout(() => {
+        setError("");
+        setLoadingState(false);
+      }, 5000);
     }
   };
 
@@ -33,10 +44,6 @@ const Newsletter = () => {
                 if (!email && !email.includes("@")) return;
 
                 subscribe();
-                setUser((prev) => ({
-                  ...prev,
-                  isSubscribed: !prev.isSubscribed,
-                }));
               }}
               className="flex mt-1 sm:h-15 sm:py-2 w-fit  "
             >
@@ -47,12 +54,16 @@ const Newsletter = () => {
                 className="border text-xs sm:text-sm px-3  md:max-w-sm  border-r-0 border-gray-500 rounded-l-lg"
               />
               <button
+                disabled={loadingState}
                 type="submit"
                 className="text-xs sm:text-sm flex justify-center border border-gray-500 items-center p-2 sm:p-3 rounded-r-lg"
               >
                 Subscribe
               </button>
             </form>
+            {error && (
+              <span className="text-red-500 text-xs px-2">{error}</span>
+            )}
           </>
         ) : (
           <div className="max-w-sm mx-auto sm:mt-10 theme text-theme  overflow-hidden">
@@ -73,18 +84,18 @@ const Newsletter = () => {
               </div>
 
               <button
+                disabled={loadingState}
                 className="text-xs  sm:text-sm h-fit p-2 rounded-lg font-semibold  text-red-500"
                 onClick={() => {
                   subscribe();
-                  setUser((prev) => ({
-                    ...prev,
-                    isSubscribed: !prev.isSubscribed,
-                  }));
                 }}
               >
                 Unsubscribe
               </button>
             </div>
+            {error && (
+              <span className="text-red-500 text-xs px-2">{error}</span>
+            )}
           </div>
         )}
       </div>
