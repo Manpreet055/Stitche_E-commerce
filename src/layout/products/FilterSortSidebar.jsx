@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { PRODUCTS_SORTING_OPTIONS } from "../../utils/sort_filter_options";
 import { Checkbox, Label } from "flowbite-react";
 import { useForm } from "react-hook-form";
