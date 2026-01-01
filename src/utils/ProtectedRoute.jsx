@@ -4,9 +4,14 @@ import { useUser } from "../context/UserDataProvider";
 
 const ProtectedRoute = ({ children }) => {
   const { user, loadingState } = useUser();
-  if (!user && !loadingState) {
+  if (loadingState) {
+    return null; // or a spinner
+  }
+
+  if (!user) {
     return <Navigate to="/login" replace />;
   }
+
   return children;
 };
 

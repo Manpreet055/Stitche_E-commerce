@@ -9,7 +9,7 @@ export const UserDataProvider = ({ children }) => {
   const { accessToken } = useAuthentication();
   const [user, setUser] = useState(null);
   const [cart, setCart] = useState([]);
-  const [loadingState, setLoadingState] = useState(false);
+  const [loadingState, setLoadingState] = useState(true);
   const [error, setError] = useState({});
 
   // refetch user
@@ -17,32 +17,23 @@ export const UserDataProvider = ({ children }) => {
     try {
       setLoadingState(true);
       const fetchUser = await api.get("/users");
-      const user = fetchUser.data?.user;
-      setUser(user);
+      const data = fetchUser.data;
+      setUser(data?.user);
+      setCart(data?.user?.cart);
     } catch (err) {
-      setError((prev) => ({ ...prev, fetch: err.message }));
+      setError(err.message);
+      setCart([]);
+      setUser(null);
     } finally {
       setLoadingState(false);
     }
   }, [api, accessToken]);
 
-  // fetching cart
-  const refetchCart = async () => {
-    try {
-      setLoadingState(true);
-      const fetchCart = await api.get(`/cart`);
-      setCart(fetchCart.data.cart);
-    } catch (error) {
-      setError(error.message);
-    } finally {
-      setLoadingState(false);
-    }
-  };
-
   const logOutUser = async () => {
     try {
       await api.post(`/users/logout`);
-      window.location.reload();
+      setUser(null);
+      setCart([]);
     } catch (error) {
       setError(error.message);
     }
@@ -50,7 +41,6 @@ export const UserDataProvider = ({ children }) => {
 
   useEffect(() => {
     refetchUser();
-    refetchCart();
   }, [refetchUser]);
   return (
     <UserDataContext.Provider
@@ -63,7 +53,6 @@ export const UserDataProvider = ({ children }) => {
         error,
         setError,
         refetchUser,
-        refetchCart,
         logOutUser,
       }}
     >
