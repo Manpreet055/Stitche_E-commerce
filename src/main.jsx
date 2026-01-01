@@ -12,7 +12,7 @@ const Products = lazy(() => import("./pages/Products.jsx"));
 const SearchPage = lazy(() => import("./pages/SearchPage.jsx"));
 const ContactPage = lazy(() => import("./pages/ContactPage.jsx"));
 const About = lazy(() => import("./pages/About.jsx"));
-const ProductOverview = lazy(() => import("./pages/ProductOverview.jsx"));
+const ProductDetailsPage = lazy(() => import("./pages/ProductDetailsPage.jsx"));
 const Cart = lazy(() => import("./pages/Cart.jsx"));
 const LoginPage = lazy(() => import("./pages/LoginPage.jsx"));
 const SignupPage = lazy(() => import("./pages/SignupPage.jsx"));
@@ -67,7 +67,7 @@ const routes = createBrowserRouter([
         path: "product/:id",
         element: (
           <Suspense>
-            <ProductOverview />
+            <ProductDetailsPage />
           </Suspense>
         ),
       },

@@ -26,7 +26,7 @@ const Products = () => {
   };
 
   return (
-    <div className=" sm:p-5 relative theme text-theme mt-10 sm:mt-20 lg:flex">
+    <section className=" sm:p-5 relative theme text-theme mt-10 sm:mt-20 lg:flex">
       <motion.div
         initial={{ translateX: -100, opacity: 0 }}
         animate={{ translateX: 0, opacity: 1 }}
@@ -40,7 +40,7 @@ const Products = () => {
         <ProductPageHeader query={query} setQuery={setQuery} />
         <RenderProducts data={data} />
       </div>
-    </div>
+    </section>
   );
 };
 

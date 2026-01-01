@@ -8,7 +8,7 @@ const OrdersHistory = () => {
   const { currentPage, totalPages, setCurrentPage, loadingState, allOrders } =
     useOrderHistory();
   return (
-    <div className="flex my-15 sm:my-23 items-center w-full h-screen text-theme flex-col">
+    <section className="flex my-15 sm:my-23 items-center w-full h-screen text-theme flex-col">
       <div className="flex h-full flex-col w-full p-2 max-w-6xl ">
         <BackButton text="Back" />
         <h2 className="text-4xl font-bold my-3">Order History</h2>
@@ -29,7 +29,7 @@ const OrdersHistory = () => {
           </>
         )}
       </div>
-    </div>
+    </section>
   );
 };
 

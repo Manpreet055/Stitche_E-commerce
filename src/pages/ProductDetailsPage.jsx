@@ -7,7 +7,7 @@ import CarauselComp from "../layout/productDetails/CarauselComp";
 import ProductBasicDetails from "../layout/productDetails/ProductBasicDetails";
 import SimilarProducts from "../layout/productDetails/SimilarProducts";
 import CustomerReview from "../layout/productDetails/CustomerReview";
-const ProductOverview = () => {
+const ProductDetailsPage = () => {
   const [product, setProduct] = useState({});
   const [loadingState, setLoadingState] = useState(false);
   const [error, setError] = useState(null);
@@ -35,7 +35,7 @@ const ProductOverview = () => {
     return <AsyncBoundary customMessage="No Product found." />;
   }
   return (
-    <div className="h-full w-full my-13 sm:my-20">
+    <section className="h-full w-full my-13 sm:my-20">
       <div className="w-full px-2 sm:px-4 py-2">
         <BackButton text="Back" />
       </div>
@@ -45,8 +45,8 @@ const ProductOverview = () => {
       </div>
       <SimilarProducts category={category} />
       <CustomerReview />
-    </div>
+    </section>
   );
 };
 
-export default ProductOverview;
+export default ProductDetailsPage;

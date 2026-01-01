@@ -96,7 +96,7 @@ const UserProfileForm = () => {
   };
 
   return (
-    <div className="w-full flex justify-center">
+    <section className="w-full flex justify-center">
       <div className=" mt-20 w-full text-theme sm:p-4 max-w-5xl">
         <BackButton text="Back" />
         <h2 className="poppins my-5 text-2xl font-semibold sm:text-3xl text-start">
@@ -138,7 +138,7 @@ const UserProfileForm = () => {
           </form>
         </FormProvider>
       </div>
-    </div>
+    </section>
   );
 };
 

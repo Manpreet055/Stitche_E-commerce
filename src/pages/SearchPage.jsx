@@ -31,7 +31,7 @@ const SearchPage = () => {
     return <AsyncBoundary customMessage="No Products found." />;
   }
   return (
-    <div className="sm:p-5 relative flex-col theme text-theme my-12 sm:my-20 lg:flex">
+    <section className="sm:p-5 relative flex-col theme text-theme my-12 sm:my-20 lg:flex">
       <div className="flex items-center py-4">
         <span className="w-fit ">
           <BackButton text="Back" />
@@ -52,7 +52,7 @@ const SearchPage = () => {
           </motion.li>
         ))}
       </motion.ul>
-    </div>
+    </section>
   );
 };
 

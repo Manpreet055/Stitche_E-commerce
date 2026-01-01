@@ -6,13 +6,11 @@ import ContextProvider from "./context/ContextProvider";
 const App = () => {
   return (
     <ContextProvider>
-      <>
-        <Navbar />
-        <main>
-          <Outlet />
-        </main>
-        <Footer />
-      </>
+      <Navbar />
+      <main>
+        <Outlet />
+      </main>
+      <Footer />
     </ContextProvider>
   );
 };

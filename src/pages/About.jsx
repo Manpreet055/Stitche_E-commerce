@@ -6,7 +6,7 @@ import { Avatar, Blockquote } from "flowbite-react";
 import { motion } from "framer-motion";
 const About = () => {
   return (
-    <div className="p-6 w-full   mt-10 text-theme flex flex-col  ">
+    <section className="p-6 w-full   mt-10 text-theme flex flex-col  ">
       {/* Image and story */}
       <div className="flex flex-wrap gap-x-20 justify-evenly mb-10 h-fit">
         <div className="flex flex-col w-fit">
@@ -119,7 +119,7 @@ const About = () => {
           </motion.div>
         </div>
       </motion.div>
-    </div>
+    </section>
   );
 };
 

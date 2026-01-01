@@ -72,7 +72,7 @@ const SignupPage = () => {
   };
 
   return (
-    <div className="w-full theme text-theme relative min-h-screen flex justify-center items-center p-4">
+    <section className="w-full theme text-theme relative min-h-screen flex justify-center items-center p-4">
       <div className="absolute top-10 left-2 sm:left-10">
         <BackButton text="Go Back" navPath="/" />
       </div>
@@ -160,7 +160,7 @@ const SignupPage = () => {
           </button>
         </form>
       </div>
-    </div>
+    </section>
   );
 };
 

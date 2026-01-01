@@ -11,11 +11,7 @@ const Footer = () => {
         (pathname === "/login" || pathname === "/signup") && "hidden"
       }`}
     >
-      <hr
-        className={`text-gray-400 sm:my-10 mx-2 sm:mx-10 ${
-          (pathname === "/login" || pathname === "/signup") && "hidden"
-        }`}
-      />
+      <hr className="text-gray-400 sm:my-10 mx-2 sm:mx-10" />
       <div className="flex  justify-evenly w-full flex-wrap   ">
         <div className="mt-3 sm:mt-6 flex flex-col gap-2 items-center">
           <h1 className="text-xl sm:text-3xl  font-bold">

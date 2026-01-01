@@ -11,7 +11,7 @@ import CategoryCards from "../layout/home/CategoryCards";
 const Homepage = () => {
   const { products } = useProducts(5);
   return (
-    <div className="w-full theme text-theme p-3 sm:p-10">
+    <section className="w-full theme text-theme p-3 sm:p-10">
       <HeroContent />
       <CategoryCards />
       <SalesCard />
@@ -34,7 +34,7 @@ const Homepage = () => {
           <ProductCard product={product} key={index} />
         ))}
       </div>
-    </div>
+    </section>
   );
 };
 

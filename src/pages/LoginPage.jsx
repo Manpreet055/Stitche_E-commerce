@@ -77,7 +77,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="w-full theme text-theme relative h-screen flex justify-center items-center">
+    <section className="w-full theme text-theme relative h-screen flex justify-center items-center">
       <div className="absolute top-10 left-2 sm:left-10">
         <BackButton text="Go Back" navPath="/" />
       </div>
@@ -158,7 +158,7 @@ const LoginPage = () => {
           </h3>
         </form>
       </div>
-    </div>
+    </section>
   );
 };
 
