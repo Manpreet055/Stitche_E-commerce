@@ -3,7 +3,13 @@ import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { useUser } from "../../context/UserDataProvider";
 import { ShoppingCart } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-const AddToCartButton = ({ product, text = "" }) => {
+import { Spinner } from "flowbite-react";
+
+const AddToCartButton = ({
+  product,
+  text = "",
+  theme = "rounded h-fit w-fit flex gap-2 items-center p-2.5 border-theme",
+}) => {
   const navigate = useNavigate();
   const api = useAxiosPrivate();
   const [loadingState, setLoadingState] = useState(false);
@@ -36,9 +42,9 @@ const AddToCartButton = ({ product, text = "" }) => {
         if (!user) return navigate("/login");
         handleAddToCart();
       }}
-      className={`rounded h-fit w-fit flex gap-2 items-center p-2.5 border-theme
-    ${loadingState ? "opacity-50 cursor-not-allowed" : ""}`}
+      className={`${theme} ${loadingState ? "cursor-progress" : "cursor-pointer"}`}
     >
+      {loadingState && <Spinner className="h-4 w-fit" color="gray" />}
       <ShoppingCart size={20} />
       <span className="text-sm xl:text-base">{text}</span>
     </button>

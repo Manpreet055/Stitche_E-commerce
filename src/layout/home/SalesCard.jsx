@@ -7,7 +7,7 @@ const SalesCard = () => {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 1.2 }}
       className="flex will-change-transform text-white justify-center"
     >
       <div className="flex max-w-410 sales-card justify-between my-5 sm:my-10 w-full rounded-3xl ">

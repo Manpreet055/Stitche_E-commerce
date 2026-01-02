@@ -36,9 +36,16 @@ const ProductCard = ({ product }) => {
           </div>
           <ProductRating rating={rating} />
           <div className="md:flex hidden  h-fit w-full mt-2 items-center justify-between md:gap-3">
-            <BuyButton product={_id} theme="theme-alt text-theme-alt" />
+            <BuyButton product={_id} />
             <AddToCartButton product={_id} />{" "}
           </div>
+          <span className="md:hidden block">
+            <AddToCartButton
+              theme="w-full theme-alt text-theme-alt flex items-center justify-center py-2 rounded mt-3 gap-2"
+              text="Add to Cart"
+              product={_id}
+            />
+          </span>{" "}
         </div>
       </motion.div>
     </NavLink>
