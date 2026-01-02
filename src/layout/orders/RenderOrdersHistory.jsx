@@ -24,7 +24,7 @@ const RenderOrdersHistory = ({ allOrders }) => {
     >
       {/* Header */}
       <li className="w-full py-4 theme-transparent grid grid-cols-4 place-items-center">
-        <span className=" ">OrdersId</span>
+        <span className=" ">Order Id</span>
         <span className=" ">Date</span>
         <span className=" ">Status</span>
         <span className="">Total</span>

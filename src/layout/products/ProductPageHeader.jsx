@@ -3,6 +3,7 @@ import SearchBar from "../header/SearchBar";
 import { ArrowLeft, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import FiltersSidebar from "./FiltersSidebar";
+import BackButton from "../../ui/BackButton";
 
 const ProductPageHeader = ({ setQuery, query }) => {
   const navigate = useNavigate();
@@ -24,20 +25,15 @@ const ProductPageHeader = ({ setQuery, query }) => {
   return (
     <>
       <div className="flex flex-wrap mt-5 sm:mt-0 gap-4 my-2 items-center">
-        <button
-          onClick={() => navigate(-1)}
-          className={`text-theme w-fit flex items-center gap-2 sm:btn-primary  group scale-transition`}
-        >
-          <span className="duration-200 ease-in-out">
-            <ArrowLeft />
-          </span>
-          Back
-        </button>
+        <div className="ml-3">
+          {" "}
+          <BackButton text="Back" />
+        </div>
         <FiltersSidebar query={query} setQuery={setQuery} />
         {/* Clear Filters Button */}
         {(isSorted || Object.keys(query?.filters).length !== 0) && (
           <button
-            className="btn-primary text-nowrap hidden rounded-lg theme-alt text-theme-alt mt-1 text-xs lg:flex items-center gap-1 border-theme"
+            className="theme-alt text-theme-alt py-2 px-3 rounded-2xl text-xs sm:text-base shadow-2xl mt-1 flex items-center gap-3"
             onClick={clearFilters}
           >
             <X size={15} /> Clear Filters

@@ -6,8 +6,8 @@ import { ArrowRight } from "lucide-react";
 const HeroContent = () => {
   return (
     <motion.div
-      initial={{ opacity: 0, x: -100 }}
-      animate={{ opacity: 1, x: 1 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
       className={`hero w-full will-change-transform mt-15 sm:mt-20 sm:py-15 md:min-h-[40vw] flex flex-col gap-3 justify-around md:px-10 p-3`}
     >
