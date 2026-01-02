@@ -6,7 +6,7 @@ import ToastComp from "../ui/ToastComp";
 import { useAuthentication } from "../context/AuthProdvider";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { useUser } from "../context/UserDataProvider";
-import { Popover } from "flowbite-react";
+import { Popover, Spinner } from "flowbite-react";
 
 const LoginPage = () => {
   const { setUser, setCart } = useUser();
@@ -78,22 +78,28 @@ const LoginPage = () => {
 
   return (
     <section className="w-full theme text-theme relative h-screen flex justify-center items-center">
-      <div className="absolute top-10 left-2 sm:left-10">
-        <BackButton text="Go Back" navPath="/" />
+      <div className="absolute top-7 sm:top-20 left-5 sm:left-20">
+        <BackButton text="Back" navPath="/" />
       </div>
       {toastText && <ToastComp text={toastText} position="top-10" />}
-      <div className="w-full max-w-lg h-fit px-6 py-10 sm:border border-gray-400 rounded-2xl">
-        <h2 className="text-center text-3xl font-semibold">Login</h2>
-        <h4 className="text-gray-500 text-center mt-4 mb-2">
-          Enter your email and password to login
+      <div className="w-full flex flex-col justify-center items-center max-w-lg px-6 sm:py-10 rounded-2xl">
+        <h1 className="text-4xl text-center sm:text-5xl mb-3 sm:mb-10 text-nowrap font-extrabold">
+          Stitche
+        </h1>
+        <h1 className="text-3xl text-center sm:text-4xl text-nowrap font-semibold poppins">
+          Welcome Back !
+        </h1>
+        <h4 className="text-gray-500 text-center mt-1 sm:mt-4 mb-4">
+          Enter your email and password
         </h4>
+
         <form
           onSubmit={handleSubmit(handleForm)}
-          className="p-4 flex flex-col h-full "
+          className=" flex w-full md:w-120  flex-col h-full "
         >
           {/* Email */}
-          <div className="flex flex-col">
-            <label className="font-medium px-2 mb-1">Email</label>
+          <div className="flex flex-col  ">
+            <label className="font-medium opacity-60 px-2 mb-1">Email</label>
             <input
               {...register("email", {
                 required: "Email is required",
@@ -101,7 +107,7 @@ const LoginPage = () => {
               })}
               type="email"
               placeholder="Enter your email"
-              className={`border px-3 py-3 rounded-xl shadow-sm ${errors.email ? "border-red-500" : "border-gray-400"}`}
+              className="border-theme px-3 py-3 rounded shadow-lg"
             />
             {errors.email && (
               <span className="text-red-500 text-xs mt-1 px-2">
@@ -112,7 +118,7 @@ const LoginPage = () => {
 
           {/* Password */}
           <div className="flex flex-col">
-            <label className="font-medium px-2 mb-1 mt-5 sm:mt-7">
+            <label className="font-medium opacity-60 px-2 mb-1 mt-5 sm:mt-7">
               Password
             </label>
             <input
@@ -122,7 +128,7 @@ const LoginPage = () => {
               })}
               type="password"
               placeholder="Enter Password"
-              className="border border-gray-400 px-3 py-3 rounded-xl shadow-sm"
+              className="border-theme px-3 py-3 rounded shadow-lg"
             />
           </div>
 
@@ -136,7 +142,7 @@ const LoginPage = () => {
           >
             <button
               type="button"
-              className="underline text-nowrap w-fit mt-3 hover-transition"
+              className="underline text-sm sm:text-base w-full text-end text-nowrap mt-3 hover-transition"
             >
               Forget Password ?
             </button>
@@ -144,15 +150,22 @@ const LoginPage = () => {
 
           <button
             disabled={isSubmitting}
-            className={`mt-10 mb-3 py-3 rounded-xl font-bold text-white transition-all ${isSubmitting ? "bg-gray-400" : "theme-alt text-theme-alt"}`}
+            className={`mt-10 mb-3 py-3 rounded font-bold text-white transition-all ${isSubmitting ? "bg-gray-400" : "theme-alt text-theme-alt"}`}
             type="submit"
           >
-            {isSubmitting ? "Logging In..." : "Login"}
+            {isSubmitting ? (
+              <span className="flex items-center justify-center gap-3">
+                <Spinner className="h-4 w-fit" color="gray" />
+                Logging in...
+              </span>
+            ) : (
+              "Login"
+            )}
           </button>
 
-          <h3 className="text-gray-500 text-center">
+          <h3 className="text-gray-400 text-center">
             Don't have an account?{" "}
-            <NavLink to="/signup" className="font-medium underline">
+            <NavLink to="/signup" className="font-medium text-theme underline">
               Sign Up
             </NavLink>
           </h3>

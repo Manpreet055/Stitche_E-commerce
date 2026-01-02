@@ -6,6 +6,7 @@ import { useUser } from "../context/UserDataProvider";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import BackButton from "../ui/BackButton";
 import ToastComp from "../ui/ToastComp";
+import { Spinner } from "flowbite-react";
 
 const SignupPage = () => {
   const navigate = useNavigate();
@@ -73,22 +74,31 @@ const SignupPage = () => {
 
   return (
     <section className="w-full theme text-theme relative min-h-screen flex justify-center items-center p-4">
-      <div className="absolute top-10 left-2 sm:left-10">
-        <BackButton text="Go Back" navPath="/" />
+      <div className="absolute top-7 sm:top-20 left-5 sm:left-20">
+        <BackButton text="Back" navPath="/" />
       </div>
 
       {toastText && <ToastComp text={toastText} position="top-10" />}
 
-      <div className="w-full max-w-lg h-fit px-6 py-10 sm:border border-gray-400 rounded-2xl bg-opacity-50">
-        <h2 className="text-center text-3xl font-semibold mb-6">Sign Up</h2>
-
+      <div className="w-full max-w-lg h-fit px-2 sm:px-6 py-10 sm:border-theme rounded-2xl bg-opacity-50">
+        <h1 className="text-4xl text-center sm:text-5xl mb-3 sm:mb-10 text-nowrap font-extrabold">
+          Stitche
+        </h1>
+        <h1 className="text-3xl text-center sm:text-4xl text-nowrap font-semibold">
+          Welcome to Stitche!{" "}
+        </h1>
+        <h4 className="text-gray-500 sm:text-base text-sm text-center mt-1 sm:mt-4 mb-4">
+          we're so glad you're part of the fabric now{" "}
+        </h4>
         <form
           onSubmit={handleSubmit(handleSignupForm)}
-          className="flex flex-col gap-4"
+          className="flex flex-col gap-3 sm:gap-7"
         >
           {/* Full Name */}
           <div className="flex flex-col">
-            <label className="font-medium px-2 mb-1">Full Name</label>
+            <label className="font-medium opacity-40 px-2 mb-1">
+              Full Name
+            </label>
             <input
               {...register("fullname", {
                 required: "Full name is required",
@@ -96,7 +106,7 @@ const SignupPage = () => {
               })}
               type="text"
               placeholder="Enter your name"
-              className={`border px-3 py-3 rounded-xl shadow-sm ${errors.fullname ? "border-red-500" : "border-gray-400"}`}
+              className={`border-theme px-3 py-3 rounded shadow-sm ${errors.fullname ? "border-red-500" : "border-gray-400"}`}
             />
             {errors.fullname && (
               <span className="text-red-500 text-xs mt-1 px-2">
@@ -107,7 +117,7 @@ const SignupPage = () => {
 
           {/* Email */}
           <div className="flex flex-col">
-            <label className="font-medium px-2 mb-1">Email</label>
+            <label className="font-medium opacity-40 px-2 mb-1">Email</label>
             <input
               {...register("email", {
                 required: "Email is required",
@@ -115,7 +125,7 @@ const SignupPage = () => {
               })}
               type="email"
               placeholder="Enter your email"
-              className={`border px-3 py-3 rounded-xl shadow-sm ${errors.email ? "border-red-500" : "border-gray-400"}`}
+              className={`border-theme px-3 py-3 rounded shadow-sm ${errors.email ? "border-red-500" : "border-gray-400"}`}
             />
             {errors.email && (
               <span className="text-red-500 text-xs mt-1 px-2">
@@ -126,7 +136,7 @@ const SignupPage = () => {
 
           {/* Password */}
           <div className="flex flex-col">
-            <label className="font-medium px-2 mb-1">Password</label>
+            <label className="font-medium opacity-40 px-2 mb-1">Password</label>
             <input
               {...register("password", {
                 required: "Password is required",
@@ -134,29 +144,38 @@ const SignupPage = () => {
               })}
               type="password"
               placeholder="Enter Password"
-              className="border border-gray-400 px-3 py-3 rounded-xl shadow-sm"
+              className="border-theme px-3 py-3 rounded shadow-sm"
             />
           </div>
 
           {/* Confirm Password */}
           <div className="flex flex-col">
-            <label className="font-medium px-2 mb-1">Confirm Password</label>
+            <label className="font-medium opacity-40 px-2 mb-1">
+              Confirm Password
+            </label>
             <input
               {...register("confirm", {
                 required: "Please confirm your password",
               })}
               type="password"
               placeholder="Confirm Password"
-              className="border border-gray-400 px-3 py-3 rounded-xl shadow-sm"
+              className="border-theme px-3 py-3 rounded shadow-sm"
             />
           </div>
 
           <button
             disabled={isSubmitting}
-            className={`mt-4 py-3 rounded-xl font-bold text-white transition-all ${isSubmitting ? "bg-gray-400" : "theme-alt text-theme-alt"}`}
+            className={`mt-4 py-3 rounded font-bold text-white transition-all ${isSubmitting ? "bg-gray-400" : "theme-alt text-theme-alt"}`}
             type="submit"
           >
-            {isSubmitting ? "Creating Account..." : "Create Account"}
+            {isSubmitting ? (
+              <span className="flex items-center justify-center gap-3">
+                <Spinner className="h-4 w-fit" color="gray" />
+                Creating Account...
+              </span>
+            ) : (
+              "Create Account"
+            )}
           </button>
         </form>
       </div>
