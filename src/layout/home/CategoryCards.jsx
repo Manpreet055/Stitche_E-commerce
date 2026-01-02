@@ -16,16 +16,13 @@ const CategoryCards = () => {
         Categories
       </span>
 
-      <motion.div
-        initial="hidden"
-        animate="show"
-        variants={container}
-        className="flex gap-3 justify-evenly hide-scrollbar max-w-screen overflow-x-auto"
-      >
+      <div className="flex gap-3 justify-evenly hide-scrollbar max-w-screen overflow-x-auto">
         <motion.div
-          variants={item}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
           onClick={() => navigate(`/search?q=mens-wear`)}
-          className="grid h-full min-w-40 gap-3  pb-2 text-black bg-white rounded-2xl place-items-center"
+          className="grid will-change-transform h-full min-w-40 gap-3  pb-2 text-black bg-white rounded-2xl place-items-center"
         >
           <img
             loading="lazy"
@@ -36,9 +33,11 @@ const CategoryCards = () => {
           <span className="text-sm sm:text-base">Men's Wear</span>
         </motion.div>
         <motion.div
-          variants={item}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
           onClick={() => navigate(`/search?q=womens-wear`)}
-          className="grid h-full min-w-40 gap-3  pb-2 text-black bg-white rounded-2xl place-items-center"
+          className="grid will-change-transform h-full min-w-40 gap-3  pb-2 text-black bg-white rounded-2xl place-items-center"
         >
           <img
             loading="lazy"
@@ -49,8 +48,10 @@ const CategoryCards = () => {
           <span className="text-sm sm:text-base">Women's Wear</span>
         </motion.div>
         <motion.div
-          variants={item}
-          className="grid h-full min-w-40 gap-3  pb-2 text-black bg-white rounded-2xl place-items-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+          className="grid will-change-transform h-full min-w-40 gap-3  pb-2 text-black bg-white rounded-2xl place-items-center"
         >
           <img
             loading="lazy"
@@ -62,9 +63,11 @@ const CategoryCards = () => {
           <span className="text-sm sm:text-base">Kid's Wear</span>
         </motion.div>
         <motion.div
-          variants={item}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
           onClick={() => navigate(`/search?q=footwear`)}
-          className="grid h-full min-w-40 gap-3  pb-2 text-black bg-white rounded-2xl place-items-center"
+          className="grid will-change-transform h-full min-w-40 gap-3  pb-2 text-black bg-white rounded-2xl place-items-center"
         >
           <img
             loading="lazy"
@@ -75,9 +78,11 @@ const CategoryCards = () => {
           <span className="text-sm sm:text-base">Footwear</span>
         </motion.div>
         <motion.div
-          variants={item}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
           onClick={() => navigate(`/search?q=accessories`)}
-          className="grid h-full min-w-40 gap-3  pb-2 text-black bg-white rounded-2xl place-items-center"
+          className="grid will-change-transform h-full min-w-40 gap-3  pb-2 text-black bg-white rounded-2xl place-items-center"
         >
           <img
             loading="lazy"
@@ -87,7 +92,7 @@ const CategoryCards = () => {
           />
           <span className="text-sm sm:text-base">Accessories</span>
         </motion.div>
-      </motion.div>
+      </div>
     </div>
   );
 };

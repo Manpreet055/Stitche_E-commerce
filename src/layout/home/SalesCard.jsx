@@ -4,14 +4,14 @@ import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 const SalesCard = () => {
   return (
-    <div className="flex text-white justify-center">
+    <motion.div
+      initial={{ opacity: 0, x: -100 }}
+      animate={{ opacity: 1, x: 1 }}
+      transition={{ duration: 0.5 }}
+      className="flex will-change-transform text-white justify-center"
+    >
       <div className="flex max-w-410 sales-card justify-between my-5 sm:my-10 w-full rounded-3xl ">
-        <motion.div
-          initial={{ translateX: -100, opacity: 0 }}
-          animate={{ translateX: 0, opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          className=" w-full lg:w-fit  flex flex-col gap-2 sm:gap-4    p-4 sm:p-6"
-        >
+        <div className=" w-full lg:w-fit   flex flex-col gap-2 sm:gap-4    p-4 sm:p-6">
           <h2 className="sm:text-2xl font-semibold">Seasonal Private Sale</h2>
           <h2 className="text-2xl sm:text-5xl font-bold">Archive Up to 50%</h2>
           <h4 className="text-lg sm:text-4xl font-medium">on Selected Items</h4>
@@ -27,9 +27,9 @@ const SalesCard = () => {
           >
             See Collections <ArrowRight className="hidden md:block" />
           </NavLink>
-        </motion.div>
+        </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
