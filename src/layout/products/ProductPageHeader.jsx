@@ -33,7 +33,7 @@ const ProductPageHeader = ({ setQuery, query }) => {
         {/* Clear Filters Button */}
         {(isSorted || Object.keys(query?.filters).length !== 0) && (
           <button
-            className="theme-alt text-theme-alt py-2 px-3 rounded-2xl text-xs sm:text-base shadow-2xl mt-1 flex items-center gap-3"
+            className="theme-alt text-theme-alt py-2 px-3 rounded-2xl text-xs sm:text-base shadow-2xl mt-1 flex items-center sm:gap-1"
             onClick={clearFilters}
           >
             <X size={15} /> Clear Filters

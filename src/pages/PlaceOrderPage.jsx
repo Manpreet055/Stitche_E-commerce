@@ -1,16 +1,18 @@
 import React from "react";
-import { useUser } from "../../context/UserDataProvider";
-import RenderCart from "../cart/RenderCart";
-import convertDate from "../../utils/convertDate";
-import { MapPin, IdCard, CreditCard, BadgeCheck } from "lucide-react";
-import capitalizeLetter from "../../utils/capitalizeLetter";
+import { useUser } from "../context/UserDataProvider";
+import RenderCart from "../layout/cart/RenderCart";
+import convertDate from "../utils/convertDate";
+import { MapPin, CreditCard, BadgeCheck } from "lucide-react";
+import capitalizeLetter from "../utils/capitalizeLetter";
 import { Navigate, NavLink, useNavigate } from "react-router-dom";
-import BackButton from "../../ui/BackButton";
-import useOrders from "../../hooks/useOrders";
-import generatePriceDetails from "../../utils/generatePriceDetails";
-import orderDataGenerator from "../../utils/orderDataGenerator";
-const Orders = () => {
-  const { placeOrder, isOrderPlaced, setIsOrderPlaced } = useOrders();
+import BackButton from "../ui/BackButton";
+import useOrders from "../hooks/useOrders";
+import generatePriceDetails from "../utils/generatePriceDetails";
+import orderDataGenerator from "../utils/orderDataGenerator";
+import { Spinner } from "flowbite-react";
+const PlaceOrderPage = () => {
+  const { placeOrder, isOrderPlaced, setIsOrderPlaced, loadingState } =
+    useOrders();
 
   const { date, randomOrderId } = orderDataGenerator();
   const navigate = useNavigate();
@@ -126,11 +128,18 @@ const Orders = () => {
           onClick={placeOrder}
           className="w-full btn-primary my-4  sm:text-lg poppins  text-center text-theme-alt theme-alt"
         >
-          Place Order
+          {loadingState ? (
+            <span className="flex items-center justify-center gap-3">
+              <Spinner className="h-4 w-fit" color="gray" />
+              Placing Order
+            </span>
+          ) : (
+            "Place Order"
+          )}{" "}
         </button>
       </div>
     </div>
   );
 };
 
-export default Orders;
+export default PlaceOrderPage;

@@ -55,12 +55,12 @@ body {
   scrollbar-width: none;
 }
 .btn-primary {
-  @apply rounded-md p-2 text-nowrap  sm:p-4 ease-in-out transition-all duration-300;
+  @apply rounded-md p-2 text-nowrap  sm:p-3 ease-in-out transition-all duration-300;
 }
 
 .hero {
   background:
-    linear-gradient(rgba(0, 0, 0, 0.3)), url("./assets/images/heroImage.webp");
+    linear-gradient(rgba(0, 0, 0, 0.5)), url("./assets/images/heroImage.webp");
   background-position: center;
   background-size: cover;
   border-radius: 25px;

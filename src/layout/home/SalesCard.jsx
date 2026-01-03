@@ -22,10 +22,13 @@ const SalesCard = () => {
             </span>
           </p>
           <NavLink
-            to="/products"
-            className="btn-primary text-sm sm:text-lg items-center w-fit text-black bg-white flex mt-1 gap-2"
+            to="products"
+            className="flex items-center gap-1 hover:scale-[1.01]  group text-theme-alt theme-alt text-sm sm:text-base p-2 px-3 sm:p-3 rounded-lg w-fit hover:bg-white/20"
           >
-            See Collections <ArrowRight className="hidden md:block" />
+            See Collections{" "}
+            <span className="group-hover:translate-x-2 ease-in-out transition-all duration-300">
+              <ArrowRight size={18} />
+            </span>
           </NavLink>
         </div>
       </div>

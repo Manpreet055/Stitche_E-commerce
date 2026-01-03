@@ -4,7 +4,8 @@ import ContactDetails from "./ContactDetails";
 import { useUser } from "../../context/UserDataProvider";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { motion } from "framer-motion";
-import { Check, CircleAlert, SendHorizonal } from "lucide-react";
+import { CircleAlert, SendHorizonal } from "lucide-react";
+import { Spinner } from "flowbite-react";
 
 const MessageForm = () => {
   const api = useAxiosPrivate();
@@ -113,7 +114,7 @@ const MessageForm = () => {
         <textarea
           {...register("message", {
             required: "Please type a Message",
-            minLength: 8,
+            minLength: 10,
             maxLength: 150,
           })}
           name="message"
@@ -132,8 +133,8 @@ const MessageForm = () => {
         >
           {loadingState ? (
             <span className="flex items-center gap-2 text-center">
-              Message sent
-              <Check size={18} />
+              <Spinner className="h-4 w-fit" color="gray" />
+              Sending Message...
             </span>
           ) : error ? (
             <span className="flex text-red-500 items-center gap-2 text-center">

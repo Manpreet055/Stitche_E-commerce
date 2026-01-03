@@ -16,7 +16,7 @@ const ProductDetailsPage = lazy(() => import("./pages/ProductDetailsPage.jsx"));
 const Cart = lazy(() => import("./pages/Cart.jsx"));
 const LoginPage = lazy(() => import("./pages/LoginPage.jsx"));
 const SignupPage = lazy(() => import("./pages/SignupPage.jsx"));
-const Orders = lazy(() => import("./layout/orders/Orders.jsx"));
+const PlaceOrderPage = lazy(() => import("./pages/PlaceOrderPage.jsx"));
 const UserProfileForm = lazy(() => import("./pages/UserProfileForm.jsx"));
 const OrdersHistory = lazy(() => import("./pages/OrdersHistory.jsx"));
 const OrderDetails = lazy(() => import("./pages/OrderDetails.jsx"));
@@ -107,7 +107,7 @@ const routes = createBrowserRouter([
         path: "orders",
         element: (
           <Suspense>
-            <Orders />
+            <PlaceOrderPage />
           </Suspense>
         ),
       },
