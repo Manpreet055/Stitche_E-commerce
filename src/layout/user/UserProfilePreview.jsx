@@ -21,7 +21,7 @@ const UserProfilePreview = ({ preview }) => {
             className="w-full h-full object-cover"
           />
         ) : (
-          <User2 className="h-20 w-20 text-gray-400" strokeWidth={1} />
+          <User2 className="h-full w-full text-gray-400" strokeWidth={1} />
         )}
       </div>
 

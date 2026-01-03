@@ -12,6 +12,7 @@ const LoginPage = () => {
   const { setUser, setCart } = useUser();
   const api = useAxiosPrivate();
   const { setAccessToken } = useAuthentication();
+  const [loadingState, setLoadingState] = useState(false);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -40,6 +41,7 @@ const LoginPage = () => {
 
   const handleForm = async (data) => {
     try {
+      setLoadingState(true);
       const response = await api.post(`/users/login`, data);
 
       if (response?.status === 200) {
@@ -73,6 +75,8 @@ const LoginPage = () => {
           serverMessage || "Connection failed. Please check your internet.",
         );
       }
+    } finally {
+      setLoadingState(false);
     }
   };
 
@@ -95,10 +99,10 @@ const LoginPage = () => {
 
         <form
           onSubmit={handleSubmit(handleForm)}
-          className=" flex w-full md:w-120  flex-col h-full "
+          className=" flex w-full md:w-120 px-3  flex-col h-full "
         >
           {/* Email */}
-          <div className="flex flex-col  ">
+          <div className="flex flex-col mb-3  ">
             <label className="font-medium opacity-60 px-2 mb-1">Email</label>
             <input
               {...register("email", {
@@ -149,11 +153,11 @@ const LoginPage = () => {
           </Popover>
 
           <button
-            disabled={isSubmitting}
-            className={`mt-10 mb-3 py-3 rounded font-bold text-white transition-all ${isSubmitting ? "bg-gray-400" : "theme-alt text-theme-alt"}`}
+            disabled={loadingState}
+            className={`mt-10 mb-3 py-3 rounded font-bold text-white transition-all theme-alt text-theme-alt`}
             type="submit"
           >
-            {isSubmitting ? (
+            {loadingState ? (
               <span className="flex items-center justify-center gap-3">
                 <Spinner className="h-4 w-fit" color="gray" />
                 Logging in...

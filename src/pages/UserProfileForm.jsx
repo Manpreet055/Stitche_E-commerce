@@ -8,9 +8,12 @@ import ToastComp from "../ui/ToastComp";
 import UserProfilePreview from "../layout/user/UserProfilePreview";
 import UserContactDetails from "../layout/user/UserContactDetails";
 import UserAddressDetails from "../layout/user/UserAddressDetails";
+import { Spinner } from "flowbite-react";
 const UserProfileForm = () => {
   const api = useAxiosPrivate();
   const { user, setUser } = useUser();
+  const [loadingState, setLoadingState] = useState(false);
+
   const navigate = useNavigate();
   if (!user) {
     return navigate("/login");
@@ -77,6 +80,7 @@ const UserProfileForm = () => {
 
     // API Call
     try {
+      setLoadingState(true);
       const updateProfile = await api.patch("/users/update-profile", formData);
       setToastText(updateProfile.data?.msg);
       setUser(updateProfile.data?.user);
@@ -92,6 +96,8 @@ const UserProfileForm = () => {
       } else {
         setToastText(serverMessage || "An unexpected error occurred");
       }
+    } finally {
+      setLoadingState(false);
     }
   };
 
@@ -126,13 +132,18 @@ const UserProfileForm = () => {
                 Cancel
               </button>
               <button
-                disabled={methods.formState.isSubmitting}
+                disabled={loadingState}
                 type="submit"
-                className={`w-full  ${methods.formState.isSubmitting ? "dark:bg-gray-400 bg-gray-200" : "theme-alt"}  text-theme-alt p-4 rounded`}
+                className={`w-full  ${loadingState ? "dark:bg-gray-400 bg-gray-200" : "theme-alt"}  text-theme-alt p-4 rounded`}
               >
-                {methods.formState.isSubmitting
-                  ? "Saving changes..."
-                  : "Save Changes"}
+                {loadingState ? (
+                  <span className="flex items-center justify-center gap-3">
+                    <Spinner className="h-4 w-fit" color="gray" />
+                    Updating Profile...
+                  </span>
+                ) : (
+                  "Update Profile"
+                )}
               </button>
             </div>
           </form>

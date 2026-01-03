@@ -12,6 +12,7 @@ const SignupPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [toastText, setToastText] = useState("");
+  const [loadingState, setLoadingState] = useState(false);
 
   const from = location.state?.from?.pathname || "/";
   const api = useAxiosPrivate();
@@ -22,7 +23,7 @@ const SignupPage = () => {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm({
     defaultValues: { fullname: "", email: "", password: "", confirm: "" },
   });
@@ -39,14 +40,13 @@ const SignupPage = () => {
     if (data.password !== data.confirm) {
       return setToastText("Passwords did not match");
     }
+    // Create a copy to avoid mutating the form state directly
+    const requestData = { ...data };
+    delete requestData.confirm;
 
     try {
-      // Create a copy to avoid mutating the form state directly
-      const requestData = { ...data };
-      delete requestData.confirm;
-
+      setLoadingState(true);
       const response = await api.post("/users/signup", requestData);
-
       if (response?.status === 201) {
         setToastText("Signup Successful!");
         const token = response.data.token;
@@ -69,6 +69,8 @@ const SignupPage = () => {
       } else {
         setToastText(serverMessage || "An unexpected error occurred");
       }
+    } finally {
+      setLoadingState(false);
     }
   };
 
@@ -92,10 +94,10 @@ const SignupPage = () => {
         </h4>
         <form
           onSubmit={handleSubmit(handleSignupForm)}
-          className="flex flex-col gap-3 sm:gap-7"
+          className="flex flex-col gap-3 px-2 sm:gap-7"
         >
           {/* Full Name */}
-          <div className="flex flex-col">
+          <div className="flex flex-col mb-2">
             <label className="font-medium opacity-40 px-2 mb-1">
               Full Name
             </label>
@@ -116,7 +118,7 @@ const SignupPage = () => {
           </div>
 
           {/* Email */}
-          <div className="flex flex-col">
+          <div className="flex flex-col mb-2">
             <label className="font-medium opacity-40 px-2 mb-1">Email</label>
             <input
               {...register("email", {
@@ -135,7 +137,7 @@ const SignupPage = () => {
           </div>
 
           {/* Password */}
-          <div className="flex flex-col">
+          <div className="flex flex-col mb-2">
             <label className="font-medium opacity-40 px-2 mb-1">Password</label>
             <input
               {...register("password", {
@@ -149,7 +151,7 @@ const SignupPage = () => {
           </div>
 
           {/* Confirm Password */}
-          <div className="flex flex-col">
+          <div className="flex flex-col mb-2">
             <label className="font-medium opacity-40 px-2 mb-1">
               Confirm Password
             </label>
@@ -164,11 +166,11 @@ const SignupPage = () => {
           </div>
 
           <button
-            disabled={isSubmitting}
-            className={`mt-4 py-3 rounded font-bold text-white transition-all ${isSubmitting ? "bg-gray-400" : "theme-alt text-theme-alt"}`}
+            disabled={loadingState}
+            className={`mt-4 py-3 rounded font-bold text-white transition-all theme-alt text-theme-alt`}
             type="submit"
           >
-            {isSubmitting ? (
+            {loadingState ? (
               <span className="flex items-center justify-center gap-3">
                 <Spinner className="h-4 w-fit" color="gray" />
                 Creating Account...
