@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Instagram, Twitter, Github, Mail } from "lucide-react";
 import api from "../../utils/api";
 import { useUser } from "../../context/UserDataProvider";
+import { Spinner } from "flowbite-react";
 const Newsletter = () => {
   const { user, setUser } = useUser();
   const [email, setEmail] = useState("");
@@ -10,30 +11,35 @@ const Newsletter = () => {
   const subscribe = async () => {
     try {
       setLoadingState(true);
-      const response = await api.patch(
-        `/users/subscirbe?email=${email || user?.email}`,
-      );
+
+      const targetEmail = email || user?.email;
+      const response = await api.patch(`/users/subscribe?email=${targetEmail}`);
       setEmail("");
       if (error) {
         setError("");
       }
-      setUser((prev) => ({ ...prev, isSubscribed: response?.data?.state }));
+      const newState = response?.data?.state;
+      console.log(newState);
+      setUser((prev) => ({
+        ...prev,
+        isSubscribed: newState,
+      }));
+      setEmail("");
     } catch (error) {
       setError(error.message);
     } finally {
-      setTimeout(() => {
-        setError("");
-        setLoadingState(false);
-      }, 5000);
+      setLoadingState(false);
+      if (error) {
+        setTimeout(() => {
+          setError("");
+        }, 5000);
+      }
     }
   };
-
   return (
     <div className="w-fit  flex gap-4 flex-wrap xl:flex-col justify-center items-center">
       <div>
-        {!user ? (
-          ""
-        ) : !user?.isSubscribed ? (
+        {!user?.isSubscribed ? (
           <>
             <h4 className="text-sm sm:text-base font-semibold">
               Subscribe To Our Newsletter{" "}
@@ -41,11 +47,9 @@ const Newsletter = () => {
             <form
               onSubmit={(event) => {
                 event.preventDefault();
-                if (!email && !email.includes("@")) return;
-
                 subscribe();
               }}
-              className="flex mt-1 sm:h-15 sm:py-2 w-fit  "
+              className="flex mt-2 h-10 sm:h-15 sm:py-2 w-fit  "
             >
               <input
                 type="email"
@@ -58,7 +62,11 @@ const Newsletter = () => {
                 type="submit"
                 className="text-xs sm:text-sm flex justify-center border border-gray-500 items-center p-2 sm:p-3 rounded-r-lg"
               >
-                Subscribe
+                {loadingState ? (
+                  <Spinner className="h-4 w-fit" color="gray" />
+                ) : (
+                  "Subscribe"
+                )}
               </button>
             </form>
             {error && (
@@ -90,7 +98,11 @@ const Newsletter = () => {
                   subscribe();
                 }}
               >
-                Unsubscribe
+                {loadingState ? (
+                  <Spinner className="h-4 w-fit" color="gray" />
+                ) : (
+                  "Unsubscribe"
+                )}
               </button>
             </div>
             {error && (
