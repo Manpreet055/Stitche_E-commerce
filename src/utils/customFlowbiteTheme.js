@@ -28,54 +28,6 @@ export const customPaginationTheme = createTheme({
   },
 });
 
-export const customNavbarTheme = createTheme({
-  root: {
-    base: "bg-white px-2 py-2.5 sm:px-4 dark:border-gray-700 dark:bg-gray-800",
-    rounded: {
-      on: "rounded",
-      off: "",
-    },
-    bordered: {
-      on: "border",
-      off: "",
-    },
-    inner: {
-      base: "mx-auto text-white flex flex-wrap items-center justify-between",
-      fluid: {
-        on: "",
-        off: "container",
-      },
-    },
-  },
-  brand: {
-    base: "flex items-center",
-  },
-  collapse: {
-    base: "w-full md:block md:w-auto",
-    list: "mt-4 flex flex-col md:mt-0 md:flex-row md:space-x-8 md:text-sm md:font-medium",
-    hidden: {
-      on: "hidden",
-      off: "",
-    },
-  },
-  link: {
-    base: "block py-2 pl-3 pr-4 md:p-0",
-    active: {
-      on: "bg-primary-700 text-white md:bg-transparent md:text-primary-700 dark:text-white",
-      off: "border-b border-gray-100 text-gray-700 hover:bg-gray-50 md:border-0 md:hover:bg-transparent md:hover:text-primary-700 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent md:dark:hover:text-white",
-    },
-    disabled: {
-      on: "text-gray-400 hover:cursor-not-allowed dark:text-gray-600",
-      off: "",
-    },
-  },
-  toggle: {
-    base: "inline-flex items-center rounded-lg p-2 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 md:hidden dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600",
-    icon: "h-6 w-6 shrink-0",
-    title: "sr-only",
-  },
-});
-
 export const buttonGroupTheme = createTheme({
   button: {
     color: {
@@ -88,32 +40,35 @@ export const buttonGroupTheme = createTheme({
   },
 });
 
-export const customDropdownTheme = createTheme({
-  arrowIcon: "ml-2 h-4 w-4",
-  content: "py-1 focus:outline-none",
-  primary: "bg-white",
-  floating: {
-    style: {
-      light: "bg-white text-black",
-      dark: "bg-[#121212] text-white",
-      auto: "bg-white text-black dark:bg-[#121212] dark:text-white",
-    },
-    base: "flex w-full cursor-pointer items-center justify-start px-4 py-2 text-sm text-black hover:bg-gray-100 focus:bg-gray-100 focus:outline-none dark:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700",
-    content: "py-1 text-sm text-gray-700 dark:text-gray-200",
-    divider: "my-1 h-px bg-gray-100 dark:bg-gray-600",
-    header: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-200",
-    hidden: "invisible opacity-0",
-    item: {
-      container: "",
-      base: "flex w-full cursor-pointer items-center justify-start px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:bg-gray-600 dark:focus:text-white",
-      icon: "mr-2 h-4 w-4",
-    },
-    style: {
-      dark: "bg-gray-900 text-white dark:bg-gray-700",
-      light: "border border-gray-200 bg-white text-gray-900",
-      auto: "border border-gray-200 bg-white text-gray-900 dark:border-none dark:bg-gray-700 dark:text-white",
-    },
-    target: "w-fit",
+export const caraouselTheme = createTheme({
+  root: {
+    base: "relative h-full w-full",
+    leftControl:
+      "absolute left-0 top-0 flex h-full items-center justify-center px-4 focus:outline-none",
+    rightControl:
+      "absolute right-0 top-0 flex h-full items-center justify-center px-4 focus:outline-none",
   },
-  inlineWrapper: "flex items-center",
+  indicators: {
+    active: {
+      off: "bg-white/50 hover:bg-white dark:bg-gray-800/50 dark:hover:bg-gray-800",
+      on: "bg-white dark:bg-gray-800",
+    },
+    base: "sm:h-3 sm:w-3 h-2.5 w-2.5   rounded-full",
+    wrapper: "absolute bottom-5 left-1/2 flex -translate-x-1/2 space-x-3",
+  },
+  item: {
+    base: "absolute left-1/2 top-1/2 block w-full -translate-x-1/2 -translate-y-1/2",
+    wrapper: {
+      off: "w-full shrink-0 transform cursor-default snap-center",
+      on: "w-full shrink-0 transform cursor-grab snap-center",
+    },
+  },
+  control: {
+    base: "inline-flex h-8 w-8 items-center justify-center rounded-full bg-white/30 group-hover:bg-white/50 group-focus:outline-none group-focus:ring-4 group-focus:ring-white sm:h-10 sm:w-10 dark:bg-gray-800/30 dark:group-hover:bg-gray-800/60 dark:group-focus:ring-gray-800/70",
+    icon: "h-5 w-5 text-white sm:h-6 sm:w-6 dark:text-gray-800",
+  },
+  scrollContainer: {
+    base: "flex h-full snap-mandatory overflow-y-hidden overflow-x-scroll scroll-smooth rounded-lg",
+    snap: "snap-x",
+  },
 });

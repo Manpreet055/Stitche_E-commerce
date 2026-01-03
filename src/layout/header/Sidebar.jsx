@@ -1,17 +1,12 @@
-import {
-  Avatar,
-  Button,
-  Drawer,
-  DrawerHeader,
-  DrawerItems,
-} from "flowbite-react";
+import { Avatar, Drawer, DrawerItems } from "flowbite-react";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Home, Menu, Power } from "lucide-react";
 import SearchBar from "./SearchBar";
 import { useUser } from "../../context/UserDataProvider";
+import ProfileSkeletonLoader from "../../ui/ProfileSkeletonLoader";
 const Sidebar = () => {
-  const { user, cart, logOutUser } = useUser();
+  const { user, loadingState, cart, logOutUser } = useUser();
   const [isOpen, setIsOpen] = useState(false);
   const cartItemsCount = cart?.length || 0;
 
@@ -30,12 +25,9 @@ const Sidebar = () => {
         onClose={handleClose}
       >
         <DrawerItems>
-          {user ? (
-            <NavLink to="profile" className="w-full flex items-center  gap-5">
-              <Avatar rounded img={user?.profile?.avatar} />{" "}
-              <span className="text-lg font-bold">{user?.username}</span>
-            </NavLink>
-          ) : (
+          {loadingState ? (
+            <ProfileSkeletonLoader />
+          ) : !user ? (
             <NavLink
               to="login"
               className={() =>
@@ -44,97 +36,112 @@ const Sidebar = () => {
             >
               LogIn{" "}
             </NavLink>
+          ) : (
+            <NavLink to="profile" className="w-full flex items-center  gap-5">
+              <Avatar rounded img={user?.profile?.avatar} />{" "}
+              <span className="text-lg font-bold">{user?.username}</span>
+            </NavLink>
           )}
         </DrawerItems>{" "}
         <DrawerItems>
           <SearchBar isDrawer />
         </DrawerItems>
         <DrawerItems>
-          <button>
-            <NavLink
-              to="/"
-              className={({ isActive }) =>
-                `hover-transition ${isActive ? "text-black dark:text-white" : "text-gray-500"} `
-              }
-            >
-              Home
-            </NavLink>
-          </button>
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              `flex w-full  font-medium rounded-lg hover-transition ${
+                isActive
+                  ? "text-theme-alt theme-alt px-4 py-3 "
+                  : "text-theme theme"
+              }`
+            }
+          >
+            Home
+          </NavLink>
         </DrawerItems>
         <DrawerItems>
-          <button>
+          <NavLink
+            to="/products"
+            className={({ isActive }) =>
+              `flex w-full  font-medium rounded-lg hover-transition ${
+                isActive
+                  ? "text-theme-alt theme-alt px-4 py-3 "
+                  : "text-theme theme"
+              }`
+            }
+          >
+            Products
+          </NavLink>
+        </DrawerItems>
+        <DrawerItems>
+          <NavLink
+            to="/about"
+            className={({ isActive }) =>
+              `flex w-full  font-medium rounded-lg hover-transition ${
+                isActive
+                  ? "text-theme-alt theme-alt px-4 py-3 "
+                  : "text-theme theme"
+              }`
+            }
+          >
+            About Us
+          </NavLink>
+        </DrawerItems>
+        <DrawerItems>
+          <NavLink
+            to="/contact"
+            className={({ isActive }) =>
+              `flex w-full  font-medium rounded-lg hover-transition ${
+                isActive
+                  ? "text-theme-alt theme-alt px-4 py-3 "
+                  : "text-theme theme"
+              }`
+            }
+          >
+            Contact
+          </NavLink>
+        </DrawerItems>
+        <DrawerItems>
+          <NavLink
+            to="orders/history"
+            className={({ isActive }) =>
+              `flex w-full  font-medium rounded-lg hover-transition ${
+                isActive
+                  ? "text-theme-alt theme-alt px-4 py-3 "
+                  : "text-theme theme"
+              }`
+            }
+          >
             {" "}
-            <NavLink
-              to="/products"
-              className={({ isActive }) =>
-                `hover-transition ${isActive ? "text-black dark:text-white" : "text-gray-500"}`
-              }
-            >
-              Products
-            </NavLink>
-          </button>
+            Orders History
+          </NavLink>
         </DrawerItems>
         <DrawerItems>
-          <button>
-            <NavLink
-              to="/about"
-              className={({ isActive }) =>
-                `hover-transition ${isActive ? "text-black dark:text-white" : "text-gray-500"}`
-              }
-            >
-              About Us
-            </NavLink>
-          </button>
-        </DrawerItems>
-        <DrawerItems>
-          <button>
-            {" "}
-            <NavLink
-              to="/contact"
-              className={({ isActive }) =>
-                `hover-transition ${isActive ? "text-black dark:text-white" : "text-gray-500"}`
-              }
-            >
-              Contact
-            </NavLink>
-          </button>
-        </DrawerItems>
-        <DrawerItems>
-          <button>
-            <NavLink
-              to="orders/history"
-              className={({ isActive }) =>
-                `hover-transition items-center flex w-full justify-between ${isActive ? "text-black dark:text-white" : "text-gray-500"}`
-              }
-            >
-              {" "}
-              Orders History
-            </NavLink>
-          </button>
-        </DrawerItems>
-        <DrawerItems>
-          <button className="w-full">
-            {" "}
-            <NavLink
-              to="/cart"
-              className={({ isActive }) =>
-                `hover-transition items-center flex w-full justify-between ${isActive ? "text-black dark:text-white" : "text-gray-500"}`
-              }
-            >
-              Cart
-              <span className="theme-alt text-theme-alt h-6 text-center w-6 rounded-full mr-10">
-                {cartItemsCount}
-              </span>
-            </NavLink>
-          </button>
+          {" "}
+          <NavLink
+            to="/cart"
+            className={({ isActive }) =>
+              `flex w-full items-center justify-between  font-medium rounded-lg hover-transition ${
+                isActive
+                  ? "text-theme-alt theme-alt px-4 py-3 "
+                  : "text-theme theme"
+              }`
+            }
+          >
+            Cart
+            <span className=" text-xs border-theme text-center p-0.5 px-2 rounded-full mr-10">
+              {cartItemsCount}
+            </span>
+          </NavLink>
         </DrawerItems>
         {user && (
           <DrawerItems>
             <button
-              className="btn-primary text-xs flex gap-2 items-center border border-red-500"
+              className="btn-primary text-sm flex gap-2 items-center border border-red-500"
               onClick={logOutUser}
             >
-              <Power size={16} />
+              <Power size={18} />
               Logout
             </button>
           </DrawerItems>

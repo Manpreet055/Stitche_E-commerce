@@ -1,6 +1,7 @@
 import React from "react";
 import { Carousel, Spinner } from "flowbite-react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import { caraouselTheme } from "../../utils/customFlowbiteTheme";
 
 const CarauselComp = ({ images = [], loadingState = () => {} }) => {
   return (
@@ -14,13 +15,14 @@ const CarauselComp = ({ images = [], loadingState = () => {} }) => {
         <div className="lg:max-w-3xl w-full relative overflow-hidden h-56 sm:h-100 2xl:h-96">
           {" "}
           <Carousel
+            theme={caraouselTheme}
             leftControl={
-              <div className="theme-alt p-1 opacity-40 rounded-full">
+              <div className="hidden sm:block theme-alt p-1 opacity-40 rounded-full">
                 <ArrowLeft />
               </div>
             }
             rightControl={
-              <div className="theme-alt p-1 opacity-40 rounded-full">
+              <div className=" hidden sm:block theme-alt p-1 opacity-40 rounded-full">
                 <ArrowRight />
               </div>
             }
