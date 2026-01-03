@@ -64,9 +64,9 @@ const PlaceOrderPage = () => {
           <BackButton text="Back" />
         </div>
         {/* Cart  */}
-        <div className="w-full flex sm:text-xl p-6 theme-transparent rounded-t-xl border-theme justify-between">
+        <div className="w-full flex sm:text-xl font-semibold p-6 theme-transparent rounded-t-xl border-theme justify-between">
           Order ID: #{randomOrderId}
-          <span>Order Date: {convertDate(date)}</span>
+          <span>Date: {convertDate(date)}</span>
         </div>
         <div className="w-full ">
           <RenderCart fullheight cart={cart} />

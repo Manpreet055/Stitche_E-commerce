@@ -3,36 +3,36 @@ import { Mail, MapPin, Phone } from "lucide-react";
 const ContactDetails = () => {
   return (
     <div className="flex flex-wrap gap-3 mt-10">
-      <div className="flex gap-2 p-5  items-center">
-        <MapPin size={30} />
+      <div className="flex gap-2 sm:p-5 p-2 grow  items-center">
+        <MapPin size={22} />
         <div className="flex flex-col">
-          <span className="font-medium md:text-lg">Address</span>
+          <span className="font-medium text-sm md:text-lg">Address</span>
           <a
-            className="md:max-w-max  max-w-20 truncate"
+            className="md:max-w-max text-nowrap text-xs sm:text-base  max-w-20"
             href="https://maps.app.goo.gl/NbL4871bsJdzXRDj6"
           >
-            Jabel ali, Dubai
+            Production city, Dubai
           </a>
         </div>
       </div>
-      <div className="flex gap-2 p-5  items-center">
-        <Phone size={30} />
+      <div className="flex gap-2 sm:p-5 p-2 grow  items-center">
+        <Phone size={22} />
         <div className="flex flex-col">
-          <span className="font-medium md:text-lg">Phone</span>
+          <span className="font-medium text-sm md:text-lg">Phone</span>
           <a
-            className="md:max-w-max  max-w-20 truncate"
+            className="md:max-w-max text-nowrap text-xs sm:text-base max-w-20 "
             href="tel:+971 5618-21018"
           >
             +971 5618-21018
           </a>
         </div>
       </div>
-      <div className="flex gap-2 p-5  items-center">
-        <Mail size={30} />
+      <div className="flex gap-2 sm:p-5 p-2 grow  items-center">
+        <Mail size={22} />
         <div className="flex flex-col">
-          <span className="font-medium md:text-lg">Email</span>
+          <span className="font-medium text-sm md:text-lg">Email</span>
           <a
-            className="md:max-w-max max-w-20 truncate"
+            className="md:max-w-max text-xs sm:text-base max-w-20 "
             href="mailto:manpreetuae4@gmail.com"
           >
             support.stitch@gmail.com

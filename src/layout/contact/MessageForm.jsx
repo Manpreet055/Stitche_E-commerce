@@ -16,7 +16,7 @@ const MessageForm = () => {
     handleSubmit,
     reset,
     register,
-    formState: { isSubmitSuccessful, errors },
+    formState: { errors },
   } = useForm({
     defaultValues: {
       name: "",
@@ -49,13 +49,13 @@ const MessageForm = () => {
     >
       <form
         onSubmit={handleSubmit(handleForm)}
-        className="flex h-fit p-6 flex-col w-fit justify-center items-center max-w-2xl  rounded theme text-theme"
+        className="flex h-fit sm:p-6 flex-col w-fit justify-center items-center max-w-2xl  rounded theme text-theme"
       >
         <h2 className="font-bold w-full text-start text-4xl lg:text-6xl">
           Get in Touch
         </h2>
         {/* Name and email */}
-        <div className="w-full max-w-xs sm:max-w-full flex items-center flex-wrap gap-3 my-4">
+        <div className="w-full max-w-sm sm:max-w-full flex items-center flex-wrap gap-3 my-4">
           <input
             id="name"
             type="text"
@@ -79,7 +79,7 @@ const MessageForm = () => {
               minLength: 8,
               maxLength: 50,
             })}
-            className="p-2 py-4 w-full sm:p-4 rounded-md sm:text-lg border-theme"
+            className="p-2 py-4  w-full sm:p-4 rounded-md sm:text-lg border-theme"
             placeholder="Email"
           />
           {errors.email && (
@@ -92,13 +92,18 @@ const MessageForm = () => {
           {...register("subject", {
             required: "Please choose a subject",
           })}
-          className=" border-theme p-2 py-4 rounded-md w-full sm:p-4"
+          className="border-theme p-2 py-4 rounded-md w-full sm:p-4"
           name="subject"
           id="subject"
+          defaultValue="" // Point this to the empty value below
         >
-          <option selected value="General Inquiry">
-            General Inquiry
+          {/* The Placeholder: hidden from the list, but shows as default */}
+          <option value="" disabled hidden>
+            Select a subject
           </option>
+
+          {/* The Actual Options */}
+          <option value="General Inquiry">General Inquiry</option>
           <option value="Order Issue">Order Issue</option>
           <option value="Technical Support">Technical Support</option>
           <option value="Feedback">Feedback</option>
@@ -118,7 +123,7 @@ const MessageForm = () => {
             maxLength: 150,
           })}
           name="message"
-          className="p-4 w-full rounded-md mt-4  sm:text-lg border-theme lg:min-h-46"
+          className="p-4 w-full rounded-md mt-4  sm:text-lg border-theme min-h-46"
           placeholder="Message"
           id="msg"
         />
@@ -132,17 +137,17 @@ const MessageForm = () => {
           className={`rounded-md w-full mt-4 ${loadingState ? "dark:bg-neutral-400" : "theme-alt text-theme-alt"}   disabled:bg-gray-400 py-3 flex justify-center hover:opacity-90 px-4 ease-in-out transition-all duration-300 `}
         >
           {loadingState ? (
-            <span className="flex items-center gap-2 text-center">
+            <span className="flex font-medium items-center gap-2 text-center">
               <Spinner className="h-4 w-fit" color="gray" />
               Sending Message...
             </span>
           ) : error ? (
-            <span className="flex text-red-500 items-center gap-2 text-center">
+            <span className="flex font-medium text-red-500 items-center gap-2 text-center">
               {error}
               <CircleAlert size={18} />
             </span>
           ) : (
-            <span className="flex  items-center gap-2 text-center">
+            <span className="flex font-medium  items-center gap-2 text-center">
               Send Message
               <SendHorizonal size={18} />
             </span>
