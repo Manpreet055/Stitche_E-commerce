@@ -9,7 +9,7 @@ export const UserDataProvider = ({ children }) => {
   const { accessToken } = useAuthentication();
   const [user, setUser] = useState(null);
   const [cart, setCart] = useState([]);
-  const [loadingState, setLoadingState] = useState(true);
+  const [loadingState, setLoadingState] = useState(false);
   const [error, setError] = useState({});
 
   // refetch user
