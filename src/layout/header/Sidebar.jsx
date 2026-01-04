@@ -5,6 +5,7 @@ import { Home, Menu, Power } from "lucide-react";
 import SearchBar from "./SearchBar";
 import { useUser } from "../../context/UserDataProvider";
 import ProfileSkeletonLoader from "../../ui/ProfileSkeletonLoader";
+import { sidebarTheme } from "../../utils/customFlowbiteTheme";
 const Sidebar = () => {
   const { user, loadingState, cart, logOutUser } = useUser();
   const [isOpen, setIsOpen] = useState(false);
@@ -20,7 +21,8 @@ const Sidebar = () => {
         </button>
       </div>
       <Drawer
-        className="theme text-theme flex flex-col gap-6"
+        theme={sidebarTheme}
+        className=" flex flex-col gap-6"
         open={isOpen}
         onClose={handleClose}
       >
@@ -44,16 +46,14 @@ const Sidebar = () => {
           )}
         </DrawerItems>{" "}
         <DrawerItems>
-          <SearchBar isDrawer />
+          <SearchBar theme="" isDrawer />
         </DrawerItems>
-        <DrawerItems>
+        <DrawerItems className="focus:border-none">
           <NavLink
             to="/"
             className={({ isActive }) =>
-              `flex w-full  font-medium rounded-lg hover-transition ${
-                isActive
-                  ? "text-theme-alt theme-alt px-4 py-3 "
-                  : "text-theme theme"
+              `flex w-full  font-medium text-white rounded-lg hover-transition ${
+                isActive && " theme-alt text-theme-alt px-4 py-3 "
               }`
             }
           >
@@ -64,10 +64,8 @@ const Sidebar = () => {
           <NavLink
             to="/products"
             className={({ isActive }) =>
-              `flex w-full  font-medium rounded-lg hover-transition ${
-                isActive
-                  ? "text-theme-alt theme-alt px-4 py-3 "
-                  : "text-theme theme"
+              `flex w-full  font-medium text-white rounded-lg hover-transition ${
+                isActive && " theme-alt text-theme-alt px-4 py-3 "
               }`
             }
           >
@@ -78,10 +76,8 @@ const Sidebar = () => {
           <NavLink
             to="/about"
             className={({ isActive }) =>
-              `flex w-full  font-medium rounded-lg hover-transition ${
-                isActive
-                  ? "text-theme-alt theme-alt px-4 py-3 "
-                  : "text-theme theme"
+              `flex w-full  font-medium text-white rounded-lg hover-transition ${
+                isActive && " theme-alt text-theme-alt px-4 py-3 "
               }`
             }
           >
@@ -92,10 +88,8 @@ const Sidebar = () => {
           <NavLink
             to="/contact"
             className={({ isActive }) =>
-              `flex w-full  font-medium rounded-lg hover-transition ${
-                isActive
-                  ? "text-theme-alt theme-alt px-4 py-3 "
-                  : "text-theme theme"
+              `flex w-full  font-medium text-white rounded-lg hover-transition ${
+                isActive && " theme-alt text-theme-alt px-4 py-3 "
               }`
             }
           >
@@ -106,10 +100,8 @@ const Sidebar = () => {
           <NavLink
             to="orders/history"
             className={({ isActive }) =>
-              `flex w-full  font-medium rounded-lg hover-transition ${
-                isActive
-                  ? "text-theme-alt theme-alt px-4 py-3 "
-                  : "text-theme theme"
+              `flex w-full  font-medium text-white rounded-lg hover-transition ${
+                isActive && " theme-alt text-theme-alt px-4 py-3 "
               }`
             }
           >
@@ -122,15 +114,13 @@ const Sidebar = () => {
           <NavLink
             to="/cart"
             className={({ isActive }) =>
-              `flex w-full items-center justify-between  font-medium rounded-lg hover-transition ${
-                isActive
-                  ? "text-theme-alt theme-alt px-4 py-3 "
-                  : "text-theme theme"
+              `flex w-full items-center justify-between  font-medium text-white rounded-lg hover-transition ${
+                isActive && " theme-alt text-theme-alt px-4 py-3 "
               }`
             }
           >
             Cart
-            <span className=" text-xs border-theme text-center p-0.5 px-2 rounded-full mr-10">
+            <span className=" text-[11px] grid place-items-center border-theme text-center w-5 h-5 rounded-full mr-10">
               {cartItemsCount}
             </span>
           </NavLink>

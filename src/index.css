@@ -51,6 +51,13 @@ body {
   @apply transition-all duration-300 ease-in-out;
 }
 
+/* Removes the focus border specifically inside the drawer */
+[role="dialog"] button:focus,
+[role="dialog"] a:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
 .hide-scrollbar {
   scrollbar-width: none;
 }

@@ -7,7 +7,7 @@ import debounce from "../../utils/debounce";
 import { Spinner } from "flowbite-react";
 import DebounceSuggestions from "../../ui/DebounceSuggestions";
 
-const SearchBar = ({ isDrawer = false }) => {
+const SearchBar = ({ isDrawer = false, theme = "text-theme theme" }) => {
   const navigate = useNavigate();
   const [searches, setSearches] = useState([]);
   const [loadingState, setLoadingState] = useState(false);
@@ -52,7 +52,7 @@ const SearchBar = ({ isDrawer = false }) => {
   return (
     <form
       onSubmit={handleSubmit(handleFormSubmit)}
-      className={` relative h-full w-full max-w-xl theme text-theme  grow ${!isDrawer ? "hidden md:flex" : "flex "} items-center gap-2`}
+      className={` relative h-full w-full max-w-xl  ${theme}  grow ${!isDrawer ? "hidden md:flex" : "flex "} items-center gap-2`}
     >
       <input
         autoComplete="off"
