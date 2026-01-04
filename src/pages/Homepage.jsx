@@ -7,6 +7,8 @@ import useProducts from "../hooks/useProducts";
 import { NavLink } from "react-router-dom";
 import SalesCard from "../layout/home/SalesCard";
 import CategoryCards from "../layout/home/CategoryCards";
+import Banner from "../Animations/Banner";
+import bannerImgLinks from "../utils/bannerImgLinks";
 
 const Homepage = () => {
   const { products } = useProducts(5);
@@ -33,6 +35,24 @@ const Homepage = () => {
         {products.map((product, index) => (
           <ProductCard product={product} key={index} />
         ))}
+      </div>
+      <div className="w-full">
+        <h2 className="text-lg md:text-2xl  font-semibold  ">Popular Brands</h2>
+        <Banner>
+          {bannerImgLinks.map((img, idx) => (
+            <div
+              key={idx}
+              className="bg-white shrink-0 min-w-32 sm:min-w-40 min-h-20 grid place-items-center"
+            >
+              <img
+                src={img}
+                loading="lazy"
+                className="p-2 h-20 w-auto"
+                alt={`logo-${idx}`}
+              />
+            </div>
+          ))}
+        </Banner>
       </div>
     </section>
   );

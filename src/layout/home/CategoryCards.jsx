@@ -10,9 +10,9 @@ const CategoryCards = () => {
   const navigate = useNavigate();
   return (
     <div className="flex flex-col w-full my-6 ">
-      <span className="text-lg md:text-2xl  font-semibold mx-2 my-4 md:ml-20">
+      <h2 className="text-lg md:text-2xl  font-semibold mx-2 my-4 md:ml-20">
         Categories
-      </span>
+      </h2>
 
       <div className="flex gap-3 justify-evenly hide-scrollbar max-w-screen overflow-x-auto">
         <div

@@ -85,3 +85,24 @@ html {
   background-size: cover;
   border-radius: 25px;
 }
+
+/* Banner animation  */
+@keyframes infinite_scroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+@layer utilities {
+  .animate-infinite-scroll {
+    animation: infinite_scroll 25s linear infinite;
+    /* @media (max-width: 640px) {
+      animation-duration: 4s;
+    } */
+  }
+  /* .animate-infinite-scroll:hover {
+    animation-play-state: paused;
+  } */
+}
