@@ -57,7 +57,7 @@ const NavLinks = () => {
           </NavLink>
         </li>
       </ul>
-      <div className="grid grid-cols-3 place-items-center ">
+      <div className="grid grid-cols-3 place-items-center sm:gap-4 ">
         <DarkThemeToggle className="border-none mr-2 sm:mr-0 bg-none place-self-center" />
         <NavLink
           to="cart"

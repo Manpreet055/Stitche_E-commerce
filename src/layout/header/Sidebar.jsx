@@ -31,7 +31,7 @@ const Sidebar = () => {
         open={isOpen}
         onClose={handleClose}
       >
-        <DrawerItems className="flex items-center">
+        <DrawerItems className="flex items-center relative">
           {!user || (user === null && loadingState) ? (
             <ProfileSkeletonLoader />
           ) : !user || user === null ? (
@@ -51,7 +51,7 @@ const Sidebar = () => {
               </span>
             </NavLink>
           )}
-          <button onClick={handleClose} className="mr-2 opacity-50">
+          <button onClick={handleClose} className="fixed right-2 opacity-50">
             <X />
           </button>
         </DrawerItems>{" "}

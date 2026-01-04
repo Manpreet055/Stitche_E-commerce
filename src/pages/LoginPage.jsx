@@ -16,7 +16,6 @@ const LoginPage = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
 
   const [toastText, setToastText] = useState();
   const {
@@ -61,7 +60,7 @@ const LoginPage = () => {
         // Use a single timeout for UX
         setTimeout(async () => {
           reset();
-          navigate(from, { replace: true });
+          navigate(location.state?.from?.pathname || -1, { replace: true });
         }, 1000);
       }
     } catch (error) {
@@ -87,7 +86,10 @@ const LoginPage = () => {
   return (
     <section className="w-full theme text-theme relative h-screen flex justify-center items-center">
       <div className="absolute top-7 sm:top-20 left-5 sm:left-20">
-        <BackButton text="Back" navPath="/" />
+        <BackButton
+          text="Back"
+          navPath={location.state?.from?.pathname || -1}
+        />
       </div>
       {toastText && <ToastComp text={toastText} position="top-10" />}
       <div className="w-full flex flex-col justify-center items-center max-w-lg px-6 sm:py-10 rounded-2xl">

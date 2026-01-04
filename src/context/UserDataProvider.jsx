@@ -20,6 +20,7 @@ export const UserDataProvider = ({ children }) => {
       const data = fetchUser.data;
       setUser(data?.user);
       setCart(data?.user?.cart);
+      localStorage.setItem("isAuthenticated", "true");
     } catch (err) {
       setError(err.message);
       setCart([]);
@@ -36,6 +37,8 @@ export const UserDataProvider = ({ children }) => {
       setCart([]);
     } catch (error) {
       setError(error.message);
+    } finally {
+      localStorage.setItem("isAuthenticated", "false");
     }
   };
 

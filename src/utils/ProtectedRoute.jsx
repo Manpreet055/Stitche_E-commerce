@@ -3,12 +3,9 @@ import { Navigate } from "react-router-dom";
 import { useUser } from "../context/UserDataProvider";
 
 const ProtectedRoute = ({ children }) => {
-  const { user, loadingState } = useUser();
-  if (loadingState) {
-    return null; // or a spinner
-  }
+  const isAuth = localStorage.getItem("isAuthenticated") === "true";
 
-  if (!user) {
+  if (!isAuth) {
     return <Navigate to="/login" replace />;
   }
 
