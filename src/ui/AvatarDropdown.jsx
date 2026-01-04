@@ -8,8 +8,10 @@ import {
 import { LogOut, ShoppingCart, User2, Settings2, History } from "lucide-react";
 import { useUser } from "../context/UserDataProvider";
 import { NavLink } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const AvatarDropDown = ({ img }) => {
+  const notify = () => toast("This Feature is coming soon");
   const { user, logOutUser } = useUser();
   return (
     <Dropdown
@@ -32,7 +34,7 @@ const AvatarDropDown = ({ img }) => {
         </NavLink>
       </DropdownItem>
 
-      <DropdownItem className="flex gap-3 items-center">
+      <DropdownItem onClick={notify} className="flex gap-3 items-center">
         <Settings2 />
         Settings
       </DropdownItem>

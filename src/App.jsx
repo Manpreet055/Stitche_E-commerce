@@ -7,8 +7,8 @@ import ContextProvider from "./context/ContextProvider";
 const App = () => {
   return (
     <ContextProvider>
-      <ScrollToTop />
       <Navbar />
+      <ScrollToTop />
       <main>
         <Outlet />
       </main>
