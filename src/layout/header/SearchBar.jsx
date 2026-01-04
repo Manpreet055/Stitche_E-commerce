@@ -32,7 +32,7 @@ const SearchBar = ({ isDrawer = false, theme = "text-theme theme" }) => {
           setLoadingState(false);
         }
       }, 500),
-    []
+    [],
   );
 
   useEffect(() => {

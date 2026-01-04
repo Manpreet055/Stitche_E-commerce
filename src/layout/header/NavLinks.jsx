@@ -5,6 +5,8 @@ import { motion } from "framer-motion";
 import MobileNav from "./Sidebar";
 import { useUser } from "../../context/UserDataProvider";
 import AvatarDropDown from "../../ui/AvatarDropdown";
+import { DarkThemeToggle } from "flowbite-react";
+
 const NavLinks = () => {
   const { cart, user } = useUser();
   const cartItemsCount = cart?.length ?? 0;
@@ -55,15 +57,19 @@ const NavLinks = () => {
           </NavLink>
         </li>
       </ul>
-      <div className="flex items-center gap-4">
+      <div className="grid grid-cols-3 place-items-center gap-2 md:gap-6">
+        <DarkThemeToggle className="border-none bg-none place-self-center" />
         <NavLink
           to="cart"
           className={({ isActive }) =>
-            `hover-transition flex flex-col items-center ${isActive ? "text-black dark:text-white" : "text-gray-500"} `
+            `hover-transition flex flex-col mb-2 items-center ${isActive ? "text-black dark:text-white" : "text-gray-500"} `
           }
         >
-          <span className="px-1 text-[10px] sm:text-sm"> {cartItemsCount}</span>
-          <ShoppingCart />
+          <span className="w-3 text-theme h-3 grid place-items-center text-[10px]">
+            {" "}
+            {cartItemsCount}
+          </span>
+          <ShoppingCart size={23} />
         </NavLink>
         <div className="hidden md:block">
           {user ? (

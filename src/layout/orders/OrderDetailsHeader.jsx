@@ -13,6 +13,7 @@ const OrderDetailsHeader = ({ order }) => {
     _id,
     shipping: { trackingId, street, city, postalCode, country },
     createdAt,
+    updatedAt,
     orderStatus,
     payment: { method, transactionId },
     user: {
@@ -46,11 +47,21 @@ const OrderDetailsHeader = ({ order }) => {
         Order #{trackingId}
       </h2>
       <div className="w-full flex justify-between ">
-        <div className="sm:text-xl  flex items-center gap-3 font-semibold">
-          Order date:{" "}
-          <span className="text-sm sm:text-base">
-            {convertDate(createdAt, "long")}
-          </span>
+        <div className="flex flex-col  justify-center">
+          <div className="sm:text-xl  flex items-center gap-3 font-semibold">
+            Order date:{" "}
+            <span className="text-sm sm:text-base">
+              {convertDate(createdAt, "long")}
+            </span>
+          </div>
+          {createdAt !== updatedAt && (
+            <div className="sm:text-xl  flex items-center gap-3 font-semibold">
+              Update date:{" "}
+              <span className="text-sm sm:text-base">
+                {convertDate(updatedAt, "long")}
+              </span>
+            </div>
+          )}
         </div>
         <button
           onClick={cancelOrder}

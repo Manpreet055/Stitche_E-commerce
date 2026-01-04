@@ -16,7 +16,7 @@ const Sidebar = () => {
   return (
     <>
       <div className="flex md:hidden   items-center justify-center">
-        <button className="mt-2" onClick={() => setIsOpen(true)}>
+        <button onClick={() => setIsOpen(true)}>
           <Menu size={30} />
         </button>
       </div>
@@ -32,9 +32,7 @@ const Sidebar = () => {
         onClose={handleClose}
       >
         <DrawerItems>
-          {loadingState ? (
-            <ProfileSkeletonLoader />
-          ) : !user ? (
+          {!user || user === null ? (
             <NavLink
               to="login"
               className={() =>
@@ -43,6 +41,8 @@ const Sidebar = () => {
             >
               LogIn{" "}
             </NavLink>
+          ) : loadingState ? (
+            <ProfileSkeletonLoader />
           ) : (
             <NavLink to="profile" className="w-full flex items-center  gap-5">
               <Avatar rounded img={user?.profile?.avatar} />{" "}
