@@ -24,9 +24,15 @@ const SignupPage = () => {
     handleSubmit,
     reset,
     formState: { errors },
+    setFocus,
   } = useForm({
     defaultValues: { fullname: "", email: "", password: "", confirm: "" },
   });
+
+  // set the focus to email input
+  useEffect(() => {
+    setFocus("fullname");
+  }, []);
 
   // Clear toast after 3 seconds automatically
   useEffect(() => {

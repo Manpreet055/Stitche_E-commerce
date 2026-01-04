@@ -2,11 +2,11 @@ import { Spinner } from "flowbite-react";
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-const DebounceSuggestions = ({ searches, loadingState, error }) => {
+const DebounceSuggestions = ({ searches = [], loadingState, error, show }) => {
   return (
     <>
-      {searches && searches.length > 0 && (
-        <ul className="rounded-xl border-theme p-4 sm:p-6 flex gap-3 sm:gap-5 flex-col justify-around absolute z-10 top-15 max-w-full sm:max-w-118 theme text-theme min-h-100 w-full ">
+      {show && (
+        <ul className="rounded-xl  shadow-black-2xl p-4 sm:p-6 flex gap-3 sm:gap-5 flex-col justify-around absolute z-10 top-15 max-w-full sm:max-w-118 theme text-theme min-h-100 w-full ">
           {loadingState ? (
             <div className="h-full w-full grid place-items-center">
               <Spinner color="gray" />
@@ -14,6 +14,12 @@ const DebounceSuggestions = ({ searches, loadingState, error }) => {
           ) : error ? (
             <div className="h-full w-full grid place-items-center">
               <p>{error}</p>
+            </div>
+          ) : searches.length === 0 || !searches ? (
+            <div className="grid place-items-center">
+              <p className="font-medium text-sm sm:text-lg ">
+                No products found{" "}
+              </p>
             </div>
           ) : (
             searches.map((result) => (

@@ -1,7 +1,7 @@
 import { Avatar, Drawer, DrawerItems } from "flowbite-react";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { Home, Menu, Power } from "lucide-react";
+import { Home, Menu, Power, X } from "lucide-react";
 import SearchBar from "./SearchBar";
 import { useUser } from "../../context/UserDataProvider";
 import ProfileSkeletonLoader from "../../ui/ProfileSkeletonLoader";
@@ -27,11 +27,11 @@ const Sidebar = () => {
           }
         }}
         theme={sidebarTheme}
-        className=" flex flex-col gap-6"
+        className=" flex w-full max-w-90 flex-col gap-6"
         open={isOpen}
         onClose={handleClose}
       >
-        <DrawerItems>
+        <DrawerItems className="flex items-center">
           {!user || (user === null && loadingState) ? (
             <ProfileSkeletonLoader />
           ) : !user || user === null ? (
@@ -51,6 +51,9 @@ const Sidebar = () => {
               </span>
             </NavLink>
           )}
+          <button onClick={handleClose} className="mr-2 opacity-50">
+            <X />
+          </button>
         </DrawerItems>{" "}
         <DrawerItems>
           <SearchBar theme="" isDrawer />

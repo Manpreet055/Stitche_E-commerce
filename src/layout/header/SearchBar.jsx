@@ -13,6 +13,7 @@ const SearchBar = ({ isDrawer = false, theme = "text-theme theme" }) => {
   const [loadingState, setLoadingState] = useState(false);
   const [error, setError] = useState("");
   const { register, handleSubmit, watch } = useForm();
+  const [isFocused, setIsFocused] = useState(false);
 
   const watchSearchBar = watch("search");
 
@@ -59,6 +60,11 @@ const SearchBar = ({ isDrawer = false, theme = "text-theme theme" }) => {
         {...register("search", {
           required: true,
         })}
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => {
+          // small delay so clicks on suggestions register first
+          setTimeout(() => setIsFocused(false), 250);
+        }}
         type="text"
         className={`w-full searchbar h-10 sm:h-12 bg-transparent placeholder:text-gray-200 dark:placeholder:text-gray-400 text-sm sm:text-base border border-slate-200 rounded-md ${!isDrawer ? "pl-10" : "pl-2"} pr-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow`}
         placeholder="Search Products .."
@@ -73,6 +79,7 @@ const SearchBar = ({ isDrawer = false, theme = "text-theme theme" }) => {
         loadingState={loadingState}
         error={error}
         searches={searches}
+        show={isFocused}
       />
     </form>
   );

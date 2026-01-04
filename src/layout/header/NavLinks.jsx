@@ -13,7 +13,7 @@ const NavLinks = () => {
 
   return (
     <nav className="py-3 px-6 flex justify-between items-center  z-20">
-      <h1 className="text-3xl sm:text-4xl text-nowrap font-bold">Stitche</h1>
+      <h1 className="text-3xl sm:text-4xl text-nowrap font-bold ">Stitche</h1>
 
       <ul className=" w-full hidden md:flex md:justify-evenly lg:justify-center  items-center gap-4 lg:gap-10  font-semibold px-3">
         <li className="">
@@ -57,12 +57,12 @@ const NavLinks = () => {
           </NavLink>
         </li>
       </ul>
-      <div className="grid grid-cols-3 place-items-center gap-2 md:gap-6">
-        <DarkThemeToggle className="border-none bg-none place-self-center" />
+      <div className="grid grid-cols-3 place-items-center ">
+        <DarkThemeToggle className="border-none mr-2 sm:mr-0 bg-none place-self-center" />
         <NavLink
           to="cart"
           className={({ isActive }) =>
-            `hover-transition flex flex-col mb-2 items-center ${isActive ? "text-black dark:text-white" : "text-gray-500"} `
+            `hover-transition mr-auto flex flex-col mb-2 items-center ${isActive ? "text-black dark:text-white" : "text-gray-500"} `
           }
         >
           <span className="w-3 text-theme h-3 grid place-items-center text-[10px]">

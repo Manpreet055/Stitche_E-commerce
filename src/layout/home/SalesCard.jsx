@@ -23,7 +23,7 @@ const SalesCard = () => {
           </p>
           <NavLink
             to="products"
-            className="flex items-center gap-1 hover:scale-[1.01]  group text-theme-alt theme-alt text-sm sm:text-base p-2 px-3 sm:p-3 rounded-lg w-fit hover:bg-white/20"
+            className="flex items-center gap-1 hover:scale-[1.01]  group text-black bg-white text-sm sm:text-base p-2 px-3 sm:p-3 rounded-lg w-fit hover:bg-white/20"
           >
             See Collections{" "}
             <span className="group-hover:translate-x-2 ease-in-out transition-all duration-300">

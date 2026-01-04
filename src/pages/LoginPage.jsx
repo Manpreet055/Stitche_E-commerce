@@ -23,13 +23,17 @@ const LoginPage = () => {
     register,
     handleSubmit,
     reset,
-    formState: { errors },
+    formState: { errors, isSubmitting },
+    setFocus,
   } = useForm({
     defaultValues: {
       email: "",
       password: "",
     },
   });
+  useEffect(() => {
+    setFocus("email");
+  }, []);
 
   // Clear toast after 3 seconds automatically
   useEffect(() => {
