@@ -36,7 +36,7 @@ const Sidebar = () => {
             <NavLink
               to="login"
               className={() =>
-                `  border text-sm  border-gray-300 text-nowrap transition-all ease-in-out py-2 px-4 rounded`
+                `  border text-sm text-white   border-gray-300 text-nowrap transition-all ease-in-out py-2 px-4 rounded`
               }
             >
               LogIn{" "}
@@ -46,7 +46,9 @@ const Sidebar = () => {
           ) : (
             <NavLink to="profile" className="w-full flex items-center  gap-5">
               <Avatar rounded img={user?.profile?.avatar} />{" "}
-              <span className="text-lg font-bold">{user?.username}</span>
+              <span className="text-lg text-white font-bold">
+                {user?.username}
+              </span>
             </NavLink>
           )}
         </DrawerItems>{" "}
@@ -133,7 +135,7 @@ const Sidebar = () => {
         {user && (
           <DrawerItems>
             <button
-              className="btn-primary text-sm flex gap-2 items-center border border-red-500"
+              className="btn-primary border-2 text-white text-sm flex gap-2 items-center border-red-500"
               onClick={logOutUser}
             >
               <Power size={18} />

@@ -24,7 +24,7 @@ const ProductPageHeader = ({ setQuery, query }) => {
     query.sort.sortField !== "" && query.sort.sortingOrder !== "";
   return (
     <>
-      <div className="flex flex-wrap mt-5 sm:mt-0 gap-4 my-2 items-center">
+      <div className="flex flex-wrap mt-5 sm:mt-0 gap-4  items-center">
         <div className="ml-3">
           {" "}
           <BackButton text="Back" />

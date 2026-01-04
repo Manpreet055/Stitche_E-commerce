@@ -11,7 +11,7 @@ const ContextProvider = ({ children }) => {
       : "light";
   return (
     <AuthProvider>
-      <ToastContainer position="bottom-right" stacked theme={theme} />
+      <ToastContainer position="bottom-right" limit={3} stacked theme={theme} />
       <UserDataProvider>{children}</UserDataProvider>
     </AuthProvider>
   );

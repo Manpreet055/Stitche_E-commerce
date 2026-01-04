@@ -26,7 +26,7 @@ const Products = () => {
   };
 
   return (
-    <section className=" sm:p-5 relative theme text-theme mt-10 sm:mt-20 lg:flex">
+    <section className=" sm:p-5 relative theme text-theme mt-14 sm:mt-20 lg:flex">
       <motion.div
         initial={{ translateX: -100, opacity: 0 }}
         animate={{ translateX: 0, opacity: 1 }}

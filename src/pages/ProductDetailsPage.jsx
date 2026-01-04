@@ -35,7 +35,7 @@ const ProductDetailsPage = () => {
     return <AsyncBoundary customMessage="No Product found." />;
   }
   return (
-    <section className="h-full w-full my-13 sm:my-20">
+    <section className="h-full w-full my-16 sm:my-20">
       <div className="w-full px-2 sm:px-4 py-2">
         <BackButton text="Back" />
       </div>

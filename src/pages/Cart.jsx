@@ -11,7 +11,7 @@ const Cart = () => {
   const { cart } = useUser();
   const priceDetails = generatePriceDetails(cart);
   return (
-    <section className="my-15 sm:p-4 w-full theme text-theme">
+    <section className="my-17 sm:p-4 w-full theme text-theme">
       <div className="flex flex-col my-6 gap-y-3 items-start">
         <BackButton navPath="/" text="Back" />
         <h2 className="text-2xl lg:text-3xl px-3 font-semibold">Your Cart</h2>
