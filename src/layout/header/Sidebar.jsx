@@ -21,6 +21,11 @@ const Sidebar = () => {
         </button>
       </div>
       <Drawer
+        onClick={(event) => {
+          if (!event.target.classList.contains("searchbar")) {
+            setIsOpen(false);
+          }
+        }}
         theme={sidebarTheme}
         className=" flex flex-col gap-6"
         open={isOpen}
