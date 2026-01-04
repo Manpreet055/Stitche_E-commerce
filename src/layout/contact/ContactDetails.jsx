@@ -35,7 +35,7 @@ const ContactDetails = () => {
             className="md:max-w-max text-xs sm:text-base max-w-20 "
             href="mailto:manpreetuae4@gmail.com"
           >
-            support.stitch@gmail.com
+            support.stitche@gmail.com
           </a>
         </div>
       </div>

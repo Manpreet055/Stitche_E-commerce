@@ -9,31 +9,31 @@ const CartPriceSummary = ({ priceDetails }) => {
     <div className="flex grow text-theme flex-col border w-full min-w-sm xl:max-w-lg justify-around border-gray-300 rounded  p-4">
       <div>
         <h2 className="text-lg sm:text-xl font-medium">Order Summary</h2>{" "}
-        <div className="flex justify-between items-center mt-4">
-          Sub Total <span className="font-bold">${sumofProductsPrice}</span>
+        <div className="grid grid-cols-2 place-items-center mt-4">
+          Sub Total <span className="font-medium">${sumofProductsPrice}</span>
         </div>
-        <div className="flex justify-between items-center mt-4">
+        <div className="grid grid-cols-2 place-items-center mt-4">
           Discount (10%){" "}
-          <span className="font-bold">${priceAfterDiscount}</span>
+          <span className="font-medium">${priceAfterDiscount}</span>
         </div>
-        <div className="flex justify-between items-center mt-4">
-          Delivery fee <span className="font-bold">${deliveryFee}</span>
+        <div className="grid grid-cols-2 place-items-center mt-4">
+          Delivery fee <span className="font-medium">${deliveryFee}</span>
         </div>
         <hr className="my-6 text-gray-400" />
-        <div className="flex justify-between items-center mt-4">
-          Total <span className="font-bold">${subTotal}</span>
+        <div className="grid grid-cols-2 place-items-center mt-4">
+          Total <span className="font-medium">${subTotal}</span>
         </div>
       </div>
 
       <div>
-        <div className="flex mt-10 justify-self-end justify-center w-full">
-          <ShieldCheck />
-          <p className="max-w-3xs">
+        <div className="mt-10 justify-self-center flex gap-2  max-w-2xs w-full">
+          <ShieldCheck size={44} />
+          <span className="text-sm sm:text-base">
             90 Days limited warranty against manufacturer's defects.{" "}
             <a href="#" className="font-semibold underline">
               Details
             </a>
-          </p>
+          </span>
         </div>
         <NavLink to="/orders" className="flex justify-center">
           {" "}
