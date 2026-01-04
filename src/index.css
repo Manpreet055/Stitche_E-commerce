@@ -114,3 +114,25 @@ html {
   height: 18px;
   width: 18px;
 }
+
+/* 1. Force the container to be truly centered and responsive */
+.Toastify__toast-container--top-center {
+  width: 80% !important; /* Take up screen space on mobile */
+  max-width: 380px !important; /* Don't get too wide on desktop */
+  left: 50% !important;
+  transform: translateX(-50%) !important; /* The magic for perfect centering */
+}
+
+/* 2. Custom styling for your specific toast */
+.custom-center-toast {
+  border-radius: 12px !important;
+  background: #1a1a1a !important; /* Match your theme */
+  color: white !important;
+  border: 1px solid #333;
+  padding: 20px !important;
+}
+
+/* 3. Center the progress bar too */
+.Toastify__progress-bar {
+  height: 4px !important;
+}
