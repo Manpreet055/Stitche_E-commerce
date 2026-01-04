@@ -32,7 +32,9 @@ const Sidebar = () => {
         onClose={handleClose}
       >
         <DrawerItems>
-          {!user || user === null ? (
+          {!user || (user === null && loadingState) ? (
+            <ProfileSkeletonLoader />
+          ) : !user || user === null ? (
             <NavLink
               to="login"
               className={() =>
@@ -41,8 +43,6 @@ const Sidebar = () => {
             >
               LogIn{" "}
             </NavLink>
-          ) : loadingState ? (
-            <ProfileSkeletonLoader />
           ) : (
             <NavLink to="profile" className="w-full flex items-center  gap-5">
               <Avatar rounded img={user?.profile?.avatar} />{" "}
