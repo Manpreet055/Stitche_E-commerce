@@ -11,9 +11,7 @@ const ToastComp = ({ text = "", icon = "", position = "left-[50%]" }) => {
     >
       <Toast className="theme text-theme border-theme items-center flex">
         {icon && (
-          <div className=" p-1 ustify-center rounded-lg bg-amber-50 ">
-            {icon}
-          </div>
+          <div className=" p-1 ustify-center rounded bg-amber-50 ">{icon}</div>
         )}
         <div className="ml-3 truncate font-normal  mr-3">{text}</div>
       </Toast>

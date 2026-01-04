@@ -62,11 +62,23 @@ const useAxiosPrivate = () => {
           originalRequest._retryCount < MAX_RETRIES
         ) {
           originalRequest._retryCount += 1;
-          if (originalRequest._retryCount === 1) {
-            toast.info("Our server is waking up... please hold on a moment!", {
-              autoClose: 5000,
-              toastId: "server-wakeup", // Prevents duplicate toasts
-            });
+          if (
+            originalRequest._retryCount === 1 ||
+            originalRequest._retryCount === 3
+          ) {
+            toast.loading(
+              <div className="flex top-2 flex-col items-center justify-center gap-1 text-center w-full">
+                <span className="text-lg font-bold">Booting backend...</span>
+                <p className="text-sm opacity-80">
+                  Stitching things together... hang tight!
+                </p>
+              </div>,
+              {
+                toastId: "server-wakeup",
+                position: "top-center", // Built-in center position
+                className: "custom-center-toast", // We will style this in CSS
+              },
+            );
           }
 
           // Exponential backoff: Wait longer each time (e.g., 2s, 4s, 6s)

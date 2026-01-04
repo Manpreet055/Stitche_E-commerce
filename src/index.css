@@ -106,3 +106,11 @@ html {
     animation-play-state: paused;
   } */
 }
+
+/* Specifically target the SVG inside */
+.Toastify__close-button > svg {
+  @apply dark:text-black text-white;
+  fill: currentColor;
+  height: 18px;
+  width: 18px;
+}
