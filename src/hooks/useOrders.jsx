@@ -11,7 +11,6 @@ const useOrders = () => {
 
   // States and toast texts
   const [loadingState, setLoadingState] = useState(false);
-  const [isOrderPlaced, setIsOrderPlaced] = useState(false);
   const [toast, setToast] = useState("");
   const [error, setError] = useState("");
 
@@ -23,12 +22,12 @@ const useOrders = () => {
     try {
       setLoadingState(true);
       const response = await api.post("/orders", orderData);
+      const orderId = response.data?.order?._id;
+
       if (response.status === 200) {
         setToast("Order Placed !!");
         setCart([]);
-        setTimeout(() => {
-          setIsOrderPlaced(true);
-        }, 500);
+        navigate(`/orders/success/${orderId}`);
       }
     } catch (error) {
       setToast(error.message);
@@ -42,8 +41,6 @@ const useOrders = () => {
     placeOrder,
     loadingState,
     toast,
-    isOrderPlaced,
-    setIsOrderPlaced,
     error,
   };
 };

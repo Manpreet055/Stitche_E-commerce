@@ -20,6 +20,7 @@ const PlaceOrderPage = lazy(() => import("./pages/PlaceOrderPage.jsx"));
 const UserProfileForm = lazy(() => import("./pages/UserProfileForm.jsx"));
 const OrdersHistory = lazy(() => import("./pages/OrdersHistory.jsx"));
 const OrderDetails = lazy(() => import("./pages/OrderDetails.jsx"));
+const ThanksGiving = lazy(() => import("./layout/orders/ThanksGiving.jsx"));
 
 const App = () => {
   return (
@@ -28,7 +29,13 @@ const App = () => {
         <Navbar />
         <ScrollToTop />
         <main>
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense
+            fallback={
+              <div className="h-screen w-full text-theme grid place-items-center">
+                Loading...
+              </div>
+            }
+          >
             <Routes>
               <Route path="/" element={<Homepage />} />
               <Route path="products" element={<Products />} />
@@ -75,6 +82,14 @@ const App = () => {
                 element={
                   <ProtectedRoute>
                     <OrderDetails />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="orders/success/:id"
+                element={
+                  <ProtectedRoute>
+                    <ThanksGiving />
                   </ProtectedRoute>
                 }
               />

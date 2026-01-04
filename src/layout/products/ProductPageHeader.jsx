@@ -1,13 +1,11 @@
 import React from "react";
 import SearchBar from "../header/SearchBar";
 import { ArrowLeft, X } from "lucide-react";
-import { useNavigate } from "react-router-dom";
 import FiltersSidebar from "./FiltersSidebar";
-import BackButton from "../../ui/BackButton";
+import useBackNavigation from "../../hooks/useBackNavigation";
 
 const ProductPageHeader = ({ setQuery, query }) => {
-  const navigate = useNavigate();
-
+  const { BackButton } = useBackNavigation();
   // Reset the filters and sort
   const clearFilters = () => {
     setQuery((prev) => ({
@@ -25,10 +23,7 @@ const ProductPageHeader = ({ setQuery, query }) => {
   return (
     <>
       <div className="flex flex-wrap mt-5 sm:mt-0 gap-4  items-center">
-        <div className="ml-3">
-          {" "}
-          <BackButton text="Back" />
-        </div>
+        <div className="ml-3"> {BackButton()}</div>
         <FiltersSidebar query={query} setQuery={setQuery} />
         {/* Clear Filters Button */}
         {(isSorted || Object.keys(query?.filters).length !== 0) && (

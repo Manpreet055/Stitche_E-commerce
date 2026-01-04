@@ -4,65 +4,28 @@ import RenderCart from "../layout/cart/RenderCart";
 import convertDate from "../utils/convertDate";
 import { MapPin, CreditCard, BadgeCheck } from "lucide-react";
 import capitalizeLetter from "../utils/capitalizeLetter";
-import { Navigate, NavLink, useNavigate } from "react-router-dom";
-import BackButton from "../ui/BackButton";
+import { Navigate, NavLink } from "react-router-dom";
 import useOrders from "../hooks/useOrders";
 import generatePriceDetails from "../utils/generatePriceDetails";
 import orderDataGenerator from "../utils/orderDataGenerator";
 import { Spinner } from "flowbite-react";
+import useBackNavigation from "../hooks/useBackNavigation";
+
 const PlaceOrderPage = () => {
-  const { placeOrder, isOrderPlaced, setIsOrderPlaced, loadingState } =
-    useOrders();
+  const { BackButton } = useBackNavigation(); //custom hook
+  const { placeOrder, loadingState } = useOrders();
 
   const { date, randomOrderId } = orderDataGenerator();
-  const navigate = useNavigate();
   let { user, cart } = useUser();
 
   const { priceAfterDiscount, deliveryFee, sumofProductsPrice, subTotal } =
     generatePriceDetails(cart);
 
   if (!user) return <Navigate to="/login" replace />;
-  if (cart.length === 0) return navigate("/cart");
-
-  if (isOrderPlaced) {
-    return (
-      <div className="grid place-items-center">
-        <div className="w-full max-w-300 text-theme p-4 mt-5   min-h-150 grid place-items-center">
-          <div
-            onClick={() => setIsOrderPlaced(false)}
-            className="w-full mt-3 text-start"
-          >
-            <BackButton text="Go Back" navPath="/" />
-          </div>
-          <div className="grid place-items-center gap-3">
-            {" "}
-            <BadgeCheck className="my-4" size={54} />
-            {/* Heading */}
-            <h2 className="font-medium w-full text-center text-2xl sm:text-4xl poppins">
-              Thank You for Your Purchase!
-            </h2>
-            <p className="text-gray-200 dark:text-gray-400 sm:text-lg my-2  max-w-xl text-center">
-              Your order has been successfully placed. A confirmation email has
-              been sent to{" "}
-              <span className="sm:text-xl font-bold">{user?.email}</span>
-            </p>
-          </div>
-          <NavLink
-            to="/products"
-            className="w-full dark:hover:bg-white dark:hover:text-black text-white bg-black btn-primary sm:text-lg poppins max-w-sm text-center  "
-          >
-            Continue Shopping
-          </NavLink>
-        </div>
-      </div>
-    );
-  }
   return (
     <div className=" flex mt-20 justify-center">
       <div className="max-w-300 flex theme items-center text-theme flex-col w-full">
-        <div className="w-full text-start mb-6">
-          <BackButton text="Back" />
-        </div>
+        <div className="w-full text-start mb-6">{BackButton()}</div>
         {/* Cart  */}
         <div className="w-full flex sm:text-xl font-semibold p-6 theme-transparent rounded-t-xl border-theme justify-between">
           Order ID: #{randomOrderId}

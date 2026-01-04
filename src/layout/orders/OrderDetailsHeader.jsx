@@ -3,9 +3,10 @@ import { List, ListItem } from "flowbite-react";
 import convertDate from "../../utils/convertDate";
 import capitalizeFirstLetter from "../../utils/capitalizeLetter";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-import { useNavigate } from "react-router-dom";
+import useBackNavigation from "../../hooks/useBackNavigation";
+
 const OrderDetailsHeader = ({ order }) => {
-  const navigate = useNavigate();
+  const { goBack } = useBackNavigation();
   const api = useAxiosPrivate();
 
   // destructuring order data
@@ -34,7 +35,7 @@ const OrderDetailsHeader = ({ order }) => {
     try {
       const response = await api.patch(`/orders/${_id}`);
       if (response.status === 200) {
-        navigate(-1);
+        goBack();
       }
     } catch (error) {
       setError(error.message);

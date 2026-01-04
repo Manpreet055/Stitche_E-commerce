@@ -1,20 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useLocation, useNavigate } from "react-router-dom";
 import { useAuthentication } from "../context/AuthProdvider";
 import { useUser } from "../context/UserDataProvider";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
-import BackButton from "../ui/BackButton";
 import ToastComp from "../ui/ToastComp";
 import { Spinner } from "flowbite-react";
+import useBackNavigation from "../hooks/useBackNavigation";
 
 const SignupPage = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
+  const { BackButton, goBack } = useBackNavigation();
   const [toastText, setToastText] = useState("");
   const [loadingState, setLoadingState] = useState(false);
 
-  const from = location.state?.from?.pathname || "/";
   const api = useAxiosPrivate();
   const { setUser } = useUser();
   const { setAccessToken } = useAuthentication();
@@ -63,7 +60,7 @@ const SignupPage = () => {
         // Use a single timeout for UX
         setTimeout(async () => {
           reset();
-          navigate(from, { replace: true });
+          goBack();
         }, 1500);
       }
     } catch (error) {
@@ -83,7 +80,7 @@ const SignupPage = () => {
   return (
     <section className="w-full theme text-theme relative min-h-screen flex justify-center items-center p-4">
       <div className="absolute top-7 sm:top-20 left-5 sm:left-20">
-        <BackButton text="Back" navPath="/" />
+        {BackButton()}
       </div>
 
       {toastText && <ToastComp text={toastText} position="top-10" />}

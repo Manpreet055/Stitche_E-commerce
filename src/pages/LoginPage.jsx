@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
-import BackButton from "../ui/BackButton";
+import { NavLink } from "react-router-dom";
 import ToastComp from "../ui/ToastComp";
 import { useAuthentication } from "../context/AuthProdvider";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { useUser } from "../context/UserDataProvider";
 import { Popover, Spinner } from "flowbite-react";
+import useBackNavigation from "../hooks/useBackNavigation";
 
 const LoginPage = () => {
   const { setUser, setCart } = useUser();
@@ -14,15 +14,14 @@ const LoginPage = () => {
   const { setAccessToken } = useAuthentication();
   const [loadingState, setLoadingState] = useState(false);
 
-  const navigate = useNavigate();
-  const location = useLocation();
+  const { goBack, BackButton } = useBackNavigation();
 
   const [toastText, setToastText] = useState();
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isSubmitting },
+    formState: { errors },
     setFocus,
   } = useForm({
     defaultValues: {
@@ -60,7 +59,7 @@ const LoginPage = () => {
         // Use a single timeout for UX
         setTimeout(async () => {
           reset();
-          navigate(location.state?.from?.pathname || -1, { replace: true });
+          goBack();
         }, 1000);
       }
     } catch (error) {
@@ -86,10 +85,7 @@ const LoginPage = () => {
   return (
     <section className="w-full theme text-theme relative h-screen flex justify-center items-center">
       <div className="absolute top-7 sm:top-20 left-5 sm:left-20">
-        <BackButton
-          text="Back"
-          navPath={location.state?.from?.pathname || -1}
-        />
+        {BackButton()}
       </div>
       {toastText && <ToastComp text={toastText} position="top-10" />}
       <div className="w-full flex flex-col justify-center items-center max-w-lg px-6 sm:py-10 rounded-2xl">

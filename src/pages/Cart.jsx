@@ -1,19 +1,18 @@
 import React, { useState } from "react";
-import BackButton from "../ui/BackButton";
 import RenderCart from "../layout/cart/RenderCart";
 import CartPriceSummary from "../layout/cart/CartPriceSummary";
 import { useUser } from "../context/UserDataProvider";
 import generatePriceDetails from "../utils/generatePriceDetails";
-import AsyncBoundary from "../ui/AsyncBoundary";
-import { Spinner } from "flowbite-react";
+import useBackNavigation from "../hooks/useBackNavigation";
 
 const Cart = () => {
+  const { BackButton } = useBackNavigation();
   const { cart } = useUser();
   const priceDetails = generatePriceDetails(cart);
   return (
     <section className="my-17 sm:p-4 w-full theme text-theme">
       <div className="flex flex-col my-6 gap-y-3 items-start">
-        <BackButton navPath="/" text="Back" />
+        {BackButton()}{" "}
         <h2 className="text-2xl lg:text-3xl px-3 font-semibold">Your Cart</h2>
       </div>
       <div className="flex flex-wrap xl:flex-nowrap min-h-100 justify-evenly gap-4">

@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import { useUser } from "../context/UserDataProvider";
-import { useNavigate } from "react-router-dom";
-import BackButton from "../ui/BackButton";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import ToastComp from "../ui/ToastComp";
 import UserProfilePreview from "../layout/user/UserProfilePreview";
 import UserContactDetails from "../layout/user/UserContactDetails";
 import UserAddressDetails from "../layout/user/UserAddressDetails";
 import { Spinner } from "flowbite-react";
+import useBackNavigation from "../hooks/useBackNavigation";
+
 const UserProfileForm = () => {
+  const { navigate, BackButton, goBack } = useBackNavigation();
   const api = useAxiosPrivate();
   const { user, setUser } = useUser();
   const [loadingState, setLoadingState] = useState(false);
 
-  const navigate = useNavigate();
   if (!user) {
     return navigate("/login");
   }
@@ -85,7 +85,7 @@ const UserProfileForm = () => {
       setToastText(updateProfile.data?.msg);
       setUser(updateProfile.data?.user);
       setTimeout(() => {
-        navigate(-1);
+        goBack();
       }, 1500);
     } catch (error) {
       const serverMessage = error.response?.data?.message;
@@ -104,15 +104,13 @@ const UserProfileForm = () => {
   return (
     <section className="w-full flex justify-center">
       <div className=" mt-20 w-full text-theme sm:p-4 max-w-5xl">
-        <BackButton text="Back" />
+        {BackButton()}{" "}
         <h2 className="poppins my-5 text-2xl font-semibold sm:text-3xl text-start">
           Edit Profile
         </h2>
-
         <div className="w-full flex justify-center">
           {toastText && <ToastComp text={toastText} position="top-15" />}
         </div>
-
         <FormProvider {...methods}>
           <form
             onSubmit={methods.handleSubmit(updateUserProfile)}
@@ -127,7 +125,7 @@ const UserProfileForm = () => {
               <button
                 type="button"
                 className="w-full hover:bg-gray-500 dark:hover:bg-gray-300 dark:hover:text-black ease-in-out transition-colors  p-4 rounded"
-                onClick={() => navigate(-1)}
+                onClick={goBack}
               >
                 Cancel
               </button>

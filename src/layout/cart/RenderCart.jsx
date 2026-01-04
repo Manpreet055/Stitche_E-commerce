@@ -15,7 +15,7 @@ const RenderCart = ({ cart, fullheight = false }) => {
   // Empty cart states handles
   if (cart.length === 0) {
     return (
-      <div className="flex flex-col gap-y-6 justify-center items-center">
+      <div className="flex  flex-col gap-y-6 justify-center items-center">
         <span className="text-lg">Cart is empty</span>
         <NavLink
           to="/products"

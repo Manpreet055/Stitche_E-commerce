@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import OrderDetailsHeader from "../layout/orders/OrderDetailsHeader";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
-import BackButton from "../ui/BackButton";
 import AsyncBoundary from "../ui/AsyncBoundary";
 import RenderOrderedProducts from "../layout/orders/RenderOrderedProducts";
 import OrderTotalPrice from "../layout/orders/OrderTotalPrice";
+import useBackNavigation from "../hooks/useBackNavigation";
 
 const OrderDetails = () => {
+  const { BackButton } = useBackNavigation();
   const api = useAxiosPrivate();
   const { id } = useParams();
 
@@ -37,7 +38,7 @@ const OrderDetails = () => {
   return (
     <section className="my-15 sm:my-20 flex justify-center theme text-theme ">
       <div className="w-full max-w-7xl p-1 sm:p-4">
-        <BackButton text="Back" />
+        {BackButton()}
         <OrderDetailsHeader order={order} />
         <RenderOrderedProducts products={order.products} />
         <OrderTotalPrice order={order} />
