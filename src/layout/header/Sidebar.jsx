@@ -32,20 +32,18 @@ const Sidebar = () => {
         onClose={handleClose}
       >
         <DrawerItems className="flex items-center relative">
-          {!user || (user === null && loadingState) ? (
+          {loadingState ? (
             <ProfileSkeletonLoader />
-          ) : !user || user === null ? (
+          ) : !user ? (
             <NavLink
               to="login"
-              className={() =>
-                `  border text-sm text-white   border-gray-300 text-nowrap transition-all ease-in-out py-2 px-4 rounded`
-              }
+              className="border text-sm text-white border-gray-300 text-nowrap transition-all ease-in-out py-2 px-4 rounded"
             >
-              LogIn{" "}
+              LogIn
             </NavLink>
           ) : (
-            <NavLink to="profile" className="w-full flex items-center  gap-5">
-              <Avatar rounded img={user?.profile?.avatar} />{" "}
+            <NavLink to="profile" className="w-full flex items-center gap-5">
+              <Avatar rounded img={user?.profile?.avatar} />
               <span className="text-lg text-white font-bold">
                 {user?.username}
               </span>

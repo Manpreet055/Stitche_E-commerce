@@ -17,7 +17,7 @@ const AsyncBoundary = ({
 
   return (
     <div className="h-screen text-theme w-full flex justify-center items-center ">
-      <div className="text-xl">
+      <div className="sm:text-xl">
         {loadingState
           ? loader
           : error
