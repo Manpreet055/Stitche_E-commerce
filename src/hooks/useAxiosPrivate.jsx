@@ -39,12 +39,11 @@ const useAxiosPrivate = () => {
         }
         return config;
       },
-      (error) => Promise.reject(error),
+      (error) => Promise.reject(error)
     );
 
     const responseIntercept = api.interceptors.response.use(
       (response) => {
-        //Dismiss the loading toast immediately
         toast.dismiss("server-wakeup");
         return response;
       },
@@ -55,7 +54,6 @@ const useAxiosPrivate = () => {
           return Promise.reject(error);
         }
 
-        //SERVER SLEEP (500 ERROR) RETRY LOGIC ---
         const MAX_RETRIES = 5;
         originalRequest._retryCount = originalRequest._retryCount || 0;
 
@@ -77,7 +75,7 @@ const useAxiosPrivate = () => {
                 toastId: "server-wakeup",
                 position: "top-center",
                 className: "custom-center-toast",
-              },
+              }
             );
           }
 
@@ -86,10 +84,8 @@ const useAxiosPrivate = () => {
           return api(originalRequest);
         }
 
-        //If retries failed or it's a different error, dismiss the toast
         toast.dismiss("server-wakeup");
 
-        //AUTHENTICATION (401 ERROR) REFRESH LOGIC ---
         if (error.response?.status === 401 && !originalRequest._retry) {
           originalRequest._retry = true;
 
@@ -118,7 +114,7 @@ const useAxiosPrivate = () => {
         }
 
         return Promise.reject(error);
-      },
+      }
     );
 
     return () => {
