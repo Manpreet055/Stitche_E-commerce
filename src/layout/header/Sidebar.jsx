@@ -1,5 +1,5 @@
 import { Avatar, Drawer, DrawerItems } from "flowbite-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Home, Menu, Power, X } from "lucide-react";
 import SearchBar from "./SearchBar";
@@ -7,11 +7,21 @@ import { useUser } from "../../context/UserDataProvider";
 import ProfileSkeletonLoader from "../../ui/ProfileSkeletonLoader";
 import { sidebarTheme } from "../../utils/customFlowbiteTheme";
 const Sidebar = () => {
-  const { user, loadingState, cart, logOutUser } = useUser();
+  const { user, cart, logOutUser } = useUser();
   const [isOpen, setIsOpen] = useState(false);
   const cartItemsCount = cart?.length || 0;
-
+  const [showSkeleton, setShowSkeleton] = useState(false);
   const handleClose = () => setIsOpen(false);
+  useEffect(() => {
+    if (user) {
+      setShowSkeleton(false);
+    } else {
+      setShowSkeleton(true);
+      setTimeout(() => {
+        setShowSkeleton(false);
+      }, 3000);
+    }
+  }, [user]);
 
   return (
     <>
@@ -32,7 +42,7 @@ const Sidebar = () => {
         onClose={handleClose}
       >
         <DrawerItems className="flex items-center relative">
-          {!user || (user === null && loadingState) ? (
+          {showSkeleton ? (
             <ProfileSkeletonLoader />
           ) : !user || user === null ? (
             <NavLink

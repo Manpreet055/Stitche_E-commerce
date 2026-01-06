@@ -58,11 +58,11 @@ const NavLinks = () => {
         </li>
       </ul>
       <div className="grid grid-cols-3 place-items-center sm:gap-4 ">
-        <DarkThemeToggle className="border-none mr-2 sm:mr-0 bg-none place-self-center" />
+        <DarkThemeToggle className="border-none sm:mr-0 bg-none place-self-center" />
         <NavLink
           to="cart"
           className={({ isActive }) =>
-            `hover-transition mr-auto flex flex-col mb-2 items-center ${isActive ? "text-black dark:text-white" : "text-gray-500"} `
+            `hover-transition    flex flex-col mb-2 items-center ${isActive ? "text-black dark:text-white" : "text-gray-500"} `
           }
         >
           <span className="w-3 text-theme h-3 grid place-items-center text-[10px]">

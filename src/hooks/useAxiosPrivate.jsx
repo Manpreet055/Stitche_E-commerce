@@ -7,6 +7,8 @@ import { toast } from "react-toastify";
 const useAxiosPrivate = () => {
   const { accessToken, setAccessToken } = useAuthentication();
   const navigate = useNavigate();
+
+  // Using refs for queue and refreshing state to avoid closure issues in the effect
   const isRefreshing = useRef(false);
   const failedQueue = useRef([]);
 
@@ -15,7 +17,7 @@ const useAxiosPrivate = () => {
       const response = await api.post("/users/refresh-token");
       const token = response.data?.token;
       setAccessToken(token);
-      return token;
+      return token; // Return the token so the queue can use it
     } catch (err) {
       await api.post(`/users/logout`);
       window.location.reload();
@@ -39,21 +41,20 @@ const useAxiosPrivate = () => {
         }
         return config;
       },
-      (error) => Promise.reject(error)
+      (error) => Promise.reject(error),
     );
 
     const responseIntercept = api.interceptors.response.use(
-      (response) => {
-        toast.dismiss("server-wakeup");
-        return response;
-      },
+      (response) => response,
       async (error) => {
         const originalRequest = error.config;
 
+        // Skip logic for refresh-token calls themselves
         if (originalRequest.url.includes("/refresh-token")) {
           return Promise.reject(error);
         }
 
+        // --- 1. SERVER SLEEP (500 ERROR) RETRY LOGIC ---
         const MAX_RETRIES = 5;
         originalRequest._retryCount = originalRequest._retryCount || 0;
 
@@ -62,30 +63,31 @@ const useAxiosPrivate = () => {
           originalRequest._retryCount < MAX_RETRIES
         ) {
           originalRequest._retryCount += 1;
-
+          // Inside your axios interceptor (500 error block)
           if (originalRequest._retryCount === 1) {
-            toast.loading(
-              <div className="flex flex-col items-center justify-center gap-1 text-center w-full">
-                <span className="text-lg font-bold">Booting backend...</span>
+            toast.info(
+              <div className="flex flex-col items-center justify-center text-center w-full">
+                <span className="text-lg font-bold">Server Waking Up...</span>
                 <p className="text-sm opacity-80">
-                  Stitching things together... hang tight!
+                  Please wait while we stitch things together. ☕
                 </p>
               </div>,
               {
                 toastId: "server-wakeup",
-                position: "top-center",
-                className: "custom-center-toast",
-              }
+                position: "top-center", // Built-in center position
+                className: "custom-center-toast", // We will style this in CSS
+              },
             );
           }
 
+          // Exponential backoff: Wait longer each time (e.g., 2s, 4s, 6s)
           const delay = originalRequest._retryCount * 2000;
           await new Promise((resolve) => setTimeout(resolve, delay));
+
           return api(originalRequest);
         }
 
-        toast.dismiss("server-wakeup");
-
+        // --- 2. AUTHENTICATION (401 ERROR) REFRESH LOGIC ---
         if (error.response?.status === 401 && !originalRequest._retry) {
           originalRequest._retry = true;
 
@@ -102,6 +104,7 @@ const useAxiosPrivate = () => {
           try {
             const newToken = await refresh();
             processQueue(null, newToken);
+
             originalRequest.headers.Authorization = `Bearer ${newToken}`;
             return api(originalRequest);
           } catch (err) {
@@ -114,7 +117,7 @@ const useAxiosPrivate = () => {
         }
 
         return Promise.reject(error);
-      }
+      },
     );
 
     return () => {
