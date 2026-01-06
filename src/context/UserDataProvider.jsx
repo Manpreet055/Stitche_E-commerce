@@ -30,6 +30,16 @@ export const UserDataProvider = ({ children }) => {
     }
   }, [api, accessToken]);
 
+  useEffect(() => {
+    (async () => {
+      try {
+        await api.get("/health");
+      } catch (e) {
+        setError(e?.message ?? "Health check failed");
+      }
+    })();
+  }, []);
+
   const logOutUser = async () => {
     try {
       await api.post(`/users/logout`);

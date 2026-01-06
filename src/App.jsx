@@ -29,73 +29,204 @@ const App = () => {
         <Navbar />
         <ScrollToTop />
         <main>
-          <Suspense
-            fallback={
-              <div className="h-screen w-full text-theme grid place-items-center">
-                Loading...
-              </div>
-            }
-          >
-            <Routes>
-              <Route path="/" element={<Homepage />} />
-              <Route path="products" element={<Products />} />
-              <Route path="login" element={<LoginPage />} />
-              <Route path="signup" element={<SignupPage />} />
-              <Route
-                path="profile"
-                element={
-                  <ProtectedRoute>
+          <Routes>
+            <Route path="/" element={<Homepage />} />
+            <Route
+              path="products"
+              element={
+                <Suspense
+                  fallback={
+                    <div className="h-screen w-full text-theme grid place-items-center">
+                      Loading...
+                    </div>
+                  }
+                >
+                  <Products />
+                </Suspense>
+              }
+            />
+            <Route
+              path="login"
+              element={
+                <Suspense
+                  fallback={
+                    <div className="h-screen w-full text-theme grid place-items-center">
+                      Loading...
+                    </div>
+                  }
+                >
+                  <LoginPage />
+                </Suspense>
+              }
+            />
+            <Route
+              path="signup"
+              element={
+                <Suspense
+                  fallback={
+                    <div className="h-screen w-full text-theme grid place-items-center">
+                      Loading...
+                    </div>
+                  }
+                >
+                  <SignupPage />
+                </Suspense>
+              }
+            />
+            <Route
+              path="profile"
+              element={
+                <ProtectedRoute>
+                  <Suspense
+                    fallback={
+                      <div className="h-screen w-full text-theme grid place-items-center">
+                        Loading...
+                      </div>
+                    }
+                  >
                     <UserProfileForm />
-                  </ProtectedRoute>
-                }
-              />
-              <Route path="product/:id" element={<ProductDetailsPage />} />
-              <Route path="about" element={<About />} />
-              <Route path="contact" element={<ContactPage />} />
-              <Route path="search" element={<SearchPage />} />
-              <Route
-                path="cart"
-                element={
-                  <ProtectedRoute>
+                  </Suspense>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="product/:id"
+              element={
+                <Suspense
+                  fallback={
+                    <div className="h-screen w-full text-theme grid place-items-center">
+                      Loading...
+                    </div>
+                  }
+                >
+                  <ProductDetailsPage />
+                </Suspense>
+              }
+            />
+            <Route
+              path="about"
+              element={
+                <Suspense
+                  fallback={
+                    <div className="h-screen w-full text-theme grid place-items-center">
+                      Loading...
+                    </div>
+                  }
+                >
+                  <About />
+                </Suspense>
+              }
+            />
+            <Route
+              path="contact"
+              element={
+                <Suspense
+                  fallback={
+                    <div className="h-screen w-full text-theme grid place-items-center">
+                      Loading...
+                    </div>
+                  }
+                >
+                  <ContactPage />
+                </Suspense>
+              }
+            />
+            <Route
+              path="search"
+              element={
+                <Suspense
+                  fallback={
+                    <div className="h-screen w-full text-theme grid place-items-center">
+                      Loading...
+                    </div>
+                  }
+                >
+                  <SearchPage />
+                </Suspense>
+              }
+            />
+            <Route
+              path="cart"
+              element={
+                <ProtectedRoute>
+                  <Suspense
+                    fallback={
+                      <div className="h-screen w-full text-theme grid place-items-center">
+                        Loading...
+                      </div>
+                    }
+                  >
                     <Cart />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="orders"
-                element={
-                  <ProtectedRoute>
+                  </Suspense>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="orders"
+              element={
+                <ProtectedRoute>
+                  <Suspense
+                    fallback={
+                      <div className="h-screen w-full text-theme grid place-items-center">
+                        Loading...
+                      </div>
+                    }
+                  >
                     <PlaceOrderPage />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="orders/history"
-                element={
-                  <ProtectedRoute>
+                  </Suspense>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="orders/history"
+              element={
+                <ProtectedRoute>
+                  <Suspense
+                    fallback={
+                      <div className="h-screen w-full text-theme grid place-items-center">
+                        Loading...
+                      </div>
+                    }
+                  >
                     <OrdersHistory />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="orders/:id"
-                element={
-                  <ProtectedRoute>
+                  </Suspense>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="orders/:id"
+              element={
+                <ProtectedRoute>
+                  <Suspense
+                    fallback={
+                      <div className="h-screen w-full text-theme grid place-items-center">
+                        Loading...
+                      </div>
+                    }
+                  >
                     <OrderDetails />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="orders/success/:id"
-                element={
-                  <ProtectedRoute>
+                  </Suspense>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="orders/success/:id"
+              element={
+                <ProtectedRoute>
+                  <Suspense
+                    fallback={
+                      <div className="h-screen w-full text-theme grid place-items-center">
+                        Loading...
+                      </div>
+                    }
+                  >
                     <ThanksGiving />
-                  </ProtectedRoute>
-                }
-              />
-              <Route path="*" element={<ErrorPage />} />
-            </Routes>
-          </Suspense>
+                  </Suspense>
+                </ProtectedRoute>
+              }
+            />
+            <Route path="*" element={<ErrorPage />} />
+          </Routes>
         </main>
         <Footer />
       </ContextProvider>

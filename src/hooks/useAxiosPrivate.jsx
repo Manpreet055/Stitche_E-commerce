@@ -63,19 +63,18 @@ const useAxiosPrivate = () => {
           originalRequest._retryCount < MAX_RETRIES
         ) {
           originalRequest._retryCount += 1;
-          // Inside your axios interceptor (500 error block)
           if (originalRequest._retryCount === 1) {
-            toast.info(
-              <div className="flex flex-col items-center justify-center text-center w-full">
-                <span className="text-lg font-bold">Server Waking Up...</span>
+            toast.loading(
+              <div className="flex flex-col items-center justify-center gap-1 text-center w-full">
+                <span className="text-lg font-bold">Booting backend...</span>
                 <p className="text-sm opacity-80">
-                  Please wait while we stitch things together. ☕
+                  Stitching things together... hang tight!
                 </p>
               </div>,
               {
                 toastId: "server-wakeup",
-                position: "top-center", // Built-in center position
-                className: "custom-center-toast", // We will style this in CSS
+                position: "top-center",
+                className: "custom-center-toast",
               },
             );
           }
@@ -83,7 +82,7 @@ const useAxiosPrivate = () => {
           // Exponential backoff: Wait longer each time (e.g., 2s, 4s, 6s)
           const delay = originalRequest._retryCount * 2000;
           await new Promise((resolve) => setTimeout(resolve, delay));
-
+          toast.dismiss("server-wakeup");
           return api(originalRequest);
         }
 
