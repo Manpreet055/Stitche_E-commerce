@@ -1,44 +1,16 @@
 import React, { useContext, useState, useCallback, useEffect } from "react";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { useAuthentication } from "./AuthProdvider";
-
+import api from "../utils/api";
 const UserDataContext = React.createContext();
 
 export const UserDataProvider = ({ children }) => {
-  const api = useAxiosPrivate();
+  const apiPrivate = useAxiosPrivate();
   const { accessToken } = useAuthentication();
   const [user, setUser] = useState(null);
   const [cart, setCart] = useState([]);
-  const [loadingState, setLoadingState] = useState(false);
+  const [loadingState, setLoadingState] = useState(true);
   const [error, setError] = useState({});
-
-  // refetch user
-  const refetchUser = useCallback(async () => {
-    try {
-      setLoadingState(true);
-      const fetchUser = await api.get("/users");
-      const data = fetchUser.data;
-      setUser(data?.user);
-      setCart(data?.user?.cart);
-      localStorage.setItem("isAuthenticated", "true");
-    } catch (err) {
-      setError(err.message);
-      setCart([]);
-      setUser(null);
-    } finally {
-      setLoadingState(false);
-    }
-  }, [api, accessToken]);
-
-  useEffect(() => {
-    (async () => {
-      try {
-        await api.get("/health");
-      } catch (e) {
-        setError(e?.message ?? "Health check failed");
-      }
-    })();
-  }, []);
 
   const logOutUser = async () => {
     try {
@@ -51,6 +23,38 @@ export const UserDataProvider = ({ children }) => {
       localStorage.setItem("isAuthenticated", "false");
     }
   };
+  // refetch user
+  const refetchUser = useCallback(async () => {
+    try {
+      setLoadingState(true);
+      const fetchUser = await Promise.race([
+        api.get("/users"),
+        new Promise((_, reject) =>
+          setTimeout(() => reject(new Error(" refetchUser timeout")), 15000),
+        ),
+      ]);
+      setUser(fetchUser.data?.user);
+      setCart(fetchUser.data?.user?.cart);
+      localStorage.setItem("isAuthenticated", "true");
+    } catch (err) {
+      setError(err.message);
+      setCart([]);
+      setUser(null);
+      localStorage.setItem("isAuthenticated", "false");
+    } finally {
+      setLoadingState(false);
+    }
+  }, [apiPrivate]);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        await api.get("/health");
+      } catch (e) {
+        setError(e?.message ?? "Health check failed");
+      }
+    })();
+  }, []);
 
   useEffect(() => {
     refetchUser();

@@ -5,7 +5,6 @@ import useBackNavigation from "../../hooks/useBackNavigation";
 import { useUser } from "../../context/UserDataProvider";
 const ThanksGiving = () => {
   const { id } = useParams();
-  console.log(id);
   const { BackButton } = useBackNavigation();
   const { user } = useUser();
   return (

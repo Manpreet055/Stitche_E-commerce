@@ -7,21 +7,10 @@ import { useUser } from "../../context/UserDataProvider";
 import ProfileSkeletonLoader from "../../ui/ProfileSkeletonLoader";
 import { sidebarTheme } from "../../utils/customFlowbiteTheme";
 const Sidebar = () => {
-  const { user, cart, logOutUser } = useUser();
+  const { user, cart, logOutUser, loadingState } = useUser();
   const [isOpen, setIsOpen] = useState(false);
   const cartItemsCount = cart?.length || 0;
-  const [showSkeleton, setShowSkeleton] = useState(false);
   const handleClose = () => setIsOpen(false);
-  useEffect(() => {
-    if (user) {
-      setShowSkeleton(false);
-    } else {
-      setShowSkeleton(true);
-      setTimeout(() => {
-        setShowSkeleton(false);
-      }, 3000);
-    }
-  }, [user]);
 
   return (
     <>
@@ -42,7 +31,7 @@ const Sidebar = () => {
         onClose={handleClose}
       >
         <DrawerItems className="flex items-center relative">
-          {showSkeleton ? (
+          {loadingState ? (
             <ProfileSkeletonLoader />
           ) : !user || user === null ? (
             <NavLink

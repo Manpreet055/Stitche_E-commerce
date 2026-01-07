@@ -19,7 +19,6 @@ const Newsletter = () => {
         setError("");
       }
       const newState = response?.data?.state;
-      console.log(newState);
       setUser((prev) => ({
         ...prev,
         isSubscribed: newState,
@@ -36,6 +35,9 @@ const Newsletter = () => {
       }
     }
   };
+  if (!user) {
+    return null;
+  }
   return (
     <div className="w-fit  flex gap-4 flex-wrap xl:flex-col justify-center items-center">
       <div>

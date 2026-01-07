@@ -9,9 +9,10 @@ import SalesCard from "../layout/home/SalesCard";
 import CategoryCards from "../layout/home/CategoryCards";
 import Banner from "../Animations/Banner";
 import bannerImgLinks from "../utils/bannerImgLinks";
+import { Spinner } from "flowbite-react";
 
 const Homepage = () => {
-  const { products } = useProducts(5);
+  const { products, loadingState, error } = useProducts(5);
   return (
     <section className="w-full theme text-theme p-3 sm:p-10">
       <HeroContent />
@@ -31,11 +32,23 @@ const Homepage = () => {
           />{" "}
         </NavLink>
       </div>
-      <div className="flex  max-w-screen w-full gap-2 overflow-auto hide-scrollbar mb-5 justify-evenly">
-        {products.map((product, index) => (
-          <ProductCard product={product} key={index} />
-        ))}
-      </div>
+
+      {loadingState ? (
+        <div className="min-h-50 w-full grid place-content-center">
+          <Spinner color="gray" />
+        </div>
+      ) : error ? (
+        <div className="min-h-50 w-full grid place-content-center">
+          {error || "Failed to load products."}
+        </div>
+      ) : (
+        <div className="flex  max-w-screen w-full gap-2 overflow-auto hide-scrollbar mb-5 justify-evenly">
+          {products.map((product, index) => (
+            <ProductCard product={product} key={index} />
+          ))}
+        </div>
+      )}
+
       <div className="w-full">
         <h2 className="text-lg md:text-2xl  font-semibold  ">Popular Brands</h2>
         <Banner>

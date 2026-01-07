@@ -15,15 +15,15 @@ const OrderDetails = () => {
   // Initialize as null or undefined since it's a single order object, not a list
   const [order, setOrder] = useState(null);
   const [loadingState, setLoadingState] = useState(true);
+  const [error, setError] = useState(null);
 
   const getOrderedProducts = async () => {
     try {
       setLoadingState(true);
       const response = await api.get(`/orders/${id}`);
       setOrder(response.data?.orders);
-      console.log("Fetched order data:", response.data?.orders);
     } catch (error) {
-      console.error("Fetch error:", error);
+      setError(error);
     } finally {
       setLoadingState(false);
     }
@@ -34,6 +34,9 @@ const OrderDetails = () => {
   }, [id]); // Include 'id' as a dependency in case the URL changes
   if (loadingState) {
     return <AsyncBoundary loadingState={loadingState} errorState={null} />;
+  }
+  if (error) {
+    return <AsyncBoundary loadingState={false} errorState={error} />;
   }
 
   return (

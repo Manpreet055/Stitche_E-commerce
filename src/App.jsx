@@ -7,6 +7,7 @@ import ContextProvider from "./context/ContextProvider";
 import ErrorPage from "./pages/ErrorPage.jsx";
 import Homepage from "./pages/Homepage.jsx";
 import ProtectedRoute from "./utils/ProtectedRoute.jsx";
+import { Spinner } from "flowbite-react";
 
 const Products = lazy(() => import("./pages/Products.jsx"));
 const SearchPage = lazy(() => import("./pages/SearchPage.jsx"));
@@ -24,7 +25,7 @@ const ThanksGiving = lazy(() => import("./layout/orders/ThanksGiving.jsx"));
 
 const LoadingFallback = () => (
   <div className="h-screen w-full text-theme grid place-items-center">
-    Loading...
+    <Spinner color="gray" />
   </div>
 );
 
