@@ -37,7 +37,7 @@ export const fetchProductById = async (
 ) => {
   try {
     setLoadingState(true);
-    const response = await api.get(`/api/products/${id}`);
+    const response = await api.get(`/products/${id}`);
     let data = response.data.data;
     return data;
   } catch (error) {

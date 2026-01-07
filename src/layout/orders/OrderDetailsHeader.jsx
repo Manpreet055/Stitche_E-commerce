@@ -9,17 +9,22 @@ const OrderDetailsHeader = ({ order }) => {
   const { goBack } = useBackNavigation();
   const api = useAxiosPrivate();
 
-  // destructuring order data
+  // destucture order object safely
+  const [error, setError] = useState(null);
   const {
     _id,
-    shipping: { trackingId, street, city, postalCode, country },
-    createdAt,
-    updatedAt,
-    orderStatus,
-    payment: { method, transactionId },
-    user: {
-      profile: { fullName },
-    },
+    shipping: {
+      trackingId = "",
+      street = "",
+      city = "",
+      postalCode = "",
+      country = "",
+    } = {},
+    createdAt = "",
+    updatedAt = "",
+    orderStatus = "",
+    payment: { method = "", transactionId = "" } = {},
+    user: { profile: { fullName = "" } = {} } = {},
   } = order || {};
 
   const statusColor = {
@@ -70,6 +75,7 @@ const OrderDetailsHeader = ({ order }) => {
         >
           Cancel Order
         </button>
+        {error && <p className="text-red-500 font-medium">{error}</p>}
       </div>
 
       {/* Cards */}

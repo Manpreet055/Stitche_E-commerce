@@ -22,6 +22,12 @@ const OrdersHistory = lazy(() => import("./pages/OrdersHistory.jsx"));
 const OrderDetails = lazy(() => import("./pages/OrderDetails.jsx"));
 const ThanksGiving = lazy(() => import("./layout/orders/ThanksGiving.jsx"));
 
+const LoadingFallback = () => (
+  <div className="h-screen w-full text-theme grid place-items-center">
+    Loading...
+  </div>
+);
+
 const App = () => {
   return (
     <Router>
@@ -34,13 +40,7 @@ const App = () => {
             <Route
               path="products"
               element={
-                <Suspense
-                  fallback={
-                    <div className="h-screen w-full text-theme grid place-items-center">
-                      Loading...
-                    </div>
-                  }
-                >
+                <Suspense fallback={<LoadingFallback />}>
                   <Products />
                 </Suspense>
               }
@@ -48,13 +48,7 @@ const App = () => {
             <Route
               path="login"
               element={
-                <Suspense
-                  fallback={
-                    <div className="h-screen w-full text-theme grid place-items-center">
-                      Loading...
-                    </div>
-                  }
-                >
+                <Suspense fallback={<LoadingFallback />}>
                   <LoginPage />
                 </Suspense>
               }
@@ -62,13 +56,7 @@ const App = () => {
             <Route
               path="signup"
               element={
-                <Suspense
-                  fallback={
-                    <div className="h-screen w-full text-theme grid place-items-center">
-                      Loading...
-                    </div>
-                  }
-                >
+                <Suspense fallback={<LoadingFallback />}>
                   <SignupPage />
                 </Suspense>
               }
@@ -77,13 +65,7 @@ const App = () => {
               path="profile"
               element={
                 <ProtectedRoute>
-                  <Suspense
-                    fallback={
-                      <div className="h-screen w-full text-theme grid place-items-center">
-                        Loading...
-                      </div>
-                    }
-                  >
+                  <Suspense fallback={<LoadingFallback />}>
                     <UserProfileForm />
                   </Suspense>
                 </ProtectedRoute>
@@ -92,13 +74,7 @@ const App = () => {
             <Route
               path="product/:id"
               element={
-                <Suspense
-                  fallback={
-                    <div className="h-screen w-full text-theme grid place-items-center">
-                      Loading...
-                    </div>
-                  }
-                >
+                <Suspense fallback={<LoadingFallback />}>
                   <ProductDetailsPage />
                 </Suspense>
               }
@@ -106,13 +82,7 @@ const App = () => {
             <Route
               path="about"
               element={
-                <Suspense
-                  fallback={
-                    <div className="h-screen w-full text-theme grid place-items-center">
-                      Loading...
-                    </div>
-                  }
-                >
+                <Suspense fallback={<LoadingFallback />}>
                   <About />
                 </Suspense>
               }
@@ -120,13 +90,7 @@ const App = () => {
             <Route
               path="contact"
               element={
-                <Suspense
-                  fallback={
-                    <div className="h-screen w-full text-theme grid place-items-center">
-                      Loading...
-                    </div>
-                  }
-                >
+                <Suspense fallback={<LoadingFallback />}>
                   <ContactPage />
                 </Suspense>
               }
@@ -134,13 +98,7 @@ const App = () => {
             <Route
               path="search"
               element={
-                <Suspense
-                  fallback={
-                    <div className="h-screen w-full text-theme grid place-items-center">
-                      Loading...
-                    </div>
-                  }
-                >
+                <Suspense fallback={<LoadingFallback />}>
                   <SearchPage />
                 </Suspense>
               }
@@ -149,13 +107,7 @@ const App = () => {
               path="cart"
               element={
                 <ProtectedRoute>
-                  <Suspense
-                    fallback={
-                      <div className="h-screen w-full text-theme grid place-items-center">
-                        Loading...
-                      </div>
-                    }
-                  >
+                  <Suspense fallback={<LoadingFallback />}>
                     <Cart />
                   </Suspense>
                 </ProtectedRoute>
@@ -165,13 +117,7 @@ const App = () => {
               path="orders"
               element={
                 <ProtectedRoute>
-                  <Suspense
-                    fallback={
-                      <div className="h-screen w-full text-theme grid place-items-center">
-                        Loading...
-                      </div>
-                    }
-                  >
+                  <Suspense fallback={<LoadingFallback />}>
                     <PlaceOrderPage />
                   </Suspense>
                 </ProtectedRoute>
@@ -181,13 +127,7 @@ const App = () => {
               path="orders/history"
               element={
                 <ProtectedRoute>
-                  <Suspense
-                    fallback={
-                      <div className="h-screen w-full text-theme grid place-items-center">
-                        Loading...
-                      </div>
-                    }
-                  >
+                  <Suspense fallback={<LoadingFallback />}>
                     <OrdersHistory />
                   </Suspense>
                 </ProtectedRoute>
@@ -197,13 +137,7 @@ const App = () => {
               path="orders/:id"
               element={
                 <ProtectedRoute>
-                  <Suspense
-                    fallback={
-                      <div className="h-screen w-full text-theme grid place-items-center">
-                        Loading...
-                      </div>
-                    }
-                  >
+                  <Suspense fallback={<LoadingFallback />}>
                     <OrderDetails />
                   </Suspense>
                 </ProtectedRoute>
@@ -213,13 +147,7 @@ const App = () => {
               path="orders/success/:id"
               element={
                 <ProtectedRoute>
-                  <Suspense
-                    fallback={
-                      <div className="h-screen w-full text-theme grid place-items-center">
-                        Loading...
-                      </div>
-                    }
-                  >
+                  <Suspense fallback={<LoadingFallback />}>
                     <ThanksGiving />
                   </Suspense>
                 </ProtectedRoute>

@@ -24,7 +24,7 @@ const ProductDetailsPage = () => {
 
   const { category = "", media = {} } = product ?? {};
 
-  const { thumbnail = "", images = [] } = media || {};
+  const { images = [] } = media || {};
 
   if (loadingState) {
     return <AsyncBoundary loadingState={true} errorState={null} />;

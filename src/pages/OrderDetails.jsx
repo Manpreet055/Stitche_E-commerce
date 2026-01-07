@@ -21,6 +21,7 @@ const OrderDetails = () => {
       setLoadingState(true);
       const response = await api.get(`/orders/${id}`);
       setOrder(response.data?.orders);
+      console.log("Fetched order data:", response.data?.orders);
     } catch (error) {
       console.error("Fetch error:", error);
     } finally {
@@ -40,7 +41,7 @@ const OrderDetails = () => {
       <div className="w-full max-w-7xl p-1 sm:p-4">
         {BackButton()}
         <OrderDetailsHeader order={order} />
-        <RenderOrderedProducts products={order.products} />
+        <RenderOrderedProducts products={order?.products} />
         <OrderTotalPrice order={order} />
       </div>
     </section>
