@@ -56,11 +56,19 @@ const Counter = ({ productId = "", defaultqty = 1 }) => {
       className={`w-fit theme text-theme border-theme ${loadingState ? "cursor-progress" : "cursor-pointer"}`}
     >
       <ThemeProvider theme={buttonGroupTheme}>
-        <Button color="primary" className="p-2 sm:p-4" onClick={decValue}>
+        <Button
+          color="primary"
+          className="p-2 cursor-pointer sm:p-4"
+          onClick={decValue}
+        >
           -
         </Button>
         <p className="flex  items-center px-4 md:px-6">{quantity}</p>
-        <Button color="primary" className="p-2 sm:p-4" onClick={incValue}>
+        <Button
+          color="primary"
+          className="p-2 cursor-pointer sm:p-4"
+          onClick={incValue}
+        >
           +
         </Button>
       </ThemeProvider>
