@@ -10,7 +10,7 @@ import useBackNavigation from "../hooks/useBackNavigation";
 import { motion } from "framer-motion";
 
 const SignupPage = () => {
-  const { BackButton, goBack } = useBackNavigation();
+  const { BackButton, navigate } = useBackNavigation();
   const [toastText, setToastText] = useState("");
   const [loadingState, setLoadingState] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -63,7 +63,7 @@ const SignupPage = () => {
         // Use a single timeout for UX
         setTimeout(async () => {
           reset();
-          goBack();
+          navigate(-2);
         }, 1500);
       }
     } catch (error) {

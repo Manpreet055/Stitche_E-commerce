@@ -16,7 +16,7 @@ const LoginPage = () => {
   const [loadingState, setLoadingState] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
-  const { goBack, BackButton } = useBackNavigation();
+  const { navigate, BackButton } = useBackNavigation();
 
   const [toastText, setToastText] = useState();
   const {
@@ -61,7 +61,7 @@ const LoginPage = () => {
         // Use a single timeout for UX
         setTimeout(async () => {
           reset();
-          goBack();
+          navigate(-1);
         }, 1000);
       }
     } catch (error) {
