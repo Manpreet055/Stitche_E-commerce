@@ -7,12 +7,14 @@ import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { useUser } from "../context/UserDataProvider";
 import { Popover, Spinner } from "flowbite-react";
 import useBackNavigation from "../hooks/useBackNavigation";
-
+import { Eye } from "lucide-react";
+import { motion, spring } from "framer-motion";
 const LoginPage = () => {
   const { setUser, setCart } = useUser();
   const api = useAxiosPrivate();
   const { setAccessToken } = useAuthentication();
   const [loadingState, setLoadingState] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const { goBack, BackButton } = useBackNavigation();
 
@@ -89,15 +91,30 @@ const LoginPage = () => {
       </div>
       {toastText && <ToastComp text={toastText} position="top-10" />}
       <div className="w-full flex flex-col justify-center items-center max-w-lg px-6 sm:py-10 rounded-2xl">
-        <h1 className="text-4xl text-center sm:text-5xl mb-3 sm:mb-10 text-nowrap font-extrabold">
+        <motion.h1
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-4xl text-center sm:text-5xl mb-3 sm:mb-10 text-nowrap font-extrabold"
+        >
           Stitche
-        </h1>
-        <h1 className="text-3xl text-center sm:text-4xl text-nowrap font-semibold poppins">
+        </motion.h1>
+        <motion.h1
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+          className="text-3xl text-center sm:text-4xl text-nowrap font-semibold poppins"
+        >
           Welcome Back !
-        </h1>
-        <h4 className="text-gray-500 text-center mt-1 sm:mt-4 mb-4">
+        </motion.h1>
+        <motion.h4
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.2 }}
+          className="text-gray-500 text-center mt-1 sm:mt-4 mb-4"
+        >
           Enter your email and password
-        </h4>
+        </motion.h4>
 
         <form
           onSubmit={handleSubmit(handleForm)}
@@ -106,7 +123,10 @@ const LoginPage = () => {
           {/* Email */}
           <div className="flex flex-col mb-3  ">
             <label className="font-medium opacity-60 px-2 mb-1">Email</label>
-            <input
+            <motion.input
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
               {...register("email", {
                 required: "Email is required",
                 pattern: { value: /^\S+@\S+$/i, message: "Invalid email" },
@@ -123,19 +143,33 @@ const LoginPage = () => {
           </div>
 
           {/* Password */}
-          <div className="flex flex-col">
+          <div className="relative flex flex-col mb-2">
             <label className="font-medium opacity-60 px-2 mb-1 mt-5 sm:mt-7">
               Password
             </label>
-            <input
+            <motion.input
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
               {...register("password", {
                 required: "Password is required",
                 minLength: { value: 8, message: "Min 8 characters" },
               })}
-              type="password"
+              type={showPassword ? "text" : "password"}
               placeholder="Enter Password"
-              className="border-theme px-3 py-3 rounded shadow-lg"
+              className=" border-theme px-3 py-3 rounded shadow-sm"
             />
+            <span
+              className="absolute right-4 top-18 cursor-pointer"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              <Eye className="h-5 w-5 text-gray-500" />
+            </span>
+            {errors.password && (
+              <span className="text-red-500 text-xs mt-1 px-2">
+                {errors.password.message}
+              </span>
+            )}
           </div>
 
           <Popover

@@ -5,13 +5,16 @@ import { useUser } from "../context/UserDataProvider";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import ToastComp from "../ui/ToastComp";
 import { Spinner } from "flowbite-react";
+import { Eye } from "lucide-react";
 import useBackNavigation from "../hooks/useBackNavigation";
+import { motion } from "framer-motion";
 
 const SignupPage = () => {
   const { BackButton, goBack } = useBackNavigation();
   const [toastText, setToastText] = useState("");
   const [loadingState, setLoadingState] = useState(false);
-
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const api = useAxiosPrivate();
   const { setUser } = useUser();
   const { setAccessToken } = useAuthentication();
@@ -86,15 +89,30 @@ const SignupPage = () => {
       {toastText && <ToastComp text={toastText} position="top-10" />}
 
       <div className="w-full max-w-lg h-fit px-2 sm:px-6 py-10 sm:border-theme rounded-2xl bg-opacity-50">
-        <h1 className="text-4xl text-center sm:text-5xl mb-3 sm:mb-10 text-nowrap font-extrabold">
+        <motion.h1
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-4xl text-center sm:text-5xl mb-3 sm:mb-10 text-nowrap font-extrabold"
+        >
           Stitche
-        </h1>
-        <h1 className="text-3xl text-center sm:text-4xl text-nowrap font-semibold">
+        </motion.h1>
+        <motion.h1
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+          className="text-3xl text-center sm:text-4xl text-nowrap font-semibold"
+        >
           Welcome to Stitche!{" "}
-        </h1>
-        <h4 className="text-gray-500 sm:text-base text-sm text-center mt-1 sm:mt-4 mb-4">
+        </motion.h1>
+        <motion.h4
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.2 }}
+          className="text-gray-500 sm:text-base text-sm text-center mt-1 sm:mt-4 mb-4"
+        >
           we're so glad you're part of the fabric now{" "}
-        </h4>
+        </motion.h4>
         <form
           onSubmit={handleSubmit(handleSignupForm)}
           className="flex flex-col gap-3 px-2 sm:gap-7"
@@ -104,10 +122,13 @@ const SignupPage = () => {
             <label className="font-medium opacity-40 px-2 mb-1">
               Full Name
             </label>
-            <input
+            <motion.input
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
               {...register("fullname", {
                 required: "Full name is required",
-                minLength: { value: 6, message: "Min 6 characters" },
+                minLength: { value: 2, message: "Min 2 characters" },
               })}
               type="text"
               placeholder="Enter your name"
@@ -123,7 +144,10 @@ const SignupPage = () => {
           {/* Email */}
           <div className="flex flex-col mb-2">
             <label className="font-medium opacity-40 px-2 mb-1">Email</label>
-            <input
+            <motion.input
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
               {...register("email", {
                 required: "Email is required",
                 pattern: { value: /^\S+@\S+$/i, message: "Invalid email" },
@@ -140,32 +164,55 @@ const SignupPage = () => {
           </div>
 
           {/* Password */}
-          <div className="flex flex-col mb-2">
+          <div className="relative flex flex-col mb-2">
             <label className="font-medium opacity-40 px-2 mb-1">Password</label>
-            <input
+            <motion.input
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
               {...register("password", {
                 required: "Password is required",
                 minLength: { value: 8, message: "Min 8 characters" },
               })}
-              type="password"
+              type={showPassword ? "text" : "password"}
               placeholder="Enter Password"
-              className="border-theme px-3 py-3 rounded shadow-sm"
+              className=" border-theme px-3 py-3 rounded shadow-sm"
             />
+            <span
+              className="absolute right-3 top-11 cursor-pointer"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              <Eye className="h-5 w-5 text-gray-500" />
+            </span>
+            {errors.password && (
+              <span className="text-red-500 text-xs mt-1 px-2">
+                {errors.password.message}
+              </span>
+            )}
           </div>
 
           {/* Confirm Password */}
-          <div className="flex flex-col mb-2">
+          <div className="relative flex flex-col mb-2">
             <label className="font-medium opacity-40 px-2 mb-1">
               Confirm Password
             </label>
-            <input
+            <motion.input
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
               {...register("confirm", {
                 required: "Please confirm your password",
               })}
-              type="password"
+              type={showConfirmPassword ? "text" : "password"}
               placeholder="Confirm Password"
               className="border-theme px-3 py-3 rounded shadow-sm"
             />
+            <span
+              className="absolute right-3 top-11 cursor-pointer"
+              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+            >
+              <Eye className="h-5 w-5 text-gray-500" />
+            </span>
           </div>
 
           <button
