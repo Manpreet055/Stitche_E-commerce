@@ -13,7 +13,7 @@ const ProductCard = ({ product }) => {
       <motion.div className="min-w-40 max-w-47 sm:max-w-full cursor-pointer md:min-w-62.5 md:w-80 overflow-hidden dark:bg-black dark:text-white rounded-lg  shadow-md duration-300  hover:shadow-lg">
         <img
           loading="lazy"
-          className={`h-30 md:h-54 object-center object-cover md:min-h-54 w-full`}
+          className={`h-30 md:h-54 bg-center object-cover md:min-h-54 w-full`}
           src={media.thumbnail}
           alt="Product Image"
         />
