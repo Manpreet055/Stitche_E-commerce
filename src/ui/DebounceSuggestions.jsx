@@ -4,9 +4,11 @@ import { NavLink } from "react-router-dom";
 
 const DebounceSuggestions = ({ searches = [], loadingState, error, show }) => {
   return (
-    <>
+    <div className="absolute z-10 top-15 max-w-full sm:max-w-118 rounded-xl  shadow-black-2xl p-4 sm:p-6 theme text-theme min-h-100 w-full">
       {show && (
-        <ul className="rounded-xl  shadow-black-2xl p-4 sm:p-6 flex gap-3 sm:gap-5 flex-col justify-around absolute z-10 top-15 max-w-full sm:max-w-118 theme text-theme min-h-100 w-full ">
+        <ul
+          className={`h-full  grid grid-rows-${searches.length} gap-4 max-h-60 overflow-y-auto`  }
+        >
           {loadingState ? (
             <div className="h-full w-full grid place-items-center">
               <Spinner color="gray" />
@@ -16,8 +18,8 @@ const DebounceSuggestions = ({ searches = [], loadingState, error, show }) => {
               <p>{error}</p>
             </div>
           ) : searches.length === 0 || !searches ? (
-            <div className="grid place-items-center">
-              <p className="font-medium text-sm sm:text-lg ">
+            <div className="h-full w-full grid place-items-center">
+              <p className="font-medium h-full text-sm sm:text-lg ">
                 No products found{" "}
               </p>
             </div>
@@ -38,7 +40,7 @@ const DebounceSuggestions = ({ searches = [], loadingState, error, show }) => {
           )}
         </ul>
       )}
-    </>
+    </div>
   );
 };
 

@@ -1,4 +1,3 @@
-import axios from "axios";
 import api from "../utils/api";
 
 const searchProducts = async (
