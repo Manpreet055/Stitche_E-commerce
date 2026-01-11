@@ -7,7 +7,7 @@ import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { useUser } from "../context/UserDataProvider";
 import { Popover, Spinner } from "flowbite-react";
 import useBackNavigation from "../hooks/useBackNavigation";
-import { Eye } from "lucide-react";
+import { Eye,EyeClosed } from "lucide-react";
 import { motion, spring } from "framer-motion";
 const LoginPage = () => {
   const { setUser, setCart } = useUser();
@@ -163,7 +163,7 @@ const LoginPage = () => {
               className="absolute right-4 top-18 cursor-pointer"
               onClick={() => setShowPassword(!showPassword)}
             >
-              <Eye className="h-5 w-5 text-gray-500" />
+              {showPassword ? (<EyeClosed size={18} />) : (<Eye size={18} />)}  
             </span>
             {errors.password && (
               <span className="text-red-500 text-xs mt-1 px-2">

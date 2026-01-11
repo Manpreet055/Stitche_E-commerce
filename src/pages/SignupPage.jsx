@@ -5,7 +5,7 @@ import { useUser } from "../context/UserDataProvider";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import ToastComp from "../ui/ToastComp";
 import { Spinner } from "flowbite-react";
-import { Eye } from "lucide-react";
+import { Eye, EyeClosed } from "lucide-react";
 import useBackNavigation from "../hooks/useBackNavigation";
 import { motion } from "framer-motion";
 
@@ -182,7 +182,7 @@ const SignupPage = () => {
               className="absolute right-3 top-11 cursor-pointer"
               onClick={() => setShowPassword(!showPassword)}
             >
-              <Eye className="h-5 w-5 text-gray-500" />
+              {showPassword ? (<EyeClosed size={18} />) : (<Eye size={18} />)}  
             </span>
             {errors.password && (
               <span className="text-red-500 text-xs mt-1 px-2">
@@ -211,7 +211,7 @@ const SignupPage = () => {
               className="absolute right-3 top-11 cursor-pointer"
               onClick={() => setShowConfirmPassword(!showConfirmPassword)}
             >
-              <Eye className="h-5 w-5 text-gray-500" />
+              {showConfirmPassword ? (<EyeClosed size={18} />) : (<Eye size={18} />)}  
             </span>
           </div>
 
