@@ -4,7 +4,6 @@ import { Search } from "lucide-react";
 import searchProducts from "../../services/searchProducts";
 import { useNavigate, NavLink } from "react-router-dom";
 import debounce from "../../utils/debounce";
-import { Spinner } from "flowbite-react";
 import DebounceSuggestions from "../../ui/DebounceSuggestions";
 
 const SearchBar = ({ isDrawer = false, theme = "text-theme theme" }) => {
@@ -66,7 +65,7 @@ const SearchBar = ({ isDrawer = false, theme = "text-theme theme" }) => {
           setTimeout(() => setIsFocused(false), 250);
         }}
         type="text"
-        className={`w-full searchbar h-10 sm:h-12 bg-transparent placeholder:text-gray-200 dark:placeholder:text-gray-400 text-sm sm:text-base border border-slate-200 rounded-md ${!isDrawer ? "pl-10" : "pl-2"} pr-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow`}
+        className={`w-full text-white searchbar h-10 sm:h-12 bg-transparent placeholder:text-gray-200 dark:placeholder:text-gray-400 text-sm sm:text-base border border-slate-200 rounded-md ${!isDrawer ? "pl-10" : "pl-2"} pr-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow`}
         placeholder="Search Products .."
       />
       <button

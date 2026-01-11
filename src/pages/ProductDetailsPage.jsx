@@ -39,7 +39,7 @@ const ProductDetailsPage = () => {
   return (
     <section className="h-full w-full my-16 sm:my-20">
       <div className="w-full px-2 sm:px-4 py-2">{BackButton()}</div>
-      <div className="w-full p-3 sm:p-6 flex flex-col md:flex-row  gap-7 justify-center">
+      <div className="w-full p-3 sm:p-6 flex flex-col md:flex-row items-center md:items-start  gap-7 justify-center">
         <CarauselComp loadingState={loadingState} images={images} />
         <ProductBasicDetails product={product} />
       </div>

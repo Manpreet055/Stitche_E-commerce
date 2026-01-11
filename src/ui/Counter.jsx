@@ -53,7 +53,7 @@ const Counter = ({ productId = "", defaultqty = 1 }) => {
         event.preventDefault();
         event.stopPropagation();
       }}
-      className={`w-fit theme text-theme border-theme ${loadingState ? "cursor-progress" : "cursor-pointer"}`}
+      className={`w-full max-w-35 flex justify-evenly theme text-theme border-theme ${loadingState ? "cursor-progress" : "cursor-pointer"}`}
     >
       <ThemeProvider theme={buttonGroupTheme}>
         <Button

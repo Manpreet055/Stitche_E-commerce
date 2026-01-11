@@ -16,7 +16,7 @@ const SimilarProducts = ({ category }) => {
       try {
         const data = await searchProducts(
           category,
-          4,
+          6,
           setLoadingState,
           setError,
         );

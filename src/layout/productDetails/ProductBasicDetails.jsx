@@ -37,11 +37,15 @@ const ProductBasicDetails = ({ product }) => {
             ? `Only ${stock}  left`
             : `${stock} In Stock `}
       </p>
-      <div className="flex items-center  mt-3  sm:mt-6 gap-3">
+      <div className="mt-6 ">
         <Counter productId={_id} />
-        <AddToCartButton product={_id} text="Add to Cart" />
       </div>
-      <div className="mt-5">
+      <div className="mt-5 flex flex-col gap-4">
+        <AddToCartButton
+          theme="rounded sm:max-w-xs text-center h-fit w-full flex gap-2 items-center justify-center p-2.5 border-theme"
+          product={_id}
+          text="Add to Cart"
+        />
         <BuyButton product={_id} />
       </div>
     </div>

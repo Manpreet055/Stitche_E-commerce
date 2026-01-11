@@ -182,7 +182,7 @@ const SignupPage = () => {
               className="absolute right-3 top-11 cursor-pointer"
               onClick={() => setShowPassword(!showPassword)}
             >
-              {showPassword ? (<EyeClosed size={18} />) : (<Eye size={18} />)}  
+              {showPassword ? <EyeClosed size={18} /> : <Eye size={18} />}
             </span>
             {errors.password && (
               <span className="text-red-500 text-xs mt-1 px-2">
@@ -211,7 +211,11 @@ const SignupPage = () => {
               className="absolute right-3 top-11 cursor-pointer"
               onClick={() => setShowConfirmPassword(!showConfirmPassword)}
             >
-              {showConfirmPassword ? (<EyeClosed size={18} />) : (<Eye size={18} />)}  
+              {showConfirmPassword ? (
+                <EyeClosed size={18} />
+              ) : (
+                <Eye size={18} />
+              )}
             </span>
           </div>
 
