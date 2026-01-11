@@ -2,7 +2,7 @@ import api from "../utils/api";
 
 const searchProducts = async (
   query,
-  limit = 6,
+  limit = 10,
   setLoadingState = () => {},
   setError = () => {},
 ) => {
