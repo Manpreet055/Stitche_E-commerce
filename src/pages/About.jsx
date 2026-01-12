@@ -109,12 +109,12 @@ const About = () => {
               <span className="text-center "> CEO & Founder </span>
             </div>
             <Blockquote className="text-sm sm:text-lg text-center">
-              “Stitche was built on respect for craft and the belief that true
-              luxury is intentional. Every garment we create reflects time,
-              skill, and care—values we refuse to compromise. Our focus has
-              never been speed or scale, but meaning, quality, and longevity.
-              Thank you for being part of a brand that values how things are
-              made as much as how they are worn.”
+              “At Stitche, our role is simple: to bring the world’s most
+              respected brands together in one trusted space. Every label we
+              offer is chosen for its quality, innovation, and authenticity. We
+              don’t chase trends—we curate them. Our commitment is to give our
+              customers access to genuine products, transparent service, and a
+              shopping experience built on trust.”
             </Blockquote>
           </motion.div>
         </div>
