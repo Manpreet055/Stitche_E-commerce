@@ -54,7 +54,7 @@ const Sidebar = () => {
             <X />
           </button>
         </DrawerItems>{" "}
-        <DrawerItems>
+        <DrawerItems className="text-white">
           <SearchBar theme="" isDrawer />
         </DrawerItems>
         <DrawerItems className="focus:border-none">

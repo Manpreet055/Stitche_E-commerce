@@ -23,6 +23,7 @@ const useOrders = () => {
       setLoadingState(true);
       const response = await api.post("/orders", orderData);
       const orderId = response.data?.order?._id;
+      console.log(response.data.order);
 
       if (response.status === 200) {
         setToast("Order Placed !!");

@@ -65,7 +65,7 @@ const SearchBar = ({ isDrawer = false, theme = "text-theme theme" }) => {
           setTimeout(() => setIsFocused(false), 250);
         }}
         type="text"
-        className={`w-full text-white searchbar h-10 sm:h-12 bg-transparent placeholder:text-gray-200 dark:placeholder:text-gray-400 text-sm sm:text-base  border border-slate-200 rounded-md ${!isDrawer ? "pl-10" : "pl-3"} pr-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow`}
+        className={`w-full searchbar h-10 sm:h-12 bg-transparent placeholder:text-gray-400 dark:placeholder:text-gray-400 text-sm sm:text-base  border border-slate-200 rounded-md ${!isDrawer ? "pl-10" : "pl-3"} pr-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow`}
         placeholder="Search Products .."
       />
       <button

@@ -19,10 +19,10 @@ const orderDataGenerator = (cart = [], user = []) => {
   const randomPaymentMethod = Math.floor(Math.random() * paymentMethod.length);
   const transactionId = Math.floor(100000000 + Math.random() * 900000000);
   const trackingId = Math.floor(100000 + Math.random() * 900000);
-
   const cartProducts = cart.map((p) => ({
     product: p?.product?._id ?? "undefined",
     qty: p?.qty,
+    price: p?.product?.price * p?.qty ?? 0, // price for qty
   }));
 
   // Creating orderData

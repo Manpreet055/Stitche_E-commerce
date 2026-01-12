@@ -78,7 +78,7 @@ const RenderCart = ({ cart, fullheight = false }) => {
                     )
                   }
                   alt="product"
-                  className=" sm:w-] sm:grid-col20 h-full sm:h-20 "
+                  className=" sm:w-] bg-white sm:grid-col20 h-full sm:h-20 "
                 />
                 <div className="flex place-self-start flex-col justify-center gap-2 mx-4">
                   <h2 className=" sm:text-xl font-medium">
