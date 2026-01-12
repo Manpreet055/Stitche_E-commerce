@@ -7,6 +7,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { container, item } from "../../Animations/ListStagger";
 import { motion } from "framer-motion";
+import AsyncBoundary from "../../ui/AsyncBoundary";
 
 const RenderCart = ({ cart, fullheight = false }) => {
   const api = useAxiosPrivate();
@@ -87,7 +88,11 @@ const RenderCart = ({ cart, fullheight = false }) => {
                     {p.product?.title}
                   </p>
                 </div>
-                <Counter productId={p.product?._id} defaultqty={p?.qty} />
+                <Counter
+                  productId={p.product?._id}
+                  size="max-w-25 md:max-w-35"
+                  defaultqty={p?.qty}
+                />
                 <span className=" ml-3 font-medium">
                   ${(p.product?.price * p.qty).toFixed(2)}
                 </span>

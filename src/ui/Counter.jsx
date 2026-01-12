@@ -4,7 +4,7 @@ import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { buttonGroupTheme } from "../utils/customFlowbiteTheme";
 import { ButtonGroup, Button, ThemeProvider } from "flowbite-react";
 import { useUser } from "../context/UserDataProvider";
-const Counter = ({ productId = "", defaultqty = 1 }) => {
+const Counter = ({ productId = "", defaultqty = 1, size = " max-w-35" }) => {
   const api = useAxiosPrivate();
   const { loadingState, cart, setCart, setError } = useUser();
 
@@ -53,7 +53,7 @@ const Counter = ({ productId = "", defaultqty = 1 }) => {
         event.preventDefault();
         event.stopPropagation();
       }}
-      className={`w-full max-w-35 flex justify-evenly theme text-theme border-theme ${loadingState ? "cursor-progress" : "cursor-pointer"}`}
+      className={`w-full flex justify-evenly theme text-theme border-theme ${size} ${loadingState ? "cursor-progress" : "cursor-pointer"}`}
     >
       <ThemeProvider theme={buttonGroupTheme}>
         <Button
@@ -63,7 +63,9 @@ const Counter = ({ productId = "", defaultqty = 1 }) => {
         >
           -
         </Button>
-        <p className="flex  items-center px-4 md:px-6">{quantity}</p>
+        <p className="flex sm:text-base text-sm items-center px-2 md:px-6">
+          {quantity}
+        </p>
         <Button
           color="primary"
           className="p-2 cursor-pointer sm:p-4"

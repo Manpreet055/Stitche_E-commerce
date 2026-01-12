@@ -18,7 +18,7 @@ const Footer = () => {
             Stitche <small>&nbsp;&#8482;</small>
           </h1>
           <h2 className="text-xs sm:text-lg font-medium text-center">
-            Made By Hand. Designed to Tell Your Story.{" "}
+            Curated. Trusted. Authentic.{" "}
           </h2>
         </div>{" "}
         <div className="flex justify-between items-center gap-x-10 w-full sm:w-fit flex-col lg:flex-row">

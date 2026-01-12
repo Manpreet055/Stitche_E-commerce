@@ -25,19 +25,19 @@ const CartPriceSummary = ({ priceDetails }) => {
         </div>
       </div>
 
-      <div>
-        <div className="mt-10 justify-self-center flex gap-2  max-w-2xs w-full">
-          <ShieldCheck size={44} />
-          <span className="text-sm sm:text-base">
+      <div className="flex flex-col items-center w-full ">
+        <div className="mt-10  flex justify-center items-center gap-2  max-w-xs w-full">
+          <ShieldCheck size={24} />
+          <span className="text-sm sm:text-base w-full ">
             90 Days limited warranty against manufacturer's defects.{" "}
             <a href="#" className="font-semibold underline">
               Details
             </a>
           </span>
         </div>
-        <NavLink to="/orders" className="flex justify-center">
+        <NavLink to="/orders" className="flex w-full justify-center">
           {" "}
-          <button className=" w-full max-w-xs sm:max-w-full theme-alt text-theme-alt p-3  sm:p-4 mt-3 rounded-2xl hover:scale-[1.02] ease-in-out duration-300 transition-all">
+          <button className=" grow w-full max-w-xs sm:max-w-full theme-alt text-theme-alt p-3  sm:p-4 mt-3 rounded-2xl hover:scale-[1.02] ease-in-out duration-300 transition-all">
             Order Now
           </button>
         </NavLink>

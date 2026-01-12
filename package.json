@@ -25,6 +25,7 @@
     "framer-motion": "^12.23.25",
     "lucide": "^0.525.0",
     "lucide-react": "^0.525.0",
+    "mongosh": "^2.5.10",
     "prettier": "^3.7.3",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",

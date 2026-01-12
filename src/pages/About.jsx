@@ -1,7 +1,7 @@
 import React from "react";
 import aboutImg from "../assets/images/aboutImage.webp";
 import ceoImage from "../assets/images/ceo.avif";
-import { Hand, Leaf, Scissors } from "lucide-react";
+import { Sparkles, Handshake, Gem } from "lucide-react";
 import { Avatar, Blockquote } from "flowbite-react";
 import { motion } from "framer-motion";
 const About = () => {
@@ -33,19 +33,19 @@ const About = () => {
             transition={{ duration: 0.5 }}
             className="max-w-2xl sm:text-lg dark:text-gray-200 text-gray-500"
           >
-            Stitche was founded on the art of slow fashion and refined
-            craftsmanship. Rooted in handmade excellence, we create thoughtfully
-            designed garments— from hand-knitted sweaters to meticulously
-            finished essentials—each shaped by skilled hands and uncompromising
-            standards.
+            Stitche was founded with a clear vision: to curate authentic,
+            high-quality brands that value design, performance, and
+            craftsmanship. Rather than creating products, we focus on
+            selection—bringing together globally respected labels known for
+            their standards, innovation, and consistency.
             <br />
             <br />
-            Every piece reflects a balance of timeless design, premium
-            materials, and deliberate attention to detail. At Stitche, we
-            believe true luxury isn’t loud; it’s felt in the weight of the
-            fabric, the precision of every stitch, and the way a garment lives
-            with you over time. Our commitment is simple: create enduring
-            clothing that honors craftsmanship and elevates everyday wear.
+            Every product on Stitche is chosen with intention, evaluated for
+            quality, material integrity, and long-term value. We believe true
+            quality isn’t about excess or hype, but about choosing pieces that
+            stand the test of time. Our commitment is simple: offer genuine
+            products from trusted brands and deliver a shopping experience built
+            on transparency, confidence, and care.
           </motion.p>
         </div>
       </div>
@@ -64,27 +64,36 @@ const About = () => {
             </h1>
             <div className="flex flex-wrap gap-y-10 ">
               <div className="flex grow text-sm sm:max-w-3xs flex-col gap-3 items-center justify-center p-2  rounded-2xl w-fit">
-                <Scissors size={34} />
-                <h3 className="font-semibold sm:text-xl">Craftsmanship </h3>
+                <Sparkles size={34} />
+                <h3 className="font-semibold sm:text-xl">
+                  Curated With Purpose{" "}
+                </h3>
                 <p className="text-center max-w-3xs">
                   {" "}
-                  Represents precision, tailoring, and handmade work
+                  Every brand and product is selected intentionally—quality,
+                  relevance, and value come first.{" "}
                 </p>
               </div>
               <div className="flex grow text-sm sm:max-w-3xs flex-col gap-3 items-center justify-center p-2  rounded-2xl w-fit">
-                <Leaf size={34} />
-                <h3 className="font-semibold sm:text-xl">Sustainability </h3>
+                <Gem size={34} />
+                <h3 className="font-semibold sm:text-xl">
+                  Quality Over Quantity{" "}
+                </h3>
                 <p className="text-center max-w-3xs ">
                   {" "}
-                  Responsible sourcing, longevity, and respect for nature{" "}
+                  We don’t chase volume or trends. We focus on products that
+                  last and perform.{" "}
                 </p>
               </div>
               <div className="flex grow text-sm sm:max-w-3xs flex-col gap-3 items-center justify-center p-2  rounded-2xl w-fit">
-                <Hand size={34} />
-                <h3 className="font-semibold sm:text-xl">Human Touch </h3>
+                <Handshake size={34} />
+                <h3 className="font-semibold sm:text-xl">
+                  Respect for Brands{" "}
+                </h3>
                 <p className="text-center max-w-3xs ">
                   {" "}
-                  Real people, real craftsmanship, no factory shortcuts.{" "}
+                  We honor the craftsmanship, innovation, and identity of every
+                  brand we partner with.{" "}
                 </p>
               </div>
             </div>

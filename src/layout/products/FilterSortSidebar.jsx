@@ -8,9 +8,17 @@ const FilterSortSidebar = ({ setQuery }) => {
     handleSubmit,
     register,
     watch,
+    reset,
     formState: { dirtyFields },
     getValues,
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      category: [],
+      brand: [],
+      price: 1500,
+      sort: "",
+    },
+  });
 
   const price = watch("price");
 
@@ -59,7 +67,7 @@ const FilterSortSidebar = ({ setQuery }) => {
         {/* Category Filters */}
         <hr className="my-4 text-gray-200 dark:text-gray-500" />
         <h3 className="font-medium text-lg">Category</h3>
-        <ul className="flex flex-col my-5  gap-2">
+        <ul className="flex flex-col my-5  gap-3">
           <li className="flex gap-2 items-center">
             <Checkbox id="all" {...register("category")} value="all" />
             <Label id="all">All Categories</Label>
@@ -85,14 +93,18 @@ const FilterSortSidebar = ({ setQuery }) => {
         {/* Brands */}
         <hr className="my-4 text-gray-200 dark:text-gray-500" />
         <h3 className="font-medium text-lg">Popular Brands</h3>
-        <ul className="flex flex-col my-5  gap-2">
+        <ul className="flex flex-col my-5  gap-3">
           <li className="flex gap-2 items-center">
             <Checkbox id="puma" {...register("brand")} value="Puma" />
             <Label id="puma">Puma</Label>
           </li>
           <li className="flex gap-2 items-center">
-            <Checkbox id="addidas" {...register("brand")} value="Adidas" />
-            <Label id="addidas">Addidas</Label>
+            <Checkbox
+              id="The North Face"
+              {...register("brand")}
+              value="The North Face"
+            />
+            <Label id="the-north-face">The North Face</Label>
           </li>
           <li className="flex gap-2 items-center">
             <Checkbox
@@ -103,8 +115,8 @@ const FilterSortSidebar = ({ setQuery }) => {
             <Label id="balenciaga">Balenciaga</Label>
           </li>
           <li className="flex gap-2 items-center">
-            <Checkbox id="louis" {...register("brand")} value="Louis Vuitton" />
-            <Label id="louis">Louis Vuitton</Label>
+            <Checkbox id="Fila" {...register("brand")} value="Fila" />
+            <Label id="fila">Fila</Label>
           </li>
         </ul>
         {/* Price Range Slider */}
@@ -118,10 +130,11 @@ const FilterSortSidebar = ({ setQuery }) => {
           {...register("price")}
           min={500}
           max={1500}
+          className="mt-3"
           defaultValue={1500}
         />
-        <span className="btn-primary border w-fit mb-5">
-          ${price}
+        <span className="btn-primary border w-fit my-5">
+          AED {price}
           {price >= 1500 && "+"}
         </span>
 
@@ -130,7 +143,7 @@ const FilterSortSidebar = ({ setQuery }) => {
           Sort By
         </label>
         <select
-          className="btn-primary border border-gray-300 my-5"
+          className="btn-primary border border-gray-300 mt-3 mb-5"
           {...register("sort")}
           name="sort"
           id="sort"
@@ -144,8 +157,19 @@ const FilterSortSidebar = ({ setQuery }) => {
 
         {/* Buttons */}
         <div className="w-full flex justify-between  gap-4">
-          <button className="border w-full btn-primary">Clear all</button>
-          <button className="theme-alt w-full  text-theme-alt btn-primary">
+          <button
+            onClick={() =>
+              reset({ category: [], brand: [], price: 1500, sort: "" })
+            }
+            type="button"
+            className="border w-full btn-primary"
+          >
+            Clear all
+          </button>
+          <button
+            type="submit"
+            className="theme-alt w-full  text-theme-alt btn-primary"
+          >
             Submit
           </button>
         </div>

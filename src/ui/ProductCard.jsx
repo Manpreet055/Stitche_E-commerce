@@ -25,7 +25,9 @@ const ProductCard = ({ product }) => {
             {description}
           </p>
           <div className="flex justify-between items-center">
-            <p className="mr-2 sm:text-base text-sm font-semibold ">${price}</p>
+            <p className="mr-2 sm:text-base text-sm font-semibold ">
+              AED {price}
+            </p>
             <p className=" sm:text-base text-sm font-medium  ">
               {discount?.value && discount?.value > 0
                 ? discount?.value + "% off"
