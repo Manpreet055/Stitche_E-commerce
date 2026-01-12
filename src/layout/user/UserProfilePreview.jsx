@@ -18,7 +18,7 @@ const UserProfilePreview = ({ preview }) => {
             src={preview}
             loading="lazy"
             alt="Avatar"
-            className="w-full max-h-30 max-w-30 h-full object-cover"
+            className="w-full h-full object-cover"
           />
         ) : (
           <User2 className="h-full w-full text-gray-400" strokeWidth={1} />

@@ -22,7 +22,7 @@ const ProductPageHeader = ({ setQuery, query }) => {
     query.sort.sortField !== "" && query.sort.sortingOrder !== "";
   return (
     <>
-      <div className="flex flex-wrap mt-5 sm:mt-0 gap-4  items-center">
+      <div className="flex flex-wrap gap-y-5 my-5 sm:mt-0  gap-4  items-center">
         <div className="ml-3"> {BackButton()}</div>
         <FiltersSidebar query={query} setQuery={setQuery} />
         {/* Clear Filters Button */}

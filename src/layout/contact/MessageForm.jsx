@@ -6,9 +6,11 @@ import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { motion } from "framer-motion";
 import { CircleAlert, SendHorizonal } from "lucide-react";
 import { Spinner } from "flowbite-react";
+import { useNavigate } from "react-router-dom";
 
 const MessageForm = () => {
   const api = useAxiosPrivate();
+  const navigate = useNavigate();
   const [loadingState, setLoadingState] = useState(false);
   const [error, setError] = useState("");
   const { user } = useUser();
@@ -26,6 +28,9 @@ const MessageForm = () => {
     },
   });
   const handleForm = async (data) => {
+    if (!user || user === null) {
+      return navigate("/login");
+    }
     data.user = user._id;
     try {
       setLoadingState(true);

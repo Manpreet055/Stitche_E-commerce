@@ -56,7 +56,7 @@ const Footer = () => {
         <div className="flex justify-center flex-col gap-3  px-6 mb-2 sm:mb-4 items-center">
           <h3 className="text-xs md:text-lg  font-light flex items-center gap-1">
             <small>&nbsp;&#169;</small>
-            2025 Stitche. All rights are reserved.
+            2025-{new Date().getFullYear()} Stitche. All rights are reserved.
           </h3>
         </div>
       </div>{" "}
