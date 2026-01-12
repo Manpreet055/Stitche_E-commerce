@@ -42,6 +42,29 @@ const ProductDetailsPage = () => {
       <div className="w-full p-3 sm:p-6 flex flex-col md:flex-row items-center md:items-start  gap-7 justify-center">
         <CarauselComp loadingState={loadingState} images={images} />
         <ProductBasicDetails product={product} />
+        <ul className="xl:hidden px-2 flex text-theme h-full my-8 flex-col gap-2 ">
+          <h2 className="text-xl font-bold ">Key Features</h2>
+
+          <li className="font-medium flex items-start gap-2">
+            <span className="shrink-0">•</span>
+            <span>Premium quality materials for long-lasting durability</span>
+          </li>
+
+          <li className="font-medium flex items-start gap-2">
+            <span className="shrink-0">•</span>
+            <span>Comfortable fit designed for everyday wear</span>
+          </li>
+
+          <li className="font-medium flex items-start gap-2">
+            <span className="shrink-0">•</span>
+            <span>Easy care and maintenance instructions included</span>
+          </li>
+
+          <li className="font-medium flex items-start gap-2">
+            <span className="shrink-0">•</span>
+            <span>Available in multiple sizes and color options</span>
+          </li>
+        </ul>
       </div>
       <SimilarProducts category={category} />
       <CustomerReview />
