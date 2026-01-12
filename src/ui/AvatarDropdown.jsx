@@ -42,7 +42,10 @@ const AvatarDropDown = ({ img }) => {
         Settings
       </DropdownItem>
       <DropdownItem>
-        <NavLink to="orders/history" className="flex gap-5 items-center">
+        <NavLink
+          to="orders/history"
+          className="flex text-nowrap gap-5 items-center"
+        >
           {" "}
           <History />
           Orders History

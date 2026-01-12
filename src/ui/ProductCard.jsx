@@ -10,7 +10,7 @@ const ProductCard = ({ product }) => {
     product || {};
   return (
     <NavLink to={`/product/${_id}`}>
-      <motion.div className="min-w-40 max-w-49 sm:max-w-full cursor-pointer md:min-w-62.5 md:w-80 overflow-hidden dark:bg-black dark:text-white rounded-lg  shadow-md duration-300  hover:shadow-lg">
+      <motion.div className="min-w-40 max-w-49 sm:max-w-70 md:max-w-78 lg:max-w-100 cursor-pointer md:min-w-62.5 md:w-80 overflow-hidden dark:bg-black dark:text-white rounded-lg  shadow-md duration-300  hover:shadow-lg">
         <img
           loading="lazy"
           className={`bg-white bg-center object-cover min-h-58 md:min-h-60 w-full`}

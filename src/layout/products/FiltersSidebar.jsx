@@ -24,7 +24,7 @@ const FiltersSidebar = ({ setQuery, query }) => {
 
   return (
     <>
-      <div className="flex lg:hidden items-center gap-3 theme justify-center">
+      <div className="flex xl:hidden items-center gap-3 theme justify-center">
         {/* Toggle filters sidebar */}
         <button
           className=" theme-alt text-theme-alt py-2 px-4 rounded-2xl text-xs shadow-2xl mt-1 flex items-center gap-3"

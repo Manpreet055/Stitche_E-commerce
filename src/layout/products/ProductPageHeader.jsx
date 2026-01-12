@@ -34,8 +34,15 @@ const ProductPageHeader = ({ setQuery, query }) => {
             <X size={15} /> Clear Filters
           </button>
         )}
-        <div className="w-fit min-w-lg grow flex justify-center">
-          <SearchBar />
+        <div className="w-fit min-w-lg grow  md:flex hidden justify-center">
+          <span className="w-full flex justify-center max-w-130">
+            <SearchBar />
+          </span>
+        </div>
+        <div className="w-full  sm:hidden flex justify-center">
+          <span className="w-full max-w-sm  mx-6  ">
+            <SearchBar isDrawer theme="" />
+          </span>
         </div>
       </div>
     </>

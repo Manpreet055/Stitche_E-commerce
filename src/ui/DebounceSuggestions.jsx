@@ -22,7 +22,7 @@ const DebounceSuggestions = ({ searches = [], loadingState, error, show }) => {
               </p>
             </div>
           ) : (
-            <ul className="max-h-91 overflow-y-auto scrollbar-hide grid grid-rows-[repeat(10,)12px] gap-3">
+            <ul className="max-h-91 p-2 overflow-y-auto scrollbar-hide grid grid-rows-[repeat(10,)12px] gap-3">
               {searches.map((result) => (
                 <li key={result?._id} className="mb-2">
                   <NavLink
