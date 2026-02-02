@@ -37,7 +37,7 @@ const Sidebar = () => {
             <NavLink
               to="login"
               className={() =>
-                `  border text-sm text-white   border-gray-300 text-nowrap transition-all ease-in-out py-2 px-4 rounded`
+                `  border text-sm    border-gray-300 text-nowrap transition-all ease-in-out py-2 px-4 rounded`
               }
             >
               LogIn{" "}
@@ -45,23 +45,21 @@ const Sidebar = () => {
           ) : (
             <NavLink to="profile" className="w-full flex items-center  gap-5">
               <Avatar rounded img={user?.profile?.avatar} />{" "}
-              <span className="text-lg text-white font-bold">
-                {user?.username}
-              </span>
+              <span className="text-lg  font-bold">{user?.username}</span>
             </NavLink>
           )}
           <button onClick={handleClose} className="fixed right-2 opacity-50">
             <X />
           </button>
         </DrawerItems>{" "}
-        <DrawerItems className="text-white">
+        <DrawerItems className="">
           <SearchBar theme="" isDrawer />
         </DrawerItems>
         <DrawerItems className="focus:border-none">
           <NavLink
             to="/"
             className={({ isActive }) =>
-              `flex w-full  font-medium text-white rounded-lg hover-transition ${
+              `flex w-full  font-medium  rounded-lg hover-transition ${
                 isActive && " theme-alt text-theme-alt px-4 py-3 "
               }`
             }
@@ -73,7 +71,7 @@ const Sidebar = () => {
           <NavLink
             to="/products"
             className={({ isActive }) =>
-              `flex w-full  font-medium text-white rounded-lg hover-transition ${
+              `flex w-full  font-medium  rounded-lg hover-transition ${
                 isActive && " theme-alt text-theme-alt px-4 py-3 "
               }`
             }
@@ -85,7 +83,7 @@ const Sidebar = () => {
           <NavLink
             to="/about"
             className={({ isActive }) =>
-              `flex w-full  font-medium text-white rounded-lg hover-transition ${
+              `flex w-full  font-medium  rounded-lg hover-transition ${
                 isActive && " theme-alt text-theme-alt px-4 py-3 "
               }`
             }
@@ -97,7 +95,7 @@ const Sidebar = () => {
           <NavLink
             to="/contact"
             className={({ isActive }) =>
-              `flex w-full  font-medium text-white rounded-lg hover-transition ${
+              `flex w-full  font-medium  rounded-lg hover-transition ${
                 isActive && " theme-alt text-theme-alt px-4 py-3 "
               }`
             }
@@ -109,7 +107,7 @@ const Sidebar = () => {
           <NavLink
             to="orders/history"
             className={({ isActive }) =>
-              `flex w-full  font-medium text-white rounded-lg hover-transition ${
+              `flex w-full  font-medium  rounded-lg hover-transition ${
                 isActive && " theme-alt text-theme-alt px-4 py-3 "
               }`
             }
@@ -123,7 +121,7 @@ const Sidebar = () => {
           <NavLink
             to="/cart"
             className={({ isActive }) =>
-              `flex w-full items-center justify-between  font-medium text-white rounded-lg hover-transition ${
+              `flex w-full items-center justify-between  font-medium  rounded-lg hover-transition ${
                 isActive && " theme-alt text-theme-alt px-4 py-3 "
               }`
             }
@@ -137,7 +135,7 @@ const Sidebar = () => {
         {user && (
           <DrawerItems>
             <button
-              className="btn-primary border-2 text-white text-sm flex gap-2 items-center border-red-500"
+              className="btn-primary border-2  text-sm flex gap-2 items-center border-red-500"
               onClick={logOutUser}
             >
               <Power size={18} />

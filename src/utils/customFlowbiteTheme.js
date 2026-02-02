@@ -75,7 +75,7 @@ export const caraouselTheme = createTheme({
 
 export const sidebarTheme = createTheme({
   root: {
-    base: "fixed z-40 overflow-y-auto dark:bg-black/10 dark:backdrop-blur-lg bg-white/30 backdrop-blur-xl p-4 transition-transform ",
+    base: "fixed z-40 overflow-y-auto theme text-theme p-4 transition-transform ",
     backdrop: "fixed inset-0 z-30 bg-gray-900/50 dark:bg-gray-900/80",
     edge: "bottom-16",
     position: {
