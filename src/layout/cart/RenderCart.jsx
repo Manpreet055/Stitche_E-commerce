@@ -40,9 +40,9 @@ const RenderCart = ({ cart, fullheight = false }) => {
   return (
     <div className="flex h-full relative  theme text-theme  flex-col gap-2 border-theme grow rounded sm:p-4">
       {/* Header */}
-      <div className="grid grid-cols-[60px_100px_1fr_60px_70px] sm:grid-cols-5 md:text-xl place-items-center py-4 w-full">
+      <div className="grid grid-cols-4 md:text-xl place-items-center py-4  w-full">
         <span></span>
-        <span>Brand</span>
+        <span>Product</span>
         <span>Quantity</span>
         <span>Total</span>
         <span></span>
@@ -66,7 +66,7 @@ const RenderCart = ({ cart, fullheight = false }) => {
             <motion.li variants={item} key={index + 1}>
               <NavLink
                 to={`/product/${p.product._id}`}
-                className="grid grid-cols-[60px_100px_1fr_60px_70px] sm:grid-cols-5 place-items-center border-t border-gray-300 py-4 w-full"
+                className="grid grid-cols-4 place-items-center border-t border-gray-300 py-4 w-full"
               >
                 <img
                   loading="lazy"
@@ -78,24 +78,25 @@ const RenderCart = ({ cart, fullheight = false }) => {
                     )
                   }
                   alt="product"
-                  className=" sm:w-] bg-white sm:grid-col20 h-full sm:h-20 "
+                  className="bg-white rounded-lg h-full sm:h-20 "
                 />
-                <div className="flex place-self-start flex-col justify-center gap-2 mx-4">
+                <div className="flex place-self-start flex-col justify-center  gap-2 mx-4">
                   <h2 className=" sm:text-xl font-medium">
                     {p.product?.brand}
                   </h2>
                   <p className="truncate text-sm sm:text-lg w-20 sm:w-full">
                     {p.product?.title}
                   </p>
+                  <span className="font-medium">
+                    ${(p.product?.price * p.qty).toFixed(2)}
+                  </span>
                 </div>
                 <Counter
                   productId={p.product?._id}
                   size="max-w-25 md:max-w-35"
                   defaultqty={p?.qty}
                 />
-                <span className=" ml-3 font-medium">
-                  ${(p.product?.price * p.qty).toFixed(2)}
-                </span>
+
                 <button
                   onClick={(event) => {
                     event.preventDefault();
