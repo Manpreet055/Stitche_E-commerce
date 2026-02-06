@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 const CartPriceSummary = ({ priceDetails }) => {
   const { priceAfterDiscount, deliveryFee, sumofProductsPrice, subTotal } =
     priceDetails;
-
+  const isMobile = window.innerWidth < 726;
   return (
     <div className="flex grow text-theme flex-col border w-full min-w-sm xl:max-w-lg justify-around border-gray-300 rounded  p-4">
       <div>
@@ -26,14 +26,14 @@ const CartPriceSummary = ({ priceDetails }) => {
       </div>
 
       <div className="flex flex-col items-center w-full ">
-        <div className="mt-10  flex justify-center items-center gap-2  max-w-xs w-full">
-          <ShieldCheck size={24} />
-          <span className="text-sm sm:text-base w-full ">
+        <div className="mt-10  text-sm  text-center sm:text-base  flex justify-center  items-center w-full  max-w-xs ">
+          <ShieldCheck size={isMobile ? 24 : 40} />
+          <p className="max-w-56 sm:max-w-full ">
             90 Days limited warranty against manufacturer's defects.{" "}
             <a href="#" className="font-semibold underline">
               Details
             </a>
-          </span>
+          </p>
         </div>
         <NavLink to="/orders" className="flex w-full justify-center">
           {" "}
