@@ -40,11 +40,11 @@ const RenderCart = ({ cart, fullheight = false }) => {
   return (
     <div className="flex h-full relative  theme text-theme  flex-col gap-2 border-theme grow rounded sm:p-4">
       {/* Header */}
-      <div className="grid grid-cols-4 md:text-xl place-items-center py-4  w-full">
+      <div className="grid grid-cols-[1fr_1fr_120px_50px] font-semibold sm:grid-cols-4 md:text-xl place-items-center py-4  w-full">
         <span></span>
         <span>Product</span>
         <span>Quantity</span>
-        <span>Total</span>
+        <span></span>
         <span></span>
       </div>
 
@@ -66,7 +66,7 @@ const RenderCart = ({ cart, fullheight = false }) => {
             <motion.li variants={item} key={index + 1}>
               <NavLink
                 to={`/product/${p.product._id}`}
-                className="grid grid-cols-4 place-items-center border-t border-gray-300 py-4 w-full"
+                className="grid grid-cols-[1fr_1fr_120px_50px] sm:grid-cols-4 place-items-center border-t border-gray-300 py-4 w-full"
               >
                 <img
                   loading="lazy"
@@ -78,7 +78,7 @@ const RenderCart = ({ cart, fullheight = false }) => {
                     )
                   }
                   alt="product"
-                  className="bg-white rounded-lg h-full sm:h-20 "
+                  className="bg-white max-w-20 rounded-lg h-full sm:h-20 "
                 />
                 <div className="flex place-self-start flex-col justify-center  gap-2 mx-4">
                   <h2 className=" sm:text-xl font-medium">

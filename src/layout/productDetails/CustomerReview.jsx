@@ -8,7 +8,7 @@ const CustomerReview = () => {
       </h1>
       <div className="w-full flex justify-center items-center gap-4 flex-col">
         <div className="">No reviews yet, be the first to write a review !</div>
-        <Button className="w-fit">Write Review</Button>
+        <Button className="w-fit theme-alt text-theme-alt">Write Review</Button>
       </div>
     </div>
   );
