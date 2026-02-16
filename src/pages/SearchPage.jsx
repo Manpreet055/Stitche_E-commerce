@@ -46,7 +46,7 @@ const SearchPage = () => {
         className="flex w-full justify-around flex-wrap gap-y-4 sm:gap-8 "
       >
         {products.map((product, index) => (
-          <motion.li variants={item} key={index}>
+          <motion.li variants={item} key={product?._id}>
             <ProductCard product={product} />
           </motion.li>
         ))}

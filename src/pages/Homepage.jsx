@@ -44,7 +44,7 @@ const Homepage = () => {
       ) : (
         <div className="flex  max-w-screen w-full gap-2 overflow-auto hide-scrollbar mb-5 justify-evenly">
           {products.map((product, index) => (
-            <ProductCard product={product} key={index} />
+            <ProductCard product={product} key={product?._id} />
           ))}
         </div>
       )}

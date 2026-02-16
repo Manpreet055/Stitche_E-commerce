@@ -148,8 +148,8 @@ const FilterSortSidebar = ({ setQuery }) => {
           name="sort"
           id="sort"
         >
-          {PRODUCTS_SORTING_OPTIONS.map((option, index) => (
-            <option key={index} value={option.field}>
+          {PRODUCTS_SORTING_OPTIONS.map((option) => (
+            <option key={option?.title} value={option.field}>
               {option.title}
             </option>
           ))}

@@ -49,8 +49,8 @@ const SimilarProducts = ({ category }) => {
         variants={container}
         className="flex w-full justify-evenly hide-scrollbar py-2 overflow-x-auto max-w-screen gap-y-8 gap-x-6"
       >
-        {products.map((product, index) => (
-          <motion.li variants={item} key={index}>
+        {products.map((product) => (
+          <motion.li variants={item} key={product?._id}>
             <ProductCard product={product} />
           </motion.li>
         ))}

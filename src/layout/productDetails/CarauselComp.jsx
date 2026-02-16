@@ -3,7 +3,7 @@ import { Carousel, Spinner } from "flowbite-react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { caraouselTheme } from "../../utils/customFlowbiteTheme";
 
-const CarauselComp = ({ images = [], loadingState = () => {} }) => {
+const CarauselComp = ({ id, images = [], loadingState = () => {} }) => {
   return (
     <div className="w-full max-w-5xl flex justify-center h-auto sm:mb-10">
       {/* Images Slider*/}
@@ -29,8 +29,8 @@ const CarauselComp = ({ images = [], loadingState = () => {} }) => {
             slide
             pauseOnHover
           >
-            {images.map((img, index) => (
-              <div key={index} className="relative flex justify-center h-full ">
+            {images.map((img) => (
+              <div key={id} className="relative flex justify-center h-full ">
                 <img
                   src={img}
                   loading="lazy"

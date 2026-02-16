@@ -40,7 +40,7 @@ const ProductDetailsPage = () => {
     <section className="h-full w-full my-16 sm:my-20">
       <div className="w-full px-2 sm:px-4 py-2">{BackButton()}</div>
       <div className="w-full p-3 sm:p-6 flex flex-col md:flex-row items-center md:items-start  gap-7 justify-center">
-        <CarauselComp loadingState={loadingState} images={images} />
+        <CarauselComp id={id} loadingState={loadingState} images={images} />
         <ProductBasicDetails product={product} />
         <ul className="xl:hidden px-2 flex text-theme h-full my-8 flex-col gap-2 ">
           <h2 className="text-xl font-bold ">Key Features</h2>
