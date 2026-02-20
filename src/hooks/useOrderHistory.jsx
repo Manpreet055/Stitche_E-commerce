@@ -19,7 +19,6 @@ const useOrderHistory = () => {
       });
       const { orders, totalPages } = response.data;
       setAllOrders(orders);
-      console.log(orders);
       setTotalPages(totalPages);
     } catch (error) {
       if (error.code === "ERR_CANCELED") return;
