@@ -24,40 +24,48 @@ export const UserDataProvider = ({ children }) => {
     }
   };
   // refetch user
-  const refetchUser = useCallback(async () => {
-    try {
-      setLoadingState(true);
-      const fetchUser = await Promise.race([
-        api.get("/users"),
-        new Promise((_, reject) =>
-          setTimeout(() => reject(new Error(" refetchUser timeout")), 15000),
-        ),
-      ]);
-      setUser(fetchUser.data?.user);
-      setCart(fetchUser.data?.user?.cart);
-      localStorage.setItem("isAuthenticated", "true");
-    } catch (err) {
-      setError(err.message);
-      setCart([]);
-      setUser(null);
-      localStorage.setItem("isAuthenticated", "false");
-    } finally {
-      setLoadingState(false);
-    }
-  }, [apiPrivate]);
+  const refetchUser = useCallback(
+    async (signal) => {
+      try {
+        setLoadingState(true);
+        const fetchUser = await api.get("/users", { signal });
+        setUser(fetchUser.data?.user);
+        setCart(fetchUser.data?.user?.cart);
+        localStorage.setItem("isAuthenticated", "true");
+      } catch (err) {
+        if (err.code === "ERR_CANCELED") return;
+        setError(err.message);
+        setCart([]);
+        setUser(null);
+        localStorage.setItem("isAuthenticated", "false");
+      } finally {
+        setLoadingState(false);
+      }
+    },
+    [apiPrivate],
+  );
 
   useEffect(() => {
+    const controller = new AbortController();
     (async () => {
       try {
-        await api.get("/health");
+        await api.get("/health", { signal: controller.signal });
       } catch (e) {
+        if (e.name === "CanceledError") return;
         setError(e?.message ?? "Health check failed");
       }
     })();
+    return () => {
+      controller.abort();
+    };
   }, []);
 
   useEffect(() => {
-    refetchUser();
+    const controller = new AbortController();
+    refetchUser(controller.signal);
+    return () => {
+      controller.abort();
+    };
   }, [refetchUser]);
   return (
     <UserDataContext.Provider

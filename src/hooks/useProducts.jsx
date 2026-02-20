@@ -17,6 +17,7 @@ const useProducts = (initialLimit = 8) => {
   });
 
   useEffect(() => {
+    const controller = new AbortController();
     fetchProducts(
       query,
       setLoadingState,
@@ -24,7 +25,11 @@ const useProducts = (initialLimit = 8) => {
       setTotalPages,
       setProducts,
       currentPage,
+      controller.signal,
     );
+    return () => {
+      controller.abort();
+    };
   }, [query, currentPage]);
 
   return {

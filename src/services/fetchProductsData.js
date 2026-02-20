@@ -6,6 +6,7 @@ export const fetchProducts = async (
   setTotalPages,
   setProducts,
   currentPage,
+  signal = null,
 ) => {
   const { limit, sort, filters } = query;
   try {
@@ -18,11 +19,13 @@ export const fetchProducts = async (
         sortingOrder: sort.sortingOrder,
         ...filters,
       },
+      signal,
     });
     const data = response.data;
     setProducts(data.products);
     setTotalPages(data.totalPages);
   } catch (error) {
+    if (error.code === "ERR_CANCELED") return;
     setError(error.message);
     throw error;
   } finally {
@@ -34,13 +37,15 @@ export const fetchProductById = async (
   id,
   setLoadingState = () => {},
   setError = () => {},
+  signal,
 ) => {
   try {
     setLoadingState(true);
-    const response = await api.get(`/products/${id}`);
+    const response = await api.get(`/products/${id}`, { signal });
     let data = response.data.data;
     return data;
   } catch (error) {
+    if (error.code === "ERR_CANCELED") return;
     setError(error.message);
     throw error;
   } finally {

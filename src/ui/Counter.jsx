@@ -1,4 +1,10 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  useTransition,
+} from "react";
 import debounce from "../utils/debounce";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { buttonGroupTheme } from "../utils/customFlowbiteTheme";
@@ -12,28 +18,27 @@ const Counter = ({ productId = "", defaultqty = 1, size = " max-w-35" }) => {
     (p) => p?.product?._id === productId,
   );
 
-  const hasInteracted = useRef(false);
   const [quantity, setQuantity] = useState(
     findProductQtyInCart[0]?.qty ?? defaultqty,
   );
 
   const incValue = () => {
-    hasInteracted.current = true;
     if (quantity === 10) return;
     setQuantity((p) => p + 1);
   };
   const decValue = () => {
-    hasInteracted.current = true;
-
     if (quantity === 1) return;
     setQuantity((p) => p - 1);
   };
 
-  const updateCartQty = (product, qty) => {
+  const updateCartQty = (product, qty, signal) => {
     api
-      .patch(`/cart/update`, { product, qty })
+      .patch(`/cart/update`, { product, qty }, { signal })
       .then((res) => setCart(res.data?.cart))
-      .catch((error) => setError(error.message));
+      .catch((error) => {
+        if (error.code === "ERR_CANCELED") return;
+        setError(error.message);
+      });
   };
 
   // Debounce the quantity update
@@ -43,8 +48,11 @@ const Counter = ({ productId = "", defaultqty = 1, size = " max-w-35" }) => {
   );
 
   useEffect(() => {
-    if (!hasInteracted.current) return;
-    debouncedUpdate(productId, quantity); // Only call on changes after mount
+    const controller = new AbortController();
+    debouncedUpdate(productId, quantity, controller.signal); // Only call on changes after mount
+    return () => {
+      controller.abort();
+    };
   }, [quantity]);
 
   return (

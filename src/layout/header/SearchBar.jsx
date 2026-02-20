@@ -19,11 +19,11 @@ const SearchBar = ({ isDrawer = false, theme = "text-theme theme" }) => {
   // Creating Debounce Variable function
   const debounceFn = React.useMemo(
     () =>
-      debounce(async (query) => {
+      debounce(async (query, signal) => {
         try {
           setLoadingState(true);
           if (query?.length > 2) {
-            const results = await searchProducts(query);
+            const results = await searchProducts(query, signal);
             setSearches(results);
           }
         } catch (error) {
@@ -36,10 +36,15 @@ const SearchBar = ({ isDrawer = false, theme = "text-theme theme" }) => {
   );
 
   useEffect(() => {
-    debounceFn(watchSearchBar);
+    const controller = new AbortController();
+
+    debounceFn(watchSearchBar, controller.signal);
     if (watchSearchBar === "") {
       setSearches([]);
     }
+    return () => {
+      controller.abort();
+    };
   }, [watchSearchBar, debounceFn]);
 
   const handleFormSubmit = (data) => {

@@ -14,12 +14,17 @@ const ProductDetailsPage = () => {
   const [loadingState, setLoadingState] = useState(false);
   const [error, setError] = useState(null);
 
-  const { id } = useParams();
+  let { id } = useParams();
 
   useEffect(() => {
     if (!id) return;
-
-    fetchProductById(id, setLoadingState, setError).then(setProduct);
+    const controller = new AbortController();
+    fetchProductById(id, setLoadingState, setError, controller.signal).then(
+      setProduct,
+    );
+    return () => {
+      controller.abort();
+    };
   }, [id]);
 
   const { category = "", media = {} } = product ?? {};

@@ -11,14 +11,18 @@ const useOrderHistory = () => {
   const [allOrders, setAllOrders] = useState([]);
 
   // fetch OrdersHistory
-  const getOrderHistory = async () => {
+  const getOrderHistory = async (signal = null) => {
     try {
       setLoadingState(true);
-      const response = await api.get(`/orders?limit=${7}&page=${currentPage}`);
-      const data = response.data;
-      setAllOrders(data?.orders);
-      setTotalPages(data?.totalPages);
+      const response = await api.get(`/orders?limit=${7}&page=${currentPage}`, {
+        signal,
+      });
+      const { orders, totalPages } = response.data;
+      setAllOrders(orders);
+      console.log(orders);
+      setTotalPages(totalPages);
     } catch (error) {
+      if (error.code === "ERR_CANCELED") return;
       setError(error.messages);
     } finally {
       setLoadingState(false);
@@ -26,7 +30,11 @@ const useOrderHistory = () => {
   };
 
   useEffect(() => {
-    getOrderHistory();
+    const controller = new AbortController();
+    getOrderHistory(controller.signal);
+    return () => {
+      controller.abort();
+    };
   }, [currentPage]);
   return {
     setCurrentPage,

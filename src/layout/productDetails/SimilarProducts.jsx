@@ -12,21 +12,28 @@ const SimilarProducts = ({ category }) => {
 
   //   fetching the products with based on query
   useEffect(() => {
-    const fetchResults = async () => {
+    const controller = new AbortController();
+
+    (async () => {
       try {
         const data = await searchProducts(
           category,
           6,
           setLoadingState,
           setError,
+          controller.signal,
         );
         setProducts(data);
-      } catch (err) {
-        setError(err.message);
+      } catch (error) {
+        if (error.code === "ERR_CANCELED") return;
+        setError(error.message);
       }
+    })();
+
+    return () => {
+      controller.abort();
     };
-    fetchResults();
-  }, []);
+  }, [category]);
 
   //   handling errors and loading states
   if (loadingState) {

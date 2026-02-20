@@ -10,19 +10,20 @@ import useBackNavigation from "../hooks/useBackNavigation";
 const OrderDetails = () => {
   const { BackButton } = useBackNavigation();
   const api = useAxiosPrivate();
-  const { id } = useParams();
+  let { id } = useParams();
 
   // Initialize as null or undefined since it's a single order object, not a list
   const [order, setOrder] = useState(null);
   const [loadingState, setLoadingState] = useState(true);
   const [error, setError] = useState(null);
 
-  const getOrderedProducts = async () => {
+  const getOrderedProducts = async (signal) => {
     try {
       setLoadingState(true);
-      const response = await api.get(`/orders/${id}`);
+      const response = await api.get(`/orders/${id}`, { signal });
       setOrder(response.data?.orders);
     } catch (error) {
+      if (error.code === "ERR_CANCELED") return;
       setError(error);
     } finally {
       setLoadingState(false);
@@ -30,8 +31,13 @@ const OrderDetails = () => {
   };
 
   useEffect(() => {
-    getOrderedProducts();
-  }, [id]); // Include 'id' as a dependency in case the URL changes
+    const controller = new AbortController();
+    getOrderedProducts(controller.signal);
+    return () => {
+      id = null;
+      controller.abort();
+    };
+  }, [id]);
   if (loadingState) {
     return <AsyncBoundary loadingState={loadingState} errorState={null} />;
   }

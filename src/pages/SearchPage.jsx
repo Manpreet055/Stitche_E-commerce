@@ -18,7 +18,13 @@ const SearchPage = () => {
 
   //   fetching the products with based on query
   useEffect(() => {
-    searchProducts(query, setLoadingState, setError).then(setProducts);
+    const controller = new AbortController();
+    searchProducts(query, setLoadingState, setError, controller.signal).then(
+      setProducts,
+    );
+    return () => {
+      controller.abort();
+    };
   }, [query]);
 
   //   handling errors and loading states
