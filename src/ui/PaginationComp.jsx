@@ -1,4 +1,4 @@
-import { Pagination, createTheme } from "flowbite-react";
+import { Pagination } from "flowbite-react";
 import { customPaginationTheme } from "../utils/customFlowbiteTheme";
 
 export function PaginationComp({ currentPage, setCurrentPage, totalPages }) {

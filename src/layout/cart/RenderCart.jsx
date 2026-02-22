@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Counter from "../../ui/Counter";
 import { Trash } from "lucide-react";
 import { Spinner } from "flowbite-react";
 import { useUser } from "../../context/UserDataProvider";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { container, item } from "../../Animations/ListStagger";
 import { motion } from "framer-motion";
 import AsyncBoundary from "../../ui/AsyncBoundary";
 
-const RenderCart = ({ cart, fullheight = false }) => {
+const RenderCart = React.memo(({ cart, fullheight = false }) => {
   const api = useAxiosPrivate();
   const { setCart, setError, loadingState } = useUser();
 
@@ -113,6 +113,6 @@ const RenderCart = ({ cart, fullheight = false }) => {
       </motion.ul>
     </div>
   );
-};
+});
 
 export default RenderCart;

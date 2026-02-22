@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import capitalizeFirstLetter from "../../utils/capitalizeLetter";
 import Counter from "../../ui/Counter";
 import ProductRating from "./ProductRating";
@@ -17,6 +17,7 @@ const ProductBasicDetails = ({ product }) => {
     rating,
   } = product;
   const stock = product?.stock ?? product?.quantity ?? 0;
+  const [qty, setQty] = useState(0); // to set qty before adding product to cart
 
   return (
     <div className=" flex flex-col grow w-full justify-between ">
@@ -39,10 +40,11 @@ const ProductBasicDetails = ({ product }) => {
               : `${stock} In Stock `}
         </p>
         <div className="mt-6 ">
-          <Counter productId={_id} />
+          <Counter setQty={setQty} productId={_id} />
         </div>
         <div className="mt-5 flex flex-col gap-4">
           <AddToCartButton
+            qty={qty}
             theme="rounded sm:max-w-xs text-center h-fit w-full flex gap-2 items-center justify-center p-2.5 border-theme"
             product={_id}
             text="Add to Cart"

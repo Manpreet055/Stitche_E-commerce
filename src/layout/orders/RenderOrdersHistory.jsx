@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import convertDate from "../../utils/convertDate";
 import capitalizeFirstLetter from "../../utils/capitalizeLetter";
-import { ArrowRight } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { container, item } from "../../Animations/ListStagger";
 import { motion } from "framer-motion";

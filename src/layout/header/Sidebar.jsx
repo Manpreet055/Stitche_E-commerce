@@ -1,7 +1,7 @@
 import { Avatar, Drawer, DrawerItems } from "flowbite-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { Home, Menu, Power, X } from "lucide-react";
+import { Menu, Power, X } from "lucide-react";
 import SearchBar from "./SearchBar";
 import { useUser } from "../../context/UserDataProvider";
 import ProfileSkeletonLoader from "../../ui/ProfileSkeletonLoader";

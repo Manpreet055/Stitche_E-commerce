@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { useUser } from "../../context/UserDataProvider";
 import { ShoppingCart } from "lucide-react";
@@ -7,6 +7,7 @@ import { Spinner } from "flowbite-react";
 
 const AddToCartButton = ({
   product,
+  qty,
   text = "",
   theme = "rounded h-fit w-fit flex gap-2 items-center p-2.5 border-theme",
 }) => {
@@ -24,7 +25,7 @@ const AddToCartButton = ({
     setLoadingState(true);
 
     try {
-      const res = await api.patch("/cart", { product, qty: 1 });
+      const res = await api.patch("/cart", { product, qty });
       setCart(res.data?.cart);
     } catch (error) {
       setError(error.message);

@@ -1,12 +1,10 @@
 import React, { useContext, useState, useCallback, useEffect } from "react";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
-import { useAuthentication } from "./AuthProdvider";
 import api from "../utils/api";
 const UserDataContext = React.createContext();
 
 export const UserDataProvider = ({ children }) => {
   const apiPrivate = useAxiosPrivate();
-  const { accessToken } = useAuthentication();
   const [user, setUser] = useState(null);
   const [cart, setCart] = useState([]);
   const [loadingState, setLoadingState] = useState(true);

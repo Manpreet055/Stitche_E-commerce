@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { ArrowRightIcon } from "lucide-react";
 import ProductCard from "../ui/ProductCard";
-import { motion } from "framer-motion";
 import HeroContent from "../layout/home/HeroContent";
 import useProducts from "../hooks/useProducts";
 import { NavLink } from "react-router-dom";
@@ -43,7 +42,7 @@ const Homepage = () => {
         </div>
       ) : (
         <div className="flex  max-w-screen w-full gap-2 overflow-auto hide-scrollbar mb-5 justify-evenly">
-          {products.map((product, index) => (
+          {products.map((product) => (
             <ProductCard product={product} key={product?._id} />
           ))}
         </div>

@@ -7,21 +7,6 @@ const FiltersSidebar = ({ setQuery, query }) => {
   const [isOpen, setIsOpen] = useState(false);
   const handleClose = () => setIsOpen(false);
 
-  // Reset the filters and sort
-  const clearFilters = () => {
-    setQuery((prev) => ({
-      ...prev,
-      sort: {
-        sortField: "",
-        sortingOrder: "",
-      },
-      filters: {},
-    }));
-  };
-
-  const isSorted =
-    query.sort.sortField !== "" || query.sort.sortingOrder !== "";
-
   return (
     <>
       <div className="flex xl:hidden items-center gap-3 theme justify-center">

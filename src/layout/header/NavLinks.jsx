@@ -1,7 +1,6 @@
-import React, { useContext } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
-import { ShoppingCart, Menu } from "lucide-react";
-import { motion } from "framer-motion";
+import { ShoppingCart } from "lucide-react";
 import MobileNav from "./Sidebar";
 import { useUser } from "../../context/UserDataProvider";
 import AvatarDropDown from "../../ui/AvatarDropdown";

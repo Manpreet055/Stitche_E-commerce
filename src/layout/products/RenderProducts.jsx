@@ -4,7 +4,7 @@ import { container, item } from "../../Animations/ListStagger";
 import { motion } from "framer-motion";
 import PaginationComp from "../../ui/PaginationComp";
 import ProductCard from "../../ui/ProductCard";
-const RenderProducts = ({ data }) => {
+const RenderProducts = React.memo(({ data }) => {
   const {
     loadingState,
     error,
@@ -32,7 +32,7 @@ const RenderProducts = ({ data }) => {
             className="flex w-full justify-around flex-wrap gap-y-4 gap-2 sm:gap-8 "
           >
             {products.map((product) => (
-              <motion.li variants={item} key={product.title}>
+              <motion.li variants={item} key={product._id}>
                 <ProductCard product={product} />
               </motion.li>
             ))}
@@ -46,6 +46,6 @@ const RenderProducts = ({ data }) => {
       )}
     </div>
   );
-};
+});
 
 export default RenderProducts;

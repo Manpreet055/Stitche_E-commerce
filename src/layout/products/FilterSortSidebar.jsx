@@ -3,7 +3,7 @@ import { PRODUCTS_SORTING_OPTIONS } from "../../utils/sort_filter_options";
 import { Checkbox, Label } from "flowbite-react";
 import { useForm } from "react-hook-form";
 
-const FilterSortSidebar = ({ setQuery }) => {
+const FilterSortSidebar = React.memo(({ setQuery }) => {
   const {
     handleSubmit,
     register,
@@ -19,7 +19,6 @@ const FilterSortSidebar = ({ setQuery }) => {
       sort: "",
     },
   });
-
   const price = watch("price");
 
   const handleForm = () => {
@@ -40,7 +39,7 @@ const FilterSortSidebar = ({ setQuery }) => {
 
     // Parsing the sorting fields
     if (Object.keys(changedData).includes("sort")) {
-      const [sortField, sortingOrder] = changedData?.sort.split("_");
+      const [sortField, sortingOrder] = changedData.sort.split("_");
       // setSort({ sortField, sortingOrder });
       setQuery((prev) => ({
         ...prev,
@@ -176,6 +175,6 @@ const FilterSortSidebar = ({ setQuery }) => {
       </form>
     </>
   );
-};
+});
 
 export default FilterSortSidebar;

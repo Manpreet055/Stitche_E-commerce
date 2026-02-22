@@ -22,7 +22,7 @@ const orderDataGenerator = (cart = [], user = []) => {
   const cartProducts = cart.map((p) => ({
     product: p?.product?._id ?? "undefined",
     qty: p?.qty,
-    price: p?.product?.price * p?.qty ?? 0, // price for qty
+    price: p?.product?.price * p?.qty || 0, // price for qty
   }));
 
   // Creating orderData

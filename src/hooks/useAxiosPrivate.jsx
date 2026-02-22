@@ -22,11 +22,7 @@ const useAxiosPrivate = () => {
     } catch (err) {
       // Clear auth state and redirect to login (no reload)
       setAccessToken("");
-      try {
-        await api.post("/users/logout");
-      } catch (_) {
-        // Ignore logout errors
-      }
+      await api.post("/users/logout");
       navigate("/login", { replace: true });
       throw err;
     }

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import FooterLinks from "./FooterLinks";
 import Newsletter from "./Newsletter";
 import { useLocation } from "react-router-dom";

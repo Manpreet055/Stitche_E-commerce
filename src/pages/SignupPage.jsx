@@ -32,7 +32,7 @@ const SignupPage = () => {
   // set the focus to email input
   useEffect(() => {
     setFocus("fullname");
-  }, []);
+  }, [setFocus]);
 
   // Clear toast after 3 seconds automatically
   useEffect(() => {

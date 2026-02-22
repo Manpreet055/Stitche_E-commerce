@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import RenderOrdersHistory from "../layout/orders/RenderOrdersHistory";
 import PaginationComp from "../ui/PaginationComp";
 import useOrderHistory from "../hooks/useOrderHistory";

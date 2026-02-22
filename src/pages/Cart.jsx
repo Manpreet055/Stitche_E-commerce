@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import RenderCart from "../layout/cart/RenderCart";
 import CartPriceSummary from "../layout/cart/CartPriceSummary";
 import { useUser } from "../context/UserDataProvider";

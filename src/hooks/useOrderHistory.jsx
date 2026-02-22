@@ -34,7 +34,7 @@ const useOrderHistory = () => {
     return () => {
       controller.abort();
     };
-  }, [currentPage]);
+  }, [currentPage, getOrderHistory]);
   return {
     setCurrentPage,
     currentPage,

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { NavLink } from "react-router-dom";
 import ToastComp from "../ui/ToastComp";
@@ -8,7 +8,7 @@ import { useUser } from "../context/UserDataProvider";
 import { Popover, Spinner } from "flowbite-react";
 import useBackNavigation from "../hooks/useBackNavigation";
 import { Eye, EyeClosed } from "lucide-react";
-import { motion, spring } from "framer-motion";
+import { motion } from "framer-motion";
 const LoginPage = () => {
   const { setUser, setCart } = useUser();
   const api = useAxiosPrivate();
@@ -33,7 +33,7 @@ const LoginPage = () => {
   });
   useEffect(() => {
     setFocus("email");
-  }, []);
+  }, [setFocus]);
 
   // Clear toast after 3 seconds automatically
   useEffect(() => {

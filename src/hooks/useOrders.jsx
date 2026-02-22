@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useUser } from "../context/UserDataProvider";
 import useAxiosPrivate from "./useAxiosPrivate";
 import orderDataGenerator from "../utils/orderDataGenerator";

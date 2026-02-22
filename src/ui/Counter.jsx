@@ -10,7 +10,12 @@ import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { buttonGroupTheme } from "../utils/customFlowbiteTheme";
 import { ButtonGroup, Button, ThemeProvider } from "flowbite-react";
 import { useUser } from "../context/UserDataProvider";
-const Counter = ({ productId = "", defaultqty = 1, size = " max-w-35" }) => {
+const Counter = ({
+  productId = "",
+  defaultqty = 1,
+  size = " max-w-35",
+  setQty,
+}) => {
   const api = useAxiosPrivate();
   const { loadingState, cart, setCart, setError } = useUser();
 
@@ -25,10 +30,12 @@ const Counter = ({ productId = "", defaultqty = 1, size = " max-w-35" }) => {
   const incValue = () => {
     if (quantity === 10) return;
     setQuantity((p) => p + 1);
+    setQty((p) => p + 1);
   };
   const decValue = () => {
     if (quantity === 1) return;
     setQuantity((p) => p - 1);
+    setQty((p) => p - 1);
   };
 
   const updateCartQty = (product, qty, signal) => {

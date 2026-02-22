@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Instagram, Twitter, Github, Mail } from "lucide-react";
 import api from "../../utils/api";
 import { useUser } from "../../context/UserDataProvider";
 import { Spinner } from "flowbite-react";
+
 const Newsletter = () => {
   const { user, setUser } = useUser();
   const [email, setEmail] = useState("");

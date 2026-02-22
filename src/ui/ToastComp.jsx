@@ -1,4 +1,4 @@
-import { Toast, ToastToggle } from "flowbite-react";
+import { Toast } from "flowbite-react";
 import { motion } from "framer-motion";
 
 const ToastComp = ({ text = "", icon = "", position = "left-[50%]" }) => {
